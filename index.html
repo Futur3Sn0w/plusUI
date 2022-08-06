@@ -99,6 +99,10 @@
                     </div>
                 </div>
             </div>
+
+            <div class="expandToggle">
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
         </div>
     </div>
 
@@ -187,8 +191,9 @@
             window.location.reload();
         });
 
-        $('.timeDate').on('click', function () {
+        $('.expandToggle').on('click', function () {
             $('.timeDate').toggleClass('expanded');
+            $('.expandToggle').toggleClass('expanded');
         });
 
         setInterval(() => {

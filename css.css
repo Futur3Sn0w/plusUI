@@ -101,7 +101,7 @@ body {
 
     border-radius: 25px;
     background-color: rgba(255, 255, 255, 0.55);
-    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 7px 12px 0 rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(50px) saturate(6);
 
     transition: background-color .3s;
@@ -138,7 +138,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.2);
 
     transform: scale(0.95);
 }
@@ -337,7 +337,7 @@ body {
     top: 15px;
     right: 0;
 
-    height: 70px;
+    height: 100px;
     min-width: 150px;
 
     padding-right: 30px;
@@ -348,7 +348,7 @@ body {
 }
 
 .timeDate.expanded {
-    height: 195px;
+    height: 212px;
 }
 
 #clockIcon {
@@ -378,6 +378,35 @@ body {
     height: 70px;
     width: fit-content;
     font-family: GST-Med;
+}
+
+.expandToggle {
+    position: absolute;
+    top: 65px;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 35px;
+
+    transition: top .4s;
+
+}
+
+.expandToggle.expanded i {
+    transform: rotate(180deg);
+}
+
+.expandToggle i {
+    transition: transform .3s;
+}
+
+.expandToggle.expanded {
+    top: 178px;
+    backdrop-filter: blur(20px) saturate(2);
 }
 
 .keys {
@@ -425,25 +454,30 @@ body {
 .controlBtns {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
-    gap: 5px;
+    gap: 1px;
 
     position: absolute;
     top: 70px;
     right: 0;
-    z-index: 100000;
 
-    height: fit-content;
-    width: fit-content;
+    height: 0;
+    overflow: hidden;
+    width: 100%;
     /* background-color: white !important; */
+    transition: height .4s;
+}
+
+.timeDate.expanded .controlBtns {
+    height: 115px;
 }
 
 .button {
-    width: 170px;
+    width: 181px;
     height: 35px;
     background-color: rgba(255, 255, 255, 1);
-    border-radius: 100px 0 0 100px;
+    /* border-radius: 100px 0 0 100px; */
 
     font-size: 17px;
     color: rgb(0, 0, 0);
