@@ -28,7 +28,6 @@
 
 <body>
     <div class="nonView"></div>
-    <div class="nonView nv2"></div>
 
     <div class="keys">
         <div class="keyLines">
@@ -40,11 +39,18 @@
     </div>
 
     <div class="tvUI" id="tvUI">
+        <div class="nonView nv2"></div>
 
         <div class="backDrop" id="backDrop"></div>
         <div class="backDrop hidden" id="backDrop2"></div>
 
         <div class="darkModeOn" id="cards">
+            <div class="wallCard card active" id="wallCard">
+                <div class="info">
+                    <!-- <div class="wallName">Name</div> -->
+                    <!-- <div class="wallAuth">Author</div> -->
+                </div>
+            </div>
             <div class="ytCard card" id="ytCard">
                 <iframe class="ytIframe" width="190" height="110" src="" frameborder="0"
                     style="margin: 0; padding: 0; transform: scale(.84);" allowTransparency="true"></iframe>
@@ -53,15 +59,6 @@
                 <img src="" alt="" id="weatherIcon">
                 <div class="tdm temp" id="temp"></div>
             </div>
-            <div class="wallCard card active" id="wallCard">
-                <div class="info">
-                    <!-- <div class="wallName">Name</div> -->
-                    <!-- <div class="wallAuth">Author</div> -->
-                </div>
-                <div class="wallProg">
-                    <div class="wpBar"></div>
-                </div>
-            </div>
             <div class="batteryCard card" id="batteryCard">
                 <div class="bcIndicator">
                     <i class="fa-solid fa-bolt chargingIcon"></i>
@@ -69,7 +66,12 @@
                 </div>
                 <div class="batteryText"></div>
             </div>
-            <div class="blankCard card" id="blankCard3">
+            <div class="clockCard card" id="clockCard">
+                <div id="clockContainer">
+                    <div id="hour"></div>
+                    <div id="minute"></div>
+                    <div id="second"></div>
+                </div>
             </div>
         </div>
 
@@ -101,7 +103,7 @@
     </div>
 
     <script>
-        var wallFilter = '&bright,wallpaper';
+        var wallFilter = '&minimal,wallpaper';
         var backdropImg = 'https://source.unsplash.com/featured/?sig=' + Math.random() + wallFilter;
 
         window.onload = function () {
@@ -189,6 +191,20 @@
             $('.timeDate').toggleClass('expanded');
         });
 
+        setInterval(() => {
+            d = new Date(); //object of date()
+            hr = d.getHours();
+            min = d.getMinutes();
+            sec = d.getSeconds();
+            hr_rotation = 30 * hr + min / 2; //converting current time
+            min_rotation = 6 * min;
+            sec_rotation = 6 * sec;
+
+            hour.style.transform = `rotate(${hr_rotation}deg)`;
+            minute.style.transform = `rotate(${min_rotation}deg)`;
+            second.style.transform = `rotate(${sec_rotation}deg)`;
+        }, 1000);
+
         var battery = navigator.battery || navigator.webkitBattery || navigator.mozBattery || navigator.msBattery;
 
         function doTheBatteryThing() {
@@ -274,12 +290,6 @@
             $('.nv2').css('background-image', $('#backDrop2').css('background-image'));
             $('.wallCard').css('background-image', $('#backDrop2').css('background-image'));
             $('#backDrop2').delay(700).css('background-image', "url(" + backdropSample + ")");
-
-            var indexVariable = 0;
-            setInterval(function () {
-                indexVariable = ++indexVariable % 30; // SET { 1-30 }
-                $('.wpBar').css('width', indexVariable * 3.330 + "%");
-            }, 1000);
         }
 
         function showTime() {
