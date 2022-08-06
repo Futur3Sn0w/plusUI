@@ -1,0 +1,424 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: black;
+    /* background-image: url('https://source.unsplash.com/random/?wallpaper,neon'); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    font-family: GST-Reg, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.tvUI {
+    width: 905px;
+    height: 506px;
+
+    overflow: hidden;
+    position: relative;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(0) saturate(1.5);
+    border-radius: 0;
+
+    /* transition: transform .2s; */
+}
+
+.tvUI.tvFS {
+    /* transform: scale(.91) translateY(-15px); */
+    width: 100vw;
+    height: 100vh;
+}
+
+.nonView {
+    /* This represents the overhang/bleed of the wallpaper.
+       It wont be visible on the TV, only the tablet. */
+
+    width: 100vw;
+    height: 100vh;
+
+    position: absolute;
+    z-index: 0;
+    backdrop-filter: blur(150px);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nonView.nv2 {
+    filter: blur(10px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background-image .3s;
+
+    transform: scale(1.03);
+
+    width: 905px;
+    height: 506px;
+}
+
+.backDrop {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background-image .3s;
+
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 60%, transparent 70%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 67%, transparent 75%);
+
+    opacity: 1;
+
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.backDrop.hidden {
+    opacity: 0;
+}
+
+#cards {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: fit-content;
+    height: fit-content;
+
+    border-radius: 27px;
+    background-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(50px) saturate(6);
+
+    transition: background-color .3s;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 13px;
+
+    transform: translateX(-50%);
+    padding: 13px 16px;
+    box-sizing: border-box;
+}
+
+#cards.darkModeOn,
+.timeDate.darkModeOn {
+    background-color: rgba(0, 0, 0, 0.65);
+    color: white;
+    backdrop-filter: blur(100px) saturate(7);
+}
+
+.card {
+    max-width: 150px !important;
+    min-width: 150px !important;
+    width: 190px;
+    height: 90px;
+
+    border-radius: 16px;
+    background-color: white;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.3);
+
+    /* transform: scale(0.86) translateX(-20%); */
+}
+
+.card:first-of-type {
+    transform: none;
+}
+
+.weatherCard {
+    background: linear-gradient(360deg, #0e63d1, rgb(92, 168, 255));
+    color: white;
+}
+
+#weatherIcon {
+    height: 90%;
+    aspect-ratio: 1/1;
+
+    transform: translateX(-8px);
+}
+
+.temp {
+    font-size: 25px;
+    font-family: GST-Med;
+    transform: translateX(-12px);
+}
+
+.wallCard {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background-image .3s;
+}
+
+.card.active {
+    transform: scale(1.06);
+    box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.4);
+    border: 3px solid rgb(235, 235, 235);
+
+    /* animation-name: borderPulse; */
+    animation-timing-function: linear;
+    animation-duration: 2.5s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+.wallCard .info {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+
+    background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.75));
+}
+
+.info .wallName {
+    font-size: 15px;
+    font-family: GST-Med;
+
+    margin-top: 40px;
+    margin-left: 10px;
+}
+
+.info .wallAuth {
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+@keyframes borderPulse {
+    from {
+        border: 3px solid rgba(235, 235, 235, 0.3);
+    }
+
+    to {
+        border: 3px solid rgb(235, 235, 235);
+    }
+}
+
+.batteryCard {
+    background: linear-gradient(360deg, #47ad0c, rgb(89, 231, 84));
+    color: white;
+    font-size: 22px;
+    font-family: GSD-Bold;
+}
+
+.bcIndicator {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 64px;
+    height: 35px;
+
+    padding: 2px;
+    margin: 0;
+    margin-left: -.3%;
+
+    border-radius: 10px;
+    border: 3px solid white;
+    box-sizing: border-box;
+
+    position: relative;
+
+    transform: scale(0.7);
+}
+
+.bcIndicator::after {
+    content: "";
+    width: 7px;
+    height: 12px;
+
+    border-radius: 3px;
+    background-color: white;
+
+    position: absolute;
+    right: -8px;
+}
+
+.bciProg {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 5px;
+    background-color: white;
+}
+
+.timeDate {
+    display: flex;
+    align-items: flex-start;
+    color: rgb(0, 0, 0);
+
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(100px) saturate(6);
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    height: 70px;
+    width: 200px;
+
+    transition: background-color .4s, color .3s, height .4s, width .4s;
+
+    overflow: hidden;
+}
+
+.timeDate.expanded {
+    height: 155px;
+    width: 245px;
+
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#clockIcon {
+    font-size: 30px;
+
+    height: 70px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.time {
+    font-size: 21px;
+}
+
+.date {
+    font-size: 17px;
+    opacity: .8;
+}
+
+.td {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    height: 70px;
+    width: fit-content;
+    font-family: GST-Med;
+}
+
+.keys {
+    width: 100vw;
+    height: 100vh;
+
+    border-radius: 5px;
+
+    background-color: rgba(211, 211, 211, 0);
+
+    overflow: hidden;
+
+    position: absolute;
+    z-index: 10000;
+}
+
+.keyLines {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+
+    margin: auto;
+
+    width: 200px;
+    height: fit-content;
+}
+
+.keyTB {
+    border: 1px solid grey;
+    background-color: white;
+    outline: none;
+
+    font-family: GST-Reg;
+
+    border-radius: 4px;
+}
+
+.keyTB.submit {
+    width: 50% !important;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.controlBtns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    position: absolute;
+    top: 70px;
+    left: 7px;
+    z-index: 100000;
+
+    height: fit-content;
+    width: 230px;
+    /* background-color: white !important; */
+}
+
+.button {
+    width: 110px;
+    height: 35px;
+    background-color: rgba(255, 255, 255, .2);
+    border-radius: 540px;
+
+    font-size: 17px;
+    color: white;
+
+    padding-left: 10px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+
+    position: relative;
+}
+
+.button::before {
+    content: attr(data-btnLabel);
+    font-size: 11px;
+    font-family: GST-Bold;
+
+    position: absolute;
+    left: 35px;
+}
+
+.button.darkModeOn {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(100px) saturate(20);
+}
+
+.button.darkModeOn::before {
+    display: initial;
+}
