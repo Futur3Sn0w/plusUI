@@ -58,6 +58,9 @@
                     <!-- <div class="wallName">Name</div> -->
                     <!-- <div class="wallAuth">Author</div> -->
                 </div>
+                <div class="wallProg">
+                    <div class="wpBar"></div>
+                </div>
             </div>
             <div class="batteryCard card" id="batteryCard">
                 <div class="bcIndicator">
@@ -109,7 +112,7 @@
             $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
             $('body').css('background-image', "url(" + backdropImg + ")");
             refreshWall();
-            setInterval("refreshWall();", 60000);
+            setInterval("refreshWall();", 30000);
 
             applyKeys();
 
@@ -271,6 +274,12 @@
             $('.nv2').css('background-image', $('#backDrop2').css('background-image'));
             $('.wallCard').css('background-image', $('#backDrop2').css('background-image'));
             $('#backDrop2').delay(700).css('background-image', "url(" + backdropSample + ")");
+
+            var indexVariable = 0;
+            setInterval(function () {
+                indexVariable = ++indexVariable % 30; // SET { 1-30 }
+                $('.wpBar').css('width', indexVariable * 3.330 + "%");
+            }, 1000);
         }
 
         function showTime() {

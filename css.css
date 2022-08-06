@@ -209,6 +209,31 @@ body {
     margin-left: 10px;
 }
 
+.wallProg {
+    width: 93%;
+    height: 9px;
+
+    border: 2px solid white;
+    background-color: black;
+    box-sizing: border-box;
+    border-radius: 50px;
+
+    padding: 1px 1px 0 1px;
+
+    position: absolute;
+    bottom: 7px;
+}
+
+.wpBar {
+    height: 3px;
+
+    border-radius: inherit;
+    background-color: white;
+
+    transition: width 1s;
+    transition-timing-function: linear;
+}
+
 @keyframes borderPulse {
     from {
         border: 3px solid rgba(235, 235, 235, 0.3);
