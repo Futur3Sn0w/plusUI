@@ -84,7 +84,7 @@
 
             <div class="controlBtns">
                 <div class="lightDark btnCont">
-                    <div class="button darkModeBtn darkModeOn" data-btnLabel="Dark mode">
+                    <div class="button darkModeBtn darkModeOn" data-btnLabel="Theme">
                         <i class="fa-solid fa-circle-half-stroke"></i>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
 
         $('.lightDark').on('click', function () {
             localStorage.setItem('theme', theme);
-            $('.darkModeBtn').toggleClass('darkModeOn');
+            $('.button').toggleClass('darkModeOn');
             $('.timeDate').toggleClass('darkModeOn');
             $('#cards').toggleClass('darkModeOn');
             theme = !theme;
@@ -268,11 +268,11 @@
 
         function checkTheme() {
             if (themeLS == 'false') {
-                $('.darkModeBtn').addClass('darkModeOn');
+                $('.button').addClass('darkModeOn');
                 $('.timeDate').addClass('darkModeOn');
                 $('#cards').addClass('darkModeOn');
             } else if (themeLS == 'true') {
-                $('.darkModeBtn').removeClass('darkModeOn');
+                $('.button').removeClass('darkModeOn');
                 $('.timeDate').removeClass('darkModeOn');
                 $('#cards').removeClass('darkModeOn');
             }

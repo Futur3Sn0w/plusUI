@@ -319,6 +319,10 @@ body {
     background: #FF8E00;
 }
 
+.ytCard {
+    display: none;
+}
+
 .timeDate {
     display: flex;
     align-items: flex-start;
@@ -327,26 +331,24 @@ body {
     background-color: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(100px) saturate(6);
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 16px;
+    border-radius: 16px 0 0 16px;
 
     position: absolute;
     top: 15px;
-    right: 15px;
+    right: 0;
 
     height: 70px;
-    width: 200px;
+    min-width: 150px;
 
-    transition: background-color .4s, color .3s, height .4s, width .4s;
+    padding-right: 30px;
+
+    transition: .4s;
 
     overflow: hidden;
 }
 
 .timeDate.expanded {
-    height: 155px;
-    width: 245px;
-
-    color: rgb(255, 255, 255);
-    background-color: rgba(0, 0, 0, 0.7);
+    height: 195px;
 }
 
 #clockIcon {
@@ -357,10 +359,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.ytCard {
-    display: none;
 }
 
 .time {
@@ -428,27 +426,27 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 5px;
 
     position: absolute;
     top: 70px;
-    left: 7px;
+    right: 0;
     z-index: 100000;
 
     height: fit-content;
-    width: 230px;
+    width: fit-content;
     /* background-color: white !important; */
 }
 
 .button {
-    width: 110px;
+    width: 170px;
     height: 35px;
-    background-color: rgba(255, 255, 255, .2);
-    border-radius: 540px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 100px 0 0 100px;
 
     font-size: 17px;
-    color: white;
+    color: rgb(0, 0, 0);
 
     padding-left: 10px;
     box-sizing: border-box;
@@ -471,8 +469,8 @@ body {
 }
 
 .button.darkModeOn {
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(100px) saturate(20);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgb(255, 255, 255);
 }
 
 .button.darkModeOn::before {
