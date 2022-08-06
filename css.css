@@ -220,7 +220,7 @@ body {
 }
 
 .batteryCard {
-    background: linear-gradient(360deg, #47ad0c, rgb(89, 231, 84));
+    background: linear-gradient(360deg, #47ad0c, #59e754);
     color: white;
     font-size: 22px;
     font-family: GSD-Bold;
@@ -265,6 +265,13 @@ body {
 
     border-radius: 5px;
     background-color: white;
+}
+
+.chargingIcon {
+    color: white;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-55%);
 }
 
 .timeDate {

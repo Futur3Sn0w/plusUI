@@ -61,6 +61,7 @@
             </div>
             <div class="batteryCard card" id="batteryCard">
                 <div class="bcIndicator">
+                    <i class="fa-solid fa-bolt chargingIcon"></i>
                     <div class="bciProg"></div>
                 </div>
                 <div class="batteryText"></div>
@@ -114,6 +115,7 @@
 
             checkTheme();
             doTheBatteryThing();
+            chargingIndic();
         }
 
         var lsOwmAPI = localStorage.getItem('owmAPI');
@@ -189,16 +191,37 @@
         function doTheBatteryThing() {
             navigator.getBattery().then(function (battery) {
                 var bLevPerc = (battery.level * 100) + "%";
+                var batteryIsCharging = battery.charging;
                 battery.addEventListener('levelchange', function () {
                     $('.bciProg').css('width', bLevPerc);
                     $('.batteryText').text(bLevPerc);
-                })
+                });
                 $('.bciProg').css('width', bLevPerc);
                 $('.batteryText').text(bLevPerc);
             });
         }
 
+        function chargingIndic() {
+            let batteryIsCharging = false;
 
+            navigator.getBattery().then(function (battery) {
+                batteryIsCharging = battery.charging;
+                if (batteryIsCharging == true) {
+                    $('.chargingIcon').css('color', "#3daa39");
+                } else {
+                    $('.chargingIcon').css('color', "white");
+                }
+
+                battery.addEventListener('chargingchange', function () {
+                    batteryIsCharging = battery.charging;
+                    if (batteryIsCharging == true) {
+                        $('.chargingIcon').css('color', "#3daa39");
+                    } else {
+                        $('.chargingIcon').css('color', "white");
+                    }
+                });
+            });
+        }
 
         var elem = document.documentElement;
 
