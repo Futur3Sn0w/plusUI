@@ -226,13 +226,14 @@
         function doTheBatteryThing() {
             navigator.getBattery().then(function (battery) {
                 var bLevPerc = (battery.level * 100) + "%";
+                var bLev = battery.level * 100;
                 var batteryIsCharging = battery.charging;
                 battery.addEventListener('levelchange', function () {
                     $('.bciProg').css('width', bLevPerc);
-                    $('.batteryText').text(bLevPerc);
+                    $('.batteryText').text(Math.round(blev) + "%");
                 });
                 $('.bciProg').css('width', bLevPerc);
-                $('.batteryText').text(bLevPerc);
+                $('.batteryText').text(Math.round(blev) + "%");
             });
         }
 
