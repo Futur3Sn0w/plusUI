@@ -34,7 +34,7 @@ body {
     backdrop-filter: saturate(1.5);
     border-radius: 0;
 
-    /* transition: transform .2s; */
+    transition: transform .2s;
 }
 
 .tvUI.tvFS {
@@ -128,7 +128,6 @@ body {
 .card {
     max-width: 150px !important;
     min-width: 150px !important;
-    width: 190px;
     height: 90px;
 
     border-radius: 16px;
@@ -348,7 +347,7 @@ body {
 }
 
 .timeDate.expanded {
-    height: 212px;
+    height: 262px;
 }
 
 #clockIcon {
@@ -405,8 +404,8 @@ body {
 }
 
 .expandToggle.expanded {
-    top: 178px;
-    backdrop-filter: blur(20px) saturate(2);
+    top: 231px;
+    background-color: inherit;
 }
 
 .keys {
@@ -470,7 +469,7 @@ body {
 }
 
 .timeDate.expanded .controlBtns {
-    height: 115px;
+    height: 160px;
 }
 
 .button {
@@ -509,4 +508,16 @@ body {
 
 .button.darkModeOn::before {
     display: initial;
+}
+
+.controlBtns .keyTB {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: inherit;
+    border-radius: 0;
+    font-size: 14px;
+    box-sizing: border-box;
+
+    width: 75%;
+    padding: 3px;
+    border: none;
 }

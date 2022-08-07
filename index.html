@@ -52,8 +52,6 @@
                 </div>
             </div>
             <div class="ytCard card" id="ytCard">
-                <iframe class="ytIframe" width="190" height="110" src="" frameborder="0"
-                    style="margin: 0; padding: 0; transform: scale(.84);" allowTransparency="true"></iframe>
             </div>
             <div class="weatherCard card" id="weatherCard">
                 <img src="" alt="" id="weatherIcon">
@@ -98,6 +96,10 @@
                         <i class="fa-solid fa-refresh"></i>
                     </div>
                 </div>
+                <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
+                <input class="keyTB" type="number" value="1" min=".8" max="3" step=".01"
+                    placeholder="Zoom level (1 is default)" id="zoomLvl">
+
             </div>
 
             <div class="expandToggle">
@@ -107,7 +109,7 @@
     </div>
 
     <script>
-        var wallFilter = '&minimal,wallpaper';
+        var wallFilter = localStorage.getItem('unsplashTags');
         var backdropImg = 'https://source.unsplash.com/featured/?sig=' + Math.random() + wallFilter;
 
         window.onload = function () {
@@ -194,6 +196,15 @@
         $('.expandToggle').on('click', function () {
             $('.timeDate').toggleClass('expanded');
             $('.expandToggle').toggleClass('expanded');
+        });
+
+        $('#unsplashTags').focusout(function () {
+            localStorage.setItem('unsplashTags', '&' + $(this).val());
+            refreshWall();
+        });
+
+        $('#zoomLvl').change(function () {
+            $('.tvUI').css('transform', 'scale(' + $(this).val() + ')')
         });
 
         setInterval(() => {
@@ -288,6 +299,7 @@
         });
 
         function refreshWall() {
+            var wallFilter = localStorage.getItem('unsplashTags');
             var backdropSample = 'https://source.unsplash.com/featured/?sig=' + Math.random() + wallFilter;
 
             $('#backDrop').css('background-image', $('#backDrop2').css('background-image'));
