@@ -230,10 +230,10 @@
                 var batteryIsCharging = battery.charging;
                 battery.addEventListener('levelchange', function () {
                     $('.bciProg').css('width', bLevPerc);
-                    $('.batteryText').text(Math.round(blev) + "%");
+                    $('.batteryText').text(Math.round(bLev) + "%");
                 });
                 $('.bciProg').css('width', bLevPerc);
-                $('.batteryText').text(Math.round(blev) + "%");
+                $('.batteryText').text(Math.round(bLev) + "%");
             });
         }
 
