@@ -263,7 +263,7 @@ body {
 }
 
 .chargingIcon {
-    color: white;
+    color: transparent;
     position: absolute;
     left: 50%;
     transform: translateX(-55%);

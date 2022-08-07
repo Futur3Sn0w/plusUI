@@ -244,7 +244,7 @@
                 if (batteryIsCharging == true) {
                     $('.chargingIcon').css('color', "#3daa39");
                 } else {
-                    $('.chargingIcon').css('color', "white");
+                    $('.chargingIcon').css('color', "transparent");
                 }
 
                 battery.addEventListener('chargingchange', function () {
@@ -252,7 +252,7 @@
                     if (batteryIsCharging == true) {
                         $('.chargingIcon').css('color', "#3daa39");
                     } else {
-                        $('.chargingIcon').css('color', "white");
+                        $('.chargingIcon').css('color', "transparent");
                     }
                 });
             });
