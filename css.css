@@ -43,6 +43,12 @@ body {
     height: 100vh;
 }
 
+.tvUI.tvFS .nv2 {
+    transform: none;
+    width: 100vw;
+    height: 100vh;
+}
+
 .nonView {
     /* This represents the overhang/bleed of the wallpaper.
        It wont be visible on the TV, only the tablet. */
@@ -57,7 +63,7 @@ body {
 }
 
 .nonView.nv2 {
-    filter: blur(10px);
+    filter: blur(15px);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -75,8 +81,8 @@ body {
     background-size: cover;
     transition: background-image .3s;
 
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 60%, transparent 70%);
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 67%, transparent 75%);
+    /* -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 60%, transparent 70%); */
+    /* mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 67%, transparent 75%); */
 
     opacity: 1;
 
@@ -94,27 +100,24 @@ body {
 
 #cards {
     position: absolute;
+    z-index: 1;
     bottom: 10px;
-    left: 50%;
+    left: 0;
     width: fit-content;
-    height: fit-content;
+    height: 95px;
 
-    border-radius: 25px;
+    border-radius: 0 20px 20px 0;
     background-color: rgba(255, 255, 255, 0.55);
-    box-shadow: 0 7px 12px 0 rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(50px) saturate(6);
+    box-shadow: 7px 7px 12px 0 rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(30px) saturate(6);
 
     transition: background-color .3s;
 
-    overflow: hidden;
-
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-start;
-    gap: 13px;
 
-    transform: translateX(-50%);
-    padding: 13px 16px;
+    padding: 10px 3px 10px 20px;
     box-sizing: border-box;
 }
 
@@ -122,7 +125,7 @@ body {
 .timeDate.darkModeOn {
     background-color: rgba(0, 0, 0, 0.65);
     color: white;
-    backdrop-filter: blur(100px) saturate(7);
+    backdrop-filter: blur(50px) saturate(7);
 }
 
 .card {
@@ -139,7 +142,25 @@ body {
     justify-content: center;
     box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.2);
 
-    transform: scale(0.95);
+    margin: 0 0 0 -5px;
+
+    transform: scale(0.85);
+    transform-origin: bottom center;
+}
+
+.card.active {
+    transform: scale(1.075);
+    box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.4);
+    border: 3px solid rgb(235, 235, 235);
+
+    margin: 0 15px 0 10px;
+    border-radius: 600px;
+
+    /* animation-name: borderPulse; */
+    animation-timing-function: linear;
+    animation-duration: 2.5s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
 }
 
 .weatherCard {
@@ -165,18 +186,6 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     transition: background-image .3s;
-}
-
-.card.active {
-    transform: scale(1.04);
-    box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.4);
-    border: 3px solid rgb(235, 235, 235);
-
-    /* animation-name: borderPulse; */
-    animation-timing-function: linear;
-    animation-duration: 2.5s;
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
 }
 
 .wallCard .info {
@@ -271,17 +280,33 @@ body {
 
 .clockCard {
     background-color: #1E1E1F;
+    max-width: 90px !important;
+    min-width: 90px !important;
 }
 
 #clockContainer {
     position: relative;
     margin: auto;
     /*to make the height and width responsive*/
-    width: 50%;
+    width: 90%;
     aspect-ratio: 1/1;
     background: url("clockback.png") no-repeat;
     /*setting our background image*/
     background-size: 100%;
+}
+
+#clockContainer::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+
+    background-color: #1E1E1F;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #hour,
@@ -336,10 +361,10 @@ body {
     top: 15px;
     right: 0;
 
-    height: 100px;
-    min-width: 150px;
+    height: 75px;
+    min-width: 140px;
 
-    padding-right: 30px;
+    padding-right: 20px;
 
     transition: .4s;
 
@@ -347,17 +372,19 @@ body {
 }
 
 .timeDate.expanded {
-    height: 262px;
+    height: 230px;
 }
 
 #clockIcon {
-    font-size: 30px;
+    font-size: 25px;
 
     height: 70px;
     width: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    color: transparent;
 }
 
 .time {
@@ -381,7 +408,8 @@ body {
 
 .expandToggle {
     position: absolute;
-    top: 65px;
+    top: 20px;
+    left: -53px;
     z-index: 2;
 
     display: flex;
@@ -392,7 +420,6 @@ body {
     height: 35px;
 
     transition: top .4s;
-
 }
 
 .expandToggle.expanded i {
@@ -401,11 +428,6 @@ body {
 
 .expandToggle i {
     transition: transform .3s;
-}
-
-.expandToggle.expanded {
-    top: 231px;
-    background-color: inherit;
 }
 
 .keys {
