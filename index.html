@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="responsive.css">
     <link rel="stylesheet" href="fonts.css">
 
     <script src="https://kit.fontawesome.com/a1fc6f0f3a.js" crossorigin="anonymous"></script>
@@ -39,12 +40,12 @@
     </div>
 
     <div class="tvUI" id="tvUI">
-        <div class="nonView nv2"></div>
+        <!-- <div class="nonView nv2"></div> -->
 
         <div class="backDrop" id="backDrop"></div>
         <div class="backDrop hidden" id="backDrop2"></div>
 
-        <div class="darkModeOn" id="cards">
+        <div class="cards darkModeOn" id="cards">
             <div class="wallCard card active" id="wallCard">
                 <div class="info">
                     <!-- <div class="wallName">Name</div> -->
@@ -71,6 +72,9 @@
                     <div id="second"></div>
                 </div>
             </div>
+            <div class="photosCard card" id="photosCard">
+                ❤️
+            </div>
         </div>
 
         <div class="timeDate darkModeOn">
@@ -81,25 +85,29 @@
             </div>
 
             <div class="controlBtns">
-                <div class="lightDark btnCont">
-                    <div class="button darkModeBtn darkModeOn" data-btnLabel="Theme">
-                        <i class="fa-solid fa-circle-half-stroke"></i>
+                <div class="toggles">
+                    <div class="lightDark btnCont">
+                        <div class="button darkModeBtn darkModeOn" data-btnLabel="Theme">
+                            <i class="fa-solid fa-circle-half-stroke"></i>
+                        </div>
+                    </div>
+                    <div class="fullScreen btnCont">
+                        <div class="button fullScreenBtn" data-btnLabel="Expand">
+                            <i class="fa-solid fa-expand"></i>
+                        </div>
+                    </div>
+                    <div class="reloadPage btnCont">
+                        <div class="button reloadBtn" data-btnLabel="Refresh">
+                            <i class="fa-solid fa-refresh"></i>
+                        </div>
                     </div>
                 </div>
-                <div class="fullScreen btnCont">
-                    <div class="button fullScreenBtn" data-btnLabel="Full screen">
-                        <i class="fa-solid fa-expand"></i>
-                    </div>
-                </div>
-                <div class="reloadPage btnCont">
-                    <div class="button reloadBtn" data-btnLabel="Refresh">
-                        <i class="fa-solid fa-refresh"></i>
-                    </div>
-                </div>
-                <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
-                <input class="keyTB" type="number" value="1" min=".8" max="3" step=".01"
-                    placeholder="Zoom level (1 is default)" id="zoomLvl">
+                <div class="inputs">
+                    <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
+                    <input class="keyTB" type="number" value="1" min=".8" max="3" step=".01"
+                        placeholder="Zoom level (1 is default)" id="zoomLvl">
 
+                </div>
             </div>
 
             <div class="expandToggle">
@@ -181,10 +189,8 @@
 
         $('.fullScreenBtn').on('click', function () {
             if ($('.tvUI').hasClass('tvFS')) {
-                closeFullscreen();
                 $('.tvUI').removeClass('tvFS');
             } else {
-                openFullscreen();
                 $('.tvUI').addClass('tvFS');
             }
         });
@@ -259,30 +265,6 @@
             });
         }
 
-        var elem = document.documentElement;
-
-        /* View in fullscreen */
-        function openFullscreen() {
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) { /* Safari */
-                elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) { /* IE11 */
-                elem.msRequestFullscreen();
-            }
-        }
-
-        /* Close fullscreen */
-        function closeFullscreen() {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) { /* Safari */
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) { /* IE11 */
-                document.msExitFullscreen();
-            }
-        }
-
         function checkTheme() {
             if (themeLS == 'false') {
                 $('.button').addClass('darkModeOn');
@@ -301,13 +283,15 @@
 
         function refreshWall() {
             var wallFilter = localStorage.getItem('unsplashTags');
-            var backdropSample = 'https://source.unsplash.com/featured/?sig=' + Math.random() + wallFilter;
+            fetch("https://source.unsplash.com/random/?sig=" + Math.round(Math.random) + wallFilter).then(data => {
+                var backdropSample = data.url;
 
-            $('#backDrop').css('background-image', $('#backDrop2').css('background-image'));
-            $('body').css('background-image', $('#backDrop2').css('background-image'));
-            $('.nv2').css('background-image', $('#backDrop2').css('background-image'));
-            $('.wallCard').css('background-image', $('#backDrop2').css('background-image'));
-            $('#backDrop2').delay(700).css('background-image', "url(" + backdropSample + ")");
+                $('#backDrop').css('background-image', $('#backDrop2').css('background-image'));
+                $('body').css('background-image', $('#backDrop2').css('background-image'));
+                $('.nv2').css('background-image', $('#backDrop2').css('background-image'));
+                $('.wallCard').css('background-image', $('#backDrop2').css('background-image'));
+                $('#backDrop2').delay(700).css('background-image', "url(" + backdropSample + ")");
+            });
         }
 
         function showTime() {
@@ -334,28 +318,28 @@
         function showDate() {
             const localDate = new Date();
             const months = [
-                "Jan",
-                "Feb",
-                "Mar",
-                "Apr",
+                "January",
+                "February",
+                "March",
+                "April",
                 "May",
                 "June",
                 "July",
-                "Aug",
-                "Sep",
-                "Oct",
-                "Nov",
-                "Dec",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
             ];
 
             const days = [
-                "Sun",
-                "Mon",
-                "Tue",
-                "Wed",
-                "Thu",
-                "Fri",
-                "Sat",
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
             ];
 
             const currentDay = days[localDate.getDay()];

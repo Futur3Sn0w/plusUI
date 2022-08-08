@@ -1,0 +1,7 @@
+@media only screen and (max-width: 768px) {
+    .cards {
+        border-radius: 0;
+        overflow: scroll visible;
+        bottom: 0;
+    }
+}
