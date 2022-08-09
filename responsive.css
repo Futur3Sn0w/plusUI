@@ -1,7 +1,73 @@
 @media only screen and (max-width: 768px) {
+    .tvUI {
+        position: absolute;
+        top: 0 !important;
+
+        width: 100vw;
+        height: 93vh;
+
+        box-sizing: border-box;
+    }
+
+    .toggles {
+        transform: scale(1.2);
+        height: fit-content;
+    }
+
+    .fullScreen {
+        display: none;
+    }
+
+    .timeDate {
+        top: 0;
+        border-radius: 0 0 0 20px;
+    }
+
     .cards {
         border-radius: 0;
-        overflow: scroll visible;
+
+        overflow: scroll;
         bottom: 0;
+        left: 0;
+
+        padding: 0;
+        padding: 20px 10px 10px 10px;
+        user-select: none;
+
+        height: fit-content;
+    }
+
+    .active {
+        margin: unset;
+    }
+}
+
+/* Only MOUSE and TOUCHPAD */
+@media (hover: hover) and (pointer: fine) {
+    .card:not(.active):hover {
+        /* border: 3px solid white; */
+        box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.3);
+
+        margin-bottom: 5px;
+    }
+
+    .expandToggle:hover {
+        transform: scale(1.15);
+    }
+
+    .expandToggle:active {
+        transform: scale(0.7);
+    }
+}
+
+/* Only TOUCH SCREENS */
+
+@media (hover: none) and (pointer: coarse) {
+    .card {
+        transition: .1s;
+    }
+
+    .card:active {
+        transform: scale(.8);
     }
 }

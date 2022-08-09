@@ -34,7 +34,6 @@
         <div class="keyLines">
             <input class="keyTB" type="text" placeholder="OWM API Key" name="" id="owmAPI">
             <input class="keyTB" type="text" placeholder="City ID" name="" id="owmCity">
-            <input class="keyTB" type="text" placeholder="rss.app embed ID" name="" id="rssapp">
             <button class="keyTB submit" onclick="submitKeys()">Submit</button>
         </div>
     </div>
@@ -51,8 +50,6 @@
                     <!-- <div class="wallName">Name</div> -->
                     <!-- <div class="wallAuth">Author</div> -->
                 </div>
-            </div>
-            <div class="ytCard card" id="ytCard">
             </div>
             <div class="weatherCard card" id="weatherCard">
                 <img src="" alt="" id="weatherIcon">
@@ -130,6 +127,8 @@
             refreshWall();
             setInterval("refreshWall();", 30000);
 
+            setTimeout("cardSmarts();", 500);
+
             applyKeys();
 
             checkTheme();
@@ -139,12 +138,10 @@
 
         var lsOwmAPI = localStorage.getItem('owmAPI');
         var lsOwmCity = localStorage.getItem('owmCity');
-        var lsrssapp = localStorage.getItem('rssapp');
 
         function submitKeys() {
             localStorage.setItem('owmAPI', $('#owmAPI').val());
             localStorage.setItem('owmCity', $('#owmCity').val());
-            localStorage.setItem('rssapp', $('#rssapp').val());
             window.location.reload();
             // alert(lsOwmAPI + " " + lsOwmCity + " " + lsrssapp);
         }
@@ -156,13 +153,9 @@
             } else if (localStorage.getItem('owmCity') == null) {
                 $('.keys').css('display', 'flex');
                 alert('The info below is required to enter.');
-            } else if (localStorage.getItem('rssapp') == null) {
-                $('.keys').css('display', 'flex');
-                alert('The info below is required to enter.');
             } else {
                 var lsOwmAPI = localStorage.getItem('owmAPI');
                 var lsOwmCity = localStorage.getItem('owmCity');
-                var lsrssapp = localStorage.getItem('rssapp');
 
                 $('.keys').css('display', 'none');
                 $('.tvUI').css('display', 'flex');
@@ -171,8 +164,6 @@
 
                 weatherBalloon(lsOwmCity);
                 window.setInterval("weatherBalloon(lsOwmCity);", 10000);
-
-                $('.ytIframe').attr('src', "https://rss.app/embed/v1/carousel/" + lsrssapp);
             }
         }
 
@@ -236,10 +227,10 @@
                 var batteryIsCharging = battery.charging;
                 battery.addEventListener('levelchange', function () {
                     $('.bciProg').css('width', bLevPerc);
-                    $('.batteryText').text(Math.round(bLev) + "%");
+                    $('.batteryText').text(Math.round(bLev));
                 });
                 $('.bciProg').css('width', bLevPerc);
-                $('.batteryText').text(Math.round(bLev) + "%");
+                $('.batteryText').text(Math.round(bLev));
             });
         }
 
@@ -263,6 +254,23 @@
                     }
                 });
             });
+        }
+
+        function cardSmarts() {
+            // the below will hide the battery card if the host device doesn't have a battery
+            if ($('.batteryText').width() == "0") {
+                $('.batteryCard').hide();
+            } else {
+                $('.batteryCard').show();
+            }
+
+            // this will slim the card to a square when device is charged. this can be removed if desired.
+            var pp = $('.batteryText').text();
+
+            if (pp >= "99") {
+                $('.batteryText').text("");
+                $('.batteryCard').addClass('square');
+            }
         }
 
         function checkTheme() {
