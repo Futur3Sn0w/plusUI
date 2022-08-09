@@ -133,8 +133,7 @@ body {
 }
 
 .card {
-    max-width: 150px !important;
-    min-width: 150px !important;
+    width: 150px;
     height: 90px;
 
     border-radius: 16px;
@@ -241,7 +240,6 @@ body {
     min-width: 90px !important;
 }
 
-
 .bcIndicator {
     display: flex;
     align-items: center;
@@ -292,8 +290,6 @@ body {
 
 .clockCard {
     background-color: #1E1E1F;
-    max-width: 90px !important;
-    min-width: 90px !important;
 }
 
 #clockContainer {
@@ -355,12 +351,44 @@ body {
     background: #FF8E00;
 }
 
-.photosCard {
+.emojiLocaleCard {
     font-size: 30px;
-    min-width: 90px !important;
-    max-width: 90px !important;
-    border-radius: 200px;
     background-color: pink;
+}
+
+.shortcutCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: inherit;
+}
+
+.shortcutCard .shortcuts {
+    width: fit-content;
+    height: fit-content;
+
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.scApp {
+    width: 35px;
+    aspect-ratio: 1/1;
+
+    font-size: 19px;
+
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
 }
 
 .timeDate {
@@ -496,20 +524,22 @@ body {
 .controlBtns {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     gap: 7px;
 
     position: absolute;
-    top: 20px;
-    right: 10px;
+    top: 110px;
+    right: -200px;
     z-index: 9;
 
-    height: fit-content;
+    height: 55px;
     width: fit-content;
 
+    overflow-y: scroll;
+
     padding: 15px 10px;
-    border-radius: 16px;
+    border-radius: 16px 0 0 16px;
     pointer-events: none;
 
     background-color: rgba(34, 34, 34, 0.7);
@@ -517,9 +547,10 @@ body {
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
     opacity: 0;
 
-    transform: scale(.75);
+    /* transform: scale(.75); */
+    /* transform-origin: right; */
 
-    transition: transform .4s, top .25s, opacity .3s;
+    transition: transform .4s, right .25s, opacity .3s;
     transition-timing-function: ease-out;
 }
 
@@ -529,12 +560,14 @@ body {
 
     pointer-events: all;
 
-    top: 80px
+    right: 0;
 }
 
 .controlBtns .toggles {
     display: flex;
     gap: 3px;
+
+    min-height: fit-content;
 }
 
 .button {
@@ -592,4 +625,10 @@ input[type="number"] {
 
 .controlBtns .keyTB::placeholder {
     color: rgba(255, 255, 255, 0.5);
+}
+
+.debugCards {
+    margin-top: 10px;
+    color: white;
+    font-size: 14px;
 }
