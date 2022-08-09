@@ -438,6 +438,10 @@ body {
     transition: top .4s, transform .2s;
 }
 
+.expandToggle:active {
+    transform: scale(0.7) !important;
+}
+
 .expandToggle.expanded i {
     transform: rotate(180deg);
 }

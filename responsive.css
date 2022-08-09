@@ -54,10 +54,6 @@
     .expandToggle:hover {
         transform: scale(1.15);
     }
-
-    .expandToggle:active {
-        transform: scale(0.7);
-    }
 }
 
 /* Only TOUCH SCREENS */
