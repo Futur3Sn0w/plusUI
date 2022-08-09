@@ -227,10 +227,12 @@
                 var batteryIsCharging = battery.charging;
                 battery.addEventListener('levelchange', function () {
                     $('.bciProg').css('width', bLevPerc);
-                    $('.batteryText').text(Math.round(bLev));
+                    $('.batteryText').text(Math.round(bLev) + "%");
+                    $('.batteryText').attr('data-battLvl', Math.round(bLev));
                 });
                 $('.bciProg').css('width', bLevPerc);
-                $('.batteryText').text(Math.round(bLev));
+                $('.batteryText').text(Math.round(bLev) + "%");
+                $('.batteryText').attr('data-battLvl', Math.round(bLev));
             });
         }
 
@@ -265,9 +267,9 @@
             }
 
             // this will slim the card to a square when device is charged. this can be removed if desired.
-            var pp = $('.batteryText').text();
+            var pp = $('.batteryText').attr('data-battLvl');
 
-            if (pp >= "99") {
+            if (pp >= "97") {
                 $('.batteryText').text("");
                 $('.batteryCard').addClass('square');
             }
