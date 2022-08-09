@@ -376,19 +376,16 @@ body {
     position: absolute;
     top: 30px;
     right: 0;
+    z-index: 10;
 
     height: 73px;
-    width: 220px;
+    width: 200px;
 
     padding-right: 20px;
 
     transition: .4s;
 
     overflow: hidden;
-}
-
-.timeDate.expanded {
-    height: 140px;
 }
 
 #clockIcon {
@@ -405,11 +402,13 @@ body {
 
 .time {
     font-size: 23px;
+    width: max-content;
 }
 
 .date {
     font-size: 16px;
     opacity: .7;
+    width: max-content;
 }
 
 .td {
@@ -418,7 +417,7 @@ body {
     justify-content: center;
 
     height: 70px;
-    width: fit-content;
+    width: max-content;
     font-family: GST-Med;
 }
 
@@ -443,7 +442,7 @@ body {
 }
 
 .expandToggle.expanded i {
-    transform: rotate(180deg);
+    transform: rotate(135deg);
 }
 
 .expandToggle i {
@@ -497,35 +496,50 @@ body {
 .controlBtns {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     flex-direction: column;
-    gap: 5px;
+    gap: 7px;
 
     position: absolute;
-    top: 70px;
-    right: 0;
+    top: 20px;
+    right: 10px;
+    z-index: 9;
 
-    height: 0;
-    overflow: hidden;
-    width: 100%;
-    /* background-color: white !important; */
-    transition: height .4s;
+    height: fit-content;
+    width: fit-content;
+
+    padding: 15px 10px;
+    border-radius: 16px;
+    pointer-events: none;
+
+    background-color: rgba(34, 34, 34, 0.7);
+    backdrop-filter: blur(20px) saturate(3);
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    opacity: 0;
+
+    transform: scale(.75);
+
+    transition: transform .4s, top .25s, opacity .3s;
+    transition-timing-function: ease-out;
+}
+
+.controlBtns.visible {
+    transform: scale(1);
+    opacity: 1;
+
+    pointer-events: all;
+
+    top: 80px
 }
 
 .controlBtns .toggles {
     display: flex;
     gap: 3px;
-    border-radius: 200px;
-    overflow: hidden;
-}
-
-.timeDate.expanded .controlBtns {
-    height: 140px;
 }
 
 .button {
     width: 73px;
-    height: 30px;
+    height: 25px;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 6px;
 
@@ -552,11 +566,6 @@ body {
     left: 28px;
 }
 
-.button.darkModeOn {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: rgb(255, 255, 255);
-}
-
 .button.darkModeOn::before {
     display: initial;
 }
@@ -565,14 +574,18 @@ body {
     display: flex;
 }
 
+input[type="number"] {
+    width: 40px !important;
+}
+
 .controlBtns .keyTB {
     background-color: rgba(14, 14, 14, 0.4);
     color: white;
-    border-radius: 3px;
+    border-radius: 5px;
     font-size: 13px;
     box-sizing: border-box;
 
-    width: 110px;
+    width: 140px;
     padding: 3px;
     border: 1px solid rgba(255, 255, 255, 0.5);
 }

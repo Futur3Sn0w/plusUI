@@ -54,6 +54,10 @@
     .expandToggle:hover {
         transform: scale(1.15);
     }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 /* Only TOUCH SCREENS */
