@@ -1,4 +1,4 @@
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 440px) {
     .tvUI {
         position: absolute;
         top: 0 !important;
@@ -20,6 +20,7 @@
 
     .timeDate {
         top: 0;
+        right: 0;
         border-radius: 0 0 0 20px;
     }
 
@@ -35,6 +36,8 @@
         user-select: none;
 
         height: fit-content;
+        width: 100vw;
+        max-width: 100vw;
     }
 
     .active {
