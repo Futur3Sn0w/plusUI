@@ -395,7 +395,11 @@ body {
 
 .timeDate {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    user-select: none;
     color: rgb(0, 0, 0);
 
     background-color: rgba(255, 255, 255, 0.75);
@@ -408,26 +412,12 @@ body {
     right: 20px;
     z-index: 10;
 
-    height: 73px;
-    width: 200px;
-
-    padding-right: 20px;
+    height: fit-content;
+    width: fit-content;
+    padding: 15px 15px 15px 10px;
+    overflow: hidden;
 
     transition: .4s;
-
-    overflow: hidden;
-}
-
-#clockIcon {
-    font-size: 25px;
-
-    height: 70px;
-    width: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: transparent;
 }
 
 .time {
@@ -446,23 +436,22 @@ body {
     flex-direction: column;
     justify-content: center;
 
-    height: 70px;
+    height: fit-content;
     width: max-content;
     font-family: GST-Med;
 }
 
 .expandToggle {
-    position: absolute;
-    top: 20px;
-    right: 34%;
+    /* position: absolute; */
+    /* top: 20px; */
+    /* right: 34%; */
     z-index: 2;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
-    width: 100%;
-    height: 35px;
+    height: 100%;
+    aspect-ratio: 1/1;
 
     transition: top .4s, transform .2s;
 }
