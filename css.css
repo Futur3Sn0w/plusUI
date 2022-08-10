@@ -291,18 +291,29 @@ body {
 }
 
 .clockCard {
-    background-color: #1E1E1F;
+    background-color: #dddddd;
+}
+
+.clockCard.darkModeOn {
+    background-color: #222222;
 }
 
 #clockContainer {
     position: relative;
     margin: auto;
-    /*to make the height and width responsive*/
-    width: 90%;
+    width: 85%;
     aspect-ratio: 1/1;
-    background: url("clockback.png") no-repeat;
-    /*setting our background image*/
+    background-image: url("resc/clock_numbs_black.svg");
+    background-repeat: no-repeat;
     background-size: 100%;
+
+    background-color: white;
+    border-radius: 50%;
+}
+
+.clockCard.darkModeOn #clockContainer {
+    background-image: url("resc/clock_numbs_white.svg");
+    background-color: black;
 }
 
 #clockContainer::after {
@@ -319,9 +330,12 @@ body {
     transform: translate(-50%, -50%);
 }
 
-#hour,
-#minute,
-#second {
+.clockCard.darkModeOn .clockHand,
+.clockCard.darkModeOn #clockContainer::after {
+    background: white;
+}
+
+.clockHand {
     position: absolute;
     background: black;
     border-radius: 10px;

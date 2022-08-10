@@ -192,11 +192,9 @@ function setTheme() {
         $('.timeDate').addClass('darkModeOn');
         $('#cards').addClass('darkModeOn');
         $('.controlBtns').addClass('darkModeOn');
+        $('.clockCard').addClass('darkModeOn');
     } else {
-        $('.button').removeClass('darkModeOn');
-        $('.timeDate').removeClass('darkModeOn');
-        $('#cards').removeClass('darkModeOn');
-        $('.controlBtns').removeClass('darkModeOn');
+        $('.darkModeOn').removeClass('darkModeOn');
     }
 }
 
