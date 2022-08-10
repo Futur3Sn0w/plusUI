@@ -5,10 +5,14 @@ window.onload = function () {
     showTime();
     showDate();
 
-    if (localStorage.getItem('debug') == 'true') {
+    if (localStorage.getItem('debug') == true) {
         $('.dbg').addClass('enabled');
         $('#cbDebugCards').prop('checked', true);
     }
+
+    setFullscreen();
+    setTheme();
+    setDbg();
 
     $('#backDrop').css('background-image', "url(" + backdropImg + ")");
     $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
@@ -20,7 +24,6 @@ window.onload = function () {
 
     applyKeys();
 
-    checkTheme();
     doTheBatteryThing();
     chargingIndic();
 }
@@ -56,22 +59,27 @@ function applyKeys() {
     }
 }
 
-var theme = true;
-var themeLS = localStorage.getItem('theme');
-
 $('.lightDark').on('click', function () {
-    localStorage.setItem('theme', theme);
-    $('.button').toggleClass('darkModeOn');
-    $('.timeDate').toggleClass('darkModeOn');
-    $('#cards').toggleClass('darkModeOn');
-    theme = !theme;
+    if (localStorage.getItem('theme') == 'light') {
+        localStorage.setItem('theme', 'dark');
+        setTheme();
+    } else {
+        localStorage.setItem('theme', 'light');
+        setTheme();
+    }
 });
 
-$('.fullScreenBtn').on('click', function () {
-    $('.tvUI').hasClass('tvFS') ? $('.tvUI').removeClass('tvFS') : $('.tvUI').addClass('tvFS');
+$('.fullScreen').on('click', function () {
+    if (localStorage.getItem('fullscreen') == 'true') {
+        localStorage.setItem('fullscreen', 'false');
+        setFullscreen();
+    } else {
+        localStorage.setItem('fullscreen', 'true');
+        setFullscreen();
+    }
 });
 
-$('.reloadBtn').on('click', function () {
+$('.reloadPage').on('click', function () {
     window.location.reload();
 });
 
@@ -97,9 +105,10 @@ $(document).mouseup(function (e) {
     var element = $(".timeDate");
     var element2 = $(".controlBtns");
     var element3 = $(".expandToggle");
+    var element4 = $(".keyTB");
 
     // if the target element is not expected element
-    if (!element.is(e.target) && !element2.is(e.target) && !element3.is(e.target)) {
+    if (!element.is(e.target) && !element2.is(e.target) && !element3.is(e.target) && !element4.is(e.target)) {
         $('.controlBtns').removeClass('visible');
         $('.expandToggle').removeClass('expanded');
     }
@@ -177,15 +186,37 @@ function cardSmarts() {
     }
 }
 
-function checkTheme() {
-    if (themeLS == 'false') {
+function setTheme() {
+    if (localStorage.getItem('theme') === 'dark') {
         $('.button').addClass('darkModeOn');
         $('.timeDate').addClass('darkModeOn');
         $('#cards').addClass('darkModeOn');
-    } else if (themeLS == 'true') {
+        $('.controlBtns').addClass('darkModeOn');
+    } else {
         $('.button').removeClass('darkModeOn');
         $('.timeDate').removeClass('darkModeOn');
         $('#cards').removeClass('darkModeOn');
+        $('.controlBtns').removeClass('darkModeOn');
+    }
+}
+
+function setFullscreen() {
+    if (localStorage.getItem('fullscreen') == 'true') {
+        $('.nonView').addClass('displayNone');
+        $('.tvUI').addClass('tvFS');
+    } else {
+        $('.tvUI').removeClass('tvFS');
+        $('.nonView').removeClass('displayNone');
+    }
+}
+
+function setDbg() {
+    if (localStorage.getItem('debug') == 'true') {
+        $('.dbg').addClass('enabled');
+        $('#cbDebugCards').attr('checked', true)
+    } else {
+        $('.dbg').removeClass('enabled');
+        $('#cbDebugCards').attr('checked', false)
     }
 }
 

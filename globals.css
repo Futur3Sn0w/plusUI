@@ -16,3 +16,7 @@
 .card.dbg.enabled {
     display: flex;
 }
+
+.displayNone {
+    display: none !important;
+}
