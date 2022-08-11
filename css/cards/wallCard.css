@@ -27,7 +27,7 @@
     transition: .25s;
     transition-timing-function: ease;
 
-    transform: scale(1.075);
+    transform: scale(1.15);
     box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.4);
     border: 3px solid rgb(235, 235, 235);
 

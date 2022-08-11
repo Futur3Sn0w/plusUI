@@ -7,11 +7,11 @@
     height: 90%;
     aspect-ratio: 1/1;
 
-    transform: translateX(-8px);
+    transform: translateX(-8px) translateZ(10px);
 }
 
 .temp {
     font-size: 25px;
     font-family: GST-Med;
-    transform: translateX(-12px);
+    transform: translateX(-12px) translateZ(10px);
 }

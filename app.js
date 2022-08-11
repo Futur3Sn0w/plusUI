@@ -330,3 +330,4 @@ function drawWeather(d) {
     var wIcon = d.weather[0].icon;
     $('#weatherIcon').attr('src', "http://openweathermap.org/img/wn/" + wIcon + "@4x.png");
 }
+
