@@ -127,10 +127,14 @@ body {
 
 .cards.darkModeOn,
 .timeDate.darkModeOn,
-.controlBtns.darkModeOn {
+.controlBtns.darkModeOn,
+.expandToggle.darkModeOn {
     background-color: rgba(0, 0, 0, 0.65);
     color: white;
     backdrop-filter: blur(50px) saturate(7);
+
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card {
@@ -161,6 +165,9 @@ body {
     right: 20px;
     z-index: 10;
 
+    width: min-content;
+    height: min-content;
+
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -180,11 +187,12 @@ body {
     background-color: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(100px) saturate(6);
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 16px;
 
     height: fit-content;
     width: fit-content;
-    padding: 12.5px 15px 12.5px 10px;
+    padding: 13px 20px;
     overflow: hidden;
 
     transition: .4s;
@@ -212,26 +220,34 @@ body {
 }
 
 .expandToggle {
-    /* position: absolute; */
-    /* top: 20px; */
-    /* right: 34%; */
+    position: absolute;
+    /* top: 13px; */
+    bottom: 25px;
+    left: 215px;
     z-index: 2;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.75);
+
+    font-size: 12px;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
     aspect-ratio: 1/1;
 
-    transition: top .4s, transform .2s;
+    transition: left .3s;
 }
 
-.expandToggle:active {
-    transform: scale(0.7) !important;
+.expandToggle.expanded {
+    left: -35px;
 }
 
 .expandToggle.expanded i {
-    transform: rotate(135deg);
+    transform: rotate(180deg);
 }
 
 .expandToggle i {
@@ -289,8 +305,9 @@ body {
     flex-direction: column;
     gap: 7px;
 
-    height: 55px;
-    width: fit-content;
+    height: 85px;
+    width: 100%;
+    min-width: 230px;
 
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
@@ -303,9 +320,9 @@ body {
     backdrop-filter: blur(100px) saturate(6);
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
     border-radius: 16px;
-    opacity: 0;
+    opacity: 1;
 
-    transform: translateX(100px);
+    transform: translateX(110%);
     /* transform-origin: right; */
 
     transition: transform .3s, opacity .3s;

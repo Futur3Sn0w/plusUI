@@ -54,10 +54,6 @@
         margin-bottom: 5px;
     }
 
-    .expandToggle:hover {
-        transform: scale(1.15);
-    }
-
     ::-webkit-scrollbar {
         display: none;
     }

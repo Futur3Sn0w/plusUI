@@ -204,9 +204,11 @@ function cardSmarts() {
 function setTheme() {
     if (localStorage.getItem('theme') === 'dark') {
         $('.button').addClass('darkModeOn');
+
         $('.timeDate').addClass('darkModeOn');
         $('#cards').addClass('darkModeOn');
         $('.controlBtns').addClass('darkModeOn');
+        $('.expandToggle').addClass('darkModeOn');
 
         $('.clockCard').addClass('darkModeOn');
         $('.calendarCard').addClass('darkModeOn');
