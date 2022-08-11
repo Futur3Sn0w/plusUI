@@ -6,10 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css.css">
-    <link rel="stylesheet" href="globals.css">
-    <link rel="stylesheet" href="responsive.css">
-    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="master_cards.css">
+    <link rel="stylesheet" href="master_structure.css">
 
     <script src="https://kit.fontawesome.com/a1fc6f0f3a.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -46,7 +44,7 @@
         <div class="backDrop hidden" id="backDrop2"></div>
 
         <div class="cards darkModeOn" id="cards">
-            <div class="wallCard card active" id="wallCard">
+            <div class="wallCard active" id="wallCard">
                 <div class="info">
                     <!-- <div class="wallName">Name</div> -->
                     <!-- <div class="wallAuth">Author</div> -->
@@ -62,6 +60,11 @@
                     <div class="clockHand" id="minute"></div>
                     <div class="clockHand" id="second"></div>
                 </div>
+            </div>
+            <div class="calendarCard card squareCard" id="calendarCard">
+                <div class="month"></div>
+                <div class="calenDayNo"></div>
+                <div class="calenDay"></div>
             </div>
             <div class="batteryCard card" id="batteryCard">
                 <div class="bcIndicator">
@@ -91,42 +94,44 @@
             </div>
         </div>
 
-        <div class="timeDate darkModeOn">
-            <div class="expandToggle">
-                <i class="fa-solid fa-plus"></i>
+        <div class="topChrome">
+            <div class="timeDate darkModeOn">
+                <div class="expandToggle">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="td">
+                    <div class="tdm time" id="time"></div>
+                    <div class="tdm date" id="date"></div>
+                </div>
             </div>
-            <div class="td">
-                <div class="tdm time" id="time"></div>
-                <div class="tdm date" id="date"></div>
-            </div>
-        </div>
 
-        <div class="controlBtns">
-            <div class="toggles">
-                <div class="lightDark btnCont">
-                    <div class="button darkModeBtn darkModeOn" data-btnLabel="Theme">
-                        <i class="fa-solid fa-circle-half-stroke"></i>
+            <div class="controlBtns">
+                <div class="toggles">
+                    <div class="lightDark btnCont">
+                        <div class="button darkModeBtn darkModeOn" data-btnLabel="Theme">
+                            <i class="fa-solid fa-circle-half-stroke"></i>
+                        </div>
+                    </div>
+                    <div class="fullScreen btnCont">
+                        <div class="button fullScreenBtn" data-btnLabel="Expand">
+                            <i class="fa-solid fa-expand"></i>
+                        </div>
+                    </div>
+                    <div class="reloadPage btnCont">
+                        <div class="button reloadBtn" data-btnLabel="Refresh">
+                            <i class="fa-solid fa-refresh"></i>
+                        </div>
                     </div>
                 </div>
-                <div class="fullScreen btnCont">
-                    <div class="button fullScreenBtn" data-btnLabel="Expand">
-                        <i class="fa-solid fa-expand"></i>
-                    </div>
+                <div class="inputs">
+                    <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
+                    <input class="keyTB" type="number" value="1" min=".8" max="3" step=".01"
+                        placeholder="Zoom level (1 is default)" id="zoomLvl">
                 </div>
-                <div class="reloadPage btnCont">
-                    <div class="button reloadBtn" data-btnLabel="Refresh">
-                        <i class="fa-solid fa-refresh"></i>
-                    </div>
+                <div class="debugCards">
+                    <input type="checkbox" name="debugCards" id="cbDebugCards">
+                    <label for="debugCards">Show debug cards (not recommended)</label>
                 </div>
-            </div>
-            <div class="inputs">
-                <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
-                <input class="keyTB" type="number" value="1" min=".8" max="3" step=".01"
-                    placeholder="Zoom level (1 is default)" id="zoomLvl">
-            </div>
-            <div class="debugCards">
-                <input type="checkbox" name="debugCards" id="cbDebugCards">
-                <label for="debugCards">Show debug cards (not recommended)</label>
             </div>
         </div>
     </div>

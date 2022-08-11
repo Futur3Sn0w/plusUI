@@ -1,0 +1,54 @@
+.batteryCard {
+    background: linear-gradient(360deg, #47ad0c, #59e754);
+    color: white;
+    font-size: 22px;
+    font-family: GSD-Bold;
+}
+
+.bcIndicator {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 64px;
+    height: 35px;
+
+    padding: 2px;
+    margin: 0;
+    margin-left: -.3%;
+
+    border-radius: 10px;
+    border: 3px solid white;
+    box-sizing: border-box;
+
+    position: relative;
+
+    transform: scale(0.7);
+}
+
+.bcIndicator::after {
+    content: "";
+    width: 7px;
+    height: 12px;
+
+    border-radius: 3px;
+    background-color: white;
+
+    position: absolute;
+    right: -8px;
+}
+
+.bciProg {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 5px;
+    background-color: white;
+}
+
+.chargingIcon {
+    color: transparent;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-55%);
+}

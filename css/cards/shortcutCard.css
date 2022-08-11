@@ -1,0 +1,34 @@
+.shortcutCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: inherit;
+}
+
+.shortcutCard .shortcuts {
+    width: fit-content;
+    height: fit-content;
+
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.scApp {
+    width: 35px;
+    aspect-ratio: 1/1;
+
+    font-size: 19px;
+
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}

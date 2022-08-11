@@ -114,6 +114,16 @@ $(document).mouseup(function (e) {
     }
 });
 
+$(document).mouseup(function (e) {
+    var element = $(".editMode");
+    var element2 = $(".card");
+
+    // if the target element is not expected element
+    if (!element.is(e.target) && !element2.is(e.target)) {
+        $('.editMode').removeClass('editMode');
+    }
+});
+
 $('#cbDebugCards').click(function () {
     if (localStorage.getItem('debug') == 'true') {
         $('.dbg').removeClass('enabled');
@@ -122,6 +132,11 @@ $('#cbDebugCards').click(function () {
         $('.dbg').addClass('enabled');
         localStorage.setItem('debug', 'true');
     }
+});
+
+$('.card').on('contextmenu', function (e) {
+    e.preventDefault();
+    $('.cards').addClass('editMode');
 });
 
 setInterval(() => {
@@ -192,7 +207,9 @@ function setTheme() {
         $('.timeDate').addClass('darkModeOn');
         $('#cards').addClass('darkModeOn');
         $('.controlBtns').addClass('darkModeOn');
+
         $('.clockCard').addClass('darkModeOn');
+        $('.calendarCard').addClass('darkModeOn');
     } else {
         $('.darkModeOn').removeClass('darkModeOn');
     }
@@ -288,6 +305,10 @@ function showDate() {
     const currentMonth = months[localDate.getMonth()];
     const currentYear = localDate.getFullYear();
     document.getElementById('date').innerText = currentDay + ", " + currentMonth + " " + currentDate;
+
+    $('.calendarCard .month').text(currentMonth);
+    $('.calendarCard .calenDayNo').text(currentDate);
+    $('.calendarCard .calenDay').text(currentDay);
 }
 
 function weatherBalloon(cityID) {
