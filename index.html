@@ -43,54 +43,56 @@
         <div class="backDrop" id="backDrop"></div>
         <div class="backDrop hidden" id="backDrop2"></div>
 
-        <div class="cards darkModeOn" id="cards">
+        <div class="shelf">
             <div class="wallCard active" id="wallCard">
                 <div class="info">
                     <!-- <div class="wallName">Name</div> -->
                     <!-- <div class="wallAuth">Author</div> -->
                 </div>
             </div>
-            <div class="weatherCard card" id="weatherCard">
-                <img src="" alt="" id="weatherIcon">
-                <div class="tdm temp" id="temp"></div>
-            </div>
-            <div class="clockCard card squareCard" id="clockCard">
-                <div id="clockContainer">
-                    <div class="clockHand" id="hour"></div>
-                    <div class="clockHand" id="minute"></div>
-                    <div class="clockHand" id="second"></div>
+            <div class="cards darkModeOn" id="cards">
+                <div class="weatherCard card parallax" id="weatherCard">
+                    <img src="" alt="" id="weatherIcon">
+                    <div class="tdm temp" id="temp"></div>
                 </div>
-            </div>
-            <div class="calendarCard card squareCard" id="calendarCard">
-                <div class="month"></div>
-                <div class="calenDayNo"></div>
-                <div class="calenDay"></div>
-            </div>
-            <div class="batteryCard card" id="batteryCard">
-                <div class="bcIndicator">
-                    <i class="fa-solid fa-bolt chargingIcon"></i>
-                    <div class="bciProg"></div>
-                </div>
-                <div class="batteryText"></div>
-            </div>
-            <div class="shortcutCard card squareCard dbg" id="shortcutCard">
-                <div class="shortcuts">
-                    <div class="scApp" id="scaYouTube" data-launch="youtube" style="background-color: #ff0101;">
-                        <i class="fa-brands fa-youtube"></i>
-                    </div>
-                    <div class="scApp" id="scaYTM" data-launch="music.youtube" style="background-color: #ff0101;">
-                        <i class="fa-solid fa-play"></i>
-                    </div>
-                    <div class="scApp" id="scaTwitter" data-launch="twitter" style="background-color: #1d9bf0;">
-                        <i class="fa-brands fa-twitter"></i>
-                    </div>
-                    <div class="scApp" id="" style="background-color: rgb(136, 136, 136);">
-                        <i class="fa-solid fa-question"></i>
+                <div class="clockCard card parallax squareCard" id="clockCard">
+                    <div id="clockContainer">
+                        <div class="clockHand" id="hour"></div>
+                        <div class="clockHand" id="minute"></div>
+                        <div class="clockHand" id="second"></div>
                     </div>
                 </div>
-            </div>
-            <div class="emojiLocaleCard card circleCard dbg" id="emojiLocaleCard">
-                <p>❤️</p>
+                <div class="calendarCard card parallax squareCard" id="calendarCard">
+                    <div class="month"></div>
+                    <div class="calenDayNo"></div>
+                    <div class="calenDay"></div>
+                </div>
+                <div class="batteryCard card parallax" id="batteryCard">
+                    <div class="bcIndicator">
+                        <i class="fa-solid fa-bolt chargingIcon"></i>
+                        <div class="bciProg"></div>
+                    </div>
+                    <div class="batteryText"></div>
+                </div>
+                <div class="shortcutCard card parallax squareCard dbg" id="shortcutCard">
+                    <div class="shortcuts">
+                        <div class="scApp" id="scaYouTube" data-launch="youtube" style="background-color: #ff0101;">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                        <div class="scApp" id="scaYTM" data-launch="music.youtube" style="background-color: #ff0101;">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <div class="scApp" id="scaTwitter" data-launch="twitter" style="background-color: #1d9bf0;">
+                            <i class="fa-brands fa-twitter"></i>
+                        </div>
+                        <div class="scApp" id="" style="background-color: rgb(136, 136, 136);">
+                            <i class="fa-solid fa-question"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="emojiLocaleCard card parallax circleCard dbg" id="emojiLocaleCard">
+                    <p>❤️</p>
+                </div>
             </div>
         </div>
 
@@ -138,21 +140,7 @@
     <script type="text/javascript" src="vanilla-tilt.js"></script>
 
     <script type="text/javascript">
-        const cards = document.querySelectorAll('.card');
-        VanillaTilt.init(cards, {
-            reverse: true,  // reverse the tilt direction
-            max: 25,     // max tilt rotation (degrees)
-            perspective: 400,   // Transform perspective, the lower the more extreme the tilt gets.
-            scale: 1.05,      // 2 = 200%, 1.5 = 150%, etc..
-            speed: 700,    // Speed of the enter/exit transition
-            transition: true,   // Set a transition on enter/exit.
-            reset: true,   // If the tilt effect has to be reset on exit.
-            easing: "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
-            glare: false,  // if it should have a "glare" effect
-            "max-glare": 1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
-            "glare-prerender": false,
-            gyroscope: false
-        });
+
     </script>
 
     <script src="app.js"></script>

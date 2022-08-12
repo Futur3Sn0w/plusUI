@@ -5,6 +5,31 @@ window.onload = function () {
     showTime();
     showDate();
 
+    function isTouchScreendevice() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints;
+    };
+
+    if (isTouchScreendevice()) {
+        $('.card').removeClass('parallax');
+    } else {
+        const cards = document.querySelectorAll('.parallax');
+        VanillaTilt.init(cards, {
+            reverse: true,  // reverse the tilt direction
+            max: 25,     // max tilt rotation (degrees)
+            perspective: 400,   // Transform perspective, the lower the more extreme the tilt gets.
+            scale: 1.05,      // 2 = 200%, 1.5 = 150%, etc..
+            speed: 700,    // Speed of the enter/exit transition
+            transition: true,   // Set a transition on enter/exit.
+            reset: true,   // If the tilt effect has to be reset on exit.
+            easing: "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
+            glare: false,  // if it should have a "glare" effect
+            "max-glare": 1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
+            "glare-prerender": false,
+            gyroscope: false,
+            "mouse-event-element": cards
+        });
+    }
+
     if (localStorage.getItem('debug') == true) {
         $('.dbg').addClass('enabled');
         $('#cbDebugCards').prop('checked', true);
@@ -330,4 +355,3 @@ function drawWeather(d) {
     var wIcon = d.weather[0].icon;
     $('#weatherIcon').attr('src', "http://openweathermap.org/img/wn/" + wIcon + "@4x.png");
 }
-

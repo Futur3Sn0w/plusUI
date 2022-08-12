@@ -12,9 +12,12 @@
     transition: background-image .3s, transform .3s, top .3s, filter .2s;
 
     overflow: hidden;
+    position: absolute;
+    left: 15px;
+    z-index: 10;
 
-    width: 150px;
-    height: 90px;
+    width: 195px;
+    height: 125px;
     flex-shrink: 0;
 
     display: flex;
@@ -23,15 +26,12 @@
 
     user-select: none;
 
-    transform-origin: center;
     transition: .25s;
     transition-timing-function: ease;
 
-    transform: scale(1.15);
     box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.4);
-    border: 3px solid rgb(235, 235, 235);
+    border: 4px solid rgb(235, 235, 235);
 
-    margin: 0 15px 0 10px;
     border-radius: 600px;
 }
 
