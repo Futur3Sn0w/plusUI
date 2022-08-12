@@ -66,11 +66,21 @@
         filter: blur(0) grayscale(1);
         transform: scale(.8) !important;
     }
+
+    .wallCard:hover .refresh {
+        opacity: 1;
+    }
 }
 
 /* Only TOUCH SCREENS */
 
 @media (hover: none) and (pointer: coarse) {
+
+    html,
+    body {
+        overscroll-behavior-x: none;
+    }
+
     .card {
         transition: .1s;
     }

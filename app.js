@@ -37,6 +37,7 @@ window.onload = function () {
     setFullscreen();
     setTheme();
     setDbg();
+    alignShelf();
 
     $('#backDrop').css('background-image', "url(" + backdropImg + ")");
     $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
@@ -126,23 +127,19 @@ $('#zoomLvl').change(function () {
 });
 
 $(document).mouseup(function (e) {
-    var element = $(".timeDate");
-    var element2 = $(".controlBtns");
-    var element3 = $(".expandToggle");
-    var element4 = $(".keyTB");
+    var element = $(".controlBtns");
+    var element2 = $(".controlBtns *");
 
-    // if the target element is not expected element
-    if (!element.is(e.target) && !element2.is(e.target) && !element3.is(e.target) && !element4.is(e.target)) {
+    if (!element.is(e.target) && !element2.is(e.target)) {
         $('.controlBtns').removeClass('visible');
         $('.expandToggle').removeClass('expanded');
     }
 });
 
 $(document).mouseup(function (e) {
-    var element = $(".editMode");
-    var element2 = $(".card");
+    var element = $(".card");
+    var element2 = $(".card *");
 
-    // if the target element is not expected element
     if (!element.is(e.target) && !element2.is(e.target)) {
         $('.editMode').removeClass('editMode');
     }
@@ -168,6 +165,27 @@ $('.card').click(function (e) {
         $(this).toggleClass('disabled');
     }
 });
+
+$('.sao-radio').click(function (e) {
+    localStorage.setItem('shelfPos', e.target.id);
+    alignShelf();
+});
+
+function alignShelf() {
+    if (localStorage.getItem('shelfPos') == "saoL-radio") {
+        $('.shelf').removeClass('right');
+        $('.shelf').removeClass('center');
+        $('.shelf').addClass('left');
+    } else if (localStorage.getItem('shelfPos') == "saoC-radio") {
+        $('.shelf').removeClass('right');
+        $('.shelf').addClass('center');
+        $('.shelf').removeClass('left');
+    } else if (localStorage.getItem('shelfPos') == "saoR-radio") {
+        $('.shelf').addClass('right');
+        $('.shelf').removeClass('center');
+        $('.shelf').removeClass('left');
+    }
+}
 
 setInterval(() => {
     d = new Date(); //object of date()
@@ -243,6 +261,7 @@ function setTheme() {
         $('.clockCard').addClass('darkModeOn');
         $('.calendarCard').addClass('darkModeOn');
         $('.shortcutCard').addClass('darkModeOn');
+        $('.wallCard').addClass('darkModeOn');
     } else {
         $('.darkModeOn').removeClass('darkModeOn');
     }
@@ -361,3 +380,32 @@ function drawWeather(d) {
     var wIcon = d.weather[0].icon;
     $('#weatherIcon').attr('src', "http://openweathermap.org/img/wn/" + wIcon + "@4x.png");
 }
+
+let touchstartX = 0
+let touchendX = 0
+
+function checkDirection() {
+    if (touchendX < touchstartX) {
+        if ($('.shelf').hasClass('right')) {
+            $('#saoC-radio').click()
+        } else if ($('.shelf').hasClass('center')) {
+            $('#saoL-radio').click()
+        }
+    } else if (touchendX > touchstartX) {
+        // right swipe
+        if ($('.shelf').hasClass('left')) {
+            $('#saoC-radio').click()
+        } else if ($('.shelf').hasClass('center')) {
+            $('#saoR-radio').click()
+        }
+    }
+}
+
+document.querySelector('.wallCard').addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX
+})
+
+document.querySelector('.wallCard').addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX
+    checkDirection()
+})

@@ -338,6 +338,8 @@ body {
 
 .inputs {
     display: flex;
+
+    padding: 0 0 10px 0;
 }
 
 input[type="number"] {
@@ -360,6 +362,41 @@ input[type="number"] {
     color: rgba(255, 255, 255, 0.5);
 }
 
+.shelfAlign {
+    /* Debug cards setting */
+
+    color: rgb(103, 103, 103);
+    font-size: 11px;
+
+    scroll-snap-align: start;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    background-color: inherit;
+    border-radius: 50px;
+    box-sizing: border-box;
+
+    width: max-content;
+
+    padding: 10px 20px;
+}
+
+.sa-opt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sa-opt input {
+    width: 20px;
+    height: 20px;
+
+    border: none !important;
+}
 
 .debugCards {
     /* Debug cards setting */

@@ -9,17 +9,32 @@
 .shelf {
     position: absolute;
     bottom: 0;
-    left: 0;
 
-    width: 100%;
+    width: fit-content;
     height: fit-content;
 
     display: flex;
     align-items: center;
-    justify-content: flex-start;
 
     box-sizing: border-box;
     padding: 15px;
+
+    transition: .3s;
+}
+
+.shelf.left {
+    left: 0;
+    right: 0;
+}
+
+.shelf.center {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.shelf.right {
+    right: 0;
+    left: auto;
 }
 
 .cards {
@@ -31,6 +46,7 @@
     background-color: rgba(255, 255, 255, 0.55);
     box-shadow: 7px 7px 12px 0 rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(30px) saturate(6);
+    border: 1px solid transparent;
 
     transition: background-color .3s;
 

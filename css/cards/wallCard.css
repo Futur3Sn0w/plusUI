@@ -13,7 +13,7 @@
 
     overflow: hidden;
     position: absolute;
-    left: 15px;
+    /* left: 15px; */
     z-index: 10;
 
     width: 195px;
@@ -32,7 +32,29 @@
     box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.4);
     border: 4px solid rgb(235, 235, 235);
 
-    border-radius: 600px;
+    border-radius: 25px;
+}
+
+.wallCard.darkModeOn {
+    border: 4px solid rgb(39, 39, 39);
+}
+
+.wallCard .refresh {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+
+    font-size: 40px;
+
+    transition: opacity .2s;
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .wallCard .info {
