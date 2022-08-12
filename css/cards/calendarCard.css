@@ -25,7 +25,7 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 
-    transform: translateZ(6px);
+    transform: translateZ(3px);
 
     display: flex;
     align-items: center;
@@ -39,7 +39,7 @@
     margin: 0;
     padding: 0;
 
-    transform: translateZ(10px);
+    transform: translateZ(15px);
 }
 
 .calendarCard .calenDay {

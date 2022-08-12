@@ -25,8 +25,7 @@ window.onload = function () {
             glare: false,  // if it should have a "glare" effect
             "max-glare": 1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
             "glare-prerender": false,
-            gyroscope: false,
-            "mouse-event-element": cards
+            gyroscope: false
         });
     }
 
@@ -164,6 +163,12 @@ $('.card').on('contextmenu', function (e) {
     $('.cards').addClass('editMode');
 });
 
+$('.card').click(function (e) {
+    if ($(this).parent().hasClass('editMode')) {
+        $(this).toggleClass('disabled');
+    }
+});
+
 setInterval(() => {
     d = new Date(); //object of date()
     hr = d.getHours();
@@ -215,12 +220,12 @@ function cardSmarts() {
     $('.batteryText').width() == "0" ? $('.batteryCard').hide() : $('.batteryCard').show();
 
     // this will slim the card to a square when device is charged. this can be removed if desired.
-    var pp = $('.batteryText').attr('data-battLvl');
+    var lev = $('.batteryText').attr('data-battLvl');
 
-    if (pp >= "97") {
-        $('.batteryText').text("");
-        $('.batteryCard').addClass('square');
-        $('.bciProg').css('width', "100%");
+    if (lev >= "97") {
+        $('.batteryText').remove();
+        $('.batteryCard').addClass('squareCard');
+        $('.bcIndicator').css('background-color', "white");
     } else {
         doTheBatteryThing();
     }

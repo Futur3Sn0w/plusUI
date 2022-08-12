@@ -98,47 +98,6 @@ body {
     opacity: 0;
 }
 
-.shelf {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    height: fit-content;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-
-    box-sizing: border-box;
-    padding: 15px;
-}
-
-.cards {
-    width: fit-content;
-    max-width: 100%;
-    height: fit-content;
-
-    border-radius: 90px 30px 30px 90px;
-    background-color: rgba(255, 255, 255, 0.55);
-    box-shadow: 7px 7px 12px 0 rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(30px) saturate(6);
-
-    /* transform: scale(0.85) !important; */
-    transition: background-color .3s;
-
-    overflow: scroll;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 15px;
-
-    padding: 10px;
-    padding-left: 215px;
-    box-sizing: border-box;
-}
-
 .cards.darkModeOn,
 .timeDate.darkModeOn,
 .controlBtns.darkModeOn,
@@ -149,29 +108,6 @@ body {
 
     box-sizing: border-box;
     border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.card {
-    width: 150px;
-    height: 90px;
-    flex-shrink: 0;
-
-    border-radius: 16px;
-    /* overflow: hidden; */
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.2);
-
-    user-select: none;
-    /* margin: 0 0 -.85% -5px; */
-
-    transform-style: preserve-3d;
-    transform: perspective(1000px);
-    transform-origin: center;
-    transition: .25s;
-    transition-timing-function: ease;
 }
 
 .topChrome {
@@ -417,63 +353,4 @@ input[type="number"] {
 
 .controlBtns .keyTB::placeholder {
     color: rgba(255, 255, 255, 0.5);
-}
-
-.debugCards {
-    margin-top: 10px;
-    color: white;
-    font-size: 12px;
-
-    margin-bottom: 40px;
-    scroll-snap-align: start;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.editMode .card {
-    filter: blur(0);
-
-    animation-name: jiggleMode;
-    animation-duration: .1s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: linear;
-
-    transform-origin: center center;
-}
-
-.editMode .card::after {
-    content: "✕";
-
-    width: 26px;
-    aspect-ratio: 1/1;
-
-    background-color: white;
-    color: black;
-    border-radius: 50%;
-
-    font-size: 15px;
-    font-family: GST-Bold;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    position: absolute;
-    top: -10px;
-    left: -10px;
-
-    cursor: pointer;
-}
-
-@keyframes jiggleMode {
-    from {
-        transform: scale(.9) rotate(-3deg);
-    }
-
-    to {
-        transform: scale(.9) rotate(3deg);
-    }
 }

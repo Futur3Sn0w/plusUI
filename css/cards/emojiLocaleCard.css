@@ -1,8 +1,8 @@
 .emojiLocaleCard {
-    font-size: 30px;
-    background-color: rgb(187, 92, 109) !important;
+    font-size: 35px;
+    background-color: rgb(220, 125, 142) !important;
 }
 
 .emojiLocaleCard p {
-    transform: translateZ(10px);
+    transform: translateZ(20px);
 }

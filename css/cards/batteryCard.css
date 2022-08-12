@@ -23,7 +23,7 @@
 
     position: relative;
 
-    transform: scale(0.7) translateZ(10px);
+    transform: scale(0.7) translateZ(15px);
 }
 
 .bcIndicator::after {

@@ -18,7 +18,7 @@
     background-color: white;
     border-radius: 50%;
 
-    transform: translateZ(10px);
+    transform: translateZ(13px);
 }
 
 .clockCard.darkModeOn #clockContainer {

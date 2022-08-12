@@ -61,6 +61,11 @@
     ::-webkit-scrollbar {
         display: none;
     }
+
+    .editMode .card.disabled:hover {
+        filter: blur(0) grayscale(1);
+        transform: scale(.8) !important;
+    }
 }
 
 /* Only TOUCH SCREENS */

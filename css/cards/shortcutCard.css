@@ -14,7 +14,7 @@
     grid-template-rows: auto auto;
     gap: 4px;
     flex-wrap: wrap;
-    transform: translateZ(10px);
+    transform: translateZ(12px);
 }
 
 .scApp {
