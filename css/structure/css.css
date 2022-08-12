@@ -264,7 +264,7 @@ body {
     scroll-snap-type: y mandatory;
     scroll-padding: 15px;
 
-    padding: 15px 10px;
+    padding: 12px 10px;
     pointer-events: none;
     box-sizing: border-box;
 
@@ -300,7 +300,7 @@ body {
 
 .button {
     width: 73px;
-    height: 25px;
+    height: 27px;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 6px;
 
@@ -321,7 +321,7 @@ body {
 .button::before {
     content: attr(data-btnLabel);
     font-size: 10px;
-    font-family: GST-Med;
+    font-family: GST-Reg;
 
     position: absolute;
     left: 28px;
@@ -329,6 +329,11 @@ body {
 
 .button.darkModeOn::before {
     display: initial;
+}
+
+.button.darkModeOn {
+    background-color: #222222;
+    color: white;
 }
 
 .inputs {
@@ -343,7 +348,7 @@ input[type="number"] {
     background-color: rgba(14, 14, 14, 0.4);
     color: white;
     border-radius: 5px;
-    font-size: 13px;
+    font-size: 12px;
     box-sizing: border-box;
 
     width: 140px;
@@ -353,4 +358,27 @@ input[type="number"] {
 
 .controlBtns .keyTB::placeholder {
     color: rgba(255, 255, 255, 0.5);
+}
+
+
+.debugCards {
+    /* Debug cards setting */
+
+    color: rgb(103, 103, 103);
+    font-size: 11px;
+
+    margin-top: 33px;
+    margin-bottom: 17px;
+    scroll-snap-align: start;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    box-sizing: border-box;
+
+    padding: 3px 7px 3px 3px;
 }

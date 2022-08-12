@@ -1,11 +1,3 @@
-.clockCard {
-    background-color: #dddddd;
-}
-
-.clockCard.darkModeOn {
-    background-color: #222222;
-}
-
 #clockContainer {
     position: relative;
     margin: auto;

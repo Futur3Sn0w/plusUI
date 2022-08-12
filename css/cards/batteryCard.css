@@ -1,6 +1,6 @@
 .batteryCard {
     background: linear-gradient(360deg, #47ad0c, #59e754);
-    color: white;
+    color: white !important;
     font-size: 22px;
     font-family: GSD-Bold;
 }

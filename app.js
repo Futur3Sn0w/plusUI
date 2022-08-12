@@ -222,7 +222,7 @@ function cardSmarts() {
     // this will slim the card to a square when device is charged. this can be removed if desired.
     var lev = $('.batteryText').attr('data-battLvl');
 
-    if (lev >= "97") {
+    if (lev >= "97" || lev == "100") {
         $('.batteryText').remove();
         $('.batteryCard').addClass('squareCard');
         $('.bcIndicator').css('background-color', "white");
@@ -242,6 +242,7 @@ function setTheme() {
 
         $('.clockCard').addClass('darkModeOn');
         $('.calendarCard').addClass('darkModeOn');
+        $('.shortcutCard').addClass('darkModeOn');
     } else {
         $('.darkModeOn').removeClass('darkModeOn');
     }

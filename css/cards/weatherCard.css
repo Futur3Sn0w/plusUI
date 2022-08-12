@@ -1,6 +1,6 @@
 .weatherCard {
     background: linear-gradient(360deg, #0e63d1, rgb(92, 168, 255));
-    color: white;
+    color: white !important;
 }
 
 #weatherIcon {

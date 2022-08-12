@@ -1,15 +1,7 @@
 .calendarCard {
-    background-color: white;
-    color: black;
-    display: flex;
     flex-direction: column;
 
     font-family: GST-Med;
-}
-
-.calendarCard.darkModeOn {
-    background-color: rgb(55, 55, 55);
-    color: white;
 }
 
 .calendarCard .month {
