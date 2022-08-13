@@ -70,6 +70,10 @@
     .wallCard:hover .refresh {
         opacity: 1;
     }
+
+    .shelf:hover .shelfLabel {
+        transform: translateY(-50px) scale(1);
+    }
 }
 
 /* Only TOUCH SCREENS */
@@ -87,5 +91,22 @@
 
     .card:active {
         transform: scale(.85) !important;
+    }
+
+    .expandToggle {
+        color: transparent !important;
+
+        background-color: rgba(255, 255, 255, 0.5) !important;
+        backdrop-filter: blur(10px) saturate(10);
+        box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.4);
+        border: none;
+
+        left: unset !important;
+        right: -20px !important;
+        bottom: 15px;
+
+        width: 7px;
+        height: 60px;
+        border-radius: 5px 0 0 5px;
     }
 }

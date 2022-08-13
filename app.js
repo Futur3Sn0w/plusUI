@@ -166,6 +166,14 @@ $('.card').click(function (e) {
     }
 });
 
+$('.labeled').mouseover(function (e) {
+    $('.shelfLabel').text($(this).attr('data-friendlyName'));
+});
+
+$('.labeled').mouseout(function (e) {
+    $('.shelfLabel').text('Shelf');
+});
+
 $('.sao-radio').click(function (e) {
     localStorage.setItem('shelfPos', e.target.id);
     alignShelf();
@@ -381,11 +389,14 @@ function drawWeather(d) {
     $('#weatherIcon').attr('src', "http://openweathermap.org/img/wn/" + wIcon + "@4x.png");
 }
 
+// Wallpaper card / shelf alignment gestures (mobile only)
+
 let touchstartX = 0
 let touchendX = 0
 
-function checkDirection() {
+function checkDirectionWC() {
     if (touchendX < touchstartX) {
+        // left swipe
         if ($('.shelf').hasClass('right')) {
             $('#saoC-radio').click()
         } else if ($('.shelf').hasClass('center')) {
@@ -407,5 +418,32 @@ document.querySelector('.wallCard').addEventListener('touchstart', e => {
 
 document.querySelector('.wallCard').addEventListener('touchend', e => {
     touchendX = e.changedTouches[0].screenX
-    checkDirection()
+    checkDirectionWC()
+})
+
+// Control panel gesture pill (mobile only)
+
+function checkDirectionCC() {
+    if (touchendX < touchstartX) {
+        // left swipe
+        if ($('.controlBtns').hasClass('expanded')) {
+        } else {
+            $('.expandToggle').click()
+        }
+    } else if (touchendX > touchstartX) {
+        // right swipe
+        if ($('.controlBtns').hasClass('expanded')) {
+        } else {
+            $('.expandToggle').click()
+        }
+    }
+}
+
+document.querySelector('.expandToggle').addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX
+})
+
+document.querySelector('.expandToggle').addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX
+    checkDirectionCC()
 })
