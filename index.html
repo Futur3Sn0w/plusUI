@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="master_cards.css">
     <link rel="stylesheet" href="master_structure.css">
+    <link rel="stylesheet" href="master_modal.css">
 
     <script src="https://kit.fontawesome.com/a1fc6f0f3a.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -27,137 +28,118 @@
 </head>
 
 <body>
-    <div class="nonView"></div>
+    <!-- <div class="modal">
+        <div class="modal-inner" id="miAboutPlusUI"></div>
+    </div> -->
 
-    <div class="keys">
-        <div class="keyLines">
-            <input class="keyTB" type="text" placeholder="OWM API Key" name="" id="owmAPI">
-            <input class="keyTB" type="text" placeholder="City ID" name="" id="owmCity">
-            <button class="keyTB submit" onclick="submitKeys()">Submit</button>
+    <div class="backDrop" id="backDrop2"></div>
+
+    <div class="shelf left">
+        <div class="shelfLabel"></div>
+        <div class="wallCard labeled active" data-friendlyName="Backdrop" id="wallCard">
+            <div class="refresh">
+                <i class="fa-solid fa-refresh"></i>
+            </div>
+            <div class="info">
+                <!-- <div class="wallName">Name</div> -->
+                <!-- <div class="wallAuth">Author</div> -->
+            </div>
+        </div>
+        <div class="cards darkModeOn" id="cards">
+            <div class="weatherCard card labeled parallax" data-friendlyName="Weather" id="weatherCard">
+                <img src="" alt="" id="weatherIcon">
+                <div class="tdm temp" id="temp"></div>
+            </div>
+            <div class="clockCard card labeled parallax squareCard" data-friendlyName="Clock" id="clockCard">
+                <div id="clockContainer">
+                    <div class="clockHand" id="hour"></div>
+                    <div class="clockHand" id="minute"></div>
+                    <div class="clockHand" id="second"></div>
+                </div>
+            </div>
+            <div class="calendarCard card labeled parallax squareCard" data-friendlyName="Calendar" id="calendarCard">
+                <div class="month"></div>
+                <div class="calenDayNo"></div>
+                <div class="calenDay"></div>
+            </div>
+            <div class="batteryCard card labeled parallax" data-friendlyName="Battery" id="batteryCard">
+                <div class="bcIndicator">
+                    <i class="fa-solid fa-bolt chargingIcon"></i>
+                    <div class="bciProg"></div>
+                </div>
+                <div class="batteryText"></div>
+            </div>
+            <div class="shortcutCard card labeled parallax squareCard" data-friendlyName="Shortcuts" id="shortcutCard">
+                <div class="shortcuts">
+                    <div class="scApp" id="scaYouTube" data-launch="youtube" style="background-color: #ff0101;">
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                    <div class="scApp" id="scaYTM" data-launch="music.youtube" style="background-color: #ff0101;">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="scApp" id="scaTwitter" data-launch="twitter" style="background-color: #1d9bf0;">
+                        <i class="fa-brands fa-twitter"></i>
+                    </div>
+                    <div class="scApp" id="" style="background-color: rgb(136, 136, 136);">
+                        <i class="fa-solid fa-question"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="emojiLocaleCard card labeled parallax circleCard dbg" data-friendlyName="Emoji"
+                id="emojiLocaleCard">
+                <p>❤️</p>
+            </div>
+        </div>
+        <div class="shelfCollapseToggle expanded">
+            <i class="fa-solid fa-chevron-right"></i>
         </div>
     </div>
 
-    <div class="tvUI" id="tvUI">
-        <!-- <div class="nonView nv2"></div> -->
-
-        <div class="backDrop" id="backDrop"></div>
-        <div class="backDrop hidden" id="backDrop2"></div>
-
-        <div class="shelf left">
-            <div class="shelfLabel"></div>
-            <div class="wallCard labeled active" data-friendlyName="Backdrop" id="wallCard">
-                <div class="refresh">
-                    <i class="fa-solid fa-refresh"></i>
-                </div>
-                <div class="info">
-                    <!-- <div class="wallName">Name</div> -->
-                    <!-- <div class="wallAuth">Author</div> -->
-                </div>
+    <div class="topChrome">
+        <div class="timeDate darkModeOn">
+            <div class="aboutBtn">
+                <i class="fa-solid fa-info-circle"></i>
             </div>
-            <div class="cards darkModeOn" id="cards">
-                <div class="weatherCard card labeled parallax" data-friendlyName="Weather" id="weatherCard">
-                    <img src="" alt="" id="weatherIcon">
-                    <div class="tdm temp" id="temp"></div>
-                </div>
-                <div class="clockCard card labeled parallax squareCard" data-friendlyName="Clock" id="clockCard">
-                    <div id="clockContainer">
-                        <div class="clockHand" id="hour"></div>
-                        <div class="clockHand" id="minute"></div>
-                        <div class="clockHand" id="second"></div>
-                    </div>
-                </div>
-                <div class="calendarCard card labeled parallax squareCard" data-friendlyName="Calendar"
-                    id="calendarCard">
-                    <div class="month"></div>
-                    <div class="calenDayNo"></div>
-                    <div class="calenDay"></div>
-                </div>
-                <div class="batteryCard card labeled parallax" data-friendlyName="Battery" id="batteryCard">
-                    <div class="bcIndicator">
-                        <i class="fa-solid fa-bolt chargingIcon"></i>
-                        <div class="bciProg"></div>
-                    </div>
-                    <div class="batteryText"></div>
-                </div>
-                <div class="shortcutCard card labeled parallax squareCard" data-friendlyName="Shortcuts"
-                    id="shortcutCard">
-                    <div class="shortcuts">
-                        <div class="scApp" id="scaYouTube" data-launch="youtube" style="background-color: #ff0101;">
-                            <i class="fa-brands fa-youtube"></i>
-                        </div>
-                        <div class="scApp" id="scaYTM" data-launch="music.youtube" style="background-color: #ff0101;">
-                            <i class="fa-solid fa-play"></i>
-                        </div>
-                        <div class="scApp" id="scaTwitter" data-launch="twitter" style="background-color: #1d9bf0;">
-                            <i class="fa-brands fa-twitter"></i>
-                        </div>
-                        <div class="scApp" id="" style="background-color: rgb(136, 136, 136);">
-                            <i class="fa-solid fa-question"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="emojiLocaleCard card labeled parallax circleCard dbg" data-friendlyName="Emoji"
-                    id="emojiLocaleCard">
-                    <p>❤️</p>
-                </div>
-            </div>
-            <div class="shelfCollapseToggle expanded">
-                <i class="fa-solid fa-chevron-right"></i>
+            <div class="td">
+                <div class="tdm time" id="time"></div>
+                <div class="tdm date" id="date"></div>
             </div>
         </div>
-
-        <div class="topChrome">
-            <div class="timeDate darkModeOn">
-                <div class="td">
-                    <div class="tdm time" id="time"></div>
-                    <div class="tdm date" id="date"></div>
+        <div class="controlBtns">
+            <div class="toggles">
+                <div class="lightDark btnCont">
+                    <div class="button darkModeBtn darkModeOn" data-btnLabel="Theme">
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+                    </div>
+                </div>
+                <div class="reloadPage btnCont">
+                    <div class="button reloadBtn" data-btnLabel="Refresh">
+                        <i class="fa-solid fa-refresh"></i>
+                    </div>
                 </div>
             </div>
-            <div class="controlBtns">
-                <div class="toggles">
-                    <div class="lightDark btnCont">
-                        <div class="button darkModeBtn darkModeOn" data-btnLabel="Theme">
-                            <i class="fa-solid fa-circle-half-stroke"></i>
-                        </div>
-                    </div>
-                    <div class="fullScreen btnCont">
-                        <div class="button fullScreenBtn" data-btnLabel="Expand">
-                            <i class="fa-solid fa-expand"></i>
-                        </div>
-                    </div>
-                    <div class="reloadPage btnCont">
-                        <div class="button reloadBtn" data-btnLabel="Refresh">
-                            <i class="fa-solid fa-refresh"></i>
-                        </div>
-                    </div>
+            <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
+            <div class="shelfAlign">
+                <div class="sa-opt saoL">
+                    <input class="sao-radio" type="radio" name="shelfAlign" id="saoL-radio">
+                    <label for="saoL-radio">Left</label>
                 </div>
-                <div class="inputs">
-                    <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
-                    <input class="keyTB" type="number" value="1" min=".8" max="3" step=".01"
-                        placeholder="Zoom level (1 is default)" id="zoomLvl">
+                <div class="sa-opt saoC">
+                    <input class="sao-radio" type="radio" name="shelfAlign" id="saoC-radio">
+                    <label for="saoC-radio">Center</label>
                 </div>
-                <div class="shelfAlign">
-                    <div class="sa-opt saoL">
-                        <input class="sao-radio" type="radio" name="shelfAlign" id="saoL-radio">
-                        <label for="saoL-radio">Left</label>
-                    </div>
-                    <div class="sa-opt saoC">
-                        <input class="sao-radio" type="radio" name="shelfAlign" id="saoC-radio">
-                        <label for="saoC-radio">Center</label>
-                    </div>
-                    <div class="sa-opt saoR">
-                        <input class="sao-radio" type="radio" name="shelfAlign" id="saoR-radio">
-                        <label for="saoR-radio">Right</label>
-                    </div>
-                </div>
-                <div class="debugCards">
-                    <input type="checkbox" name="debugCards" id="cbDebugCards">
-                    <label for="debugCards">Enable debug cards</label>
+                <div class="sa-opt saoR">
+                    <input class="sao-radio" type="radio" name="shelfAlign" id="saoR-radio">
+                    <label for="saoR-radio">Right</label>
                 </div>
             </div>
-            <div class="expandToggle">
-                <i class="fa-solid fa-chevron-left"></i>
+            <div class="debugCards">
+                <input type="checkbox" name="debugCards" id="cbDebugCards">
+                <label for="debugCards">Enable debug cards</label>
             </div>
+        </div>
+        <div class="expandToggle">
+            <i class="fa-solid fa-chevron-left"></i>
         </div>
     </div>
 

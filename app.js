@@ -34,12 +34,12 @@ window.onload = function () {
         $('#cbDebugCards').prop('checked', true);
     }
 
-    setFullscreen();
+    applyKeys();
+
     setTheme();
     setDbg();
     alignShelf();
 
-    $('#backDrop').css('background-image', "url(" + backdropImg + ")");
     $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
     $('body').css('background-image', "url(" + backdropImg + ")");
     refreshWall();
@@ -47,41 +47,16 @@ window.onload = function () {
 
     setTimeout("cardSmarts();", 500);
 
-    applyKeys();
-
     doTheBatteryThing();
     chargingIndic();
 }
 
-var lsOwmAPI = localStorage.getItem('owmAPI');
-var lsOwmCity = localStorage.getItem('owmCity');
-
-function submitKeys() {
-    localStorage.setItem('owmAPI', $('#owmAPI').val());
-    localStorage.setItem('owmCity', $('#owmCity').val());
-    window.location.reload();
-    // alert(lsOwmAPI + " " + lsOwmCity + " " + lsrssapp);
-}
+var lsOwmAPI = "984b3d6c3b801e60a2eaf094da08b866";
+var lsOwmCity = "4791259";
 
 function applyKeys() {
-    if (localStorage.getItem('owmAPI') == null) {
-        $('.keys').css('display', 'flex');
-        alert('The info below is required to enter.');
-    } else if (localStorage.getItem('owmCity') == null) {
-        $('.keys').css('display', 'flex');
-        alert('The info below is required to enter.');
-    } else {
-        var lsOwmAPI = localStorage.getItem('owmAPI');
-        var lsOwmCity = localStorage.getItem('owmCity');
-
-        $('.keys').css('display', 'none');
-        $('.tvUI').css('display', 'flex');
-
-        console.log('Keys loaded sucessfully.');
-
-        weatherBalloon(lsOwmCity);
-        window.setInterval("weatherBalloon(lsOwmCity);", 10000);
-    }
+    weatherBalloon(lsOwmCity);
+    window.setInterval("weatherBalloon(lsOwmCity);", 10000);
 }
 
 $('.lightDark').on('click', function () {
@@ -91,16 +66,6 @@ $('.lightDark').on('click', function () {
     } else {
         localStorage.setItem('theme', 'light');
         setTheme();
-    }
-});
-
-$('.fullScreen').on('click', function () {
-    if (localStorage.getItem('fullscreen') == 'true') {
-        localStorage.setItem('fullscreen', 'false');
-        setFullscreen();
-    } else {
-        localStorage.setItem('fullscreen', 'true');
-        setFullscreen();
     }
 });
 
@@ -125,10 +90,6 @@ $('.scApp').on('click', function () {
 $('#unsplashTags').focusout(function () {
     localStorage.setItem('unsplashTags', '&' + $(this).val());
     refreshWall();
-});
-
-$('#zoomLvl').change(function () {
-    $('.tvUI').css('transform', 'scale(' + $(this).val() + ')')
 });
 
 $(document).mouseup(function (e) {
@@ -280,16 +241,6 @@ function setTheme() {
     }
 }
 
-function setFullscreen() {
-    if (localStorage.getItem('fullscreen') == 'true') {
-        $('.nonView').addClass('displayNone');
-        $('.tvUI').addClass('tvFS');
-    } else {
-        $('.tvUI').removeClass('tvFS');
-        $('.nonView').removeClass('displayNone');
-    }
-}
-
 function setDbg() {
     if (localStorage.getItem('debug') == 'true') {
         $('.dbg').addClass('enabled');
@@ -309,11 +260,10 @@ function refreshWall() {
     fetch("https://source.unsplash.com/random/?sig=" + Math.round(Math.random) + wallFilter).then(data => {
         var backdropSample = data.url;
 
-        $('#backDrop').css('background-image', $('#backDrop2').css('background-image'));
         $('body').css('background-image', $('#backDrop2').css('background-image'));
         $('.nv2').css('background-image', $('#backDrop2').css('background-image'));
         $('.wallCard').css('background-image', $('#backDrop2').css('background-image'));
-        $('#backDrop2').delay(700).css('background-image', "url(" + backdropSample + ")");
+        $('#backDrop2').delay(500).css('background-image', "url(" + backdropSample + ")");
     });
 }
 

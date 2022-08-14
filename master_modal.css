@@ -1,0 +1,11 @@
+@import url('modal/card/shortcutCard-opts.css');
+
+.modal {
+    position: absolute;
+    z-index: 100;
+
+    min-width: 100px;
+    min-height: 100px;
+
+    background-color: white;
+}
