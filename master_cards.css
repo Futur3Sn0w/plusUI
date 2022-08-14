@@ -20,6 +20,8 @@
     box-sizing: border-box;
     padding: 15px;
 
+    margin-bottom: 10px;
+
     transition: .3s;
 }
 
@@ -62,6 +64,40 @@
     transition: transform .2s;
 }
 
+.shelfCollapseToggle {
+    position: absolute;
+    right: -5px;
+    z-index: 2;
+
+    width: 15px;
+    height: 50px;
+
+    border-radius: 20px;
+    background-color: white;
+
+    font-size: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+
+    transition: left .3s;
+}
+
+.shelfCollapseToggle.expanded {
+    right: 0;
+    border-radius: 0 10px 10px 0;
+}
+
+.shelfCollapseToggle.expanded i {
+    transform: rotate(180deg);
+}
+
+.shelfCollapseToggle i {
+    transition: transform .3s;
+}
+
 .cards {
     width: fit-content;
     max-width: 100%;
@@ -73,7 +109,7 @@
     backdrop-filter: blur(30px) saturate(6);
     border: 1px solid transparent;
 
-    transition: background-color .3s;
+    transition: background-color .3s, width .3s, padding-left .3s;
 
     overflow: scroll;
 
@@ -85,6 +121,11 @@
     padding: 10px;
     padding-left: 215px;
     box-sizing: border-box;
+}
+
+.cards.collapsed {
+    width: 0;
+    padding-left: 190px;
 }
 
 .card {

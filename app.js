@@ -113,6 +113,11 @@ $('.expandToggle').on('click', function () {
     $('.expandToggle').toggleClass('expanded');
 });
 
+$('.shelfCollapseToggle').on('click', function () {
+    $('.cards').toggleClass('collapsed');
+    $('.shelfCollapseToggle').toggleClass('expanded');
+});
+
 $('.scApp').on('click', function () {
     window.open('https://' + $(this).attr('data-launch') + '.com');
 });
