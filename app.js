@@ -236,6 +236,7 @@ function setTheme() {
         $('.calendarCard').addClass('darkModeOn');
         $('.shortcutCard').addClass('darkModeOn');
         $('.wallCard').addClass('darkModeOn');
+        $('.modal-about').addClass('darkModeOn');
     } else {
         $('.darkModeOn').removeClass('darkModeOn');
     }
@@ -402,3 +403,21 @@ document.querySelector('.expandToggle').addEventListener('touchend', e => {
     touchendX = e.changedTouches[0].screenX
     checkDirectionCC()
 })
+
+// About modal functions
+
+$('#aboutModalClose').click(function (e) {
+    $('.modal-about').removeClass('visible')
+});
+
+$('#topChromeAboutBtn').click(function (e) {
+    $('.modal-about').addClass('visible')
+});
+
+$(document).mouseup(function (e) {
+    var element = $(".modal-about");
+
+    if (!element.is(e.target)) {
+        $('#aboutModalClose').click();
+    }
+});

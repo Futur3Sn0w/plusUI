@@ -28,9 +28,32 @@
 </head>
 
 <body>
-    <!-- <div class="modal">
-        <div class="modal-inner" id="miAboutPlusUI"></div>
-    </div> -->
+    <div class="modal modal-about">
+        <div class="header">
+            <img src="favicon/android-chrome-192x192.png" alt="">
+            <p id="title">PlusUI</p>
+            <p id="ver">v1.0.3</p>
+            <div class="close" id="aboutModalClose">
+                <i class="fa-solid fa-close"></i>
+            </div>
+        </div>
+        <div class="aboutText">
+            PlusUI is your one-stop-shop for all your information, shortcuts, notes, and more. <br>PlusUI is currently
+            in beta, but is in Open Access, meaning anyone can test it for themselves!<br>Feel free to report bugs on
+            the project's GitHub (link below)!
+        </div>
+        <div class="aboutLinks">
+            <div class="alink">
+                <i class="fa-brands fa-github"></i>
+            </div>
+            <div class="alink">
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+            <div class="alink">
+                <i class="fa-solid fa-home"></i>
+            </div>
+        </div>
+    </div>
 
     <div class="backDrop" id="backDrop2"></div>
 
@@ -97,9 +120,9 @@
 
     <div class="topChrome">
         <div class="timeDate darkModeOn">
-            <!-- <div class="aboutBtn">
+            <div class="aboutBtn" id="topChromeAboutBtn">
                 <i class="fa-solid fa-info-circle"></i>
-            </div> -->
+            </div>
             <div class="td">
                 <div class="tdm time" id="time"></div>
                 <div class="tdm date" id="date"></div>

@@ -25,7 +25,8 @@ body {
 .cards.darkModeOn,
 .timeDate.darkModeOn,
 .controlBtns.darkModeOn,
-.expandToggle.darkModeOn {
+.expandToggle.darkModeOn,
+.modal-about.darkModeOn {
     background-color: rgba(0, 0, 0, 0.65);
     color: white;
     backdrop-filter: blur(50px) saturate(7);
@@ -92,6 +93,21 @@ body {
     height: fit-content;
     width: max-content;
     font-family: GST-Med;
+}
+
+.aboutBtn {
+    display: flex;
+
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 7px;
+
+    background-color: inherit;
+    color: inherit;
+    border-radius: 50%;
+
+    cursor: pointer;
 }
 
 .expandToggle {
