@@ -9,7 +9,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    transition: background-image .3s, transform .3s, top .3s, filter .2s;
+    transition: .3s;
 
     overflow: hidden;
     position: absolute;
@@ -29,11 +29,25 @@
 
     transition: .25s;
     transition-timing-function: ease;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.3);
 
-    box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.4);
     background-color: white;
 
     border-radius: 25px;
+}
+
+.wallCard.shExpanded {
+    box-shadow: none;
+}
+
+.wallCard:before {
+    content: " ";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
 }
 
 .wallCard .refresh {
@@ -48,6 +62,7 @@
     position: absolute;
     width: 120%;
     height: 120%;
+    z-index: -2;
 
     display: flex;
     align-items: center;

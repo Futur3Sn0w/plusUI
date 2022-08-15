@@ -85,6 +85,7 @@ $('.expandToggle').on('click', function () {
 $('.shelfCollapseToggle').on('click', function () {
     $('.cards').toggleClass('collapsed');
     $('.shelfCollapseToggle').toggleClass('expanded');
+    $('.wallCard').toggleClass('shExpanded');
 });
 
 $('.scApp').on('click', function () {
