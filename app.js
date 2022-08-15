@@ -51,6 +51,10 @@ window.onload = function () {
     chargingIndic();
 }
 
+window.addEventListener('load', function () {
+    this.localStorage.setItem('cardsWidth', $('.cards').css('width'));
+})
+
 var lsOwmAPI = "984b3d6c3b801e60a2eaf094da08b866";
 var lsOwmCity = "4791259";
 
@@ -231,6 +235,7 @@ function setTheme() {
         $('#cards').addClass('darkModeOn');
         $('.controlBtns').addClass('darkModeOn');
         $('.expandToggle').addClass('darkModeOn');
+        $('.shelfCollapseToggle').addClass('darkModeOn');
 
         $('.clockCard').addClass('darkModeOn');
         $('.calendarCard').addClass('darkModeOn');
@@ -328,8 +333,7 @@ function showDate() {
 }
 
 function weatherBalloon(cityID) {
-    var key = localStorage.getItem('owmAPI');
-    fetch('https://api.openweathermap.org/data/2.5/weather?id=' + cityID + '&appid=' + key)
+    fetch('https://api.openweathermap.org/data/2.5/weather?id=' + cityID + '&appid=' + lsOwmAPI)
         .then(function (resp) { return resp.json() }) // Convert data to json
         .then(function (data) {
 
@@ -421,3 +425,9 @@ $(document).mouseup(function (e) {
         $('#aboutModalClose').click();
     }
 });
+
+// Auto update shelf width
+
+$(document).click(function () {
+    $('.cards').css('max-width', localStorage.getItem('cardsWidth'));
+})

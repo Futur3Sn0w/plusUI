@@ -9,6 +9,7 @@
 .shelf {
     position: absolute;
     bottom: 0;
+    left: 0;
 
     width: fit-content;
     max-width: 100vw;
@@ -18,11 +19,11 @@
     align-items: center;
 
     box-sizing: border-box;
-    padding: 15px;
-
-    margin-bottom: 10px;
+    padding: 35px 25px;
 
     transition: .3s;
+
+    border-radius: 0 20px 0 0;
 }
 
 .shelf.left {
@@ -57,8 +58,8 @@
     justify-content: center;
 
     position: absolute;
-    top: 15px;
-    left: 25px;
+    top: 50px;
+    left: 30px;
 
     transform: translateY(0) scale(.7);
     transition: transform .2s;
@@ -66,14 +67,14 @@
 
 .shelfCollapseToggle {
     position: absolute;
-    right: -5px;
+    right: 5px;
     z-index: 2;
 
     width: 15px;
     height: 50px;
 
     border-radius: 20px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.75);
 
     font-size: 12px;
 
@@ -82,11 +83,11 @@
     justify-content: center;
     aspect-ratio: 1/1;
 
-    transition: left .3s;
+    transition: left .4s;
 }
 
 .shelfCollapseToggle.expanded {
-    right: 0;
+    right: 10px;
     border-radius: 0 10px 10px 0;
 }
 
@@ -99,17 +100,18 @@
 }
 
 .cards {
-    width: fit-content;
+    width: 100%;
     max-width: 100%;
-    height: fit-content;
+    height: 115px;
 
     border-radius: 90px 30px 30px 90px;
     background-color: rgba(255, 255, 255, 0.55);
     box-shadow: 7px 7px 12px 0 rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(30px) saturate(6);
     border: 1px solid transparent;
+    transform: translateX(0);
 
-    transition: background-color .3s, width .3s, padding-left .3s;
+    transition: .3s;
 
     overflow: scroll;
 
@@ -124,8 +126,17 @@
 }
 
 .cards.collapsed {
-    width: 0;
-    padding-left: 190px;
+    width: 209px;
+    height: 141px;
+
+    gap: 20px;
+
+    padding: 0;
+    padding-left: 209px;
+
+    transform: translateX(-8px);
+
+    border-radius: 31px;
 }
 
 .card {
