@@ -86,6 +86,12 @@ $('.shelfCollapseToggle').on('click', function () {
     $('.cards').toggleClass('collapsed');
     $('.shelfCollapseToggle').toggleClass('expanded');
     $('.wallCard').toggleClass('shExpanded');
+
+    if ($('.cards').hasClass('collapsed')) {
+        $('.shelfLabel').addClass('hidden');
+    } else {
+        $('.shelfLabel').removeClass('hidden');
+    }
 });
 
 $('.scApp').on('click', function () {
@@ -100,18 +106,15 @@ $('#unsplashTags').focusout(function () {
 $(document).mouseup(function (e) {
     var element = $(".controlBtns");
     var element2 = $(".controlBtns *");
+    var element3 = $(".card");
+    var element4 = $(".card *");
 
     if (!element.is(e.target) && !element2.is(e.target)) {
         $('.controlBtns').removeClass('visible');
         $('.expandToggle').removeClass('expanded');
     }
-});
 
-$(document).mouseup(function (e) {
-    var element = $(".card");
-    var element2 = $(".card *");
-
-    if (!element.is(e.target) && !element2.is(e.target)) {
+    if (!element3.is(e.target) && !element4.is(e.target)) {
         $('.editMode').removeClass('editMode');
     }
 });

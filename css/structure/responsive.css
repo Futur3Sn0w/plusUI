@@ -56,6 +56,14 @@
     }
 }
 
+/* @media only screen and (max-height: 440px) {
+    .shelf {
+        width: 50vw;
+        height: 100vh;
+    }
+} */
+
+
 /* Only MOUSE and TOUCHPAD */
 @media (hover: hover) and (pointer: fine) {
     ::-webkit-scrollbar {
@@ -74,6 +82,15 @@
     .shelf:hover .shelfLabel {
         transform: translateY(-70px) scale(1);
     }
+
+    .shelf .shelfCollapseToggle {
+        right: 40px;
+    }
+
+    .shelf:hover .shelfCollapseToggle {
+        right: 10px
+    }
+
 }
 
 /* Only TOUCH SCREENS */
@@ -102,11 +119,15 @@
         border: none;
 
         left: unset !important;
-        right: -20px !important;
-        bottom: 15px;
+        right: 0 !important;
+        top: 120px;
 
         width: 7px;
         height: 60px;
         border-radius: 5px 0 0 5px;
+    }
+
+    .shelfLabel {
+        display: none !important;
     }
 }

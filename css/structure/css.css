@@ -38,12 +38,15 @@ body {
 
 .topChrome {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 0;
+    right: 0;
     z-index: 10;
+
+    overflow: hidden;
 
     width: min-content;
     height: min-content;
+    padding: 15px;
 
     display: flex;
     align-items: flex-end;
@@ -113,8 +116,8 @@ body {
 
 .expandToggle {
     position: absolute;
-    top: 105px;
-    left: 185px;
+    top: 90px;
+    left: 0;
     z-index: 2;
 
     width: 30px;
@@ -130,11 +133,7 @@ body {
     justify-content: center;
     aspect-ratio: 1/1;
 
-    transition: left .4s;
-}
-
-.expandToggle.expanded {
-    left: -35px;
+    transition: left .3s;
 }
 
 .expandToggle.expanded i {
@@ -150,58 +149,61 @@ body {
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    gap: 7px;
+    gap: 15px;
 
     height: fit-content;
     width: 100%;
-    min-width: 180px;
+    min-width: 200px;
 
-    overflow-y: scroll;
-
-    padding: 15px;
+    padding: 10px 0 0 0;
     pointer-events: none;
     box-sizing: border-box;
 
+    filter: blur(10px);
+    opacity: 0;
+
+    overflow: hidden;
     background-color: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(100px) saturate(6);
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
     border-radius: 16px;
-    opacity: 1;
 
     transform: translateX(110%);
     /* transform-origin: right; */
 
-    transition: transform .4s, opacity .4s;
+    transition: transform .4s, filter .3s, opacity .3s;
     transition-timing-function: ease;
 }
 
 .controlBtns.visible {
-    transform: scale(1);
+    transform: translateX(0);
+    filter: blur(0);
     opacity: 1;
 
-    pointer-events: all;
+    transition: transform .3s, filter .4s, opacity .4s;
 
-    right: 20px;
+    pointer-events: all;
 }
 
 .controlBtns .toggles {
     display: flex;
-    gap: 3px;
+    justify-content: center;
+    gap: 5px;
 
     min-height: fit-content;
     width: 100%;
 }
 
 .button {
-    width: 90px;
-    height: 27px;
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 6px;
+    width: 88px;
+    height: 30px;
+    background-color: inherit;
+    border-radius: 50px;
 
     font-size: 14px;
-    color: rgb(0, 0, 0);
+    color: inherit;
 
-    padding-left: 8px;
+    padding-left: 10px;
     padding-top: 1px;
     box-sizing: border-box;
 
@@ -214,48 +216,36 @@ body {
 
 .button::before {
     content: attr(data-btnLabel);
-    font-size: 10px;
-    font-family: GST-Reg;
+    font-size: 12px;
+    font-family: GST-Med;
 
     position: absolute;
-    left: 28px;
+    left: 30px;
 }
 
 .button.darkModeOn::before {
     display: initial;
 }
 
-.button.darkModeOn {
-    background-color: #222222;
-    color: white;
-}
-
-.inputs {
-    display: flex;
-}
-
-input[type="number"] {
-    width: 40px !important;
-}
-
 .controlBtns .keyTB {
-    background-color: rgba(14, 14, 14, 0.4);
-    color: white;
-    border-radius: 5px;
+    background-color: inherit;
+    color: inherit;
+    border-radius: 50px;
     font-size: 12px;
     box-sizing: border-box;
 
-    width: 140px;
-    padding: 3px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    width: 180px;
+    padding: 5px 5px 5px 7px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .controlBtns .keyTB::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: inherit;
+    opacity: 0.5;
 }
 
 .shelfAlign {
-    color: rgb(103, 103, 103);
+    color: inherit;
     font-size: 11px;
 
     scroll-snap-align: start;
@@ -263,15 +253,15 @@ input[type="number"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 0;
 
-    background-color: inherit;
-    border-radius: 50px;
     box-sizing: border-box;
 
-    width: 100%;
+    position: relative;
 
-    padding: 10px 20px;
+    width: 140%;
+
+    padding: 0 5px 0 5px;
 }
 
 .sa-opt {
@@ -279,13 +269,48 @@ input[type="number"] {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 5px;
 }
 
 .sa-opt input {
-    width: 20px;
+    appearance: none;
+
+    position: relative;
+
+    width: 59px;
     height: 20px;
 
-    border: none !important;
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sa-opt.saoC input::before {
+    border-radius: 0;
+    border-left: 1px solid transparent !important;
+    border-right: 1px solid transparent !important;
+}
+
+.saoR input::before {
+    border-radius: 0 100px 100px 0 !important;
+}
+
+.sa-opt input::before {
+    content: "";
+
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+
+    border-radius: 100px 0 0 100px;
+    border: 1px solid white !important;
+}
+
+.sa-opt input:checked::before {
+    background-color: white;
 }
 
 .debugCards {
@@ -297,10 +322,9 @@ input[type="number"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 140%;
 
     background-color: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 6px;
     box-sizing: border-box;
 
