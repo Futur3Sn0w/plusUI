@@ -1,3 +1,8 @@
+.shelf.compact .clockCard #clockContainer {
+    background-image: none;
+    width: 75%;
+}
+
 #clockContainer {
     position: relative;
     margin: auto;

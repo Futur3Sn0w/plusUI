@@ -5,6 +5,18 @@
 
 /*  */
 
+.shelf.compact .wallCard {
+    width: 135px;
+    height: 85px;
+
+    border-radius: 17px;
+}
+
+.shelf.compact .wallCard::before {
+    border-radius: 16px;
+}
+
+
 .wallCard {
     background-position: center;
     background-repeat: no-repeat;
@@ -44,54 +56,44 @@
     content: " ";
     position: absolute;
     z-index: -1;
-    inset: 0;
-    border-radius: 24px;
+    border-radius: 25px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45) inset;
+
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
 }
 
-.wallCard .refresh {
+.wallCard .wallBtns {
+    display: flex;
+    width: 100%;
+    height: 50px;
+
+    margin-top: auto;
+
     opacity: 0;
-    background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(20px);
-
-    font-size: 40px;
-
     transition: opacity .2s;
-
-    position: absolute;
-    width: 120%;
-    height: 120%;
-    z-index: -2;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 5px;
 }
 
-.wallCard .info {
-    width: 100%;
-    height: 100%;
+.wallCard .wallBtns .wallBtn {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    backdrop-filter: blur(20px);
 
-    display: none;
-    align-items: flex-start;
+    font-size: 17px;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
     justify-content: center;
-    flex-direction: column;
-
-    background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.75));
-}
-
-.info .wallName {
-    font-size: 15px;
-    font-family: GST-Med;
-
-    margin-top: 40px;
-    margin-left: 10px;
-}
-
-.info .wallAuth {
-    font-size: 12px;
-    margin-left: 10px;
 }
 
 @keyframes borderPulse {

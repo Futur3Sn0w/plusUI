@@ -4,6 +4,18 @@
     justify-content: center;
 }
 
+.shelf.compact .shortcutCard .shortcuts {
+    display: none;
+}
+
+.shelf.compact .shortcutCard .collapseIcon {
+    display: flex;
+}
+
+.shortcutCard .collapseIcon {
+    display: none;
+}
+
 .shortcutCard .shortcuts {
     width: fit-content;
     height: fit-content;
@@ -31,5 +43,4 @@
     justify-content: center;
 
     cursor: pointer;
-
 }

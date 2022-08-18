@@ -17,6 +17,23 @@
     display: flex;
 }
 
+.shelf.compact .card {
+    height: 55px;
+    width: 100px;
+    border-radius: 12px;
+}
+
+.shelf.compact .squareCard {
+    height: 55px;
+    width: 55px;
+}
+
+.shelf.compact .circleCard {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+}
+
 .displayNone {
     display: none !important;
 }

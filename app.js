@@ -38,6 +38,7 @@ window.onload = function () {
 
     setTheme();
     setDbg();
+    setCompMode();
     alignShelf();
 
     $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
@@ -78,7 +79,7 @@ $('.reloadPage').on('click', function () {
 });
 
 $('.expandToggle').on('click', function () {
-    $('.controlBtns').toggleClass('visible');
+    $('.controlPanel').toggleClass('visible');
     $('.expandToggle').toggleClass('expanded');
 });
 
@@ -104,13 +105,13 @@ $('#unsplashTags').focusout(function () {
 });
 
 $(document).mouseup(function (e) {
-    var element = $(".controlBtns");
-    var element2 = $(".controlBtns *");
+    var element = $(".controlPanel");
+    var element2 = $(".controlPanel *");
     var element3 = $(".card");
     var element4 = $(".card *");
 
     if (!element.is(e.target) && !element2.is(e.target)) {
-        $('.controlBtns').removeClass('visible');
+        $('.controlPanel').removeClass('visible');
         $('.expandToggle').removeClass('expanded');
     }
 
@@ -126,6 +127,16 @@ $('#cbDebugCards').click(function () {
     } else {
         $('.dbg').addClass('enabled');
         localStorage.setItem('debug', 'true');
+    }
+});
+
+$('#cbCompactMode').click(function () {
+    if (localStorage.getItem('compact') == 'true') {
+        $('.shelf').removeClass('compact');
+        localStorage.setItem('compact', 'false');
+    } else {
+        $('.shelf').addClass('compact');
+        localStorage.setItem('compact', 'true');
     }
 });
 
@@ -151,6 +162,12 @@ $('.labeled').mouseout(function (e) {
 $('.sao-radio').click(function (e) {
     localStorage.setItem('shelfPos', e.target.id);
     alignShelf();
+});
+
+$('#openWallpaperBtn').click(function (e) {
+    var bg = $('body').css('background-image');
+    bg = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
+    window.open(bg);
 });
 
 function alignShelf() {
@@ -235,11 +252,7 @@ function setTheme() {
     if (localStorage.getItem('theme') === 'dark') {
         $('.button').addClass('darkModeOn');
 
-        $('.timeDate').addClass('darkModeOn');
-        $('#cards').addClass('darkModeOn');
-        $('.controlBtns').addClass('darkModeOn');
-        $('.expandToggle').addClass('darkModeOn');
-        $('.shelfCollapseToggle').addClass('darkModeOn');
+        $('.surface').addClass('darkModeOn');
 
         $('.clockCard').addClass('darkModeOn');
         $('.calendarCard').addClass('darkModeOn');
@@ -261,7 +274,17 @@ function setDbg() {
     }
 }
 
-$('.wallCard').on('click', function () {
+function setCompMode() {
+    if (localStorage.getItem('compact') == 'true') {
+        $('.shelf').addClass('compact');
+        $('#cbCompactMode').attr('checked', true)
+    } else {
+        $('.shelf').removeClass('compact');
+        $('#cbCompactMode').attr('checked', false)
+    }
+}
+
+$('#refreshWallBtn').on('click', function () {
     refreshWall();
 });
 
@@ -390,13 +413,13 @@ document.querySelector('.wallCard').addEventListener('touchend', e => {
 function checkDirectionCC() {
     if (touchendX < touchstartX) {
         // left swipe
-        if ($('.controlBtns').hasClass('expanded')) {
+        if ($('.controlPanel').hasClass('expanded')) {
         } else {
             $('.expandToggle').click()
         }
     } else if (touchendX > touchstartX) {
         // right swipe
-        if ($('.controlBtns').hasClass('expanded')) {
+        if ($('.controlPanel').hasClass('expanded')) {
         } else {
             $('.expandToggle').click()
         }

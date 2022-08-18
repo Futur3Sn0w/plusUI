@@ -22,17 +22,25 @@ body {
     display: none;
 }
 
-.cards.darkModeOn,
-.timeDate.darkModeOn,
-.controlBtns.darkModeOn,
-.expandToggle.darkModeOn,
-.shelfCollapseToggle.darkModeOn,
+.surface {
+    color: black;
+
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(100px) saturate(6);
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 16px;
+
+    transition: .4s;
+    border: 1px solid transparent;
+}
+
+.surface.darkModeOn,
 .modal-about.darkModeOn {
     background-color: rgba(0, 0, 0, 0.65);
     color: white;
     backdrop-filter: blur(50px) saturate(7);
 
-    box-sizing: border-box;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -60,22 +68,14 @@ body {
     align-items: center;
     justify-content: center;
     gap: 15px;
+    z-index: 2;
 
     user-select: none;
-    color: rgb(0, 0, 0);
-
-    background-color: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(100px) saturate(6);
-    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 16px;
 
     height: fit-content;
     width: fit-content;
     padding: 13px 25px 13px 20px;
     overflow: hidden;
-
-    transition: .4s;
 }
 
 .time {
@@ -124,7 +124,6 @@ body {
     height: 30px;
 
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.75);
 
     font-size: 12px;
 
@@ -132,8 +131,6 @@ body {
     align-items: center;
     justify-content: center;
     aspect-ratio: 1/1;
-
-    transition: left .3s;
 }
 
 .expandToggle.expanded i {
@@ -144,18 +141,20 @@ body {
     transition: transform .3s;
 }
 
-.controlBtns {
+.controlPanel {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    gap: 15px;
+    gap: 5px;
+    z-index: 1;
 
     height: fit-content;
     width: 100%;
     min-width: 200px;
+    color: inherit;
 
-    padding: 10px 0 0 0;
+    padding: 5px 0 5px 0;
     pointer-events: none;
     box-sizing: border-box;
 
@@ -163,29 +162,50 @@ body {
     opacity: 0;
 
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(100px) saturate(6);
-    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 16px;
 
-    transform: translateX(110%);
+    transform: translateY(-80%);
     /* transform-origin: right; */
 
-    transition: transform .4s, filter .3s, opacity .3s;
+    transition: transform .3s, filter .3s, opacity .3s;
     transition-timing-function: ease;
 }
 
-.controlBtns.visible {
-    transform: translateX(0);
+.controlPanel.visible {
+    transform: translateY(0);
     filter: blur(0);
     opacity: 1;
-
-    transition: transform .3s, filter .4s, opacity .4s;
 
     pointer-events: all;
 }
 
-.controlBtns .toggles {
+.controlPanelOptGroup {
+    width: 95%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    background-color: inherit;
+    color: inherit;
+    border-radius: 14px;
+    padding: 40px 0 10px 0;
+
+    position: relative;
+}
+
+.controlPanelOptGroup::before {
+    content: "Personalization:";
+
+    position: absolute;
+    top: 10px;
+    left: 15px;
+
+    font-family: GSD-Med;
+}
+
+.controlPanel .toggles {
     display: flex;
     justify-content: center;
     gap: 5px;
@@ -227,7 +247,7 @@ body {
     display: initial;
 }
 
-.controlBtns .keyTB {
+.controlPanel .keyTB {
     background-color: inherit;
     color: inherit;
     border-radius: 50px;
@@ -239,9 +259,13 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.controlBtns .keyTB::placeholder {
+.controlPanel .keyTB::placeholder {
     color: inherit;
     opacity: 0.5;
+}
+
+.shelfOpts::before {
+    content: "Shelf alignment:";
 }
 
 .shelfAlign {
@@ -259,9 +283,9 @@ body {
 
     position: relative;
 
-    width: 140%;
+    width: fit-content;
 
-    padding: 0 5px 0 5px;
+    padding: 0 5px 10px 5px;
 }
 
 .sa-opt {
@@ -313,20 +337,27 @@ body {
     background-color: white;
 }
 
-.debugCards {
-    /* Debug cards setting */
+.shelfStyle {
+    font-size: 14px;
+    color: inherit;
+}
 
-    color: rgb(103, 103, 103);
-    font-size: 11px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 140%;
-
+.shelfStyle select {
     background-color: inherit;
-    border-radius: 6px;
-    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
 
-    padding: 3px 0;
+.debugCards {
+    box-sizing: border-box;
+    align-items: flex-start;
+    padding-left: 10px;
+    gap: 3px;
+
+    font-size: 13px;
+}
+
+.debugCards::before {
+    font-size: 16px;
+    content: "Testing options:";
 }

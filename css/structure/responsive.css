@@ -75,7 +75,7 @@
         transform: scale(.8) !important;
     }
 
-    .wallCard:hover .refresh {
+    .wallCard:hover .wallBtns {
         opacity: 1;
     }
 

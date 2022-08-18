@@ -28,11 +28,11 @@
 </head>
 
 <body>
-    <div class="modal modal-about">
+    <div class="surface modal modal-about">
         <div class="header">
             <img src="favicon/android-chrome-192x192.png" alt="">
             <p id="title">PlusUI</p>
-            <p id="ver">v1.0.5</p>
+            <p id="ver">v1.1.0</p>
             <div class="close" id="aboutModalClose">
                 <i class="fa-solid fa-close"></i>
             </div>
@@ -58,19 +58,77 @@
 
     <div class="backDrop" id="backDrop2"></div>
 
-    <div class="shelf left">
-        <div class="push pushLeft"></div>
-        <div class="shelfLabel"></div>
-        <div class="wallCard labeled active" data-friendlyName="Backdrop" id="wallCard">
-            <div class="refresh">
-                <i class="fa-solid fa-refresh"></i>
+    <div class="topChrome">
+        <div class="surface timeDate darkModeOn">
+            <div class="aboutBtn" id="topChromeAboutBtn">
+                <i class="fa-solid fa-info-circle"></i>
             </div>
-            <div class="info">
-                <!-- <div class="wallName">Name</div> -->
-                <!-- <div class="wallAuth">Author</div> -->
+            <div class="td">
+                <div class="tdm time" id="time"></div>
+                <div class="tdm date" id="date"></div>
             </div>
         </div>
-        <div class="cards darkModeOn" id="cards">
+        <div class="surface controlPanel">
+            <div class="controlPanelOptGroup themeOpts">
+                <div class="toggles">
+                    <div class="lightDark btnCont">
+                        <div class="button darkModeBtn darkModeOn" data-btnLabel="Theme">
+                            <i class="fa-solid fa-circle-half-stroke"></i>
+                        </div>
+                    </div>
+                    <div class="reloadPage btnCont">
+                        <div class="button reloadBtn" data-btnLabel="Refresh">
+                            <i class="fa-solid fa-refresh"></i>
+                        </div>
+                    </div>
+                </div>
+                <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
+            </div>
+            <div class="controlPanelOptGroup shelfOpts">
+                <div class="shelfAlign" data-optName="Alignment">
+                    <div class="sa-opt saoL">
+                        <input class="sao-radio" type="radio" name="shelfAlign" id="saoL-radio">
+                        <label for="saoL-radio">Left</label>
+                    </div>
+                    <div class="sa-opt saoC">
+                        <input class="sao-radio" type="radio" name="shelfAlign" id="saoC-radio">
+                        <label for="saoC-radio">Center</label>
+                    </div>
+                    <div class="sa-opt saoR">
+                        <input class="sao-radio" type="radio" name="shelfAlign" id="saoR-radio">
+                        <label for="saoR-radio">Right</label>
+                    </div>
+                </div>
+            </div>
+            <div class="controlPanelOptGroup debugCards">
+                <div class="dc debugCardOptGroup">
+                    <input type="checkbox" name="debugCards" id="cbDebugCards">
+                    <label for="debugCards">Enable debug cards</label>
+                </div>
+                <div class="dcOpt compactModeOptGroup">
+                    <input type="checkbox" name="compactMode" id="cbCompactMode">
+                    <label for="compactMode">Enable compact mode</label>
+                </div>
+            </div>
+        </div>
+        <div class="surface expandToggle">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </div>
+
+    <div class="shelf left">
+        <div class="shelfLabel"></div>
+        <div class="wallCard labeled active" data-friendlyName="Backdrop" id="wallCard">
+            <div class="wallBtns">
+                <div class="wallBtn refresh" id="refreshWallBtn">
+                    <i class="fa-solid fa-refresh"></i>
+                </div>
+                <div class="wallBtn openWall" id="openWallpaperBtn">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+            </div>
+        </div>
+        <div class="surface cards darkModeOn" id="cards">
             <div class="weatherCard card labeled parallax" data-friendlyName="Weather" id="weatherCard">
                 <img src="" alt="" id="weatherIcon">
                 <div class="tdm temp" id="temp"></div>
@@ -95,6 +153,9 @@
                 <div class="batteryText"></div>
             </div>
             <div class="shortcutCard card labeled parallax squareCard" data-friendlyName="Shortcuts" id="shortcutCard">
+                <div class="collapseIcon">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                </div>
                 <div class="shortcuts">
                     <div class="scApp" id="scaYouTube" data-launch="youtube" style="background-color: #ff0101;">
                         <i class="fa-brands fa-youtube"></i>
@@ -115,56 +176,8 @@
                 <p>❤️</p>
             </div>
         </div>
-        <div class="shelfCollapseToggle expanded" data-friendlyName="Expand Shelf">
+        <div class="surface shelfCollapseToggle expanded" data-friendlyName="Expand Shelf">
             <i class="fa-solid fa-chevron-right"></i>
-        </div>
-    </div>
-
-    <div class="topChrome">
-        <div class="timeDate darkModeOn">
-            <div class="aboutBtn" id="topChromeAboutBtn">
-                <i class="fa-solid fa-info-circle"></i>
-            </div>
-            <div class="td">
-                <div class="tdm time" id="time"></div>
-                <div class="tdm date" id="date"></div>
-            </div>
-        </div>
-        <div class="controlBtns">
-            <div class="toggles">
-                <div class="lightDark btnCont">
-                    <div class="button darkModeBtn darkModeOn" data-btnLabel="Theme">
-                        <i class="fa-solid fa-circle-half-stroke"></i>
-                    </div>
-                </div>
-                <div class="reloadPage btnCont">
-                    <div class="button reloadBtn" data-btnLabel="Refresh">
-                        <i class="fa-solid fa-refresh"></i>
-                    </div>
-                </div>
-            </div>
-            <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
-            <div class="shelfAlign">
-                <div class="sa-opt saoL">
-                    <input class="sao-radio" type="radio" name="shelfAlign" id="saoL-radio">
-                    <label for="saoL-radio">Left</label>
-                </div>
-                <div class="sa-opt saoC">
-                    <input class="sao-radio" type="radio" name="shelfAlign" id="saoC-radio">
-                    <label for="saoC-radio">Center</label>
-                </div>
-                <div class="sa-opt saoR">
-                    <input class="sao-radio" type="radio" name="shelfAlign" id="saoR-radio">
-                    <label for="saoR-radio">Right</label>
-                </div>
-            </div>
-            <div class="debugCards">
-                <input type="checkbox" name="debugCards" id="cbDebugCards">
-                <label for="debugCards">Enable debug cards</label>
-            </div>
-        </div>
-        <div class="expandToggle">
-            <i class="fa-solid fa-chevron-left"></i>
         </div>
     </div>
 
