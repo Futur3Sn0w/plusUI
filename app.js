@@ -175,14 +175,23 @@ function alignShelf() {
         $('.shelf').removeClass('right');
         $('.shelf').removeClass('center');
         $('.shelf').addClass('left');
+        $('#saoR-radio').attr('checked', false)
+        $('#saoC-radio').attr('checked', false)
+        $('#saoL-radio').attr('checked', true)
     } else if (localStorage.getItem('shelfPos') == "saoC-radio") {
         $('.shelf').removeClass('right');
         $('.shelf').addClass('center');
         $('.shelf').removeClass('left');
+        $('#saoR-radio').attr('checked', false)
+        $('#saoC-radio').attr('checked', true)
+        $('#saoL-radio').attr('checked', false)
     } else if (localStorage.getItem('shelfPos') == "saoR-radio") {
         $('.shelf').addClass('right');
         $('.shelf').removeClass('center');
         $('.shelf').removeClass('left');
+        $('#saoR-radio').attr('checked', true)
+        $('#saoC-radio').attr('checked', false)
+        $('#saoL-radio').attr('checked', false)
     }
 }
 

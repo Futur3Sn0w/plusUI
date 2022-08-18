@@ -1,0 +1,319 @@
+.topChrome {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+
+    overflow: hidden;
+
+    width: min-content;
+    height: min-content;
+    padding: 15px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.timeDate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    z-index: 2;
+
+    user-select: none;
+
+    height: fit-content;
+    width: fit-content;
+    padding: 13px 25px 13px 20px;
+    overflow: hidden;
+}
+
+.time {
+    font-size: 33px;
+    width: max-content;
+}
+
+.date {
+    font-size: 20px;
+    opacity: .7;
+    width: max-content;
+}
+
+.td {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    height: fit-content;
+    width: max-content;
+    font-family: GST-Med;
+}
+
+.aboutBtn {
+    display: flex;
+
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 7px;
+
+    background-color: inherit;
+    color: inherit;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+.expandToggle {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    z-index: 2;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    font-size: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+}
+
+.expandToggle.expanded i {
+    transform: rotate(180deg);
+}
+
+.expandToggle i {
+    transition: transform .3s;
+}
+
+.controlPanel {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 1;
+
+    height: fit-content;
+    width: 100%;
+    min-width: 200px;
+    color: inherit;
+
+    padding: 5px 0 5px 0;
+    pointer-events: none;
+    box-sizing: border-box;
+
+    filter: blur(10px);
+    opacity: 0;
+
+    overflow: hidden;
+
+    transform: translateY(-80%);
+    /* transform-origin: right; */
+
+    transition: transform .3s, filter .3s, opacity .3s;
+    transition-timing-function: ease;
+}
+
+.controlPanel.visible {
+    transform: translateY(0);
+    filter: blur(0);
+    opacity: 1;
+
+    pointer-events: all;
+}
+
+.controlPanelOptGroup {
+    width: 95%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    background-color: rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+
+    color: inherit;
+    border-radius: 14px;
+    padding: 40px 0 10px 0;
+
+    position: relative;
+}
+
+.controlPanelOptGroup::before {
+    content: "Personalization:";
+
+    position: absolute;
+    top: 10px;
+    left: 15px;
+
+    font-family: GSD-Med;
+}
+
+.controlPanel .toggles {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+
+    min-height: fit-content;
+    width: 100%;
+}
+
+.button {
+    width: 88px;
+    height: 30px;
+    background-color: inherit;
+    border-radius: 50px;
+
+    font-size: 14px;
+    color: inherit;
+
+    padding-left: 10px;
+    padding-top: 1px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    position: relative;
+}
+
+.button::before {
+    content: attr(data-btnLabel);
+    font-size: 12px;
+    font-family: GST-Med;
+
+    position: absolute;
+    left: 30px;
+}
+
+.button.darkModeOn::before {
+    display: initial;
+}
+
+.controlPanel .keyTB {
+    background-color: inherit;
+    color: inherit;
+    border-radius: 50px;
+    font-size: 12px;
+    box-sizing: border-box;
+
+    width: 180px;
+    padding: 5px 5px 5px 7px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.controlPanel .keyTB::placeholder {
+    color: inherit;
+    opacity: 0.5;
+}
+
+.shelfOpts::before {
+    content: "Shelf alignment:";
+}
+
+.shelfAlign {
+    color: inherit;
+    font-size: 11px;
+
+    scroll-snap-align: start;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+
+    box-sizing: border-box;
+
+    position: relative;
+
+    width: fit-content;
+
+    padding: 0 5px 10px 5px;
+}
+
+.sa-opt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.sa-opt input {
+    appearance: none;
+
+    position: relative;
+
+    width: 59px;
+    height: 20px;
+
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sa-opt.saoC input::before {
+    border-radius: 0;
+    border-left: 1px solid transparent !important;
+    border-right: 1px solid transparent !important;
+}
+
+.saoR input::before {
+    border-radius: 0 100px 100px 0 !important;
+}
+
+.sa-opt input::before {
+    content: "";
+
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+
+    border-radius: 100px 0 0 100px;
+    border: 1px solid white !important;
+}
+
+.sa-opt input:checked::before {
+    background-color: white;
+}
+
+.shelfStyle {
+    font-size: 14px;
+    color: inherit;
+}
+
+.shelfStyle select {
+    background-color: inherit;
+    border: none;
+    outline: none;
+}
+
+.debugCards {
+    box-sizing: border-box;
+    align-items: flex-start;
+    padding-left: 10px;
+    gap: 3px;
+
+    font-size: 13px;
+}
+
+.debugCards::before {
+    font-size: 16px;
+    content: "Testing options:";
+}
