@@ -1,0 +1,28 @@
+.siriDbgCard {
+    font-size: 2em;
+
+    background-image: url(https://cdn.dribbble.com/users/32512/screenshots/3820721/brain_natural_os_by_gleb.gif);
+    background-size: 170%;
+    background-position: center;
+}
+
+.siriDbgCard div {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    background-size: 170%;
+    background-position: center;
+    mix-blend-mode: lighten;
+
+    border-radius: inherit;
+}
+
+.siriDbgCard .layer1 {
+    background-image: url(https://cdn.dribbble.com/users/129227/screenshots/3556417/siri.gif);
+    opacity: .75;
+}
+
+.siriDbgCard .layer2 {
+    background-image: url(https://cdn.dribbble.com/users/32512/screenshots/3546148/apple_siri_motion_animation_by_gleb.gif);
+}

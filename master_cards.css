@@ -1,22 +1,31 @@
 @import url('css/cards/clockCard.css');
 @import url('css/cards/wallCard.css');
 @import url('css/cards/emojiLocaleCard.css');
+@import url('css/cards/snowDbgCard.css');
+@import url('css/cards/siriDbgCard.css');
 @import url('css/cards/shortcutCard.css');
 @import url('css/cards/batteryCard.css');
 @import url('css/cards/weatherCard.css');
 @import url('css/cards/calendarCard.css');
 
+:root {
+    --glow-l: linear-gradient(90deg, transparent, white 80%);
+    --glow-d: linear-gradient(90deg, transparent, black 80%);
+}
+
 .shelf {
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: 10;
 
-    width: fit-content;
-    max-width: 100vw;
+    width: 100vw;
+    max-width: 100%;
     height: fit-content;
 
     display: flex;
     align-items: center;
+    justify-content: start;
 
     box-sizing: border-box;
     padding: 15px 25px;
@@ -24,23 +33,58 @@
     transition: .3s;
 
     border-radius: 0 20px 0 0;
+
+    /* background-color: white; */
 }
 
-.shelf.left {
-    left: 0;
-    right: 100%;
-    transform: translateX(0);
+.shelf.float {
+    width: 100vw !important;
+    align-items: flex-end;
+    padding: 0;
+    margin-bottom: -1px;
+    background: linear-gradient(transparent, black);
 }
 
-.shelf.center {
-    left: 50%;
-    transform: translateX(-50%);
+.shelf.float .cards {
+    margin: 0 !important;
+    margin-bottom: -1px !important;
 }
 
-.shelf.right {
-    right: 0;
-    left: 100%;
-    transform: translateX(-100%);
+.shelf.float .cards .subCards {
+    background-color: transparent;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.shelf.left .spcLeft {
+    width: 0;
+}
+
+.shelf.center .spcLeft {
+    width: 100%;
+}
+
+.shelf.right .spcLeft {
+    width: 100%;
+}
+
+.shelf.left .spcRight {
+    width: 100%;
+}
+
+.shelf.center .spcRight {
+    width: 100%;
+}
+
+.shelf.right .spcRight {
+    width: 0;
+}
+
+.shelf .spacerA {
+    position: relative;
+    z-index: 1000;
+    transition: .3s;
 }
 
 .shelfLabel {
@@ -49,10 +93,12 @@
 
     background-color: white;
     color: black;
-    border-radius: 5px;
-    padding: 5px 10px;
+    border-radius: 10px;
+    padding: 6px 10px;
+    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.2);
+    opacity: 0;
 
-    font-size: 20px;
+    font-size: 17px;
     font-family: GST-Med;
 
     display: flex;
@@ -61,88 +107,33 @@
 
     position: absolute;
     top: 50px;
-    left: 30px;
 
-    transform: translateY(0) scale(.7);
-    transition: transform .2s;
+    transition: .2s;
 }
 
 .shelfLabel.hidden {
     display: none !important;
 }
 
-.shelfCollapseToggle {
-    position: absolute;
-    right: 5px;
-    z-index: 0;
-
-    width: 15px;
-    height: 50px;
-
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.75);
-
-    font-size: 12px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1/1;
-
-    transition: .3s;
-}
-
-.shelfCollapseToggle.expanded {
-    right: 10px;
-    border-radius: 0 10px 10px 0;
-}
-
-.shelfCollapseToggle.expanded i {
-    transform: rotate(180deg);
-}
-
-.shelfCollapseToggle i {
-    transition: transform .3s;
-}
-
-.shelf.compact .cards {
-    height: 70px;
-    padding-left: 145px;
-    gap: 7px;
-}
-
-.shelf.compact .cards.collapsed {
-    width: 150px;
-    height: 100px;
-
-    gap: 20px;
-
-    padding: 0;
-    padding-left: 148px;
-
-    margin: 0;
-
-    transform: translateX(-8px);
-
-    border-radius: 24px !important;
-}
-
 .cards {
-    width: 100%;
+    width: max-content;
     max-width: 100%;
-    height: 115px;
-    margin: 13px 0;
+    height: 141px;
+    margin: 13px 10px !important;
     z-index: 1;
 
-    border-radius: 100px 30px 30px 100px !important;
-    background-color: rgba(255, 255, 255, 0.55);
-    box-shadow: 7px 7px 12px 0 rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(30px) saturate(6);
+    flex-shrink: 0;
+
     transform: translateX(0);
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    border: none !important;
 
     transition: .3s;
 
-    overflow: hidden;
+    overflow-x: scroll;
 
     display: flex;
     align-items: center;
@@ -151,7 +142,70 @@
 
     padding: 10px;
     padding-left: 215px;
+    padding-right: 20px;
     box-sizing: border-box;
+}
+
+.cards.collapsed {
+    width: 200px;
+
+    overflow: hidden;
+    margin: 0 0 13px 17px !important;
+    /* margin-bottom: 13px !important; */
+}
+
+.subCards {
+    width: max-content;
+    height: 110px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+
+    position: relative;
+    padding-left: 50px;
+    padding-right: 10px;
+    overflow-x: scroll;
+    transform: translateX(-50px);
+
+    background-color: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(100px) saturate(6);
+    box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 18px;
+
+    transition: .3s;
+}
+
+.cards.collapsed .subCards {
+    width: 200px;
+    padding-left: 0;
+    height: 140px;
+    transform: translateX(-210px);
+    border-radius: 28px !important;
+}
+
+.cards.darkModeOn::after {
+    background-color: rgba(0, 0, 0, 0.65);
+    color: white;
+    backdrop-filter: blur(50px) saturate(7);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.shelf.float .cards {
+    width: 100vw !important;
+    margin: 0;
+
+    border-radius: 0 !important;
+    background-color: transparent;
+    border: none !important;
+    box-shadow: none;
+    backdrop-filter: unset;
+
+    max-width: unset !important;
+    padding-left: 220px;
 }
 
 .cards.collapsed {
@@ -170,8 +224,11 @@
     border-radius: 31px !important;
 }
 
+.cards.collapsed .card {
+    opacity: 0;
+}
+
 .card {
-    width: 150px;
     height: 90px;
     flex-shrink: 0;
 
@@ -193,22 +250,16 @@
     transform-origin: center;
     transition: .25s;
     transition-timing-function: ease;
+    transition: opacity .2s, transform .2s;
+}
+
+.card:not(.parallax):not(.actionable):hover {
+    transform: translateY(-7px);
 }
 
 .card.darkModeOn {
     background-color: #222222;
     color: white;
-}
-
-.shelf.compact .cards .card .collapseIcon {
-    width: 100%;
-    height: 100%;
-
-    position: absolute;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* Edit mode specs */

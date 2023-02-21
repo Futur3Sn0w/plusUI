@@ -5,17 +5,15 @@
 
 /*  */
 
-.shelf.compact .wallCard {
-    width: 135px;
-    height: 85px;
-
-    border-radius: 17px;
+.shelf.float .wallCard {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-radius: 300px;
 }
 
-.shelf.compact .wallCard::before {
-    border-radius: 16px;
+.shelf.float .wallCard::before {
+    border-radius: 300px;
 }
-
 
 .wallCard {
     background-position: center;
@@ -25,7 +23,7 @@
 
     overflow: hidden;
     position: absolute;
-    /* left: 15px; */
+    left: 7px;
     z-index: 10;
 
     width: 195px;
@@ -39,13 +37,16 @@
 
     user-select: none;
 
-    transition: .25s;
     transition-timing-function: ease;
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 
     background-color: white;
 
     border-radius: 25px;
+}
+
+.wallCard:active {
+    transform: scale(.9);
 }
 
 .wallCard.shExpanded {
@@ -57,8 +58,8 @@
     position: absolute;
     z-index: -1;
     border-radius: 25px;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45) inset;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
 
     width: 100%;
     height: 100%;
@@ -75,18 +76,19 @@
     opacity: 0;
     transition: opacity .2s;
 
+    gap: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
 }
 
 .wallCard .wallBtns .wallBtn {
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
+    background-color: inherit;
+    border-radius: 10px;
     backdrop-filter: blur(20px);
+    cursor: pointer;
 
-    font-size: 17px;
+    font-size: 15px;
 
     width: 30px;
     height: 30px;
@@ -94,6 +96,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.cards.darkModeOn .wallCard .wallBtns .wallBtn i {
+    color: white !important;
 }
 
 @keyframes borderPulse {

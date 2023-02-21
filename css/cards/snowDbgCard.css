@@ -1,0 +1,16 @@
+.snowDbgCard {
+    font-size: 2em;
+
+    background-image: url(../../resc/snow-back.png);
+    background-size: contain;
+
+    box-sizing: border-box;
+}
+
+.snowDbgCard img {
+    transform: translateZ(20px);
+
+    width: 75px;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+}

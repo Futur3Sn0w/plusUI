@@ -33,18 +33,20 @@ window.onload = function () {
         $('.dbg').addClass('enabled');
         $('#cbDebugCards').prop('checked', true);
     }
+    $('.topChrome').scrollTop(800)
 
     applyKeys();
 
     setTheme();
     setDbg();
-    setCompMode();
     alignShelf();
+
+    localStorage.setItem('float', 'false');
 
     $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
     $('body').css('background-image', "url(" + backdropImg + ")");
     refreshWall();
-    setInterval("refreshWall();", 30000);
+    setInterval("refreshWall();", 90000);
 
     setTimeout("cardSmarts();", 500);
 
@@ -78,20 +80,36 @@ $('.reloadPage').on('click', function () {
     window.location.reload();
 });
 
-$('.expandToggle').on('click', function () {
-    $('.controlPanel').toggleClass('visible');
-    $('.expandToggle').toggleClass('expanded');
+$('.topChrome').on('scroll', function () {
+    if ($('.topChrome').scrollTop() == 0) {
+        $('.expandToggle').addClass('expanded')
+    } else if ($('.topChrome').scrollTop() > 2) {
+        $('.expandToggle').removeClass('expanded');
+    }
 });
 
-$('.shelfCollapseToggle').on('click', function () {
-    $('.cards').toggleClass('collapsed');
-    $('.shelfCollapseToggle').toggleClass('expanded');
-    $('.wallCard').toggleClass('shExpanded');
-
-    if ($('.cards').hasClass('collapsed')) {
-        $('.shelfLabel').addClass('hidden');
+$('.expandToggle').on('click', function () {
+    if ($('.topChrome').scrollTop() == 0) {
+        $('.topChrome').scrollTop(800)
+        $('.expandToggle').removeClass('expanded')
     } else {
-        $('.shelfLabel').removeClass('hidden');
+        $('.topChrome').scrollTop(0)
+        $('.expandToggle').addClass('expanded');
+    }
+});
+
+$('.wallCard').on('click', function () {
+    if ($('.shelf').hasClass('float')) {
+
+    } else {
+        $('.cards').toggleClass('collapsed');
+        $('.wallCard').toggleClass('shExpanded');
+
+        if ($('.cards').hasClass('collapsed')) {
+            $('.shelfLabel').addClass('hidden');
+        } else {
+            $('.shelfLabel').removeClass('hidden');
+        }
     }
 });
 
@@ -111,8 +129,8 @@ $(document).mouseup(function (e) {
     var element4 = $(".card *");
 
     if (!element.is(e.target) && !element2.is(e.target)) {
-        $('.controlPanel').removeClass('visible');
-        $('.expandToggle').removeClass('expanded');
+        $('.topChrome').scrollTop(800)
+        $('.expandToggle').removeClass('expanded')
     }
 
     if (!element3.is(e.target) && !element4.is(e.target)) {
@@ -127,16 +145,6 @@ $('#cbDebugCards').click(function () {
     } else {
         $('.dbg').addClass('enabled');
         localStorage.setItem('debug', 'true');
-    }
-});
-
-$('#cbCompactMode').click(function () {
-    if (localStorage.getItem('compact') == 'true') {
-        $('.shelf').removeClass('compact');
-        localStorage.setItem('compact', 'false');
-    } else {
-        $('.shelf').addClass('compact');
-        localStorage.setItem('compact', 'true');
     }
 });
 
@@ -268,6 +276,7 @@ function setTheme() {
         $('.shortcutCard').addClass('darkModeOn');
         $('.wallCard').addClass('darkModeOn');
         $('.modal-about').addClass('darkModeOn');
+        $('.controlPanel').addClass('darkModeOn');
     } else {
         $('.darkModeOn').removeClass('darkModeOn');
     }
@@ -280,16 +289,6 @@ function setDbg() {
     } else {
         $('.dbg').removeClass('enabled');
         $('#cbDebugCards').attr('checked', false)
-    }
-}
-
-function setCompMode() {
-    if (localStorage.getItem('compact') == 'true') {
-        $('.shelf').addClass('compact');
-        $('#cbCompactMode').attr('checked', true)
-    } else {
-        $('.shelf').removeClass('compact');
-        $('#cbCompactMode').attr('checked', false)
     }
 }
 
@@ -391,21 +390,25 @@ let touchstartX = 0
 let touchendX = 0
 
 function checkDirectionWC() {
-    if (touchendX < touchstartX) {
-        // left swipe
-        if ($('.shelf').hasClass('right')) {
-            $('#saoC-radio').click()
-        } else if ($('.shelf').hasClass('center')) {
-            $('#saoL-radio').click()
-        }
-    } else if (touchendX > touchstartX) {
-        // right swipe
-        if ($('.shelf').hasClass('left')) {
-            $('#saoC-radio').click()
-        } else if ($('.shelf').hasClass('center')) {
-            $('#saoR-radio').click()
+    if ($('.shelf').hasClass('float')) {
+    } else {
+        if (touchendX < touchstartX) {
+            // left swipe
+            if ($('.shelf').hasClass('right')) {
+                $('#saoC-radio').click()
+            } else if ($('.shelf').hasClass('center')) {
+                $('#saoL-radio').click()
+            }
+        } else if (touchendX > touchstartX) {
+            // right swipe
+            if ($('.shelf').hasClass('left')) {
+                $('#saoC-radio').click()
+            } else if ($('.shelf').hasClass('center')) {
+                $('#saoR-radio').click()
+            }
         }
     }
+
 }
 
 document.querySelector('.wallCard').addEventListener('touchstart', e => {
@@ -435,14 +438,6 @@ function checkDirectionCC() {
     }
 }
 
-document.querySelector('.expandToggle').addEventListener('touchstart', e => {
-    touchstartX = e.changedTouches[0].screenX
-})
-
-document.querySelector('.expandToggle').addEventListener('touchend', e => {
-    touchendX = e.changedTouches[0].screenX
-    checkDirectionCC()
-})
 
 // About modal functions
 
@@ -467,3 +462,22 @@ $(document).mouseup(function (e) {
 $(document).click(function () {
     $('.cards').css('max-width', localStorage.getItem('cardsWidth'));
 })
+
+// Float mode
+
+$('#cbFloatMode').click(function () {
+    if (localStorage.getItem('float') == 'true') {
+        $('.shelf').removeClass('float');
+        localStorage.setItem('float', 'false');
+        $('.shelfOpts').removeClass('collapse');
+    } else {
+        $('.shelf').addClass('float');
+        localStorage.setItem('float', 'true');
+        $('#saoL-radio').click();
+
+        $('.shelfOpts').addClass('collapse');
+
+        $('.cards').removeClass('collapsed');
+        $('.wallCard').removeClass('shExpanded');
+    }
+});

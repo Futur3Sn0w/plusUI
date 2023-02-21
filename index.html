@@ -35,7 +35,7 @@
         <div class="header">
             <img src="favicons/android-chrome-192x192.png" alt="">
             <p id="title">PlusUI</p>
-            <p id="ver">v1.1.1</p>
+            <p id="ver">v1.2</p>
             <div class="close" id="aboutModalClose">
                 <i class="fa-solid fa-close"></i>
             </div>
@@ -47,13 +47,13 @@
             the project's GitHub (link below)!
         </div>
         <div class="aboutLinks">
-            <div class="alink">
+            <div class="alink" onclick="window.open('https://www.github.com/')">
                 <i class="fa-brands fa-github"></i>
             </div>
-            <div class="alink">
+            <div class="alink" onclick="window.open('https://www.twitter.com/futur3sn0w')">
                 <i class="fa-brands fa-twitter"></i>
             </div>
-            <div class="alink">
+            <div class="alink" onclick="window.open('https://www.')">
                 <i class="fa-solid fa-home"></i>
             </div>
         </div>
@@ -71,23 +71,28 @@
                 <div class="tdm date" id="date"></div>
             </div>
         </div>
+
         <div class="surface controlPanel">
-            <div class="controlPanelOptGroup themeOpts">
+            <div class="controlPanelOptGroup themeOpts" data-sect="Personalize">
                 <div class="toggles">
-                    <div class="lightDark btnCont">
-                        <div class="button darkModeBtn darkModeOn" data-btnLabel="Theme">
+                    <div class="button lightDark btnCont">
+                        <div class="darkModeBtn darkModeOn btnInner" data-btnLabel="Theme">
                             <i class="fa-solid fa-circle-half-stroke"></i>
                         </div>
                     </div>
-                    <div class="reloadPage btnCont">
-                        <div class="button reloadBtn" data-btnLabel="Refresh">
+                    <div class="button reloadPage btnCont">
+                        <div class="reloadBtn btnInner" data-btnLabel="Refresh">
                             <i class="fa-solid fa-refresh"></i>
                         </div>
                     </div>
                 </div>
                 <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
+                <div class="dcExpt floadModeCardOptGroup">
+                    <input type="checkbox" name="floatMode" id="cbFloatMode">
+                    <label for="floatMode">Dock the Shelf</label>
+                </div>
             </div>
-            <div class="controlPanelOptGroup shelfOpts">
+            <div class="controlPanelOptGroup shelfOpts" data-sect="Shelf Placement">
                 <div class="shelfAlign" data-optName="Alignment">
                     <div class="sa-opt saoL">
                         <input class="sao-radio" type="radio" name="shelfAlign" id="saoL-radio">
@@ -103,85 +108,95 @@
                     </div>
                 </div>
             </div>
-            <div class="controlPanelOptGroup debugCards">
-                <div class="dc debugCardOptGroup">
+            <div class="controlPanelOptGroup debugCards" data-sect="Experiments">
+                <div class="dcExpt debugCardOptGroup">
                     <input type="checkbox" name="debugCards" id="cbDebugCards">
-                    <label for="debugCards">Enable debug cards</label>
-                </div>
-                <div class="dcOpt compactModeOptGroup">
-                    <input type="checkbox" name="compactMode" id="cbCompactMode">
-                    <label for="compactMode">Enable compact mode</label>
+                    <label for="debugCards">Enable experimental cards</label>
                 </div>
             </div>
+            <div class="surface expandToggle">
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
         </div>
-        <div class="surface expandToggle">
-            <i class="fa-solid fa-chevron-down"></i>
-        </div>
+
+        <div class="spacer"></div>
     </div>
 
     <div class="shelf left">
-        <div class="shelfLabel"></div>
-        <div class="wallCard labeled active" data-friendlyName="Backdrop" id="wallCard">
-            <div class="wallBtns">
-                <div class="wallBtn refresh" id="refreshWallBtn">
-                    <i class="fa-solid fa-refresh"></i>
-                </div>
-                <div class="wallBtn openWall" id="openWallpaperBtn">
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-            </div>
-        </div>
+        <div class="spacerA spcLeft"></div>
         <div class="surface cards darkModeOn" id="cards">
-            <div class="weatherCard card labeled parallax" data-friendlyName="Weather" id="weatherCard">
-                <img src="" alt="" id="weatherIcon">
-                <div class="tdm temp" id="temp"></div>
-            </div>
-            <div class="clockCard card labeled parallax squareCard" data-friendlyName="Clock" id="clockCard">
-                <div id="clockContainer">
-                    <div class="clockHand" id="hour"></div>
-                    <div class="clockHand" id="minute"></div>
-                    <div class="clockHand" id="second"></div>
-                </div>
-            </div>
-            <div class="calendarCard card labeled parallax squareCard" data-friendlyName="Calendar" id="calendarCard">
-                <div class="month"></div>
-                <div class="calenDayNo"></div>
-                <div class="calenDay"></div>
-            </div>
-            <div class="batteryCard card labeled parallax" data-friendlyName="Battery" id="batteryCard">
-                <div class="bcIndicator">
-                    <i class="fa-solid fa-bolt chargingIcon"></i>
-                    <div class="bciProg"></div>
-                </div>
-                <div class="batteryText"></div>
-            </div>
-            <div class="shortcutCard card labeled parallax squareCard" data-friendlyName="Shortcuts" id="shortcutCard">
-                <div class="collapseIcon">
-                    <i class="fa-solid fa-table-cells-large"></i>
-                </div>
-                <div class="shortcuts">
-                    <div class="scApp" id="scaYouTube" data-launch="youtube" style="background-color: #ff0101;">
-                        <i class="fa-brands fa-youtube"></i>
+            <div class="wallCard labeled active" data-friendlyName="Backdrop" id="wallCard">
+                <div class="shelfLabel"></div>
+
+                <div class="wallBtns">
+                    <div class="wallBtn refresh" id="refreshWallBtn">
+                        <i class="fa-solid fa-refresh"></i>
                     </div>
-                    <div class="scApp" id="scaYTM" data-launch="music.youtube" style="background-color: #ff0101;">
-                        <i class="fa-solid fa-play"></i>
-                    </div>
-                    <div class="scApp" id="scaTwitter" data-launch="twitter" style="background-color: #1d9bf0;">
-                        <i class="fa-brands fa-twitter"></i>
-                    </div>
-                    <div class="scApp" id="" style="background-color: rgb(136, 136, 136);">
-                        <i class="fa-solid fa-question"></i>
+                    <div class="wallBtn openWall" id="openWallpaperBtn">
+                        <i class="fa-solid fa-square-plus"></i>
                     </div>
                 </div>
             </div>
-            <div class="emojiLocaleCard card labeled parallax circleCard dbg" data-friendlyName="Emoji"
-                id="emojiLocaleCard">
-                <p>❤️</p>
+            <div class="surface subCards">
+                <div class="weatherCard card labeled rectCard" data-friendlyName="Weather" id="weatherCard">
+                    <img src="" alt="" id="weatherIcon">
+                    <div class="tdm temp" id="temp"></div>
+                </div>
+                <div class="clockCard card labeled parallax squareCard" data-friendlyName="Clock" id="clockCard">
+                    <div id="clockContainer">
+                        <div class="clockHand" id="hour"></div>
+                        <div class="clockHand" id="minute"></div>
+                        <div class="clockHand" id="second"></div>
+                    </div>
+                </div>
+                <div class="calendarCard card labeled parallax squareCard" data-friendlyName="Calendar"
+                    id="calendarCard">
+                    <div class="month"></div>
+                    <div class="calenDayNo"></div>
+                    <div class="calenDay"></div>
+                </div>
+                <div class="batteryCard card labeled parallax rectCard" data-friendlyName="Battery" id="batteryCard">
+                    <div class="bcIndicator">
+                        <i class="fa-solid fa-bolt chargingIcon"></i>
+                        <div class="bciProg"></div>
+                    </div>
+                    <div class="batteryText"></div>
+                </div>
+                <div class="shortcutCard card labeled actionable squareCard" data-friendlyName="Shortcuts"
+                    id="shortcutCard">
+                    <div class="collapseIcon">
+                        <i class="fa-solid fa-table-cells-large"></i>
+                    </div>
+                    <div class="shortcuts">
+                        <div class="scApp" id="scaYouTube" data-launch="youtube" style="background-color: #ff0101;">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                        <div class="scApp" id="scaYTM" data-launch="music.youtube" style="background-color: #ff0101;">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <div class="scApp" id="scaTwitter" data-launch="twitter" style="background-color: #1d9bf0;">
+                            <i class="fa-brands fa-twitter"></i>
+                        </div>
+                        <div class="scApp" id="" style="background-color: rgb(136, 136, 136);">
+                            <i class="fa-solid fa-question"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="emojiLocaleCard card labeled parallax circleCard dbg" data-friendlyName="Emoji"
+                    id="emojiLocaleCard">
+                    <p>❤️</p>
+                </div>
+                <div class="snowDbgCard card labeled parallax squareCard dbg" data-friendlyName="Sn0w" id="snowDbgCard">
+                    <img src="resc/snow-fore.png" id="snowFore">
+                </div>
+                <div class="siriDbgCard card labeled squareCard dbg" data-friendlyName="Siri" id="siriDbgCard">
+                    <div class="layer1"></div>
+                    <div class="layer2"></div>
+                </div>
+
             </div>
         </div>
-        <div class="surface shelfCollapseToggle expanded" data-friendlyName="Expand Shelf">
-            <i class="fa-solid fa-chevron-right"></i>
-        </div>
+        <div class="spacerA spcRight"></div>
     </div>
 
     <script type="text/javascript" src="vanilla-tilt.js"></script>
