@@ -50,6 +50,8 @@ window.onload = function () {
 
     setTimeout("cardSmarts();", 500);
 
+    $('#topChromeAboutBtn').text($('.siteVer').text());
+
     doTheBatteryThing();
     chargingIndic();
 }
@@ -98,12 +100,11 @@ $('.expandToggle').on('click', function () {
     }
 });
 
-$('.wallCard').on('click', function () {
+$('.wallCard').on('click', function (e) {
     if ($('.shelf').hasClass('float')) {
 
     } else {
         $('.cards').toggleClass('collapsed');
-        $('.wallCard').toggleClass('shExpanded');
 
         if ($('.cards').hasClass('collapsed')) {
             $('.shelfLabel').addClass('hidden');
@@ -154,7 +155,7 @@ $('.card').on('contextmenu', function (e) {
 });
 
 $('.card').click(function (e) {
-    if ($(this).parent().hasClass('editMode')) {
+    if ($('.cards').hasClass('editMode')) {
         $(this).toggleClass('disabled');
     }
 });
@@ -176,6 +177,7 @@ $('#openWallpaperBtn').click(function (e) {
     var bg = $('body').css('background-image');
     bg = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
     window.open(bg);
+    e.stopPropagation();
 });
 
 function alignShelf() {
@@ -292,8 +294,9 @@ function setDbg() {
     }
 }
 
-$('#refreshWallBtn').on('click', function () {
+$('#refreshWallBtn').on('click', function (e) {
     refreshWall();
+    e.stopPropagation();
 });
 
 function refreshWall() {
@@ -445,7 +448,7 @@ $('#aboutModalClose').click(function (e) {
     $('.modal-about').removeClass('visible')
 });
 
-$('#topChromeAboutBtn').click(function (e) {
+$('.timeDate').click(function (e) {
     $('.modal-about').addClass('visible')
 });
 
@@ -478,6 +481,5 @@ $('#cbFloatMode').click(function () {
         $('.shelfOpts').addClass('collapse');
 
         $('.cards').removeClass('collapsed');
-        $('.wallCard').removeClass('shExpanded');
     }
 });

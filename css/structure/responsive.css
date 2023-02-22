@@ -39,4 +39,8 @@
     .shelfLabel {
         display: none !important;
     }
+
+    .wallCard .wallBtns {
+        opacity: 1 !important;
+    }
 }

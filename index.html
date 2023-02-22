@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
 
     <link rel="stylesheet" href="master_cards.css">
     <link rel="stylesheet" href="master_structure.css">
@@ -35,7 +35,7 @@
         <div class="header">
             <img src="favicons/android-chrome-192x192.png" alt="">
             <p id="title">PlusUI</p>
-            <p id="ver">v1.2</p>
+            <p class="siteVer" id="ver">v1.2.1</p>
             <div class="close" id="aboutModalClose">
                 <i class="fa-solid fa-close"></i>
             </div>
@@ -61,17 +61,15 @@
 
     <div class="backDrop" id="backDrop2"></div>
 
-    <div class="topChrome">
-        <div class="surface timeDate darkModeOn">
-            <div class="aboutBtn" id="topChromeAboutBtn">
-                <i class="fa-solid fa-info-circle"></i>
-            </div>
-            <div class="td">
-                <div class="tdm time" id="time"></div>
-                <div class="tdm date" id="date"></div>
-            </div>
+    <div class="surface timeDate darkModeOn">
+        <div class="aboutBtn" id="topChromeAboutBtn"></div>
+        <div class="td">
+            <div class="tdm time" id="time"></div>
+            <div class="tdm date" id="date"></div>
         </div>
+    </div>
 
+    <div class="topChrome">
         <div class="surface controlPanel">
             <div class="controlPanelOptGroup themeOpts" data-sect="Personalize">
                 <div class="toggles">
@@ -125,7 +123,7 @@
     <div class="shelf left">
         <div class="spacerA spcLeft"></div>
         <div class="surface cards darkModeOn" id="cards">
-            <div class="wallCard labeled active" data-friendlyName="Backdrop" id="wallCard">
+            <div class="wallCard active" id="wallCard">
                 <div class="shelfLabel"></div>
 
                 <div class="wallBtns">

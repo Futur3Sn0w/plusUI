@@ -12,18 +12,18 @@
 
 .topChrome {
     position: absolute;
-    top: 10px;
-    right: 0;
+    bottom: 0;
+    right: 10px;
     z-index: 9;
 
     overflow: hidden;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
+    box-sizing: border-box;
 
-    width: 245px;
-    height: calc(100% - 10px);
-    padding: 15px;
+    width: fit-content;
+    height: calc(100% - 90px);
 
     display: flex;
     align-items: flex-end;
@@ -31,13 +31,16 @@
     flex-direction: column;
     gap: 10px;
 
+    /* background-color: white; */
 }
 
 .topChrome .spacer {
-    height: 110%;
+    height: 100vh;
     width: 20px;
 
     scroll-snap-align: start;
+
+    /* background-color: purple; */
 }
 
 .topChrome>* {
@@ -45,21 +48,27 @@
 }
 
 .timeDate {
-    position: fixed;
+    position: absolute;
     top: 10px;
+    right: 10px;
+    z-index: 10;
 
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    z-index: 2;
-
-    pointer-events: none;
 
     height: fit-content;
-    width: fit-content;
+    width: 200px;
     padding: 13px 25px 13px 20px;
     overflow: hidden;
+
+    transition: .2s;
+    user-select: none;
+}
+
+.timeDate:active {
+    transform: scale(.95);
 }
 
 .time {
@@ -89,18 +98,18 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    padding: 7px;
+    padding: 5px 9px;
 
     background-color: inherit;
     color: inherit;
-    border-radius: 50%;
-
-    cursor: pointer;
+    font-size: 12px;
+    opacity: .4;
+    border-radius: 500px;
 }
 
 .expandToggle {
     position: absolute;
-    bottom: -122px;
+    bottom: -42px;
     left: 50%;
     transform: translateX(-50%);
     z-index: -10 !important;
@@ -143,7 +152,7 @@
     z-index: 1;
 
     height: fit-content;
-    width: 100%;
+    width: 246px;
     min-width: 200px;
     color: inherit;
 
@@ -152,7 +161,7 @@
     box-sizing: border-box;
 
     scroll-snap-align: end;
-    margin-top: 90px;
+    margin-top: 20px;
 
     /* filter: blur(10px); */
     /* opacity: 0; */
@@ -162,14 +171,6 @@
 
     transition: transform .3s, filter .3s, opacity .3s;
     transition-timing-function: ease;
-}
-
-.controlPanel.visible {
-    transform: translateY(0);
-    filter: blur(0);
-    opacity: 1;
-
-    pointer-events: all;
 }
 
 .controlPanelOptGroup:first-of-type {

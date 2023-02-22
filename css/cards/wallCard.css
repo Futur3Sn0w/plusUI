@@ -22,7 +22,7 @@
     transition: .3s;
 
     overflow: hidden;
-    position: absolute;
+    position: sticky;
     left: 7px;
     z-index: 10;
 
@@ -49,8 +49,8 @@
     transform: scale(.9);
 }
 
-.wallCard.shExpanded {
-    box-shadow: none;
+.wallCard:hover .shelfLabel {
+    opacity: 0 !important;
 }
 
 .wallCard:before {
@@ -76,30 +76,30 @@
     opacity: 0;
     transition: opacity .2s;
 
-    gap: 5px;
+    gap: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.wallCard .wallBtns .wallBtn {
-    background-color: inherit;
+.wallBtns .wallBtn {
+    background-color: white;
     border-radius: 10px;
-    backdrop-filter: blur(20px);
     cursor: pointer;
 
     font-size: 15px;
 
-    width: 30px;
+    width: 50px;
     height: 30px;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    color: black;
 }
 
 .cards.darkModeOn .wallCard .wallBtns .wallBtn i {
-    color: white !important;
+    color: black !important;
 }
 
 @keyframes borderPulse {

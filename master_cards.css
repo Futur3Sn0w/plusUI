@@ -24,15 +24,11 @@
     height: fit-content;
 
     display: flex;
-    align-items: center;
-    justify-content: start;
 
     box-sizing: border-box;
-    padding: 15px 25px;
+    padding: 0 30px 25px 30px;
 
     transition: .3s;
-
-    border-radius: 0 20px 0 0;
 
     /* background-color: white; */
 }
@@ -48,6 +44,7 @@
 .shelf.float .cards {
     margin: 0 !important;
     margin-bottom: -1px !important;
+    width: 100%;
 }
 
 .shelf.float .cards .subCards {
@@ -55,6 +52,7 @@
     backdrop-filter: none !important;
     box-shadow: none !important;
     border: none !important;
+    width: 100%;
 }
 
 .shelf.left .spcLeft {
@@ -84,7 +82,9 @@
 .shelf .spacerA {
     position: relative;
     z-index: 1000;
-    transition: .3s;
+    transition: width .5s;
+    height: 20px;
+    /* background: purple; */
 }
 
 .shelfLabel {
@@ -95,7 +95,6 @@
     color: black;
     border-radius: 10px;
     padding: 6px 10px;
-    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.2);
     opacity: 0;
 
     font-size: 17px;
@@ -118,8 +117,8 @@
 .cards {
     width: max-content;
     max-width: 100%;
-    height: 141px;
-    margin: 13px 10px !important;
+    height: 150px;
+    /* margin: 0 0 13px 10px !important; */
     z-index: 1;
 
     flex-shrink: 0;
@@ -133,29 +132,20 @@
 
     transition: .3s;
 
-    overflow-x: scroll;
-
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 15px;
 
-    padding: 10px;
-    padding-left: 215px;
-    padding-right: 20px;
+    /* padding: 10px; */
+    /* padding-left: 215px; */
+    /* padding-right: 20px; */
     box-sizing: border-box;
 }
 
-.cards.collapsed {
-    width: 200px;
-
-    overflow: hidden;
-    margin: 0 0 13px 17px !important;
-    /* margin-bottom: 13px !important; */
-}
-
 .subCards {
-    width: max-content;
+    width: fit-content;
+    max-width: calc(100% - 50px);
     height: 110px;
 
     display: flex;
@@ -168,6 +158,7 @@
     padding-right: 10px;
     overflow-x: scroll;
     transform: translateX(-50px);
+    margin-right: -50px;
 
     background-color: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(100px) saturate(6);
@@ -179,11 +170,15 @@
 }
 
 .cards.collapsed .subCards {
-    width: 200px;
-    padding-left: 0;
-    height: 140px;
-    transform: translateX(-210px);
-    border-radius: 28px !important;
+    height: 137px;
+    width: 145px;
+    transform: translateX(-216px);
+    border-radius: 29px !important;
+}
+
+.cards.collapsed .subCards .card {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .cards.darkModeOn::after {
@@ -205,21 +200,15 @@
     backdrop-filter: unset;
 
     max-width: unset !important;
-    padding-left: 220px;
 }
 
 .cards.collapsed {
-    width: 209px;
+    width: 220px;
     height: 141px;
 
-    gap: 20px;
-
     padding: 0;
-    padding-left: 209px;
-
     margin: 0;
-
-    transform: translateX(-8px);
+    /* transform: translateX(-8px); */
 
     border-radius: 31px !important;
 }
