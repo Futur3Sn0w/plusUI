@@ -35,7 +35,7 @@
         <div class="header">
             <img src="favicons/android-chrome-192x192.png" alt="">
             <p id="title">PlusUI</p>
-            <p class="siteVer" id="ver">v1.2.1</p>
+            <p class="siteVer" id="ver">v1.2.2</p>
             <div class="close" id="aboutModalClose">
                 <i class="fa-solid fa-close"></i>
             </div>
@@ -89,6 +89,10 @@
                     <input type="checkbox" name="floatMode" id="cbFloatMode">
                     <label for="floatMode">Dock the Shelf</label>
                 </div>
+                <div class="dcExpt disableParaOptGroup">
+                    <input type="checkbox" name="disablePara" id="cbDisablePara" checked>
+                    <label for="disablePara">Card parallax effects</label>
+                </div>
             </div>
             <div class="controlPanelOptGroup shelfOpts" data-sect="Shelf Placement">
                 <div class="shelfAlign" data-optName="Alignment">
@@ -123,7 +127,7 @@
     <div class="shelf left">
         <div class="spacerA spcLeft"></div>
         <div class="surface cards darkModeOn" id="cards">
-            <div class="wallCard active" id="wallCard">
+            <div class="wallCard active" id="wallCard" data-wallSet="Random">
                 <div class="shelfLabel"></div>
 
                 <div class="wallBtns">
@@ -152,6 +156,9 @@
                     <div class="month"></div>
                     <div class="calenDayNo"></div>
                     <div class="calenDay"></div>
+                </div>
+                <div class="textCard card labeled actionable squareCard" data-friendlyName="Notes" id="textCard">
+                    <textarea name="notes" id="textCardTB"></textarea>
                 </div>
                 <div class="batteryCard card labeled parallax rectCard" data-friendlyName="Battery" id="batteryCard">
                     <div class="bcIndicator">
@@ -187,7 +194,7 @@
                 <div class="snowDbgCard card labeled parallax squareCard dbg" data-friendlyName="Sn0w" id="snowDbgCard">
                     <img src="resc/snow-fore.png" id="snowFore">
                 </div>
-                <div class="siriDbgCard card labeled squareCard dbg" data-friendlyName="Siri" id="siriDbgCard">
+                <div class="siriDbgCard card labeled circleCard dbg" data-friendlyName="Siri" id="siriDbgCard">
                     <div class="layer1"></div>
                     <div class="layer2"></div>
                 </div>
@@ -197,7 +204,7 @@
         <div class="spacerA spcRight"></div>
     </div>
 
-    <script type="text/javascript" src="vanilla-tilt.js"></script>
+    <script src="tilt.jquery.js"></script>
 
     <script src="app.js"></script>
 </body>

@@ -21,6 +21,8 @@
     background-size: cover;
     transition: .3s;
 
+    text-transform: capitalize;
+
     overflow: hidden;
     position: sticky;
     left: 7px;
@@ -45,12 +47,100 @@
     border-radius: 25px;
 }
 
+.wallCard::after {
+    content: attr(data-wallSet);
+
+    position: absolute;
+    left: 18px;
+    bottom: 30px;
+
+    font-size: 12px;
+    font-family: GST-Reg;
+    color: inherit;
+
+    transform: scale(.75) translateY(20px);
+    opacity: 0;
+    filter: blur(3px);
+
+    transition: transform .3s, opacity .25s, filter .3s;
+}
+
+.shelf:hover .wallCard::after {
+    transform: scale(1) translateY(-10px);
+    opacity: .75;
+    filter: blur(0);
+}
+
+.wallCard:hover::after {
+    transform: scale(1.5) translateY(-20px) translateX(10px) !important;
+    font-family: GST-Med;
+    opacity: 1 !important;
+    filter: blur(0) !important;
+}
+
 .wallCard:active {
     transform: scale(.9);
 }
 
+.shelfLabel {
+    width: 100%;
+    height: 100%;
+
+    background-color: transparent !important;
+    color: black;
+    border-radius: 10px;
+    padding: 45px 10px 6px 45px;
+    opacity: 0;
+
+    font-size: 19px;
+    font-family: GST-Med;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    position: absolute;
+    top: 0;
+    z-index: -2;
+    transform: scale(.9) translateY(10px);
+    transform-origin: bottom left;
+
+    transition: .2s;
+}
+
+.shelf:hover .wallCard .shelfLabel {
+    transform: scale(1) translateY(0);
+}
+
+.shelfLabel::after {
+    content: "";
+    width: 100%;
+    height: 50%;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+
+    background: linear-gradient(to bottom, transparent, black 80%);
+    backdrop-filter: blur(5px);
+    /* filter: blur(5px); */
+
+    transition: .6s opacity .1s, .2s height .1s;
+}
+
+.shelfLabel.hidden {
+    display: none !important;
+}
+
 .wallCard:hover .shelfLabel {
-    opacity: 0 !important;
+    color: transparent !important;
+}
+
+.cards.darkModeOn .wallCard .shelfLabel {
+    color: white;
+    /* background-color: var(--section-d); */
+    background-color: black;
 }
 
 .wallCard:before {
@@ -80,6 +170,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    position: relative;
+    z-index: 6;
 }
 
 .wallBtns .wallBtn {

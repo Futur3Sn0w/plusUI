@@ -17,6 +17,10 @@
         opacity: 1;
     }
 
+    .shelf:hover .shelfLabel::after {
+        height: 100%;
+    }
+
 }
 
 /* Only TOUCH SCREENS */

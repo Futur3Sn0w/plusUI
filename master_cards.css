@@ -7,6 +7,7 @@
 @import url('css/cards/batteryCard.css');
 @import url('css/cards/weatherCard.css');
 @import url('css/cards/calendarCard.css');
+@import url('css/cards/textCard.css');
 
 :root {
     --glow-l: linear-gradient(90deg, transparent, white 80%);
@@ -85,33 +86,6 @@
     transition: width .5s;
     height: 20px;
     /* background: purple; */
-}
-
-.shelfLabel {
-    width: max-content;
-    height: max-content;
-
-    background-color: white;
-    color: black;
-    border-radius: 10px;
-    padding: 6px 10px;
-    opacity: 0;
-
-    font-size: 17px;
-    font-family: GST-Med;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    position: absolute;
-    top: 50px;
-
-    transition: .2s;
-}
-
-.shelfLabel.hidden {
-    display: none !important;
 }
 
 .cards {
@@ -204,7 +178,6 @@
 
 .cards.collapsed {
     width: 220px;
-    height: 141px;
 
     padding: 0;
     margin: 0;
@@ -242,7 +215,12 @@
     transition: opacity .2s, transform .2s;
 }
 
-.card:not(.parallax):not(.actionable):hover {
+.card.parallax-disabled {
+    transform: none;
+}
+
+.card:not(.parallax):not(.actionable):hover,
+.card.parallax-disabled:hover {
     transform: translateY(-7px);
 }
 

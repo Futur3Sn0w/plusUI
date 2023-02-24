@@ -1,5 +1,8 @@
+// import VanillaTilt from 'vanilla-tilt';
+
 var wallFilter = localStorage.getItem('unsplashTags');
 var backdropImg = 'https://source.unsplash.com/featured/?sig=' + Math.random() + wallFilter;
+const cards = document.querySelectorAll('.parallax');
 
 window.onload = function () {
     showTime();
@@ -12,20 +15,10 @@ window.onload = function () {
     if (isTouchScreendevice()) {
         $('.card').removeClass('parallax');
     } else {
-        const cards = document.querySelectorAll('.parallax');
-        VanillaTilt.init(cards, {
-            reverse: true,  // reverse the tilt direction
-            max: 25,     // max tilt rotation (degrees)
-            perspective: 400,   // Transform perspective, the lower the more extreme the tilt gets.
-            scale: 1.05,      // 2 = 200%, 1.5 = 150%, etc..
-            speed: 700,    // Speed of the enter/exit transition
-            transition: true,   // Set a transition on enter/exit.
-            reset: true,   // If the tilt effect has to be reset on exit.
-            easing: "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
-            glare: false,  // if it should have a "glare" effect
-            "max-glare": 1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
-            "glare-prerender": false,
-            gyroscope: false
+        $('.parallax').tilt({
+            perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
+            scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
+            speed: 500    // Speed of the enter/exit transition
         });
     }
 
@@ -42,6 +35,7 @@ window.onload = function () {
     alignShelf();
 
     localStorage.setItem('float', 'false');
+    $('#textCardTB').val(localStorage.getItem('textCard'));
 
     $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
     $('body').css('background-image', "url(" + backdropImg + ")");
@@ -55,6 +49,28 @@ window.onload = function () {
     doTheBatteryThing();
     chargingIndic();
 }
+
+// Tilt
+
+$('#cbDisablePara').on('click', function () {
+    if ($('.parallax').hasClass('parallax-disabled') == 0) {
+        const tilt = $('.parallax').tilt();
+        tilt.tilt.destroy.call(tilt);
+        localStorage.setItem('parallax', 'false');
+        $('.parallax').addClass('parallax-disabled');
+    } else {
+        localStorage.setItem('parallax', 'true');
+        $('.parallax').removeClass('parallax-disabled');
+
+        $('.parallax').tilt({
+            perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
+            scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
+            speed: 500    // Speed of the enter/exit transition
+        });
+    }
+})
+
+// 
 
 window.addEventListener('load', function () {
     this.localStorage.setItem('cardsWidth', $('.cards').css('width'));
@@ -120,6 +136,7 @@ $('.scApp').on('click', function () {
 
 $('#unsplashTags').focusout(function () {
     localStorage.setItem('unsplashTags', '&' + $(this).val());
+    $('.wallCard').attr('data-wallSet', $(this).val());
     refreshWall();
 });
 
@@ -309,6 +326,8 @@ function refreshWall() {
         $('.wallCard').css('background-image', $('#backDrop2').css('background-image'));
         $('#backDrop2').delay(500).css('background-image', "url(" + backdropSample + ")");
     });
+    $('.wallCard').attr('data-wallSet', wallFilter.replace('&', ''));
+    $('#unsplashTags').val(wallFilter.replace('&', ''));
 }
 
 function showTime() {
@@ -483,3 +502,9 @@ $('#cbFloatMode').click(function () {
         $('.cards').removeClass('collapsed');
     }
 });
+
+// Text/notes card
+
+$('#textCardTB').on('keypress', function () {
+    localStorage.setItem('textCard', $('#textCardTB').val());
+})
