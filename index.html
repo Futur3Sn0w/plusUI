@@ -35,7 +35,7 @@
         <div class="header">
             <img src="favicons/android-chrome-192x192.png" alt="">
             <p id="title">PlusUI</p>
-            <p class="siteVer" id="ver">v1.2.2</p>
+            <p class="siteVer" id="ver">v1.2.3</p>
             <div class="close" id="aboutModalClose">
                 <i class="fa-solid fa-close"></i>
             </div>
@@ -97,7 +97,7 @@
             <div class="controlPanelOptGroup shelfOpts" data-sect="Shelf Placement">
                 <div class="shelfAlign" data-optName="Alignment">
                     <div class="sa-opt saoL">
-                        <input class="sao-radio" type="radio" name="shelfAlign" id="saoL-radio">
+                        <input class="sao-radio" type="radio" name="shelfAlign" id="saoL-radio" checked>
                         <label for="saoL-radio">Left</label>
                     </div>
                     <div class="sa-opt saoC">
@@ -128,14 +128,16 @@
         <div class="spacerA spcLeft"></div>
         <div class="surface cards darkModeOn" id="cards">
             <div class="wallCard active" id="wallCard" data-wallSet="Random">
+                <div class="context-tooltip" data-touch="Click " data-state="to collapse"></div>
+
                 <div class="shelfLabel"></div>
 
                 <div class="wallBtns">
-                    <div class="wallBtn refresh" id="refreshWallBtn">
+                    <div class="wallBtn refresh" data-btnName="Refresh" id="refreshWallBtn">
                         <i class="fa-solid fa-refresh"></i>
                     </div>
-                    <div class="wallBtn openWall" id="openWallpaperBtn">
-                        <i class="fa-solid fa-square-plus"></i>
+                    <div class="wallBtn openWall" data-btnName="Open" id="openWallpaperBtn">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </div>
                 </div>
             </div>

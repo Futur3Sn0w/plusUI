@@ -1,7 +1,7 @@
 // import VanillaTilt from 'vanilla-tilt';
 
 var wallFilter = localStorage.getItem('unsplashTags');
-var backdropImg = 'https://source.unsplash.com/featured/?sig=' + Math.random() + wallFilter;
+var backdropImg = 'https://source.unsplash.com/featured/?sig=' + Math.random() + '&' + wallFilter;
 const cards = document.querySelectorAll('.parallax');
 
 window.onload = function () {
@@ -14,7 +14,9 @@ window.onload = function () {
 
     if (isTouchScreendevice()) {
         $('.card').removeClass('parallax');
+        $('.context-tooltip').attr('data-touch', 'Tap ');
     } else {
+        $('.context-tooltip').attr('data-touch', 'Click ');
         $('.parallax').tilt({
             perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
             scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
@@ -123,9 +125,9 @@ $('.wallCard').on('click', function (e) {
         $('.cards').toggleClass('collapsed');
 
         if ($('.cards').hasClass('collapsed')) {
-            $('.shelfLabel').addClass('hidden');
+            $('.context-tooltip').attr('data-state', 'to expand shelf');
         } else {
-            $('.shelfLabel').removeClass('hidden');
+            $('.context-tooltip').attr('data-state', 'to collapse shelf');
         }
     }
 });
@@ -135,7 +137,7 @@ $('.scApp').on('click', function () {
 });
 
 $('#unsplashTags').focusout(function () {
-    localStorage.setItem('unsplashTags', '&' + $(this).val());
+    localStorage.setItem('unsplashTags', $(this).val());
     $('.wallCard').attr('data-wallSet', $(this).val());
     refreshWall();
 });
@@ -184,6 +186,10 @@ $('.labeled').mouseover(function (e) {
 $('.labeled').mouseout(function (e) {
     $('.shelfLabel').text('Shelf');
 });
+
+$('.wallCard').on('hover', function () {
+    $('.shelfLabel').text('Click or tap to close');
+})
 
 $('.sao-radio').click(function (e) {
     localStorage.setItem('shelfPos', e.target.id);
@@ -318,7 +324,7 @@ $('#refreshWallBtn').on('click', function (e) {
 
 function refreshWall() {
     var wallFilter = localStorage.getItem('unsplashTags');
-    fetch("https://source.unsplash.com/random/?sig=" + Math.round(Math.random) + wallFilter).then(data => {
+    fetch("https://source.unsplash.com/random/?sig=" + Math.round(Math.random) + '&' + wallFilter).then(data => {
         var backdropSample = data.url;
 
         $('body').css('background-image', $('#backDrop2').css('background-image'));
@@ -326,8 +332,8 @@ function refreshWall() {
         $('.wallCard').css('background-image', $('#backDrop2').css('background-image'));
         $('#backDrop2').delay(500).css('background-image', "url(" + backdropSample + ")");
     });
-    $('.wallCard').attr('data-wallSet', wallFilter.replace('&', ''));
-    $('#unsplashTags').val(wallFilter.replace('&', ''));
+    $('.wallCard').attr('data-wallSet', wallFilter);
+    $('#unsplashTags').val(wallFilter);
 }
 
 function showTime() {

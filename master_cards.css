@@ -83,7 +83,7 @@
 .shelf .spacerA {
     position: relative;
     z-index: 1000;
-    transition: width .5s;
+    transition: width .45s;
     height: 20px;
     /* background: purple; */
 }
@@ -217,11 +217,6 @@
 
 .card.parallax-disabled {
     transform: none;
-}
-
-.card:not(.parallax):not(.actionable):hover,
-.card.parallax-disabled:hover {
-    transform: translateY(-7px);
 }
 
 .card.darkModeOn {

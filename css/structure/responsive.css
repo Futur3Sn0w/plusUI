@@ -18,9 +18,13 @@
     }
 
     .shelf:hover .shelfLabel::after {
-        height: 100%;
+        width: 100%;
     }
 
+    .card:not(.parallax):not(.actionable):hover,
+    .card.parallax-disabled:hover {
+        transform: translateY(-7px);
+    }
 }
 
 /* Only TOUCH SCREENS */
@@ -40,8 +44,37 @@
         transform: scale(.85) !important;
     }
 
+    .wallCard::after {
+        opacity: 1 !important;
+        filter: none !important;
+        bottom: 40px !important;
+        opacity: .75 !important;
+    }
+
     .shelfLabel {
-        display: none !important;
+        opacity: 1 !important;
+        color: transparent !important;
+    }
+
+    .wallCard::after {
+        transform: scale(1.5) translateY(-15px) translateX(8px) !important;
+        font-family: GST-Med;
+        opacity: 1 !important;
+        filter: blur(0) !important;
+    }
+
+    .context-tooltip {
+        color: white;
+        text-transform: none !important;
+        font-size: 11px;
+        font-family: GST-Med;
+
+        opacity: .6;
+
+        position: absolute;
+        z-index: 11;
+        bottom: 40px;
+        left: 20px;
     }
 
     .wallCard .wallBtns {
