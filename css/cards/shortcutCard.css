@@ -2,28 +2,41 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .shortcutCard .collapseIcon {
     display: none;
 }
 
-.shortcutCard .shortcuts {
-    width: fit-content;
-    height: fit-content;
+.shortcutCard.rectCard .shortcuts {
+    margin-left: 22px;
+    gap: 6px;
+}
 
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
-    gap: 4px;
+.shortcutCard .shortcuts {
+    width: 160px;
+    height: min-content;
+    flex-shrink: 0;
+
+    margin-left: 98px;
+    margin-right: 8px;
+    margin-top: 2px;
+
+    display: flex;
+    gap: 6px;
     flex-wrap: wrap;
+
+    transition: .2s;
+
+    overflow: hidden;
 }
 
 .scApp {
-    width: 35px;
+    width: 32px;
     aspect-ratio: 1/1;
 
-    font-size: 19px;
+    font-size: 16px;
 
     background-color: red;
     color: white;
@@ -32,6 +45,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    transition: .2s;
 
     cursor: pointer;
     position: relative;
@@ -51,4 +66,13 @@
 
 .scApp:hover::after {
     opacity: .35;
+}
+
+.shortcutCard.squareCard .shortcuts .scApp:nth-of-type(3),
+.shortcutCard.squareCard .shortcuts .scApp:nth-of-type(7) {
+    margin-left: 5px;
+}
+
+#scaDeviantart {
+    color: #00EAA6;
 }

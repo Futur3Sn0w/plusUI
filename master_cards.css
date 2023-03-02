@@ -89,8 +89,8 @@
 }
 
 .cards {
-    width: max-content;
-    max-width: 100%;
+    width: 100%;
+    max-width: calc(100vw - 215px);
     height: 150px;
     /* margin: 0 0 13px 10px !important; */
     z-index: 1;
@@ -107,6 +107,7 @@
     transition: .3s;
 
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     gap: 15px;
@@ -115,6 +116,10 @@
     /* padding-left: 215px; */
     /* padding-right: 20px; */
     box-sizing: border-box;
+}
+
+.shelf.right .cards {
+    flex-direction: row-reverse;
 }
 
 .subCards {
@@ -128,11 +133,11 @@
     flex-shrink: 0;
 
     position: relative;
-    padding-left: 50px;
+    padding-left: 207px;
     padding-right: 10px;
     overflow-x: scroll;
-    transform: translateX(-50px);
-    margin-right: -50px;
+    margin-left: -217px !important;
+    margin-right: 0;
 
     background-color: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(100px) saturate(6);
@@ -140,14 +145,28 @@
     border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 18px;
 
-    transition: .3s;
+    transition: .2s;
+}
+
+.shelf.left .cards:not(.collapsed) .subCards {
+    margin-left: -207px !important;
+}
+
+.shelf.right .cards:not(.collapsed) .subCards {
+    margin-right: -207px !important;
+    margin-left: 0 !important;
+    padding-left: 10px;
+    padding-right: 200px;
 }
 
 .cards.collapsed .subCards {
     height: 137px;
-    width: 145px;
-    transform: translateX(-216px);
-    border-radius: 29px !important;
+    width: 197px;
+    max-width: unset;
+    padding-left: 0;
+    margin-right: -217px;
+    margin-left: 0;
+    border-radius: 30px !important;
 }
 
 .cards.collapsed .subCards .card {
@@ -202,6 +221,7 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.2);
+    outline: solid 3px transparent;
 
     position: relative;
 
@@ -210,9 +230,12 @@
     transform-style: preserve-3d;
     transform: perspective(1000px);
     transform-origin: center;
-    transition: .25s;
     transition-timing-function: ease;
-    transition: opacity .2s, transform .2s;
+    transition: opacity .2s, transform .2s, outline .15s, width .2s;
+}
+
+.card.parallax {
+    transition: opacity .2s, transform 0, outline .15s, width .2s !important;
 }
 
 .card.parallax-disabled {
@@ -222,6 +245,118 @@
 .card.darkModeOn {
     background-color: #222222;
     color: white;
+}
+
+/* Context Menu stuff */
+
+.card.context-selected-card {
+    transform: translateY(-7px) !important;
+    outline: solid 3px white;
+}
+
+.contextMenuDiv {
+    position: absolute;
+    z-index: 20;
+    width: 146px;
+    height: fit-content;
+
+    opacity: 0;
+
+    background-color: white;
+    bottom: 142px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    gap: 5px !important;
+    pointer-events: none;
+
+    transition: bottom .2s, opacity .2s !important;
+}
+
+.contextMenuDiv.show {
+    opacity: 1;
+    bottom: 162px;
+    pointer-events: all;
+}
+
+.contextMenuDiv .cmItem {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    box-sizing: border-box;
+    padding: 7px 10px;
+    border-radius: 12px;
+
+    background-color: inherit;
+    font-size: 13px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.contextMenuDiv .cmItem i {
+    width: 18px;
+    height: 20px;
+    flex-shrink: 0;
+    font-size: 14px;
+
+    padding-right: 5px;
+    margin-left: -3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contextMenuDiv .cmi-resize::after,
+.contextMenuDiv .cmi-disableCard::after {
+    content: attr(data-btnLabel);
+}
+
+.contextMenuDiv .cmi-disableCard::after {
+    padding-left: 3px;
+}
+
+.cmItem::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+
+    transition: 90ms;
+}
+
+.surface.darkModeOn .cmItem::before {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.cmItem:hover::before {
+    opacity: .20;
+}
+
+.cmItem:active::before {
+    opacity: .1;
+}
+
+.cmSep {
+    width: 90%;
+    height: 1px;
+    background-color: inherit;
+    filter: invert(1);
+    opacity: .25;
+    margin: 2px 0;
 }
 
 /* Edit mode specs */

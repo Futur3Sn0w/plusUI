@@ -1,0 +1,80 @@
+.rolodex {
+    width: 800px;
+    height: 500px;
+
+    padding: 7px;
+    box-sizing: border-box;
+
+    /* display: NONE; */
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    transform: scale(1.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s;
+
+    position: relative;
+}
+
+.rolodex.visible {
+    z-index: 50;
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: unset;
+}
+
+.rolodex::before {
+    content: attr(data-sectName);
+    font-size: 25px;
+    font-family: GST-Bold;
+    height: 100px;
+
+    padding-left: 15px;
+    display: flex;
+    align-items: flex-end;
+
+    position: relative;
+    z-index: 50;
+}
+
+.rolodexCloseBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 50px;
+
+    cursor: pointer;
+
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    right: 0;
+}
+
+.cbSect {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+
+    /* border-radius: 18px; */
+    background-color: inherit;
+}
+
+.cbs1 {
+    border-radius: 14px 14px 10px 10px !important;
+}
+
+.cbs2 {
+    border-radius: 10px 10px 14px 14px !important;
+}
+
+.cbSect::before {
+    content: attr(data-sectName);
+    font-size: 18px;
+    font-family: GST-Med;
+}

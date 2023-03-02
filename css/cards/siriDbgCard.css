@@ -2,7 +2,7 @@
     font-size: 2em;
 
     background-image: url(https://cdn.dribbble.com/users/32512/screenshots/3820721/brain_natural_os_by_gleb.gif);
-    background-size: 170%;
+    background-size: 185%;
     background-position: center;
 }
 
@@ -11,7 +11,7 @@
     height: 100%;
 
     position: absolute;
-    background-size: 170%;
+    background-size: 195%;
     background-position: center;
     mix-blend-mode: lighten;
 
@@ -20,7 +20,8 @@
 
 .siriDbgCard .layer1 {
     background-image: url(https://cdn.dribbble.com/users/129227/screenshots/3556417/siri.gif);
-    opacity: .75;
+    mix-blend-mode: screen;
+    opacity: .6;
 }
 
 .siriDbgCard .layer2 {

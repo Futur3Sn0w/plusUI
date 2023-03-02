@@ -5,6 +5,16 @@
     font-family: GSD-Bold;
 }
 
+.batteryText {
+    transition: .2s;
+    overflow: hidden;
+}
+
+.batteryCard.rectCard .batteryText {
+    opacity: 0;
+    width: 0;
+}
+
 .bcIndicator {
     display: flex;
     align-items: center;

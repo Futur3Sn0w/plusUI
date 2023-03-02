@@ -6,7 +6,7 @@
 #clockContainer {
     position: relative;
     margin: auto;
-    width: 85%;
+    height: 85%;
     aspect-ratio: 1/1;
     background-image: url("../../resc/clock_numbs_black.svg");
     background-repeat: no-repeat;

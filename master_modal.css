@@ -8,7 +8,7 @@
     min-height: 100px;
 
     pointer-events: none;
-    transform: scale(1.3);
+    transform: scale(1.1);
     opacity: 0;
 
     transition: transform .3s, opacity .25s;

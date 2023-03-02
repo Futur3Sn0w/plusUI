@@ -130,22 +130,26 @@
 }
 
 .context-tooltip {
-    opacity: 0;
-    transition: .2s;
-}
-
-.wallCard:hover .context-tooltip {
     color: white;
     text-transform: none !important;
     font-size: 11px;
     font-family: GST-Med;
 
-    opacity: .6;
+    opacity: 0;
+    transition: .2s;
+    transition-delay: 0;
 
     position: absolute;
     z-index: 11;
-    bottom: 40px;
+    bottom: 30px;
     left: 20px;
+}
+
+.wallCard:hover .context-tooltip {
+    opacity: .6;
+    bottom: 40px;
+
+    transition-delay: .15s;
 }
 
 .context-tooltip::before {
@@ -180,9 +184,9 @@
     opacity: 0;
     transition: opacity .2s;
 
-    gap: 60px;
+    gap: 50px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
 
     position: relative;
@@ -210,6 +214,24 @@
     content: attr(data-btnName);
     font-size: 11px;
     opacity: .5;
+}
+
+.wallBtn.editCards {
+    transform: translateX(10px);
+    height: 20px;
+    width: 20px;
+    padding: 5px !important;
+    padding-left: 10px !important;
+    justify-content: flex-start;
+
+    color: black;
+    border-radius: 15px 0 0 15px;
+    background-color: white;
+}
+
+.wallBtn.editCards::before {
+    display: none;
+
 }
 
 @keyframes borderPulse {

@@ -4,9 +4,6 @@
 
 /* Only MOUSE and TOUCHPAD */
 @media (hover: hover) and (pointer: fine) {
-    .topChrome {
-        overflow-y: clip !important;
-    }
 
     .editMode .card.disabled:hover {
         filter: blur(0) grayscale(1);
@@ -21,10 +18,30 @@
         width: 100%;
     }
 
+    .card:active {
+        transform: unset !important;
+    }
+
     .card:not(.parallax):not(.actionable):hover,
     .card.parallax-disabled:hover {
         transform: translateY(-7px);
     }
+
+    .expandToggle:not(.expanded) {
+        transform: translateX(-50%) translateY(-30px) !important;
+    }
+
+    .topChrome:hover .expandToggle {
+        transform: translateX(-50%) translateY(0px) !important;
+    }
+
+    /* .wallBtn:hover::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, .25);
+        position: absolute;
+    } */
 }
 
 /* Only TOUCH SCREENS */
@@ -79,5 +96,9 @@
 
     .wallCard .wallBtns {
         opacity: 1 !important;
+    }
+
+    .cmItem:active {
+        transform: scale(.9);
     }
 }

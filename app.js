@@ -4,13 +4,13 @@ var wallFilter = localStorage.getItem('unsplashTags');
 var backdropImg = 'https://source.unsplash.com/featured/?sig=' + Math.random() + '&' + wallFilter;
 const cards = document.querySelectorAll('.parallax');
 
+function isTouchScreendevice() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints;
+};
+
 window.onload = function () {
     showTime();
     showDate();
-
-    function isTouchScreendevice() {
-        return 'ontouchstart' in window || navigator.maxTouchPoints;
-    };
 
     if (isTouchScreendevice()) {
         $('.card').removeClass('parallax');
@@ -35,6 +35,19 @@ window.onload = function () {
     setTheme();
     setDbg();
     alignShelf();
+    if ($('.cards').hasClass('collapsed') == 0) {
+        $('.saoC').addClass('override-hidden');
+    } else {
+        $('.saoC').removeClass('override-hidden');
+    }
+
+    $(".subCards").sortable({
+        appendTo: $('.subCards'),
+        axis: "x",
+        revert: true
+    });
+
+    $('.subCards').sortable('disable');
 
     localStorage.setItem('float', 'false');
     $('#textCardTB').val(localStorage.getItem('textCard'));
@@ -129,6 +142,12 @@ $('.wallCard').on('click', function (e) {
         } else {
             $('.context-tooltip').attr('data-state', 'to collapse shelf');
         }
+        if ($('.cards').hasClass('collapsed') == 0) {
+            $('.saoC').addClass('override-hidden');
+            $('#saoL-radio').click();
+        } else {
+            $('.saoC').removeClass('override-hidden');
+        }
     }
 });
 
@@ -147,6 +166,8 @@ $(document).mouseup(function (e) {
     var element2 = $(".controlPanel *");
     var element3 = $(".card");
     var element4 = $(".card *");
+    var element5 = $(".context-selected-card");
+    var element6 = $(".context-selected-card *");
 
     if (!element.is(e.target) && !element2.is(e.target)) {
         $('.topChrome').scrollTop(800)
@@ -155,6 +176,15 @@ $(document).mouseup(function (e) {
 
     if (!element3.is(e.target) && !element4.is(e.target)) {
         $('.editMode').removeClass('editMode');
+        $('.subCards').sortable('disable');
+    }
+
+    if (!element3.is(e.target) && !element4.is(e.target)) {
+        $('.contextMenuDiv').removeClass('show');
+    }
+
+    if (!$(".context-selected-card").is(e.target) && !$(".context-selected-card *").is(e.target) && !$(".contextMenuDiv").is(e.target) && !$(".contextMenuDiv *").is(e.target)) {
+        $('.context-selected-card').removeClass('context-selected-card')
     }
 });
 
@@ -170,14 +200,39 @@ $('#cbDebugCards').click(function () {
 
 $('.card').on('contextmenu', function (e) {
     e.preventDefault();
-    $('.cards').addClass('editMode');
-});
-
-$('.card').click(function (e) {
-    if ($('.cards').hasClass('editMode')) {
-        $(this).toggleClass('disabled');
+    if (isTouchScreendevice()) {
+        $('.cards').addClass('editMode');
+        $('.subCards').sortable('enable');
+        $('.context-selected-card').removeClass('context-selected-card')
+    } else {
+        cardContextMenu(this);
     }
 });
+
+$('.cmi-resize').on('click', function () {
+    if ($('.context-selected-card').hasClass('rectCard')) {
+        $('.context-selected-card').addClass('squareCard').removeClass('rectCard');
+    } else if ($('.context-selected-card').hasClass('squareCard')) {
+        $('.context-selected-card').addClass('rectCard').removeClass('squareCard');
+    }
+    $('.context-selected-card').removeClass('context-selected-card')
+});
+
+$('.cmi-editMode').click(function (e) {
+    $('.cards').addClass('editMode');
+    $('.subCards').sortable('enable');
+    $('.context-selected-card').removeClass('context-selected-card')
+});
+
+$('.cmi-disableCard').on('click', function () {
+    $('.context-selected-card').addClass('disabled').removeClass('context-selected-card');
+})
+
+// $('.card').click(function (e) {
+//     if ($('.cards').hasClass('editMode')) {
+//         $(this).toggleClass('disabled');
+//     }
+// });
 
 $('.labeled').mouseover(function (e) {
     $('.shelfLabel').text($(this).attr('data-friendlyName'));
@@ -290,6 +345,8 @@ function cardSmarts() {
     }
 }
 
+// Switch theme function
+
 function setTheme() {
     if (localStorage.getItem('theme') === 'dark') {
         $('.button').addClass('darkModeOn');
@@ -307,6 +364,8 @@ function setTheme() {
     }
 }
 
+// Enable debug (experimental) cards function
+
 function setDbg() {
     if (localStorage.getItem('debug') == 'true') {
         $('.dbg').addClass('enabled');
@@ -316,6 +375,8 @@ function setDbg() {
         $('#cbDebugCards').attr('checked', false)
     }
 }
+
+// Refresh wallpaper button
 
 $('#refreshWallBtn').on('click', function (e) {
     refreshWall();
@@ -335,6 +396,8 @@ function refreshWall() {
     $('.wallCard').attr('data-wallSet', wallFilter);
     $('#unsplashTags').val(wallFilter);
 }
+
+// timeCard time and date
 
 function showTime() {
     var date = new Date();
@@ -395,6 +458,8 @@ function showDate() {
     $('.calendarCard .calenDay').text(currentDay);
 }
 
+// weatherCard
+
 function weatherBalloon(cityID) {
     fetch('https://api.openweathermap.org/data/2.5/weather?id=' + cityID + '&appid=' + lsOwmAPI)
         .then(function (resp) { return resp.json() }) // Convert data to json
@@ -412,6 +477,42 @@ function drawWeather(d) {
     $('#weatherIcon').attr('src', "http://openweathermap.org/img/wn/" + wIcon + "@4x.png");
 }
 
+// Card context menu function
+
+function cardContextMenu(e) {
+    if ($(e).hasClass('squareCard')) {
+        var cardSize = 'Expand'
+        $('#cmi-resize-icn').addClass('fa-up-right-and-down-left-from-center').removeClass('fa-down-left-and-up-right-to-center');
+    } else if ($(e).hasClass('rectCard')) {
+        var cardSize = 'Shrink'
+        $('#cmi-resize-icn').addClass('fa-down-left-and-up-right-to-center').removeClass('fa-up-right-and-down-left-from-center');
+    } else {
+        var cardSize = 'else'
+    }
+
+    $('.context-selected-card').removeClass('context-selected-card');
+
+    if ($(e).parent().parent().hasClass('editMode')) {
+    } else {
+        if (cardSize == 'else' || $(e).hasClass('noresize')) {
+            $('.cmi-resize').addClass('override-hidden');
+        } else {
+            $('.cmi-resize').removeClass('override-hidden');
+        }
+        $(e).addClass('context-selected-card');
+        var cmLeft = $(".context-selected-card").offset().left - $(document).scrollLeft() + 4;
+        var cmLeftS = $(".context-selected-card").offset().left - $(document).scrollLeft() - 35;
+        if ($('.context-selected-card').hasClass('rectCard')) {
+            $('.contextMenuDiv').css('left', cmLeft);
+        } else {
+            $('.contextMenuDiv').css('left', cmLeftS);
+        }
+        $('.cmi-resize').attr('data-btnLabel', cardSize + ' ' + $('.context-selected-card').attr('data-friendlyName'));
+        $('.cmi-disableCard').attr('data-btnLabel', $('.context-selected-card').attr('data-friendlyName'));
+        $('.contextMenuDiv').addClass('show');
+    }
+}
+
 // Wallpaper card / shelf alignment gestures (mobile only)
 
 let touchstartX = 0
@@ -423,14 +524,22 @@ function checkDirectionWC() {
         if (touchendX < touchstartX) {
             // left swipe
             if ($('.shelf').hasClass('right')) {
-                $('#saoC-radio').click()
+                if ($('.cards').hasClass('collapsed') == 0) {
+                    $('#saoL-radio').click()
+                } else {
+                    $('#saoC-radio').click()
+                }
             } else if ($('.shelf').hasClass('center')) {
                 $('#saoL-radio').click()
             }
         } else if (touchendX > touchstartX) {
             // right swipe
             if ($('.shelf').hasClass('left')) {
-                $('#saoC-radio').click()
+                if ($('.cards').hasClass('collapsed') == 0) {
+                    $('#saoR-radio').click()
+                } else {
+                    $('#saoC-radio').click()
+                }
             } else if ($('.shelf').hasClass('center')) {
                 $('#saoR-radio').click()
             }
@@ -446,6 +555,26 @@ document.querySelector('.wallCard').addEventListener('touchstart', e => {
 document.querySelector('.wallCard').addEventListener('touchend', e => {
     touchendX = e.changedTouches[0].screenX
     checkDirectionWC()
+})
+
+// Card context menu swipeup gesture (Touch only)
+
+let touchstartY = 0
+let touchendY = 0
+
+$('.card').on('touchstart', function (e) {
+    touchstartY = e.changedTouches[0].screenY
+    $(this).removeClass('fnDown');
+})
+
+$('.card').on('touchend', function (e) {
+    touchendY = e.changedTouches[0].screenY
+    $(this).addClass('fnDown');
+    if (touchendY < touchstartY) {
+        // up swipe
+        cardContextMenu(this)
+        $('.fnCard').removeClass('fnCard');
+    }
 })
 
 // Control panel gesture pill (mobile only)
@@ -466,6 +595,19 @@ function checkDirectionCC() {
     }
 }
 
+// Card scroll-up action (Mouse/trackpad only)
+scrollup = 0;
+
+$('.card').on('mousewheel', function () {
+    if (isTouchScreendevice() == 0) {
+        if (scrollup == 5) {
+            scrollup = 0
+        } else {
+            scrollup++;
+            cardContextMenu(this)
+        }
+    }
+});
 
 // About modal functions
 
@@ -473,7 +615,7 @@ $('#aboutModalClose').click(function (e) {
     $('.modal-about').removeClass('visible')
 });
 
-$('.timeDate').click(function (e) {
+$('.aboutBtn').click(function (e) {
     $('.modal-about').addClass('visible')
 });
 
@@ -487,9 +629,9 @@ $(document).mouseup(function (e) {
 
 // Auto update shelf width
 
-$(document).click(function () {
-    $('.cards').css('max-width', localStorage.getItem('cardsWidth'));
-})
+// $(document).click(function () {
+//     $('.cards').css('max-width', localStorage.getItem('cardsWidth'));
+// })
 
 // Float mode
 
@@ -513,4 +655,14 @@ $('#cbFloatMode').click(function () {
 
 $('#textCardTB').on('keypress', function () {
     localStorage.setItem('textCard', $('#textCardTB').val());
+})
+
+// Rolodex Actions
+
+$('.emojiLocaleCard').on('click', function () {
+    $('.rolodex').addClass('visible');
+})
+
+$('.rolodexCloseBtn').on('click', function () {
+    $('.rolodex').removeClass('visible');
 })

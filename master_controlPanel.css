@@ -22,8 +22,9 @@
     scroll-behavior: smooth;
     box-sizing: border-box;
 
-    width: fit-content;
-    height: calc(100% - 90px);
+    width: 300px;
+    height: calc(100% - 20px);
+    padding-top: 80px;
 
     display: flex;
     align-items: flex-end;
@@ -54,13 +55,16 @@
     z-index: 10;
 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    flex-direction: column;
     gap: 15px;
+    box-sizing: border-box;
+    pointer-events: none;
 
     height: fit-content;
-    width: 200px;
-    padding: 13px 25px 13px 20px;
+    width: 250px;
+    padding: 12px 17px;
     overflow: hidden;
 
     transition: .2s;
@@ -88,7 +92,7 @@
     justify-content: center;
 
     height: fit-content;
-    width: max-content;
+    width: min-content;
     font-family: GST-Med;
 }
 
@@ -96,20 +100,28 @@
     display: flex;
 
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 14px;
+    right: 14px;
     padding: 5px 9px;
+    z-index: 1000;
 
-    background-color: inherit;
-    color: inherit;
     font-size: 12px;
-    opacity: .4;
+    font-family: GST-Bold;
+    opacity: .5;
     border-radius: 500px;
+
+    background-color: var(--surface-sect-l);
+    user-select: none;
+    cursor: pointer;
+}
+
+.aboutBtn.darkModeOn {
+    background-color: var(--surface-sect-d);
 }
 
 .expandToggle {
     position: absolute;
-    bottom: -42px;
+    bottom: -112px;
     left: 50%;
     transform: translateX(-50%);
     z-index: -10 !important;
@@ -161,7 +173,7 @@
     box-sizing: border-box;
 
     scroll-snap-align: end;
-    margin-top: 20px;
+    margin-top: 10px;
 
     /* filter: blur(10px); */
     /* opacity: 0; */

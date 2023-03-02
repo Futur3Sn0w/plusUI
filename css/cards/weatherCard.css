@@ -3,15 +3,34 @@
     color: white !important;
 }
 
+.weatherCard.squareCard {
+    flex-direction: column;
+}
+
+.weatherCard.squareCard * {
+    transform: none !important;
+}
+
+.weatherCard.squareCard #weatherIcon {
+    margin-bottom: -20px;
+    margin-top: -15px;
+}
+
+.weatherCard.squareCard .temp {
+    font-size: 20px;
+}
+
 #weatherIcon {
-    height: 90%;
+    height: 80px;
     aspect-ratio: 1/1;
 
     transform: translateX(-6px);
+    transition: .2s;
 }
 
 .temp {
     font-size: 25px;
     font-family: GST-Med;
     transform: translateX(-10px);
+    transition: .2s;
 }
