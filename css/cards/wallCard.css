@@ -57,6 +57,11 @@
     left: 18px;
     bottom: 20px;
 
+    width: 10ch;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
     font-size: 12px;
     font-family: GST-Reg;
     color: white;
@@ -64,17 +69,20 @@
     opacity: 0;
     filter: blur(3px);
 
+    /* background-color: white; */
+
     transition: .3s;
 }
 
 .shelf:hover .wallCard::after {
+    left: 18px;
     bottom: 40px;
     opacity: .75;
     filter: blur(0);
 }
 
 .wallCard:hover::after {
-    transform: scale(1.5) translateY(-15px) translateX(10px) !important;
+    transform: scale(1.5) translateY(-15px) translateX(14px) !important;
     font-family: GST-Med;
     opacity: 1 !important;
     filter: blur(0) !important;
@@ -184,7 +192,7 @@
     opacity: 0;
     transition: opacity .2s;
 
-    gap: 50px;
+    gap: 15px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -214,6 +222,16 @@
     content: attr(data-btnName);
     font-size: 11px;
     opacity: .5;
+}
+
+.wallBtn.rolodexOpen {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wallBtn.rolodexOpen.enabled {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .wallBtn.editCards {

@@ -1,0 +1,65 @@
+.winsiderCard {
+    background: linear-gradient(-45deg, #923fc9, #0adfe2);
+
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.winsiderCard p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0;
+    margin: 0;
+
+    font-size: 15px;
+    font-family: 'Segoe UI Bold', GST-Bold;
+    transform: translateY(-5px) translateZ(10px);
+}
+
+.winsiderCard p::before {
+    content: "Windows";
+    font-size: 12px;
+    font-family: 'Segoe UI', GST-Reg;
+    transform: translateY(3px);
+}
+
+.winsiderCard .insChannel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+
+    padding: 5px 9px;
+    transform: translateZ(20px);
+
+    background-color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    /* flex-direction: column; */
+
+}
+
+.winsiderCard:hover .insChannel {
+    color: transparent;
+    transition: .15s;
+}
+
+.winsiderCard .insChannel::before {
+    content: attr(data-channel);
+    opacity: 0;
+    color: black;
+    font-size: 13px;
+
+    position: absolute;
+    transition: .15s;
+}
+
+.winsiderCard:hover .insChannel::before {
+    opacity: 1;
+}

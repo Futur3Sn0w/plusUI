@@ -1,0 +1,53 @@
+.todoCard {
+    display: flex;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.todoCard .items {
+    display: flex;
+    height: 100%;
+    gap: 3px;
+    border-radius: 12px;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.todoCard .items .item {
+    display: flex;
+    position: relative;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.todoCard .items .item input[type='checkbox'] {
+    padding: 0 !important;
+    border-radius: 50%;
+}
+
+.todoCard .items .item input[type='text'] {
+    width: 50px;
+
+    border-radius: 0;
+    background-color: transparent;
+    border: 2px solid transparent;
+
+    outline: none !important;
+}
+
+.todoCard .items .item::after {
+    content: "";
+    width: 55px;
+    height: 1px;
+
+    position: absolute;
+    right: 3px;
+    bottom: 5px;
+
+    opacity: .5;
+    background-color: black;
+}

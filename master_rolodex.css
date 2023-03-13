@@ -1,6 +1,6 @@
 .rolodex {
-    width: 800px;
-    height: 500px;
+    width: 700px;
+    height: fit-content;
 
     padding: 7px;
     box-sizing: border-box;
@@ -27,11 +27,12 @@
 
 .rolodex::before {
     content: attr(data-sectName);
-    font-size: 25px;
-    font-family: GST-Bold;
-    height: 100px;
+    font-size: 18px;
+    font-family: GST-Med;
+    height: 30px;
 
-    padding-left: 15px;
+    padding-left: 10px;
+    padding-bottom: 5px;
     display: flex;
     align-items: flex-end;
 
@@ -39,20 +40,41 @@
     z-index: 50;
 }
 
+.rolodex::after {
+    content: "BETA";
+    font-size: 13px;
+
+    font-family: GST-Bold;
+    opacity: .75;
+
+    position: absolute;
+    left: 99px;
+    top: 11px;
+}
+
 .rolodexCloseBtn {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+
+    background-color: inherit;
+    border-radius: 50%;
 
     cursor: pointer;
 
+    transition: .15s;
+
     position: absolute;
     z-index: 100;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 10px;
+}
+
+.rolodexCloseBtn:active {
+    transform: scale(.75);
 }
 
 .cbSect {
@@ -61,20 +83,71 @@
     padding: 15px;
     box-sizing: border-box;
 
-    /* border-radius: 18px; */
+    display: flex;
+    gap: 15px;
+    padding-top: 50px;
+
+    position: relative;
+
+    border-radius: 12px;
     background-color: inherit;
 }
 
 .cbs1 {
-    border-radius: 14px 14px 10px 10px !important;
+    margin-bottom: 20px;
+}
+
+.cbs1::after {
+    content: attr(data-currentCard);
+    font-size: 15px;
+    font-family: GST-Reg;
+    opacity: .5;
+    height: 100px;
+
+
+    padding-left: 90px;
+    display: flex;
+    align-items: flex-end;
+
+    position: absolute;
+    top: 0;
+    left: 57px;
+    transform: translateY(-69px);
+    z-index: 50;
+}
+
+.cbs1 span {
+    /* content: "Cards here might be buggy... Click a card to add it to your shelf."; */
+    font-size: 12px;
+    font-family: GST-Reg;
+    opacity: .5;
+
+    display: flex;
+    align-items: flex-end;
+
+    position: absolute;
+    bottom: -23px;
+    right: 10px;
+    z-index: 50;
 }
 
 .cbs2 {
     border-radius: 10px 10px 14px 14px !important;
+    height: 20px;
+    display: none;
 }
 
 .cbSect::before {
     content: attr(data-sectName);
     font-size: 18px;
     font-family: GST-Med;
+
+    position: absolute;
+    top: 15px;
+}
+
+/* Card stuff */
+
+.cbSect .card:hover {
+    margin-bottom: none !important;
 }

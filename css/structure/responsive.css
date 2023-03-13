@@ -19,20 +19,20 @@
     }
 
     .card:active {
-        transform: unset !important;
+        transform: scale(.9) !important;
     }
 
-    .card:not(.parallax):not(.actionable):hover,
-    .card.parallax-disabled:hover {
-        transform: translateY(-7px);
+    .subCards .card:not(.parallax):not(.actionable):hover,
+    .subCards .card.parallax-disabled:hover {
+        margin-bottom: 10px;
     }
 
     .expandToggle:not(.expanded) {
         transform: translateX(-50%) translateY(-30px) !important;
     }
 
-    .topChrome:hover .expandToggle {
-        transform: translateX(-50%) translateY(0px) !important;
+    .topChrome:hover .expandToggle:not(.expanded) {
+        transform: translateX(-50%) translateY(0) !important;
     }
 
     /* .wallBtn:hover::after {

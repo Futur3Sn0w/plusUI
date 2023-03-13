@@ -2,7 +2,8 @@
     font-size: 2em;
 
     background-image: url(../../resc/snow-back.png);
-    background-size: contain;
+    background-size: cover;
+    background-position: center;
 
     box-sizing: border-box;
 }

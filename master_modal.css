@@ -8,7 +8,7 @@
     min-height: 100px;
 
     pointer-events: none;
-    transform: scale(1.1);
+    transform: scale(1.05);
     opacity: 0;
 
     transition: transform .3s, opacity .25s;
@@ -26,21 +26,23 @@
     width: 320px;
     height: fit-content;
 
-    border-radius: 16px;
-    padding: 0 15px;
+    padding: 0 5px;
 }
 
 .modal-about .header {
     width: 100%;
-    height: 35px;
+    height: 50px;
 
-    padding: 10px 0 5px 0;
+    padding: 5px 10px;
+    margin: 5px 0;
 
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    box-sizing: border-box;
 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    background-color: inherit;
 }
 
 .modal-about .header img {
@@ -79,30 +81,40 @@
     margin-left: auto;
     margin-top: -5px;
 
-    background-color: rgba(128, 0, 128, 0.3);
+    background-color: inherit;
     border-radius: 50%;
 
     cursor: pointer;
+
+    transition: .15s;
+}
+
+.modal-about .header .close:active {
+    transform: scale(.75);
 }
 
 .modal-about .aboutText {
     font-size: 13px;
-    width: 100%;
+    width: calc(100% - 20px);
 
     margin: 10px 0 0 0;
 
     padding-bottom: 10px;
-    padding-left: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .modal-about .aboutLinks {
-    width: 100%;
+    width: fit-content;
     font-size: 20px;
-    margin: 10px 0;
+    margin: 10px auto;
 
+    background-color: inherit;
+    border-radius: 10px;
+    overflow: hidden;
     display: flex;
-    gap: 5px;
+    gap: 1px;
 }
 
 .modal-about .aboutLinks .alink {
@@ -110,11 +122,22 @@
     align-items: center;
     justify-content: center;
 
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 30px;
 
     font-size: 15px;
+    text-align: center;
 
-    background-color: rgba(128, 0, 128, 0.3);
-    border-radius: 50%;
+    border-radius: 0;
+
+    transition: .15s;
+}
+
+.modal-about .aboutLinks .alink:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.modal-about .aboutLinks .alink:active {
+    transform: scale(.9);
+    border-radius: 10px;
 }

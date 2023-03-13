@@ -22,7 +22,7 @@
     scroll-behavior: smooth;
     box-sizing: border-box;
 
-    width: 300px;
+    width: fit-content;
     height: calc(100% - 20px);
     padding-top: 80px;
 
@@ -65,6 +65,7 @@
     height: fit-content;
     width: 250px;
     padding: 12px 17px;
+    /* padding-bottom: 28px; */
     overflow: hidden;
 
     transition: .2s;
@@ -84,6 +85,7 @@
     font-size: 20px;
     opacity: .7;
     width: max-content;
+    transition: .2s;
 }
 
 .td {
@@ -94,6 +96,33 @@
     height: fit-content;
     width: min-content;
     font-family: GST-Med;
+}
+
+.greeting {
+    display: flex;
+    font-size: 19px;
+    font-family: GST-Med;
+    gap: 3px;
+
+    opacity: .7;
+
+    position: absolute;
+    bottom: 13px;
+
+    transition: .2s;
+}
+
+.date.hidden,
+.greeting.hidden {
+    opacity: 0;
+}
+
+.greeting::before {
+    content: "Good";
+}
+
+.greeting::after {
+    content: attr(data-username);
 }
 
 .aboutBtn {
@@ -113,6 +142,12 @@
     background-color: var(--surface-sect-l);
     user-select: none;
     cursor: pointer;
+
+    transition: .15s;
+}
+
+.aboutBtn:active {
+    transform: scale(.9);
 }
 
 .aboutBtn.darkModeOn {
@@ -164,9 +199,11 @@
     z-index: 1;
 
     height: fit-content;
-    width: 246px;
+    width: 250px;
     min-width: 200px;
     color: inherit;
+
+    /* border-radius: 5px 5px 15px 15px; */
 
     padding: 5px 0 5px 0;
     /* pointer-events: none; */
@@ -238,13 +275,39 @@
     left: 15px;
 
     font-family: GSD-Med;
+    font-size: 16px;
+}
+
+.controlPanelOptGroup .ccSubHead {
+    padding-left: 5px;
+
+    font-family: GST-Med;
+
+    margin-top: 10px;
 }
 
 .themeOpts .toggles {
     display: flex;
-    gap: 5px;
+    flex-wrap: wrap;
+    gap: 3px;
     width: 100%;
 }
+
+.themeOpts .toggles .dcExpt {
+    width: calc(50% - 1.5px);
+}
+
+.themeOpts .toggles .floatModeCardOptGroup,
+.themeOpts .toggles .floatModeCardOptGroup::before {
+    border-radius: 10px 5px 5px 10px !important;
+}
+
+
+.themeOpts .toggles .disableParaOptGroup,
+.themeOpts .toggles .disableParaOptGroup::before {
+    border-radius: 5px 10px 10px 5px !important;
+}
+
 
 .button {
     width: 100%;
@@ -257,11 +320,25 @@
     color: inherit;
     box-sizing: border-box;
 
+    position: relative;
+
     display: flex;
     justify-content: flex-start;
     align-items: center;
 
     padding: 0 10px;
+    transition: .125s;
+}
+
+.button.lightDark::after {
+    content: attr(data-theme);
+
+    margin-left: 3px;
+    margin-bottom: -1px;
+    font-family: GST-Med;
+    opacity: .7;
+
+    text-transform: capitalize;
 }
 
 .controlPanel.darkModeOn .controlPanelOptGroup .toggles .button {
@@ -273,13 +350,15 @@
     padding-left: 4px;
 }
 
-.controlPanel .keyTB {
+.controlPanel .keyTB-cont {
     background-color: var(--section-input-l);
     color: inherit;
     border-radius: 10px;
-    font-size: 12px;
 
     box-sizing: border-box;
+
+    position: relative;
+    overflow: hidden;
 
     width: 100%;
     height: 30px;
@@ -287,13 +366,77 @@
     border: 0;
 }
 
-.controlPanel.darkModeOn .keyTB {
+.controlPanel.darkModeOn .keyTB-cont {
     background-color: var(--section-input-d);
 }
 
-.controlPanel .keyTB::placeholder {
+.keyTB {
+    width: 100%;
+    height: 100%;
+
+    border: none !important;
+    outline: none !important;
+
+    background-color: transparent;
+    color: inherit;
+    font-size: 12px;
+
+    position: relative;
+    z-index: 1;
+}
+
+.keyTB#userNameTextbox {
+    padding-left: 10px;
+}
+
+.keyTB-cont:active::before {
+    border-width: 3px;
+}
+
+.controlPanel .keyTB-cont .keyTB::placeholder {
     color: inherit;
     opacity: 0.5;
+}
+
+.backdropCont {
+    display: flex;
+    gap: 3px;
+    width: 100%;
+}
+
+.backdropCont .dcExpt.uploadBtn {
+    width: 35px;
+    border-radius: 5px 10px 10px 5px;
+    padding-left: 10px;
+    cursor: pointer;
+
+    display: none;
+}
+
+.backdropCont .dcExpt.uploadBtn.enabled {
+    display: flex;
+}
+
+.backdropCont .dcExpt.uploadBtn::before {
+    border-radius: 5px 10px 10px 5px;
+}
+
+.dcExpt.uploadBtn input {
+    width: 100%;
+    height: 35px !important;
+    opacity: 0;
+
+    position: absolute;
+}
+
+.backdropCont .dcExpt.keyTBOptGroup,
+.backdropCont .dcExpt.keyTBOptGroup::before {
+    border-radius: 10px 5px 5px 10px !important;
+}
+
+.backdropCont .dcExpt.keyTBOptGroup.solo,
+.backdropCont .dcExpt.keyTBOptGroup.solo::before {
+    border-radius: 10px !important;
 }
 
 .shelfAlign {
@@ -337,6 +480,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    box-sizing: border-box;
+}
+
+.saoL input::before {
+    border-right: 1px solid transparent !important;
 }
 
 .sa-opt.saoC input::before {
@@ -347,6 +496,7 @@
 
 .saoR input::before {
     border-radius: 0 10px 10px 0 !important;
+    border-left: 1px solid transparent !important;
 }
 
 .sa-opt input::before {
@@ -394,7 +544,7 @@
 .dcExpt {
     width: 100%;
     height: 30px;
-    padding-left: 5px;
+    padding-left: 7px;
     font-size: 12px;
 
     display: flex;
@@ -408,9 +558,45 @@
 
     position: relative;
     box-sizing: border-box;
+
+    transition: .125s;
 }
 
-.dcExpt input {
+.dcExpt:active,
+.button:active {
+    transform: scale(.97) !important;
+}
+
+.dcExpt::before,
+.keyTB-cont::before,
+.button::before {
+    content: "";
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border-color: rgb(0, 0, 0);
+    border-width: 1px;
+    border-style: solid;
+    mix-blend-mode: overlay;
+    opacity: .75;
+    border-radius: 11px;
+
+    transition: .1s;
+    transform-origin: center;
+}
+
+.darkModeOn .dcExpt::before,
+.darkModeOn .keyTB-cont::before,
+.darkModeOn .button::before {
+    border-color: white;
+    opacity: .5;
+}
+
+.dcExpt:not(.keyTBOptGroup) input {
     appearance: none;
     position: absolute;
     left: -2px;
@@ -419,8 +605,8 @@
     height: 100%;
 }
 
-.dcExpt input::before,
-.dcExpt input::after {
+.dcExpt:not(.keyTBOptGroup) input::before,
+.dcExpt:not(.keyTBOptGroup) input::after {
     content: "";
     height: 30px;
     width: 100%;
@@ -432,29 +618,28 @@
     transition: .2s;
 }
 
-.dcExpt input::before {
+.dcExpt:not(.keyTBOptGroup) input::before {
     background: linear-gradient(90deg, rgb(230, 139, 139), transparent);
     left: -2px;
 }
 
-.dcExpt input::after {
+.dcExpt:not(.keyTBOptGroup) input::after {
     background: linear-gradient(90deg, transparent, rgb(107, 174, 106));
     opacity: 0;
     left: 0;
 }
 
-.dcExpt input:checked::before {
+.dcExpt:not(.keyTBOptGroup) input:checked::before {
     opacity: 0;
 }
 
-.dcExpt input:checked::after {
+.dcExpt input:not(.keyTBOptGroup):checked::after {
     opacity: 1;
 }
 
-.dcExpt label {
+.dcExpt:not(.keyTBOptGroup) label {
     position: relative;
     z-index: 2;
-    margin-left: 4px;
     pointer-events: none;
 }
 

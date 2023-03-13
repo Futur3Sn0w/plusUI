@@ -41,7 +41,7 @@
         <div class="header">
             <img src="favicons/android-chrome-192x192.png" alt="">
             <p id="title">PlusUI</p>
-            <p class="siteVer" id="ver">v1.3b</p>
+            <p class="siteVer" id="ver">v1.4</p>
             <div class="close" id="aboutModalClose">
                 <i class="fa-solid fa-close"></i>
             </div>
@@ -66,6 +66,7 @@
     </div>
 
     <div class="backDrop" id="backDrop2"></div>
+    <img class="customBackdrop hidden" src="" id="customBackdrop"></img>
 
     <div class="surface aboutBtn" id="topChromeAboutBtn"></div>
     <div class="surface timeDate darkModeOn">
@@ -73,34 +74,39 @@
             <div class="tdm time" id="time"></div>
             <div class="tdm date" id="date"></div>
         </div>
+        <div class="greeting hidden" data-username="User"></div>
     </div>
 
     <div class="topChrome">
         <div class="surface controlPanel">
             <div class="controlPanelOptGroup themeOpts" data-sect="Personalize">
                 <div class="toggles">
-                    <div class="button lightDark btnCont">
-                        <div class="darkModeBtn darkModeOn btnInner" data-btnLabel="Theme">
+                    <div class="button lightDark btnCont" data-theme="Auto">
+                        <div class="darkModeBtn darkModeOn btnInner" data-btnLabel="Theme:">
                             <i class="fa-solid fa-circle-half-stroke"></i>
                         </div>
                     </div>
-                    <div class="button reloadPage btnCont">
-                        <div class="reloadBtn btnInner" data-btnLabel="Refresh">
-                            <i class="fa-solid fa-refresh"></i>
-                        </div>
+                    <div class="dcExpt floatModeCardOptGroup">
+                        <input type="checkbox" name="floatMode" id="cbFloatMode">
+                        <label for="floatMode">Dock Shelf</label>
+                    </div>
+                    <div class="dcExpt disableParaOptGroup">
+                        <input type="checkbox" name="disablePara" id="cbDisablePara" checked>
+                        <label for="disablePara">Parallax effects</label>
                     </div>
                 </div>
-                <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
-                <div class="dcExpt floadModeCardOptGroup">
-                    <input type="checkbox" name="floatMode" id="cbFloatMode">
-                    <label for="floatMode">Dock the Shelf</label>
+                <div class="ccSubHead">Backdrop</div>
+                <div class="backdropCont">
+                    <div class="dcExpt keyTBOptGroup solo">
+                        <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
+                    </div>
+                    <div class="dcExpt uploadBtn">
+                        <input type="file" id="uploadInput" onchange="customWall(this)">
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </div>
                 </div>
-                <div class="dcExpt disableParaOptGroup">
-                    <input type="checkbox" name="disablePara" id="cbDisablePara" checked>
-                    <label for="disablePara">Card parallax effects</label>
-                </div>
-            </div>
-            <div class="controlPanelOptGroup shelfOpts" data-sect="Shelf Placement">
+
+                <div class="ccSubHead shPlacement">Shelf Placement</div>
                 <div class="shelfAlign" data-optName="Alignment">
                     <div class="sa-opt saoL">
                         <input class="sao-radio" type="radio" name="shelfAlign" id="saoL-radio" checked>
@@ -116,10 +122,19 @@
                     </div>
                 </div>
             </div>
+            <div class="controlPanelOptGroup shelfOpts" data-sect="About You">
+                <div class="dcExpt userName">
+                    <input class="keyTB" type="text" id="userNameTextbox" onchange="" placeholder="Your name">
+                </div>
+            </div>
             <div class="controlPanelOptGroup debugCards" data-sect="Experiments">
                 <div class="dcExpt debugCardOptGroup">
                     <input type="checkbox" name="debugCards" id="cbDebugCards">
-                    <label for="debugCards">Enable experimental cards</label>
+                    <label for="debugCards">Codename: Rolodex</label>
+                </div>
+                <div class="dcExpt customBackdropOptGroup">
+                    <input type="checkbox" name="customBackdrops" id="cbCustomBackdrops">
+                    <label for="customBackdrops">Custom Backdrops</label>
                 </div>
             </div>
             <div class="surface expandToggle">
@@ -145,11 +160,77 @@
         </div>
     </div>
 
-    <div class="surface rolodex" data-sectName="cardBank">
+    <div class="surface rolodex" data-sectName="cardDeck">
         <div class="rolodexCloseBtn">
             <i class="fa-solid fa-xmark"></i>
         </div>
-        <div class="cbSect cbs1" data-sectName="Stock"></div>
+        <div class="cbSect cbs1" data-sectName="Available Cards" data-currentCard="Card">
+            <div class="snowDbgCard card deckCard labeled squareCard" data-resizableCard="n" data-parallaxCard="y"
+                data-friendlyName="Sn0w" id="snowDbgCard">
+                <img src="resc/snow-fore.png" id="snowFore">
+            </div>
+            <div class="siriDbgCard card deckCard labeled circleCard" data-resizableCard="n" data-parallaxCard="n"
+                data-friendlyName="Siri" id="siriDbgCard">
+                <div class="layer1"></div>
+                <div class="layer2"></div>
+            </div>
+            <div class="emojiLocaleCard card labeled circleCard" data-resizableCard="n" data-parallaxCard="y"
+                data-friendlyName="Emoji" id="emojiLocaleCard">
+                <p>❤️</p>
+            </div>
+            <div class="youtubeCard card deckCard labeled rectCard override-hidden" data-resizableCard="n"
+                data-parallaxCard="y" data-friendlyName="YouTube" id="youtubeCard">
+                <div class="cardOptions">
+                    <div class="cmItem cmi-ytcurl">
+                        <i class="fa-solid fa-user-pen"></i>
+                        <input type="text" id="ytid" placeholder="Channel ID" value="UC5yi93rwcQxIjr0s6Ak8mdw">
+                    </div>
+                </div>
+                <i class="fa-brands fa-youtube"></i>
+
+                <div class="ytThumb"></div>
+            </div>
+            <div class="todoCard card deckCard labeled actionable squareCard" data-resizableCard="n"
+                data-parallaxCard="n" data-friendlyName="To-Do" id="todoCard">
+                <div class="items">
+                    <div class="item">
+                        <input type="checkbox" id="">
+                        <input type="text">
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" id="">
+                        <input type="text">
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" id="">
+                        <input type="text">
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" id="">
+                        <input type="text">
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" id="">
+                        <input type="text">
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" id="">
+                        <input type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="winsiderCard card deckCard labeled squareCard" data-resizableCard="n" data-parallaxCard="y"
+                data-friendlyName="Insider" id="winsiderCard">
+                <p>Insider</p>
+                <div class="insChannel icBuild" data-channel="Latest"></div>
+                <!-- <div class="insChannel icRP" data-channel="RP">22000</div> -->
+                <!-- <div class="insChannel icBeta" data-channel="Beta">22100</div> -->
+                <!-- <div class="insChannel icDev" data-channel="Dev">23000</div> -->
+                <!-- <div class="insChannel icCanary" data-channel="Canary">25000</div> -->
+            </div>
+
+            <span>Cards here might be buggy... Click a card to add it to your Shelf.</span>
+        </div>
         <div class="cbSect cbs2" data-sectName="Dev"></div>
     </div>
 
@@ -166,42 +247,49 @@
                         <i class="fa-solid fa-refresh"></i>
                     </div>
 
+                    <div class="wallBtn rolodexOpen" data-btnName="Cards" id="rolodexOpenBtn">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+
                     <div class="wallBtn openWall" data-btnName="Open" id="openWallpaperBtn">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </div>
                 </div>
             </div>
             <div class="surface subCards">
-                <div class="weatherCard card labeled rectCard" data-friendlyName="Weather" id="weatherCard">
+                <div class="weatherCard card labeled rectCard" data-resizableCard="y" data-parallaxCard="n"
+                    data-friendlyName="Weather" id="weatherCard">
                     <img src="" alt="" id="weatherIcon">
                     <div class="tdm temp" id="temp"></div>
                 </div>
-                <div class="clockCard card labeled parallax noresize squareCard" data-friendlyName="Clock"
-                    id="clockCard">
+                <div class="clockCard card labeled circleCard" data-resizableCard="n" data-parallaxCard="y"
+                    data-friendlyName="Clock" id="clockCard">
                     <div id="clockContainer">
                         <div class="clockHand" id="hour"></div>
                         <div class="clockHand" id="minute"></div>
                         <div class="clockHand" id="second"></div>
                     </div>
                 </div>
-                <div class="calendarCard card labeled parallax squareCard" data-friendlyName="Calendar"
-                    id="calendarCard">
+                <div class="calendarCard card labeled squareCard" data-resizableCard="n" data-parallaxCard="y"
+                    data-friendlyName="Calendar" id="calendarCard">
                     <div class="month"></div>
                     <div class="calenDayNo"></div>
                     <div class="calenDay"></div>
                 </div>
-                <div class="textCard card labeled actionable squareCard" data-friendlyName="Notes" id="textCard">
+                <div class="textCard card labeled actionable squareCard" data-resizableCard="y" data-parallaxCard="n"
+                    data-friendlyName="Notes" id="textCard">
                     <textarea name="notes" id="textCardTB"></textarea>
                 </div>
-                <div class="batteryCard card labeled parallax rectCard" data-friendlyName="Battery" id="batteryCard">
+                <div class="batteryCard card labeled rectCard" data-resizableCard="y" data-parallaxCard="y"
+                    data-friendlyName="Battery" id="batteryCard">
                     <div class="bcIndicator">
                         <i class="fa-solid fa-bolt chargingIcon"></i>
                         <div class="bciProg"></div>
                     </div>
                     <div class="batteryText"></div>
                 </div>
-                <div class="shortcutCard card labeled actionable squareCard" data-friendlyName="Shortcuts"
-                    id="shortcutCard">
+                <div class="shortcutCard card labeled actionable squareCard" data-resizableCard="y"
+                    data-parallaxCard="n" data-friendlyName="Shortcuts" id="shortcutCard">
                     <div class="collapseIcon">
                         <i class="fa-solid fa-table-cells-large"></i>
                     </div>
@@ -231,17 +319,6 @@
                             <i class="fa-brands fa-deviantart"></i>
                         </div>
                     </div>
-                </div>
-                <div class="emojiLocaleCard card labeled parallax circleCard dbg" data-friendlyName="Emoji"
-                    id="emojiLocaleCard">
-                    <p>❎</p>
-                </div>
-                <div class="snowDbgCard card labeled parallax squareCard dbg" data-friendlyName="Sn0w" id="snowDbgCard">
-                    <img src="resc/snow-fore.png" id="snowFore">
-                </div>
-                <div class="siriDbgCard card labeled circleCard dbg" data-friendlyName="Siri" id="siriDbgCard">
-                    <div class="layer1"></div>
-                    <div class="layer2"></div>
                 </div>
 
             </div>

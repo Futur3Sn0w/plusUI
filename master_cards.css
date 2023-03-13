@@ -8,6 +8,9 @@
 @import url('css/cards/weatherCard.css');
 @import url('css/cards/calendarCard.css');
 @import url('css/cards/textCard.css');
+@import url('css/cards/youtubeCard.css');
+@import url('css/cards/todoCard.css');
+@import url('css/cards/winsiderCard.css');
 
 :root {
     --glow-l: linear-gradient(90deg, transparent, white 80%);
@@ -143,7 +146,7 @@
     backdrop-filter: blur(100px) saturate(6);
     box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 18px;
+    border-radius: 19px !important;
 
     transition: .2s;
 }
@@ -231,7 +234,7 @@
     transform: perspective(1000px);
     transform-origin: center;
     transition-timing-function: ease;
-    transition: opacity .2s, transform .2s, outline .15s, width .2s;
+    transition: .2s;
 }
 
 .card.parallax {
@@ -247,17 +250,58 @@
     color: white;
 }
 
+.cardOptions {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+
+    position: absolute;
+    z-index: -10;
+}
+
+/* Demo cards in Rolodex */
+
 /* Context Menu stuff */
 
 .card.context-selected-card {
-    transform: translateY(-7px) !important;
+    transform: none !important;
+    margin-bottom: 10px;
+}
+
+.card.context-selected-card::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+
     outline: solid 3px white;
+    border-radius: inherit;
+
+    animation-name: selectedCardBorder;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+
+    position: absolute;
+    z-index: 100;
+}
+
+@keyframes selectedCardBorder {
+    0% {
+        opacity: .5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: .5;
+    }
 }
 
 .contextMenuDiv {
     position: absolute;
     z-index: 20;
-    width: 146px;
+    width: 160px;
     height: fit-content;
 
     opacity: 0;
@@ -281,7 +325,7 @@
     pointer-events: all;
 }
 
-.contextMenuDiv .cmItem {
+.cmItem {
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -301,7 +345,7 @@
     cursor: pointer;
 }
 
-.contextMenuDiv .cmItem i {
+.cmItem i {
     width: 18px;
     height: 20px;
     flex-shrink: 0;
@@ -315,12 +359,14 @@
     justify-content: center;
 }
 
-.contextMenuDiv .cmi-resize::after,
-.contextMenuDiv .cmi-disableCard::after {
+.cmi-resize::after,
+.cmi-disableCard::after {
     content: attr(data-btnLabel);
+    width: min-content;
+    white-space: nowrap;
 }
 
-.contextMenuDiv .cmi-disableCard::after {
+.cmi-disableCard::after {
     padding-left: 3px;
 }
 
@@ -353,10 +399,40 @@
 .cmSep {
     width: 90%;
     height: 1px;
+    margin: 2px 0;
+
     background-color: inherit;
     filter: invert(1);
     opacity: .25;
-    margin: 2px 0;
+}
+
+.cmSep.custom {
+    height: fit-content;
+    width: 100%;
+    background-color: transparent;
+    filter: invert(0);
+    opacity: 1;
+}
+
+.cmSep.custom::after {
+    content: "";
+    width: 90%;
+    height: calc(100% + 2px);
+
+    border: 1px solid black;
+    opacity: .5;
+    border-left-color: transparent;
+    border-right-color: transparent;
+
+    position: absolute;
+    top: -2px;
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+.contextMenuDiv.darkModeOn .cmSep.custom::after {
+    border: 1px solid white;
 }
 
 /* Edit mode specs */
