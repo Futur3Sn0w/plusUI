@@ -40,7 +40,11 @@ window.onload = function () {
     applyKeys();
 
     setTheme();
-    // $('.lightDark').attr('data-theme', localStorage.getItem('theme'));
+    if (localStorage.getItem('theme') == null) {
+        localStorage.setItem('theme', 'light')
+    }
+    $('.lightDark').attr('data-theme', localStorage.getItem('theme'));
+
     setDbg();
     alignShelf();
     userNameSet();
@@ -461,7 +465,9 @@ function cardSmarts() {
 // Switch theme function
 
 function setTheme() {
-    if (localStorage.getItem('theme') === 'dark') {
+    if (localStorage.getItem('theme') == 'light') {
+        $('.darkModeOn').removeClass('darkModeOn');
+    } else if (localStorage.getItem('theme') == 'dark') {
         $('.button').addClass('darkModeOn');
 
         $('.surface').addClass('darkModeOn');
@@ -472,7 +478,7 @@ function setTheme() {
         $('.wallCard').addClass('darkModeOn');
         $('.modal-about').addClass('darkModeOn');
         $('.controlPanel').addClass('darkModeOn');
-    } else if (localStorage.getItem('theme') === 'auto') {
+    } else if (localStorage.getItem('theme') == 'auto') {
         $('.darkModeOn').removeClass('darkModeOn');
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             $('.button').addClass('darkModeOn');
