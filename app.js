@@ -40,7 +40,7 @@ window.onload = function () {
     applyKeys();
 
     setTheme();
-    $('.lightDark').attr('data-theme', localStorage.getItem('theme'));
+    // $('.lightDark').attr('data-theme', localStorage.getItem('theme'));
     setDbg();
     alignShelf();
     userNameSet();
@@ -472,8 +472,6 @@ function setTheme() {
         $('.wallCard').addClass('darkModeOn');
         $('.modal-about').addClass('darkModeOn');
         $('.controlPanel').addClass('darkModeOn');
-    } else if (localStorage.getItem('theme') === 'light') {
-        $('.darkModeOn').removeClass('darkModeOn');
     } else if (localStorage.getItem('theme') === 'auto') {
         $('.darkModeOn').removeClass('darkModeOn');
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -490,6 +488,8 @@ function setTheme() {
         } else {
             $('.darkModeOn').removeClass('darkModeOn');
         }
+    } else {
+        $('.darkModeOn').removeClass('darkModeOn');
     }
 }
 
@@ -538,11 +538,11 @@ $('#userNameTextbox').on('keyup', function () {
 });
 
 function userNameSet() {
-    if (localStorage.getItem('username') == '') {
-        $('.greeting').attr('data-username', 'User');
-    } else {
+    if (!localStorage.getItem('username') == '') {
         $('.greeting').attr('data-username', localStorage.getItem('username'));
         $('#userNameTextbox').val(localStorage.getItem('username'));
+    } else {
+        localStorage.setItem('username', 'User');
     }
 }
 
@@ -796,11 +796,14 @@ $(document).mouseup(function (e) {
     }
 });
 
-// Auto update shelf width
+$(document).mouseup(function (e) {
+    var element = $(".rolodex");
+    var element2 = $(".rolodex *");
 
-// $(document).click(function () {
-//     $('.cards').css('max-width', localStorage.getItem('cardsWidth'));
-// })
+    if (!element.is(e.target) && !element2.is(e.target)) {
+        $('.rolodexCloseBtn').click();
+    }
+});
 
 // Float mode
 
