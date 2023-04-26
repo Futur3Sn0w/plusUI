@@ -1,20 +1,9 @@
 .calendarCard {
     flex-direction: column;
+}
 
+.calendarCard>* {
     font-family: GST-Med;
-}
-
-.shelf.compact .cards .calendarCard .month {
-    font-size: 10px;
-    min-height: 18px;
-}
-
-.shelf.compact .cards .calendarCard .calenDayNo {
-    font-size: 25px;
-}
-
-.shelf.compact .cards .calendarCard .calenDay {
-    display: none;
 }
 
 .calendarCard .month {

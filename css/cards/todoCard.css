@@ -1,7 +1,7 @@
 .todoCard {
     display: flex;
     box-sizing: border-box;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding-top: 4px;
     padding-bottom: 4px;
 }

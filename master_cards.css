@@ -9,6 +9,7 @@
 @import url('css/cards/calendarCard.css');
 @import url('css/cards/textCard.css');
 @import url('css/cards/youtubeCard.css');
+@import url('css/cards/youtubeBrowseCard.css');
 @import url('css/cards/todoCard.css');
 @import url('css/cards/winsiderCard.css');
 
@@ -409,9 +410,11 @@
 .cmSep.custom {
     height: fit-content;
     width: 100%;
-    background-color: transparent;
+    background-color: inherit;
     filter: invert(0);
     opacity: 1;
+
+    border-radius: 12px;
 }
 
 .cmSep.custom::after {
@@ -429,6 +432,10 @@
     left: 50%;
 
     transform: translateX(-50%);
+}
+
+.cmSep.custom .cmItem {
+    background-color: transparent;
 }
 
 .contextMenuDiv.darkModeOn .cmSep.custom::after {

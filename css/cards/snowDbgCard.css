@@ -1,4 +1,4 @@
-.snowDbgCard {
+.snowCard {
     font-size: 2em;
 
     background-image: url(../../resc/snow-back.png);
@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 
-.snowDbgCard img {
+.snowCard img {
     transform: translateZ(20px);
 
     width: 75px;

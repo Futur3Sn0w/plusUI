@@ -72,6 +72,28 @@ window.onload = function () {
 
     setTimeout("cardSmarts();", 500);
 
+    $('.card').each(function (i, e) {
+        var curCard = $(e).attr('id');
+
+        $(e).attr('data-enabled', localStorage.getItem(curCard));
+
+        if (localStorage.getItem(curCard + '-size') == 'rectCard') {
+            $(e).removeClass('squareCard').addClass('rectCard')
+        } else if (localStorage.getItem(curCard + '-size') == 'squareCard') {
+            $(e).removeClass('rectCard').addClass('squareCard')
+        }
+
+        $('.card[data-enabled=y]').removeClass('deckCard').detach().appendTo($('.subCards'));
+        $('.card[data-enabled=n]').addClass('deckCard').detach().appendTo($('.cbs1'));
+
+    })
+
+    recallCards();
+
+    // $(".subCards .card").sort(function (a, b) {
+    //     return $(a).attr("data-index") - $(b).attr("data-index");
+    // }).appendTo(".subCards");
+
     $('#topChromeAboutBtn').text($('.siteVer').text());
 
     doTheBatteryThing();
@@ -102,7 +124,6 @@ $('#cbDisablePara').on('click', function () {
 
 // Windows Insider card
 
-// Define the URL of the Windows Insider blog's RSS feed
 const rssUrl = "https://rss.app/feeds/lsUWpCbadyqdyXzI.xml";
 
 $.ajax({
@@ -165,7 +186,13 @@ function getBase64Image(img) {
 
 // 
 
-
+$('.topChrome').scroll(function () {
+    if ($(this).scrollTop() >= 1) {
+        $(".controlPanel").removeClass('expanded');
+    } else {
+        $(".controlPanel").addClass('expanded');
+    }
+});
 
 window.addEventListener('load', function () {
     this.localStorage.setItem('cardsWidth', $('.cards').css('width'));
@@ -253,6 +280,12 @@ $(document).mouseup(function (e) {
     var element5 = $(".context-selected-card");
     var element6 = $(".context-selected-card *");
 
+    saveCards();
+
+    $('.card').each(function (e) {
+        // localStorage.setItem($(e).attr('id') + '-index', $(e).attr('data-index'))
+    })
+
     if (!element.is(e.target) && !element2.is(e.target)) {
         $('.topChrome').scrollTop(800)
         $('.expandToggle').removeClass('expanded')
@@ -261,6 +294,7 @@ $(document).mouseup(function (e) {
     if (!element3.is(e.target) && !element4.is(e.target)) {
         $('.editMode').removeClass('editMode');
         $('.subCards').sortable('disable');
+
     }
 
     if (!element3.is(e.target) && !element4.is(e.target)) {
@@ -313,8 +347,12 @@ $('.card').on('contextmenu', function (e) {
 $('.cmi-resize').on('click', function () {
     if ($('.context-selected-card').hasClass('rectCard')) {
         $('.context-selected-card').addClass('squareCard').removeClass('rectCard');
+        var card = $('.context-selected-card').attr('id');
+        localStorage.setItem(card + '-size', 'squareCard')
     } else if ($('.context-selected-card').hasClass('squareCard')) {
         $('.context-selected-card').addClass('rectCard').removeClass('squareCard');
+        var card = $('.context-selected-card').attr('id');
+        localStorage.setItem(card + '-size', 'rectCard')
     }
     $('.context-selected-card').removeClass('context-selected-card')
 });
@@ -327,8 +365,19 @@ $('.cmi-editMode').click(function (e) {
 
 $('.cmi-disableCard').on('click', function () {
     $('.context-selected-card').addClass('deckCard');
+    $('.context-selected-card').attr('data-enabled', 'n');
+    // $('.context-selected-card').attr('data-index', '');
     $('.context-selected-card').appendTo($('.cbSect.cbs1'));
     $('.context-selected-card').removeClass('context-selected-card');
+
+    $(".card").each(function (i, e) {
+        var enabled = $(this).attr('data-enabled');
+        var card = $(e).attr('id');
+
+        localStorage.setItem(card, enabled);
+        // localStorage.setItem(card + '-index', $(this).attr('data-index'))
+    });
+
     $(".subCards").sortable("refresh");
 })
 
@@ -340,10 +389,18 @@ $('.cmi-disableCard').on('click', function () {
 
 $('.card').on('click', function (e) {
     if ($(this).parent().hasClass('cbs1')) {
+        $(this).attr('data-enabled', 'y');
         $(this).removeClass('deckCard').detach().appendTo($('.subCards'));
         $(".subCards").sortable("enable");
         $(".subCards").sortable("refresh");
         $(".subCards").sortable("disable");
+        $(".card").each(function (i, e) {
+            var enabled = $(e).attr('data-enabled');
+            var card = $(e).attr('id');
+
+            localStorage.setItem(card, enabled);
+            // $(this).attr('data-index', $(this).index());
+        });
     }
 })
 
@@ -351,13 +408,31 @@ $('.deckCard').on('mouseover', function (e) {
     $('.cbSect.cbs1').attr('data-currentCard', $(this).attr('data-friendlyName'));
 })
 
-$('.labeled').mouseover(function (e) {
+$('.card').mouseover(function (e) {
     $('.shelfLabel').text($(this).attr('data-friendlyName'));
 });
 
-$('.labeled').mouseout(function (e) {
+$('.card').mouseout(function (e) {
     $('.shelfLabel').text('Shelf');
 });
+
+// Save/recall card order in shelf
+
+function saveCards() {
+    var ids = $.map($('.subCards > .card'), function (child) {
+        return child.id;
+    });
+    localStorage.setItem('cardList', ids);
+}
+
+function recallCards() {
+    if (localStorage.getItem('cardList')) {
+        var cardList = localStorage.getItem('cardList').split(',');
+        $.each(cardList, function (i, card) {
+            $('#' + card).appendTo('.subCards');
+        });
+    }
+}
 
 $('.wallCard').on('hover', function () {
     $('.shelfLabel').text('Click or tap to close');
@@ -683,7 +758,7 @@ function cardContextMenu(e) {
         }
 
         $('.cmi-resize').attr('data-btnLabel', cardSize + ' ' + $('.context-selected-card').attr('data-friendlyName'));
-        $('.cmi-disableCard').attr('data-btnLabel', $('.context-selected-card').attr('data-friendlyName'));
+        // $('.cmi-disableCard').attr('data-btnLabel', $('.context-selected-card').attr('data-friendlyName'));
         $('.contextMenuDiv').addClass('show');
     }
 }
@@ -851,44 +926,44 @@ $('.rolodexCloseBtn').on('click', function () {
 
 // YTCard
 
-$('.cmi-ytcurl').on('click', function (e) {
-    var ChanID = $('#ytid').value;
+// Replace with your own API key and channel ID
+var apiKey = "AIzaSyARW9x-Dw5r_CNt_j_zFdbEGbcZmksKImg";
+var channelId = "@futur3sn0w";
 
-    $.ajax({
-        url: 'http://gdata.youtube.com/feeds/base/users/' + ChanID + '/uploads?alt=json-in-script&v=2&orderby=published&max-results=1',
-        dataType: 'jsonp',
-        success: function (data) {
-            var vidID = data.feed.entry[0].id.$t.split("video:");
-            console.log(vidID[1])
-            // YTbutton.setAttribute("onclick", "OpenWindow(\'https://www.youtube.com/embed/" + vidID[1] + "\');");
-        },
-        error: function () { console.log("Error"); }
-    });
-    var thumb = Youtube.thumb("http://www.youtube.com/watch?v=" + vidID[1], '');
+// Create a URL for the videos:list request with order parameter set to "date"
+var url = 'https://yt.lemnoslife.com/channels?handle=' + channelId;
 
-    $('.ytThumb').css('background-image', "url('" + thumb + "')")
+// Use jQuery's getJSON() method to send an AJAX request to the URL
+$.getJSON(url, function (data) {
+    // Get the video ID and thumbnail URL of the first item in the items array
+    var userID = data.items[0].id;
+    var thumbURL = 'https://yt.lemnoslife.com/videos?part=contentDetails'
+
+    console.log(userID)
+
+    // Use jQuery to create an image element with the thumbnail URL as the source attribute
+    // var thumbnail = $("<img>").attr("src", thumbnailUrl);
+
+    // Append the image element to your webpage
+    // $(".ytThumb").append(thumbnail);
 });
 
-var Youtube = (function () {
-    'use strict';
+// YTCard2 
 
-    var video, results;
+var ytsearch = "https://www.youtube.com/results?search_query=";
 
-    var getThumb = function (url, size) {
-        if (url === null) {
-            return '';
-        }
-        size = (size === null) ? 'big' : size;
-        results = url.match('[\\?&]v=([^&#]*)');
-        video = (results === null) ? url : results[1];
+$('.ytSearch').keypress(function (event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if (keycode == '13') {
+        window.open(ytsearch + $('.ytSearch').val());
+        $('.ytSearch').val('');
+    }
+});
 
-        if (size === 'small') {
-            return 'http://img.youtube.com/vi/' + video + '/2.jpg';
-        }
-        return 'http://img.youtube.com/vi/' + video + '/0.jpg';
-    };
+// FS Card
 
-    return {
-        thumb: getThumb
-    };
-}());
+// $('.snowCard').on('click', function (e) {
+//     if ($(this).parent().hasClass('subCards')) {
+//         window.open('https://futur3sn0w.me');
+//     }
+// })

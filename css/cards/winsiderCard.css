@@ -8,10 +8,32 @@
     justify-content: center;
 }
 
+.winsiderCard.rectCard {
+    flex-direction: row;
+}
+
+.winsiderCard.rectCard p {
+    color: transparent;
+}
+
+.winsiderCard.rectCard p::before {
+    content: "";
+    width: 21px;
+    height: 21px;
+
+    background-image: url("https://www.elevenforum.com/attachments/windows_insiders-png.20671/");
+    background-size: contain;
+    filter: contrast(0) brightness(10);
+    transform: translateX(-16px) translateY(4px);
+}
+
 .winsiderCard p {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    position: absolute;
+    top: 15px;
 
     padding: 0;
     margin: 0;
@@ -19,6 +41,12 @@
     font-size: 15px;
     font-family: 'Segoe UI Bold', GST-Bold;
     transform: translateY(-5px) translateZ(10px);
+
+    transition: .2s;
+}
+
+.winsiderCard.rectCard p {
+    left: 15px;
 }
 
 .winsiderCard p::before {
@@ -34,8 +62,9 @@
     align-items: center;
     justify-content: center;
     width: fit-content;
+    height: fit-content;
 
-    padding: 5px 9px;
+    padding: 5px 15px;
     transform: translateZ(20px);
 
     background-color: white;
@@ -43,9 +72,27 @@
     border-radius: 10px;
     /* flex-direction: column; */
 
+    position: absolute;
+    bottom: 10px;
+    transition: .2s;
 }
 
-.winsiderCard:hover .insChannel {
+.winsiderCard.rectCard .insChannel {
+    height: 76%;
+    aspect-ratio: 1.75/1;
+
+    padding: 0;
+    padding-top: 20px;
+
+    font-size: 20px;
+    font-family: GST-Bold;
+
+    right: 13px;
+
+    box-sizing: border-box;
+}
+
+.winsiderCard.squareCard:hover .insChannel {
     color: transparent;
     transition: .15s;
 }
@@ -59,6 +106,15 @@
     position: absolute;
     transition: .15s;
 }
+
+.winsiderCard.rectCard .insChannel::before {
+    opacity: 1;
+    top: 10px;
+
+    font-family: GST-Med;
+    font-size: 15px;
+}
+
 
 .winsiderCard:hover .insChannel::before {
     opacity: 1;

@@ -33,7 +33,7 @@
     <meta name="msapplication-config" content="favicons/browserconfig.xml?v2=3">
     <meta name="theme-color" content="#ffffff">
 
-    <title>plusUI</title>
+    <title>PlusUI</title>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
         <div class="header">
             <img src="favicons/android-chrome-192x192.png" alt="">
             <p id="title">PlusUI</p>
-            <p class="siteVer" id="ver">v1.4c</p>
+            <p class="siteVer" id="ver">v1.4.1</p>
             <div class="close" id="aboutModalClose">
                 <i class="fa-solid fa-close"></i>
             </div>
@@ -137,9 +137,9 @@
                     <label for="customBackdrops">Custom Backdrops</label>
                 </div>
             </div>
-            <div class="surface expandToggle">
-                <i class="fa-solid fa-chevron-down"></i>
-            </div>
+        </div>
+        <div class="surface expandToggle">
+            <i class="fa-solid fa-chevron-down"></i>
         </div>
 
         <div class="spacer"></div>
@@ -149,9 +149,9 @@
         <div class="cmItem cmi-resize" data-btnLabel="">
             <i id="cmi-resize-icn" class="fa-solid fa-up-right-and-down-left-from-center"></i>
         </div>
-        <div class="cmItem cmi-disableCard" data-btnLabel="">
+        <div class="cmItem cmi-disableCard">
             <i class="fa-solid fa-square-xmark"></i>
-            Hide
+            Move card to Deck
         </div>
         <div class="cmSep"></div>
         <div class="cmItem cmi-editMode" id="editCardsWallBtn">
@@ -165,21 +165,24 @@
             <i class="fa-solid fa-xmark"></i>
         </div>
         <div class="cbSect cbs1" data-sectName="Available Cards" data-currentCard="Card">
-            <div class="snowDbgCard card deckCard labeled squareCard" data-resizableCard="n" data-parallaxCard="y"
-                data-friendlyName="Sn0w" id="snowDbgCard">
+            <div class="snowCard card deckCard labeled squareCard" data-enabled="n" data-resizableCard="n"
+                data-parallaxCard="y" data-friendlyName="Sn0w" id="snowDbgCard">
                 <img src="resc/snow-fore.png" id="snowFore">
             </div>
-            <div class="siriDbgCard card deckCard labeled circleCard" data-resizableCard="n" data-parallaxCard="n"
-                data-friendlyName="Siri" id="siriDbgCard">
+            <div class="siriDbgCard card deckCard labeled circleCard" data-enabled="n" data-resizableCard="n"
+                data-parallaxCard="n" data-friendlyName="Siri" id="siriDbgCard">
                 <div class="layer1"></div>
                 <div class="layer2"></div>
             </div>
-            <div class="emojiLocaleCard card labeled circleCard" data-resizableCard="n" data-parallaxCard="y"
-                data-friendlyName="Emoji" id="emojiLocaleCard">
+            <div class="emojiLocaleCard card labeled circleCard" data-enabled="n" data-resizableCard="n"
+                data-parallaxCard="y" data-friendlyName="Emoji" id="emojiLocaleCard">
                 <p>❤️</p>
+                <div id="back">
+                    <p>❤️</p>
+                </div>
             </div>
-            <div class="youtubeCard card deckCard labeled rectCard override-hidden" data-resizableCard="n"
-                data-parallaxCard="y" data-friendlyName="YouTube" id="youtubeCard">
+            <div class="youtubeCard card deckCard labeled rectCard override-hidden" data-enabled="n"
+                data-resizableCard="n" data-parallaxCard="y" data-friendlyName="YouTube" id="youtubeCard">
                 <div class="cardOptions">
                     <div class="cmItem cmi-ytcurl">
                         <i class="fa-solid fa-user-pen"></i>
@@ -190,7 +193,25 @@
 
                 <div class="ytThumb"></div>
             </div>
-            <div class="todoCard card deckCard labeled actionable squareCard" data-resizableCard="n"
+            <div class="youtubeCard-browse card deckCard labeled rectCard" data-enabled="n" data-resizableCard="y"
+                data-parallaxCard="y" data-friendlyName="YouTube" id="youtubeCard">
+                <div class="searchCont">
+                    <i class="fa-brands fa-youtube"></i>
+                    <input type="text" class="ytSearch" placeholder="Search YouTube">
+                </div>
+                <div class="browseBtns">
+                    <a href="https://www.youtube.com" class="browseBtn bb1" data-btnLabel="Home">
+                        <i class="fa-solid fa-home"></i>
+                    </a>
+                    <a href="https://www.youtube.com/feed/subscriptions" class="browseBtn bb2" data-btnLabel="Subs">
+                        <i class="fa-solid fa-bell"></i>
+                    </a>
+                    <a href="https://www.youtube.com/feed/library" class="browseBtn bb3" data-btnLabel="Library">
+                        <i class="fa-solid fa-bookmark"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="todoCard card deckCard labeled actionable squareCard" data-enabled="n" data-resizableCard="n"
                 data-parallaxCard="n" data-friendlyName="To-Do" id="todoCard">
                 <div class="items">
                     <div class="item">
@@ -219,8 +240,8 @@
                     </div>
                 </div>
             </div>
-            <div class="winsiderCard card deckCard labeled squareCard" data-resizableCard="n" data-parallaxCard="y"
-                data-friendlyName="Insider" id="winsiderCard">
+            <div class="winsiderCard card deckCard labeled squareCard" data-enabled="n" data-resizableCard="y"
+                data-parallaxCard="y" data-friendlyName="Insider" id="winsiderCard">
                 <p>Insider</p>
                 <div class="insChannel icBuild" data-channel="Latest"></div>
                 <!-- <div class="insChannel icRP" data-channel="RP">22000</div> -->
@@ -228,8 +249,6 @@
                 <!-- <div class="insChannel icDev" data-channel="Dev">23000</div> -->
                 <!-- <div class="insChannel icCanary" data-channel="Canary">25000</div> -->
             </div>
-
-            <span>Cards here might be buggy... Click a card to add it to your Shelf.</span>
         </div>
         <div class="cbSect cbs2" data-sectName="Dev"></div>
     </div>
@@ -257,63 +276,60 @@
                 </div>
             </div>
             <div class="surface subCards">
-                <div class="weatherCard card labeled rectCard" data-resizableCard="y" data-parallaxCard="n"
-                    data-friendlyName="Weather" id="weatherCard">
-                    <img src="" alt="" id="weatherIcon">
-                    <div class="tdm temp" id="temp"></div>
+                <div class="weatherCard card labeled rectCard" data-enabled="y" data-resizableCard="y"
+                    data-parallaxCard="y" data-friendlyName="Weather" id="weatherCard">
+                    <div class="tdm temp">
+                        <div class="tdm" id="temp"></div>
+                        <img src="" alt="" id="weatherIcon">
+                    </div>
+                    <i class="fa-solid fa-sun"></i>
                 </div>
-                <div class="clockCard card labeled circleCard" data-resizableCard="n" data-parallaxCard="y"
-                    data-friendlyName="Clock" id="clockCard">
+                <div class="clockCard card labeled circleCard" data-enabled="y" data-resizableCard="n"
+                    data-parallaxCard="y" data-friendlyName="Clock" id="clockCard">
                     <div id="clockContainer">
                         <div class="clockHand" id="hour"></div>
                         <div class="clockHand" id="minute"></div>
                         <div class="clockHand" id="second"></div>
                     </div>
                 </div>
-                <div class="calendarCard card labeled squareCard" data-resizableCard="n" data-parallaxCard="y"
-                    data-friendlyName="Calendar" id="calendarCard">
+                <div class="calendarCard card labeled squareCard" data-enabled="y" data-resizableCard="n"
+                    data-parallaxCard="y" data-friendlyName="Calendar" id="calendarCard">
                     <div class="month"></div>
                     <div class="calenDayNo"></div>
                     <div class="calenDay"></div>
                 </div>
-                <div class="textCard card labeled actionable squareCard" data-resizableCard="y" data-parallaxCard="n"
-                    data-friendlyName="Notes" id="textCard">
+                <div class="textCard card labeled actionable squareCard" data-enabled="y" data-resizableCard="y"
+                    data-parallaxCard="n" data-friendlyName="Notes" id="textCard">
                     <textarea name="notes" id="textCardTB"></textarea>
                 </div>
-                <div class="batteryCard card labeled rectCard" data-resizableCard="y" data-parallaxCard="y"
-                    data-friendlyName="Battery" id="batteryCard">
+                <div class="batteryCard card labeled rectCard" data-enabled="y" data-resizableCard="y"
+                    data-parallaxCard="y" data-friendlyName="Battery" id="batteryCard">
                     <div class="bcIndicator">
                         <i class="fa-solid fa-bolt chargingIcon"></i>
                         <div class="bciProg"></div>
                     </div>
                     <div class="batteryText"></div>
                 </div>
-                <div class="shortcutCard card labeled actionable squareCard" data-resizableCard="y"
+                <div class="shortcutCard card labeled actionable squareCard" data-enabled="y" data-resizableCard="y"
                     data-parallaxCard="n" data-friendlyName="Shortcuts" id="shortcutCard">
                     <div class="collapseIcon">
-                        <i class="fa-solid fa-table-cells-large"></i>
+                        <i class="fa-solid fa-list-ul"></i>
                     </div>
                     <div class="shortcuts">
                         <div class="scApp" id="scaYouTube" data-launch="youtube" style="background-color: #ff0101;">
                             <i class="fa-brands fa-youtube"></i>
                         </div>
-                        <div class="scApp" id="scaYTM" data-launch="music.youtube" style="background-color: #ff0101;">
-                            <i class="fa-solid fa-play"></i>
-                        </div>
                         <div class="scApp" id="scaTwitter" data-launch="twitter" style="background-color: #1d9bf0;">
                             <i class="fa-brands fa-twitter"></i>
-                        </div>
-                        <div class="scApp" id="scaReddit" data-launch="reddit" style="background-color: #ee581d;">
-                            <i class="fa-brands fa-reddit"></i>
-                        </div>
-                        <div class="scApp" id="scaGoogle" data-launch="google" style="background-color: #7ba8c6;">
-                            <i class="fa-brands fa-google"></i>
                         </div>
                         <div class="scApp" id="scaGmail" data-launch="mail.google" style="background-color: #30a628;">
                             <i class="fa-solid fa-envelope"></i>
                         </div>
                         <div class="scApp" id="scaDiscord" data-launch="discord" style="background-color: #626FF3;">
                             <i class="fa-brands fa-discord"></i>
+                        </div>
+                        <div class="scApp" id="scaYTM" data-launch="music.youtube" style="background-color: #ff0101;">
+                            <i class="fa-solid fa-play"></i>
                         </div>
                         <div class="scApp" id="scaDeviantart" style="background-color: #181C21;">
                             <i class="fa-brands fa-deviantart"></i>
@@ -329,6 +345,8 @@
     <script src="tilt.jquery.js"></script>
 
     <script src="app.js"></script>
+
+    <script src="elc.js"></script>
 </body>
 
 </html>

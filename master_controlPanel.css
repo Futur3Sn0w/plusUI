@@ -24,7 +24,9 @@
 
     width: fit-content;
     height: calc(100% - 20px);
-    padding-top: 80px;
+    /* padding-top: 12px; */
+
+    border-radius: 18px 18px 0 0;
 
     display: flex;
     align-items: flex-end;
@@ -36,7 +38,7 @@
 }
 
 .topChrome .spacer {
-    height: 100vh;
+    height: calc(100vh - 110px);
     width: 20px;
 
     scroll-snap-align: start;
@@ -58,15 +60,22 @@
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
-    gap: 15px;
+    gap: 17px;
     box-sizing: border-box;
     pointer-events: none;
 
     height: fit-content;
-    width: 250px;
-    padding: 12px 17px;
+    width: 250.5px;
+    padding: 12px 17px 10px 17px;
     /* padding-bottom: 28px; */
+
+    /* border-radius: 18px 18px 0 0; */
+    /* border: none !important; */
     overflow: hidden;
+
+    /* background-color: transparent !important; */
+    /* backdrop-filter: none !important; */
+    /* box-shadow: none !important; */
 
     transition: .2s;
     user-select: none;
@@ -107,7 +116,7 @@
     opacity: .7;
 
     position: absolute;
-    bottom: 13px;
+    bottom: 10px;
 
     transition: .2s;
 }
@@ -156,7 +165,7 @@
 
 .expandToggle {
     position: absolute;
-    bottom: -112px;
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
     z-index: -10 !important;
@@ -176,7 +185,7 @@
 }
 
 .expandToggle.expanded {
-    bottom: -22px;
+    /* bottom: -22px; */
 }
 
 .expandToggle i {
@@ -206,20 +215,32 @@
     /* border-radius: 5px 5px 15px 15px; */
 
     padding: 5px 0 5px 0;
+    margin-top: 85px;
     /* pointer-events: none; */
     box-sizing: border-box;
 
+    border-top: none !important;
     scroll-snap-align: end;
-    margin-top: 10px;
 
     /* filter: blur(10px); */
     /* opacity: 0; */
+    pointer-events: none;
 
     /* transform: translateY(-80%); */
     /* transform-origin: right; */
 
     transition: transform .3s, filter .3s, opacity .3s;
     transition-timing-function: ease;
+}
+
+.controlPanel * {
+    pointer-events: none;
+    opacity: 0;
+}
+
+.controlPanel.expanded * {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .controlPanelOptGroup:first-of-type {
@@ -259,6 +280,7 @@
     border-radius: 7px;
     padding: 35px 10px 10px 10px;
     gap: 5px;
+    /* opacity: 0; */
 
     position: relative;
 }
@@ -275,15 +297,16 @@
     left: 15px;
 
     font-family: GSD-Med;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .controlPanelOptGroup .ccSubHead {
     padding-left: 5px;
 
     font-family: GST-Med;
+    font-size: 14px;
 
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .themeOpts .toggles {

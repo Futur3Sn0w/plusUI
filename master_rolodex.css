@@ -94,41 +94,22 @@
 }
 
 .cbs1 {
-    margin-bottom: 20px;
+    padding-bottom: 50px;
+    overflow-x: scroll;
 }
 
-.cbs1::after {
-    content: attr(data-currentCard);
-    font-size: 15px;
-    font-family: GST-Reg;
-    opacity: .5;
-    height: 100px;
-
-
-    padding-left: 90px;
-    display: flex;
-    align-items: flex-end;
+.cbs1 .card::before {
+    content: attr(data-friendlyName);
 
     position: absolute;
-    top: 0;
-    left: 57px;
-    transform: translateY(-69px);
-    z-index: 50;
-}
+    z-index: 20;
+    bottom: -40px;
+    font-size: 13px;
 
-.cbs1 span {
-    /* content: "Cards here might be buggy... Click a card to add it to your shelf."; */
-    font-size: 12px;
-    font-family: GST-Reg;
-    opacity: .5;
-
-    display: flex;
-    align-items: flex-end;
-
-    position: absolute;
-    bottom: -23px;
-    right: 10px;
-    z-index: 50;
+    background-color: white;
+    color: black !important;
+    border-radius: 10px;
+    padding: 5px 10px;
 }
 
 .cbs2 {
@@ -142,8 +123,8 @@
     font-size: 18px;
     font-family: GST-Med;
 
-    position: absolute;
-    top: 15px;
+    position: fixed;
+    top: 62.5px;
 }
 
 /* Card stuff */

@@ -27,14 +27,6 @@
         margin-bottom: 10px;
     }
 
-    .expandToggle:not(.expanded) {
-        transform: translateX(-50%) translateY(-30px) !important;
-    }
-
-    .topChrome:hover .expandToggle:not(.expanded) {
-        transform: translateX(-50%) translateY(0) !important;
-    }
-
     /* .wallBtn:hover::after {
         content: "";
         width: 100%;

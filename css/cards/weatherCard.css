@@ -1,10 +1,12 @@
 .weatherCard {
     background: linear-gradient(360deg, #0e63d1, rgb(92, 168, 255));
-    color: white !important;
 }
 
-.weatherCard.squareCard {
-    flex-direction: column;
+.weatherCard.squareCard .temp {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 3px;
 }
 
 .weatherCard.squareCard * {
@@ -20,11 +22,16 @@
     font-size: 20px;
 }
 
+.weatherCard.rectCard #weatherIcon {
+    z-index: 21;
+    position: absolute !important;
+    left: 1px;
+}
+
 #weatherIcon {
-    height: 80px;
+    height: 78px;
     aspect-ratio: 1/1;
 
-    transform: translateX(-6px);
     transition: .2s;
 }
 
@@ -33,4 +40,53 @@
     font-family: GST-Med;
     transform: translateX(-10px);
     transition: .2s;
+    color: white !important;
+}
+
+.weatherCard.rectCard .temp {
+    height: 76%;
+    aspect-ratio: 1.75/1;
+
+    padding: 0;
+
+    font-size: 20px;
+    font-family: GST-Bold;
+
+    position: absolute;
+    right: 13px;
+    z-index: 10;
+
+    box-sizing: border-box;
+    /* padding-left: 50px; */
+    transform: translateZ(15px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    color: black !important;
+}
+
+.weatherCard.rectCard .temp #temp {
+    position: absolute;
+    right: 20px;
+}
+
+.weatherCard>i {
+    color: white;
+    position: absolute;
+    top: 14px;
+    left: 12px;
+
+    font-size: 20px;
+}
+
+.weatherCard.squareCard>i {
+    display: none;
+}
+
+.weatherCard.rectCard>i {
+    display: flex;
 }

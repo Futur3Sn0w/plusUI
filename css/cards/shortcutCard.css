@@ -2,26 +2,47 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
 }
 
-.shortcutCard .collapseIcon {
+.shortcutCard.squareCard .collapseIcon {
     display: none;
 }
 
 .shortcutCard.rectCard .shortcuts {
-    margin-left: 22px;
-    gap: 6px;
+    gap: 0px;
+    width: fit-content;
+    height: 77%;
+
+    margin-left: auto;
+    margin-top: 0;
+    margin-right: 9px;
+
+    border-radius: 10px;
+    overflow: hidden !important;
+
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto;
+}
+
+.shortcutCard.rectCard .collapseIcon {
+    font-size: 20px;
+    display: flex;
+
+    position: absolute;
+    left: 13px;
+    top: 12px;
 }
 
 .shortcutCard .shortcuts {
-    width: 160px;
+    width: 80px;
     height: min-content;
     flex-shrink: 0;
 
-    margin-left: 98px;
+    margin-left: 18px;
     margin-right: 8px;
-    margin-top: 2px;
+    margin-top: 6px;
 
     display: flex;
     gap: 6px;
@@ -32,9 +53,17 @@
     overflow: hidden;
 }
 
+.shortcutCard.rectCard .shortcuts .scApp {
+    width: 40px;
+    height: 100%;
+    aspect-ratio: unset;
+    border-radius: 0;
+    font-size: 14px;
+}
+
 .scApp {
     width: 32px;
-    aspect-ratio: 1/1;
+    height: 32px;
 
     font-size: 16px;
 
@@ -53,6 +82,15 @@
     overflow: hidden;
 }
 
+.squareCard .shortcuts .scApp:nth-of-type(5),
+.squareCard .shortcuts .scApp:nth-of-type(6),
+.squareCard .shortcuts .scApp:nth-of-type(7),
+.squareCard .shortcuts .scApp:nth-of-type(8) {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+}
+
 .scApp::after {
     content: '';
     width: 100%;
@@ -68,10 +106,10 @@
     opacity: .35;
 }
 
-.shortcutCard.squareCard .shortcuts .scApp:nth-of-type(3),
+/* .shortcutCard.squareCard .shortcuts .scApp:nth-of-type(3),
 .shortcutCard.squareCard .shortcuts .scApp:nth-of-type(7) {
     margin-left: 5px;
-}
+} */
 
 #scaDeviantart {
     color: #00EAA6;
