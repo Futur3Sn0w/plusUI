@@ -25,14 +25,6 @@
     width: 180px;
 }
 
-.card.dbg {
-    display: none;
-}
-
-.card.dbg.enabled {
-    display: flex;
-}
-
 .displayNone {
     display: none !important;
 }

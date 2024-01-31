@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="aboutText">
-            A hybrid dashboard and digital display for large-format screens, heavily inspired by TV
+            A hybrid dashboard and digital display for large-format screens, heavily inspired by TV & VisionOS
             <!-- PlusUI is your one-stop-shop for all your information, shortcuts, notes, and more. <br>PlusUI is currently
             in beta/Open Demo, meaning it won't be super customizable yet, but it will save your changes for
             later.<br>Feel free to report bugs on
@@ -71,8 +71,8 @@
 
     <div class="backDrop" id="backDrop2"></div>
 
-    <div class="surface aboutBtn" id="topChromeAboutBtn"></div>
-    <div class="surface timeDate singleLine darkModeOn">
+    <div class="surface aboutBtn interactable-hov" id="topChromeAboutBtn"></div>
+    <div class="surface timeDate interactable-hov">
         <div class="tdm time" id="time"></div>
         <div class="ccButtons">
             <div class="ccb ccb1" label="Personalize"><i class="fa-solid fa-brush"></i></div>
@@ -94,8 +94,9 @@
             </div>
             <div class="group">
                 <div class="dcExpt interactable-hov">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <label for="">idkyet</label>
+                    <input type="checkbox" name="monoMode" id="cbMonoMode">
+                    <i class="fa-solid fa-cube"></i>
+                    <label for="">Mono Widgets</label>
                 </div>
                 <div class="dcExpt interactable-hov floatModeCardOptGroup">
                     <input type="checkbox" name="floatMode" id="cbFloatMode">
@@ -162,7 +163,7 @@
             <i id="cmi-resize-icn" class="fa-solid fa-up-right-and-down-left-from-center"></i>
         </div>
         <div class="cmItem cmi-expand interactable-hov" data-btnLabel="">
-            <i id="cmi-expand-icn" class="fa-solid fa-up-right-from-square"></i>
+            <i id="cmi-expand-icn" class="fa-solid fa-clone"></i>
             Expand
         </div>
         <div class="cmItem cmi-disableCard interactable-hov">
@@ -297,7 +298,6 @@
     <div class="shelf left">
         <div class="shelfLabel surface">Shelf</div>
         <div class="spacerA spcLeft"></div>
-        <!-- <div class="surface cards darkModeOn" id="cards"> -->
         <div class="surface subCards">
 
             <div class="weatherCard card expandable labeled rectCard" data-enabled="y" data-resizableCard="y"

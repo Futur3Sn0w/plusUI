@@ -26,6 +26,14 @@
     justify-content: center;
 }
 
+.subCards.plated .calendarCard .month {
+    background: #000;
+}
+
+.subCards:not(.darkModeOn).plated .calendarCard .month {
+    background: #fff;
+}
+
 .calendarCard .calenDayNo {
     font-size: 42px;
     height: 50px;

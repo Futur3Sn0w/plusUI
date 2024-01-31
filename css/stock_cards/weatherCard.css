@@ -35,6 +35,12 @@
     transition: .2s;
 }
 
+.subCards:not(.darkModeOn).plated .weatherCard .temp,
+.subCards:not(.darkModeOn).plated .weatherCard>i {
+    color: black;
+}
+
+
 .temp {
     font-size: 25px;
     transform: translateX(-10px);

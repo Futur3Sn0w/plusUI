@@ -40,6 +40,10 @@
     justify-content: center;
 }
 
+.subCards.plated .emojiLocaleCard div p:last-of-type {
+    opacity: 0;
+}
+
 .emojiLocaleCard:active p:first-of-type {
     opacity: 0;
 }

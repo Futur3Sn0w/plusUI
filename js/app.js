@@ -60,6 +60,11 @@ window.onload = function () {
         $('#cbFloatMode').prop('checked', true);
     }
 
+    if (localStorage.getItem('monoCards') == 'true') {
+        $('.subCards').addClass('plated');
+        $('#cbMonoMode').prop('checked', true);
+    }
+
     $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
     $('body').css('background-image', "url(" + backdropImg + ")");
     refreshWall();

@@ -53,42 +53,31 @@ let touchstartX = 0
 let touchendX = 0
 
 function checkDirectionWC() {
-    if ($('.shelf').hasClass('float')) {
-    } else {
-        if (touchendX < touchstartX) {
-            // left swipe
-            if ($('.shelf').hasClass('right')) {
-                if ($('.cards').hasClass('collapsed') == 0) {
-                    $('#saoL-radio').click()
-                } else {
-                    $('#saoC-radio').click()
-                }
-            } else if ($('.shelf').hasClass('center')) {
-                $('#saoL-radio').click()
-            }
-        } else if (touchendX > touchstartX) {
-            // right swipe
-            if ($('.shelf').hasClass('left')) {
-                if ($('.cards').hasClass('collapsed') == 0) {
-                    $('#saoR-radio').click()
-                } else {
-                    $('#saoC-radio').click()
-                }
-            } else if ($('.shelf').hasClass('center')) {
-                $('#saoR-radio').click()
-            }
+    if (touchendX < touchstartX) {
+        // left swipe
+        if ($('.shelf').hasClass('right')) {
+            $('#saoC-radio').click()
+        } else if ($('.shelf').hasClass('center')) {
+            $('#saoL-radio').click()
+        }
+    } else if (touchendX > touchstartX) {
+        // right swipe
+        if ($('.shelf').hasClass('left')) {
+            $('#saoC-radio').click()
+        } else if ($('.shelf').hasClass('center')) {
+            $('#saoR-radio').click()
         }
     }
-
 }
 
-// document.querySelector('.subCards').addEventListener('touchstart', e => {
+// document.querySelector('.shelf:not(.subCards)').addEventListener('touchstart', e => {
 //     touchstartX = e.changedTouches[0].screenX
 // })
 
-// document.querySelector('.subCards').addEventListener('touchend', e => {
+// document.querySelector('.shelf:not(.subCards)').addEventListener('touchend', e => {
 //     touchendX = e.changedTouches[0].screenX
 //     checkDirectionWC()
+//     e.stopPropagation();
 // })
 
 //

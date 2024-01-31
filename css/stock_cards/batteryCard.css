@@ -1,6 +1,6 @@
 .batteryCard {
     background: linear-gradient(360deg, #47ad0c, #59e754);
-    color: white !important;
+    color: white;
     font-size: 22px;
     font-weight: 600;
 }
@@ -36,6 +36,10 @@
     transform: scale(0.7) translateZ(15px);
 }
 
+.subCards:not(.darkModeOn).plated .batteryCard .bcIndicator {
+    border: 3px solid #222222;
+}
+
 .bcIndicator::after {
     content: "";
     width: 7px;
@@ -46,6 +50,11 @@
 
     position: absolute;
     right: -8px;
+}
+
+.subCards:not(.darkModeOn).plated .batteryCard .bcIndicator::after,
+.subCards:not(.darkModeOn).plated .batteryCard .bciProg {
+    background-color: #222;
 }
 
 .bciProg {

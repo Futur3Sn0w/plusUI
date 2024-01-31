@@ -235,7 +235,7 @@ body:has(.shelf.float) .shelfBack {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.35);
     outline: solid 3px transparent;
 
     position: relative;
@@ -256,6 +256,18 @@ body:has(.shelf.float) .shelfBack {
     padding-right: 0 !important;
     margin-left: -10px !important;
     margin-right: -10px !important;
+}
+
+.plated .card {
+    background: var(--section-l);
+    background-color: var(--section-l);
+    color: black;
+}
+
+.plated.darkModeOn .card {
+    background: var(--section-d);
+    background-color: var(--section-d);
+    color: white;
 }
 
 .card.md {

@@ -102,7 +102,7 @@ $('.cmi-disableCard').on('click', function () {
     $('.shelfLabel').addClass('show').text(friendlyName + " removed");
     setTimeout(() => {
         $('.shelfLabel').removeClass('show')
-    }, 10000);
+    }, 6000);
 
     $(".subCards").sortable("refresh");
     dockRadi();
@@ -252,4 +252,16 @@ $('#cbFloatMode').click(function () {
         localStorage.setItem('float', 'false');
     }
     alignShelfLabel();
+});
+
+// Monochrome mode
+
+$('#cbMonoMode').click(function () {
+    if ($(this).is(':checked')) {
+        $('.subCards').addClass('plated');
+        localStorage.setItem('monoCards', 'true');
+    } else {
+        $('.subCards').removeClass('plated');
+        localStorage.setItem('monoCards', 'false');
+    }
 });

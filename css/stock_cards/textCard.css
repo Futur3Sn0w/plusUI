@@ -3,12 +3,12 @@
 
     font-weight: normal;
     position: relative;
-    background-color: white !important;
+    background-color: white;
 }
 
 .shelf.darkModeOn .subCards .textCard {
-    background-color: #222222 !important;
-    color: white !important;
+    background-color: #222222;
+    color: white;
 }
 
 .textCard.expanded::before {
@@ -43,6 +43,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.subCards.plated .textCard::before {
+    background: #000;
+}
+
+.subCards:not(.darkModeOn).plated .textCard::before {
+    background: #fff;
 }
 
 .textCard.rectCard textarea {

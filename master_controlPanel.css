@@ -6,7 +6,7 @@
     --section-inputBorder-l: rgba(0, 0, 0, .25);
     --surface-button-l: rgba(0, 0, 0, .15);
 
-    --section-d: rgba(0, 0, 0, 0.6);
+    --section-d: rgba(34, 34, 34, 0.6);
     --section-input-d: rgba(255, 255, 255, 0.2);
     --section-inputBorder-d: rgba(0, 0, 0, .2);
     --surface-button-d: rgba(255, 255, 255, 0.15);
@@ -46,6 +46,7 @@
 .timeDate.ccOpen {
     height: 50px;
     gap: 3px;
+    transform: none !important;
     /* padding-right: 3px; */
 }
 
@@ -260,7 +261,6 @@
 
     background-color: rgba(255, 255, 255, .25);
     user-select: none;
-    cursor: pointer;
 
     transition: .15s;
 }
@@ -331,7 +331,7 @@
     color: inherit;
     border-radius: 19px;
     padding: 10px;
-    padding-top: 35px;
+    /* padding-top: 35px; */
     margin: 0 10px;
 
     opacity: 0;
@@ -357,10 +357,11 @@
 .controlPanelOptGroup::before {
     content: attr(data-sect);
 
-    position: absolute;
     top: 10px;
-    left: 10px;
-    width: fit-content;
+    width: 100%;
+    padding: 5px 0;
+
+    text-align: center;
 
     display: flex;
     align-items: center;
@@ -379,8 +380,10 @@
 }
 
 .controlPanelOptGroup .ccSubHead {
-    padding-left: 7px;
-    margin-right: auto;
+    /* padding-left: 1px; */
+    /* margin-right: auto; */
+    width: 100%;
+    text-align: center;
 
     font-weight: 500;
     font-size: 14px;
@@ -474,7 +477,7 @@
 
     color: inherit;
     font-size: 12px;
-    border-radius: 15px;
+    border-radius: 50px;
     background-color: var(--section-input-l);
     padding: 3px;
 
@@ -573,12 +576,13 @@
 }
 
 .sectLabel {
-    width: fit-content;
+    width: 100%;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+    text-align: center;
     user-select: none;
     font-weight: 500;
     font-size: 14px;
