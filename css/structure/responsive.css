@@ -1,7 +1,3 @@
-.wallCard:hover .wallBtns {
-    opacity: 1;
-}
-
 /* Only MOUSE and TOUCHPAD */
 @media (hover: hover) and (pointer: fine) {
 
@@ -10,22 +6,10 @@
         transform: scale(.8) !important;
     }
 
-    .shelf:hover .shelfLabel {
-        opacity: 1;
-    }
-
-    .shelf:hover .shelfLabel::after {
-        width: 100%;
-    }
-
-    .card:active {
-        transform: scale(.9) !important;
-    }
-
-    .subCards .card:not(.parallax):not(.actionable):hover,
-    .subCards .card.parallax-disabled:hover {
+    /* .card:not(.parallax):not(.actionable):hover,
+    .card.parallax-disabled:hover {
         margin-bottom: 10px;
-    }
+    } */
 
     /* .wallBtn:hover::after {
         content: "";
@@ -40,11 +24,6 @@
 
 @media (hover: none) and (pointer: coarse) {
 
-    html,
-    body {
-        overscroll-behavior-x: none;
-    }
-
     .card {
         transition: .1s;
     }
@@ -53,30 +32,11 @@
         transform: scale(.85) !important;
     }
 
-    .wallCard::after {
-        opacity: 1 !important;
-        filter: none !important;
-        bottom: 40px !important;
-        opacity: .75 !important;
-    }
-
-    .shelfLabel {
-        opacity: 1 !important;
-        color: transparent !important;
-    }
-
-    .wallCard::after {
-        transform: scale(1.5) translateY(-15px) translateX(8px) !important;
-        font-family: GST-Med;
-        opacity: 1 !important;
-        filter: blur(0) !important;
-    }
-
     .context-tooltip {
         color: white;
         text-transform: none !important;
         font-size: 11px;
-        font-family: GST-Med;
+        font-weight: 500;
 
         opacity: .6;
 
@@ -84,10 +44,6 @@
         z-index: 11;
         bottom: 40px;
         left: 20px;
-    }
-
-    .wallCard .wallBtns {
-        opacity: 1 !important;
     }
 
     .cmItem:active {

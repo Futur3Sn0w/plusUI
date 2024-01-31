@@ -11,15 +11,16 @@
     <link rel="stylesheet" href="master_modal.css">
     <link rel="stylesheet" href="master_controlPanel.css">
     <link rel="stylesheet" href="master_rolodex.css">
+    <link rel="stylesheet" href="master_expandable.css">
 
     <script src="https://kit.fontawesome.com/a1fc6f0f3a.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!-- <script src="jquery.mobile.custom.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="jquery-ui.min.css">
-    <!-- <script src="external/jquery/jquery.js"></script> -->
-    <script src="jquery-ui.min.js"></script>
+    <script src="jqui/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="jqui/jquery-ui.css">
+    <link rel="stylesheet" href="jqui/jquery-ui.min.css">
+    <link rel="stylesheet" href="jqui/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="jqui/jquery-ui.theme.min.css">
 
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png?v2=3">
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png?v2=3">
@@ -37,20 +38,23 @@
 </head>
 
 <body>
+    <div class="loader"></div>
+
     <div class="surface modal modal-about">
         <div class="header">
             <img src="favicons/android-chrome-192x192.png" alt="">
-            <p id="title">PlusUI</p>
-            <p class="siteVer" id="ver">v1.4.1</p>
+            <p id="title">(PlusUI)</p>
+            <p class="siteVer" id="ver">vNext</p>
             <div class="close" id="aboutModalClose">
                 <i class="fa-solid fa-close"></i>
             </div>
         </div>
         <div class="aboutText">
-            PlusUI is your one-stop-shop for all your information, shortcuts, notes, and more. <br>PlusUI is currently
+            A hybrid dashboard and digital display for large-format screens, heavily inspired by TV
+            <!-- PlusUI is your one-stop-shop for all your information, shortcuts, notes, and more. <br>PlusUI is currently
             in beta/Open Demo, meaning it won't be super customizable yet, but it will save your changes for
             later.<br>Feel free to report bugs on
-            the project's GitHub (link below)!
+            the project's GitHub (link below)! -->
         </div>
         <div class="aboutLinks">
             <div class="alink" onclick="window.open('https://www.github.com/')">
@@ -66,123 +70,150 @@
     </div>
 
     <div class="backDrop" id="backDrop2"></div>
-    <img class="customBackdrop hidden" src="" id="customBackdrop"></img>
 
     <div class="surface aboutBtn" id="topChromeAboutBtn"></div>
-    <div class="surface timeDate darkModeOn">
-        <div class="td">
-            <div class="tdm time" id="time"></div>
-            <div class="tdm date" id="date"></div>
+    <div class="surface timeDate singleLine darkModeOn">
+        <div class="tdm time" id="time"></div>
+        <div class="ccButtons">
+            <div class="ccb ccb1" label="Personalize"><i class="fa-solid fa-brush"></i></div>
+            <div class="ccb ccb2" label="Backdrop"><i class="fa-solid fa-image"></i></div>
+            <!-- <div class="ccb ccb3" label="User"><i class="fa-solid fa-user"></i></div> -->
+            <div class="ccb ccb4" label="Labs"><i class="fa-solid fa-flask"></i></div>
         </div>
-        <div class="greeting hidden" data-username="User"></div>
+        <div class="tdSep"></div>
+        <div class="ccb rolodexOpen" data-btnName="Cards" id="rolodexOpenBtn" label="Cards">
+            <i class="fa-solid fa-plus"></i>
+        </div>
     </div>
+    <div class="surface greeting hidden" data-username="User"></div>
 
-    <div class="topChrome">
-        <div class="surface controlPanel">
-            <div class="controlPanelOptGroup themeOpts" data-sect="Personalize">
-                <div class="toggles">
-                    <div class="button lightDark btnCont" data-theme="Auto">
-                        <div class="darkModeBtn darkModeOn btnInner" data-btnLabel="Theme:">
-                            <i class="fa-solid fa-circle-half-stroke"></i>
-                        </div>
-                    </div>
-                    <div class="dcExpt floatModeCardOptGroup">
-                        <input type="checkbox" name="floatMode" id="cbFloatMode">
-                        <label for="floatMode">Dock Shelf</label>
-                    </div>
-                    <div class="dcExpt disableParaOptGroup">
-                        <input type="checkbox" name="disablePara" id="cbDisablePara" checked>
-                        <label for="disablePara">Parallax effects</label>
-                    </div>
+    <div class="controlPanel">
+        <div class="surface controlPanelOptGroup themeOpts" data-sect="Appearance">
+            <div class="lightDark btnCont interactable-hov" data-theme="Auto">
+                <i class="fa-solid fa-circle-half-stroke"></i>
+            </div>
+            <div class="group">
+                <div class="dcExpt interactable-hov">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <label for="">idkyet</label>
                 </div>
-                <div class="ccSubHead">Backdrop</div>
-                <div class="backdropCont">
-                    <div class="dcExpt keyTBOptGroup solo">
-                        <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
-                    </div>
-                    <div class="dcExpt uploadBtn">
-                        <input type="file" id="uploadInput" onchange="customWall(this)">
-                        <i class="fa-solid fa-ellipsis"></i>
-                    </div>
-                </div>
-
-                <div class="ccSubHead shPlacement">Shelf Placement</div>
-                <div class="shelfAlign" data-optName="Alignment">
-                    <div class="sa-opt saoL">
-                        <input class="sao-radio" type="radio" name="shelfAlign" id="saoL-radio" checked>
-                        <label for="saoL-radio">Left</label>
-                    </div>
-                    <div class="sa-opt saoC">
-                        <input class="sao-radio" type="radio" name="shelfAlign" id="saoC-radio">
-                        <label for="saoC-radio">Center</label>
-                    </div>
-                    <div class="sa-opt saoR">
-                        <input class="sao-radio" type="radio" name="shelfAlign" id="saoR-radio">
-                        <label for="saoR-radio">Right</label>
-                    </div>
+                <div class="dcExpt interactable-hov floatModeCardOptGroup">
+                    <input type="checkbox" name="floatMode" id="cbFloatMode">
+                    <i class="fa-solid fa-diagram-next"></i>
+                    <label for="floatMode">Floating shelf</label>
                 </div>
             </div>
-            <div class="controlPanelOptGroup shelfOpts" data-sect="About You">
-                <div class="dcExpt userName">
-                    <input class="keyTB" type="text" id="userNameTextbox" onchange="" placeholder="Your name">
+            <div class="shelfAlign" data-optName="Alignment">
+                <div class="sa-opt saoL interactable-hov">
+                    <input class="sao-radio" type="radio" name="shelfAlign" id="saoL-radio" checked>
+                    <label for="saoL-radio">Left</label>
+                </div>
+                <div class="sa-opt saoC interactable-hov">
+                    <input class="sao-radio" type="radio" name="shelfAlign" id="saoC-radio">
+                    <label for="saoC-radio">Center</label>
+                </div>
+                <div class="sa-opt saoR interactable-hov">
+                    <input class="sao-radio" type="radio" name="shelfAlign" id="saoR-radio">
+                    <label for="saoR-radio">Right</label>
                 </div>
             </div>
-            <div class="controlPanelOptGroup debugCards" data-sect="Experiments">
-                <div class="dcExpt debugCardOptGroup">
-                    <input type="checkbox" name="debugCards" id="cbDebugCards">
-                    <label for="debugCards">Codename: Rolodex</label>
+
+            <div class="ccSep"></div>
+            <div class="sectLabel userNameSL">User info</div>
+            <div class="dcExpt userName interactable-hov">
+                <input class="keyTB" type="text" id="userNameTextbox" onchange="" placeholder="Your name">
+            </div>
+        </div>
+
+        <div class="surface controlPanelOptGroup backdropOpts" data-sect="Backdrop">
+            <div class="backdropCont">
+                <div class="wallList">
+                    <!-- <div class="prevWall"></div> -->
                 </div>
-                <div class="dcExpt customBackdropOptGroup">
+                <div class="wallBtns">
+                    <div class="dcExpt interactable-hov openWall" data-btnName="Open" id="openWallpaperBtn">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+
+                    <div class="dcExpt interactable-hov refresh" data-btnName="Refresh" id="refreshWallBtn">
+                        <i class="fa-solid fa-refresh"></i>
+                    </div>
+                </div>
+                <div class="dcExpt keyTBOptGroup solo interactable-hov">
+                    <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="surface controlPanelOptGroup shelfOpts" data-sect="About You">
+            
+        </div> -->
+        <div class="surface controlPanelOptGroup debugCards" data-sect="Labs">
+            <p class="tip">Looks like there aren't any labs available... Check again later!</p>
+            <!-- <div class="dcExpt customBackdropOptGroup">
                     <input type="checkbox" name="customBackdrops" id="cbCustomBackdrops">
                     <label for="customBackdrops">Custom Backdrops</label>
-                </div>
-            </div>
+                </div> -->
         </div>
-        <div class="surface expandToggle">
-            <i class="fa-solid fa-chevron-down"></i>
-        </div>
-
-        <div class="spacer"></div>
     </div>
 
     <div class="surface contextMenuDiv">
-        <div class="cmItem cmi-resize" data-btnLabel="">
+        <div class="cmItem cmi-resize interactable-hov" data-btnLabel="">
             <i id="cmi-resize-icn" class="fa-solid fa-up-right-and-down-left-from-center"></i>
         </div>
-        <div class="cmItem cmi-disableCard">
+        <div class="cmItem cmi-expand interactable-hov" data-btnLabel="">
+            <i id="cmi-expand-icn" class="fa-solid fa-up-right-from-square"></i>
+            Expand
+        </div>
+        <div class="cmItem cmi-disableCard interactable-hov">
             <i class="fa-solid fa-square-xmark"></i>
             Move card to Deck
         </div>
         <div class="cmSep"></div>
-        <div class="cmItem cmi-editMode" id="editCardsWallBtn">
+        <div class="cmItem cmi-editMode interactable-hov" id="editCardsWallBtn">
             <i class="fa-solid fa-pencil"></i>
             Edit cards
         </div>
     </div>
 
-    <div class="surface rolodex" data-sectName="cardDeck">
+    <!-- <div class="surface expandableWindow">
+        <div class="return">
+            <i class="fa-solid fa-down-left-and-up-right-to-center"></i>
+        </div>
+        <div class="widget"></div>
+    </div> -->
+
+    <div class="surface rolodex" data-sectName="Card Deck">
         <div class="rolodexCloseBtn">
             <i class="fa-solid fa-xmark"></i>
         </div>
+
+        <div class="header"></div>
+
         <div class="cbSect cbs1" data-sectName="Available Cards" data-currentCard="Card">
             <div class="snowCard card deckCard labeled squareCard" data-enabled="n" data-resizableCard="n"
-                data-parallaxCard="y" data-friendlyName="Sn0w" id="snowDbgCard">
-                <img src="resc/snow-fore.png" id="snowFore">
+                data-parallaxCard="y" data-friendlyName="Sn0w"
+                data-cardDesc="[DEBUG] A display of various card API demos including parallax, transparency, and onClick action"
+                id="snowDbgCard">
+                <img src="resc/snow-fore.svg" id="snowFore">
             </div>
             <div class="siriDbgCard card deckCard labeled circleCard" data-enabled="n" data-resizableCard="n"
-                data-parallaxCard="n" data-friendlyName="Siri" id="siriDbgCard">
+                data-parallaxCard="n" data-friendlyName="Assistant"
+                data-cardDesc="[DEBUG] A card API demo featuring a Siri-like animated loop" id="siriDbgCard">
                 <div class="layer1"></div>
                 <div class="layer2"></div>
             </div>
             <div class="emojiLocaleCard card labeled circleCard" data-enabled="n" data-resizableCard="n"
-                data-parallaxCard="y" data-friendlyName="Emoji" id="emojiLocaleCard">
+                data-parallaxCard="y" data-friendlyName="Emoji"
+                data-cardDesc="Demo card with hundreds of emoji, click to refresh manually, or wait for the auto refresh"
+                id="emojiLocaleCard">
                 <p>❤️</p>
                 <div id="back">
                     <p>❤️</p>
                 </div>
             </div>
-            <div class="youtubeCard card deckCard labeled rectCard override-hidden" data-enabled="n"
-                data-resizableCard="n" data-parallaxCard="y" data-friendlyName="YouTube" id="youtubeCard">
+            <!-- <div class="youtubeCard card deckCard labeled rectCard override-hidden" data-enabled="n"
+                data-resizableCard="n" data-parallaxCard="n" data-friendlyName="YouTube" id="youtubeCard">
                 <div class="cardOptions">
                     <div class="cmItem cmi-ytcurl">
                         <i class="fa-solid fa-user-pen"></i>
@@ -192,9 +223,11 @@
                 <i class="fa-brands fa-youtube"></i>
 
                 <div class="ytThumb"></div>
-            </div>
-            <div class="youtubeCard-browse card deckCard labeled rectCard" data-enabled="n" data-resizableCard="y"
-                data-parallaxCard="y" data-friendlyName="YouTube" id="youtubeCard">
+            </div> -->
+            <div class="youtubeCard-browse expandable card deckCard labeled rectCard" data-enabled="n"
+                data-resizableCard="y" data-parallaxCard="n" data-friendlyName="YouTube"
+                data-cardDesc="Instantly search YouTube from the search bar, or access various YouTube places"
+                id="youtubeCard">
                 <div class="searchCont">
                     <i class="fa-brands fa-youtube"></i>
                     <input type="text" class="ytSearch" placeholder="Search YouTube">
@@ -212,7 +245,8 @@
                 </div>
             </div>
             <div class="todoCard card deckCard labeled actionable squareCard" data-enabled="n" data-resizableCard="n"
-                data-parallaxCard="n" data-friendlyName="To-Do" id="todoCard">
+                data-parallaxCard="n" data-friendlyName="To-Do"
+                data-cardDesc="Keep a customizable checklist of up to 6 items" id="todoCard">
                 <div class="items">
                     <div class="item">
                         <input type="checkbox" id="">
@@ -240,113 +274,124 @@
                     </div>
                 </div>
             </div>
-            <div class="winsiderCard card deckCard labeled squareCard" data-enabled="n" data-resizableCard="y"
-                data-parallaxCard="y" data-friendlyName="Insider" id="winsiderCard">
-                <p>Insider</p>
-                <div class="insChannel icBuild" data-channel="Latest"></div>
-                <!-- <div class="insChannel icRP" data-channel="RP">22000</div> -->
-                <!-- <div class="insChannel icBeta" data-channel="Beta">22100</div> -->
-                <!-- <div class="insChannel icDev" data-channel="Dev">23000</div> -->
-                <!-- <div class="insChannel icCanary" data-channel="Canary">25000</div> -->
-            </div>
+            <!-- <div class="winsiderCard card deckCard labeled squareCard" data-enabled="n" data-resizableCard="y" data-parallaxCard="y" data-friendlyName="Insider" data-cardDesc="Always know the latest Insider build" id="winsiderCard">
+            <p>Insider</p>
+            <div class="insChannel icBuild" data-channel="Latest"></div>
+            <div class="insChannel icRP" data-channel="RP">22000</div>
+            <div class="insChannel icBeta" data-channel="Beta">22100</div>
+            <div class="insChannel icDev" data-channel="Dev">23000</div>
+            <div class="insChannel icCanary" data-channel="Canary">25000</div>
+            </div> -->
         </div>
-        <div class="cbSect cbs2" data-sectName="Dev"></div>
+        <!-- <div class="cbSect cbs2" data-sectName="Dev"></div> -->
+        <div class="moveCtrls">
+            <div class="mvCtrl left"> <i class="fa-solid fa-chevron-left"></i> </div>
+            <div class="mvCtrl right"> <i class="fa-solid fa-chevron-right"></i> </div>
+        </div>
+        <div class="addBtn">Add<i class="fa-solid fa-plus"></i></div>
+        <!-- <div class="rssBtn disabled">Add RSS<i class="fa-solid fa-rss"></i></div> -->
     </div>
 
+    <div class="shelfBack"></div>
+
     <div class="shelf left">
+        <div class="shelfLabel surface">Shelf</div>
         <div class="spacerA spcLeft"></div>
-        <div class="surface cards darkModeOn" id="cards">
-            <div class="wallCard active" id="wallCard" data-wallSet="Random">
-                <div class="context-tooltip" data-touch="Click " data-state="to collapse"></div>
+        <!-- <div class="surface cards darkModeOn" id="cards"> -->
+        <div class="surface subCards">
 
-                <div class="shelfLabel">Shelf</div>
+            <div class="weatherCard card expandable labeled rectCard" data-enabled="y" data-resizableCard="y"
+                data-parallaxCard="y" data-friendlyName="Weather" data-cardDesc="Current temperature in local units"
+                id="weatherCard">
+                <div class="tdm temp">
+                    <div class="tdm" id="temp"></div>
+                    <img src="" alt="" id="weatherIcon">
+                </div>
+                <!-- <i class="fa-solid fa-sun"></i> -->
+            </div>
+            <div class="clockCard card labeled circleCard" data-enabled="y" data-resizableCard="y" data-parallaxCard="y"
+                data-friendlyName="Clock" data-cardDesc="A simple analog clock" id="clockCard">
+                <div id="clockContainer">
+                    <div class="clockHand" id="hour"></div>
+                    <div class="clockHand" id="minute"></div>
+                    <div class="clockHand" id="second"></div>
+                </div>
+            </div>
+            <div class="calendarCard card expandable labeled squareCard" data-enabled="y" data-resizableCard="n"
+                data-parallaxCard="y" data-friendlyName="Calendar" data-cardDesc="Day of the week and month"
+                id="calendarCard">
+                <div class="month"></div>
+                <div class="calenDayNo"></div>
+                <div class="calenDay"></div>
 
-                <div class="wallBtns">
-                    <div class="wallBtn refresh" data-btnName="Refresh" id="refreshWallBtn">
-                        <i class="fa-solid fa-refresh"></i>
+
+                <div class="expView"></div>
+
+            </div>
+            <div class="textCard card labeled expandable actionable squareCard" data-enabled="y" data-resizableCard="y"
+                data-parallaxCard="n" data-friendlyName="Notes"
+                data-cardDesc="A customizable text block (saves automatically)" id="textCard">
+                <textarea name="notes" id="textCardTB"></textarea>
+            </div>
+            <div class="batteryCard card labeled rectCard" data-enabled="y" data-resizableCard="y" data-parallaxCard="y"
+                data-friendlyName="Battery" data-cardDesc="Keep an eye on your device's battery" id="batteryCard">
+                <div class="bcIndicator">
+                    <i class="fa-solid fa-bolt chargingIcon"></i>
+                    <div class="bciProg"></div>
+                </div>
+                <div class="batteryText"></div>
+            </div>
+            <div class="shortcutCard card expandable labeled actionable squareCard" data-enabled="y"
+                data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Shortcuts"
+                data-cardDesc="Shortcuts to your favorite places on the web" id="shortcutCard">
+                <div class="cardOptions">
+                    <div class="cmItem"></div>
+                </div>
+                <div class="collapseIcon">
+                    <i class="fa-solid fa-list-ul"></i>
+                </div>
+                <div class="shortcuts">
+                    <div class="scApp" id="scaDeviantart" data-fn="DeviantArt" data-launch="deviantart"
+                        style="background-color: #181C21; color: #30a628;">
+                        <i class="fa-brands fa-deviantart"></i>
                     </div>
-
-                    <div class="wallBtn rolodexOpen" data-btnName="Cards" id="rolodexOpenBtn">
-                        <i class="fa-solid fa-plus"></i>
+                    <div class="scApp" id="scaFeedly" data-fn="Feedly" data-launch="feedly" style="color: #30a628;">
+                        <i class="fa-solid fa-rss"></i>
                     </div>
-
-                    <div class="wallBtn openWall" data-btnName="Open" id="openWallpaperBtn">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <div class="scApp" id="scaReddit" data-fn="Reddit" data-launch="reddit" style="color: #ff0101;">
+                        <i class="fa-brands fa-reddit"></i>
+                    </div>
+                    <div class="scApp" id="scaTwitter" data-fn="Twitter" data-launch="twitter" style="color: #1d9bf0;">
+                        <i class="fa-brands fa-twitter"></i>
+                    </div>
+                    <div class="scApp" id="scaGmail" data-fn="Gmail" data-launch="mail.google" style="color: #30a628;">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="scApp" id="scaDiscord" data-fn="Discord" data-launch="discord" style="color: #626FF3;">
+                        <i class="fa-brands fa-discord"></i>
+                    </div>
+                    <div class="scApp" id="scaYTM" data-fn="YTM" data-launch="music.youtube" style="color: #ff0101;">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="scApp" id="scaYouTube" data-fn="YouTube" data-launch="youtube" style="color: #ff0101;">
+                        <i class="fa-brands fa-youtube"></i>
                     </div>
                 </div>
             </div>
-            <div class="surface subCards">
-                <div class="weatherCard card labeled rectCard" data-enabled="y" data-resizableCard="y"
-                    data-parallaxCard="y" data-friendlyName="Weather" id="weatherCard">
-                    <div class="tdm temp">
-                        <div class="tdm" id="temp"></div>
-                        <img src="" alt="" id="weatherIcon">
-                    </div>
-                    <i class="fa-solid fa-sun"></i>
-                </div>
-                <div class="clockCard card labeled circleCard" data-enabled="y" data-resizableCard="n"
-                    data-parallaxCard="y" data-friendlyName="Clock" id="clockCard">
-                    <div id="clockContainer">
-                        <div class="clockHand" id="hour"></div>
-                        <div class="clockHand" id="minute"></div>
-                        <div class="clockHand" id="second"></div>
-                    </div>
-                </div>
-                <div class="calendarCard card labeled squareCard" data-enabled="y" data-resizableCard="n"
-                    data-parallaxCard="y" data-friendlyName="Calendar" id="calendarCard">
-                    <div class="month"></div>
-                    <div class="calenDayNo"></div>
-                    <div class="calenDay"></div>
-                </div>
-                <div class="textCard card labeled actionable squareCard" data-enabled="y" data-resizableCard="y"
-                    data-parallaxCard="n" data-friendlyName="Notes" id="textCard">
-                    <textarea name="notes" id="textCardTB"></textarea>
-                </div>
-                <div class="batteryCard card labeled rectCard" data-enabled="y" data-resizableCard="y"
-                    data-parallaxCard="y" data-friendlyName="Battery" id="batteryCard">
-                    <div class="bcIndicator">
-                        <i class="fa-solid fa-bolt chargingIcon"></i>
-                        <div class="bciProg"></div>
-                    </div>
-                    <div class="batteryText"></div>
-                </div>
-                <div class="shortcutCard card labeled actionable squareCard" data-enabled="y" data-resizableCard="y"
-                    data-parallaxCard="n" data-friendlyName="Shortcuts" id="shortcutCard">
-                    <div class="collapseIcon">
-                        <i class="fa-solid fa-list-ul"></i>
-                    </div>
-                    <div class="shortcuts">
-                        <div class="scApp" id="scaYouTube" data-launch="youtube" style="background-color: #ff0101;">
-                            <i class="fa-brands fa-youtube"></i>
-                        </div>
-                        <div class="scApp" id="scaTwitter" data-launch="twitter" style="background-color: #1d9bf0;">
-                            <i class="fa-brands fa-twitter"></i>
-                        </div>
-                        <div class="scApp" id="scaGmail" data-launch="mail.google" style="background-color: #30a628;">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
-                        <div class="scApp" id="scaDiscord" data-launch="discord" style="background-color: #626FF3;">
-                            <i class="fa-brands fa-discord"></i>
-                        </div>
-                        <div class="scApp" id="scaYTM" data-launch="music.youtube" style="background-color: #ff0101;">
-                            <i class="fa-solid fa-play"></i>
-                        </div>
-                        <div class="scApp" id="scaDeviantart" style="background-color: #181C21;">
-                            <i class="fa-brands fa-deviantart"></i>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
         </div>
+        <!-- </div> -->
         <div class="spacerA spcRight"></div>
     </div>
 
-    <script src="tilt.jquery.js"></script>
+    <script src="js/tilt.jquery.js"></script>
 
-    <script src="app.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/topchrome.js"></script>
+    <script src="js/shelf.js"></script>
 
-    <script src="elc.js"></script>
+    <script src="js/stock_cards.js"></script>
+    <script src="js/elc.js"></script>
 </body>
 
 </html>

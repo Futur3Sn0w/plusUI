@@ -1,0 +1,83 @@
+#clockContainer {
+    position: relative;
+    margin: auto;
+    height: 75%;
+    aspect-ratio: 1/1;
+    background-image: url("../../resc/clock_numbs_black.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    background-color: white;
+    border-radius: 50%;
+
+    transform: translateZ(13px);
+}
+
+.clockCard.darkModeOn #clockContainer {
+    background-image: url("../../resc/clock_numbs_white.svg");
+    background-color: black;
+}
+
+.clockCard.rectCard {
+    box-sizing: border-box;
+    padding-right: 50px;
+    padding-left: 2px;
+}
+
+.clockCard.rectCard #clockContainer {
+    margin-left: 15%;
+    transform: translateZ(13px) translateX(-15%);
+}
+
+
+#clockContainer::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+
+    background-color: #1E1E1F;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.clockCard.darkModeOn .clockHand,
+.clockCard.darkModeOn #clockContainer::after {
+    background: white;
+}
+
+.clockHand {
+    position: absolute;
+    background: black;
+    border-radius: 10px;
+
+    transform-origin: bottom;
+}
+
+#hour {
+    width: 1.8%;
+    height: 25%;
+    top: 25%;
+    left: 48.85%;
+    opacity: 0.8;
+}
+
+#minute {
+    width: 1.6%;
+    height: 30%;
+    top: 19%;
+    left: 48.9%;
+    opacity: 0.8;
+}
+
+#second {
+    width: 1%;
+    height: 40%;
+    top: 9%;
+    left: 49.25%;
+    opacity: 1;
+    background: #FF8E00;
+}

@@ -1,0 +1,17 @@
+.snowCard {
+    font-size: 2em;
+
+    background-image: url(../../resc/snow-back.png);
+    background-size: cover;
+    background-position: center;
+
+    box-sizing: border-box;
+}
+
+.snowCard img {
+    transform: translateZ(20px);
+
+    width: 75px;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+}

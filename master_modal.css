@@ -8,10 +8,12 @@
     min-height: 100px;
 
     pointer-events: none;
-    transform: scale(1.05);
     opacity: 0;
-
-    transition: transform .3s, opacity .25s;
+    filter: blur(20px);
+    transform: scale(.75);
+    transition: .4s;
+    transition-timing-function: ease;
+    transform-origin: top left;
 
     user-select: none;
 }
@@ -20,11 +22,15 @@
     pointer-events: all;
     transform: scale(1);
     opacity: 1;
+    filter: blur(0);
 }
 
 .modal-about {
     width: 320px;
     height: fit-content;
+
+    top: 50px;
+    left: 10px;
 
     padding: 0 5px;
 }
@@ -53,13 +59,12 @@
 
 .modal-about .header #title {
     font-size: 20px;
-    font-family: GSD-Med;
     height: 20px;
 }
 
 .modal-about .header #ver {
     font-size: 13px;
-    font-family: GST-Med;
+    font-weight: 500;
 
     padding: 3px 5px;
     background-color: rgba(0, 0, 0, 0.3);
@@ -69,28 +74,7 @@
 }
 
 .modal-about .header .close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 30px;
-    height: 30px;
-
-    font-size: 15px;
-
-    margin-left: auto;
-    margin-top: -5px;
-
-    background-color: inherit;
-    border-radius: 50%;
-
-    cursor: pointer;
-
-    transition: .15s;
-}
-
-.modal-about .header .close:active {
-    transform: scale(.75);
+    display: none;
 }
 
 .modal-about .aboutText {

@@ -1,5 +1,5 @@
 .rolodex {
-    width: 700px;
+    width: 500px;
     height: fit-content;
 
     padding: 7px;
@@ -13,10 +13,14 @@
     transform: scale(1.1);
     opacity: 0;
     pointer-events: none;
-    transition: .3s;
+    transition: transform .3s, opacity .3s;
 
     position: relative;
 }
+
+/* .rolodex.md {
+    transition: 0 !important;
+} */
 
 .rolodex.visible {
     z-index: 50;
@@ -28,28 +32,27 @@
 .rolodex::before {
     content: attr(data-sectName);
     font-size: 18px;
-    font-family: GST-Med;
+    font-weight: 500;
     height: 30px;
 
     padding-left: 10px;
     padding-bottom: 5px;
     display: flex;
     align-items: flex-end;
+    pointer-events: none;
 
     position: relative;
     z-index: 50;
 }
 
-.rolodex::after {
-    content: "BETA";
-    font-size: 13px;
-
-    font-family: GST-Bold;
-    opacity: .75;
+.rolodex .header {
+    width: 100%;
+    height: 50px;
 
     position: absolute;
-    left: 99px;
-    top: 11px;
+    top: 0;
+    left: 0;
+    z-index: 0;
 }
 
 .rolodexCloseBtn {
@@ -57,20 +60,18 @@
     align-items: center;
     justify-content: center;
 
-    width: 30px;
-    height: 30px;
+    width: 29px;
+    height: 29px;
 
     background-color: inherit;
     border-radius: 50%;
-
-    cursor: pointer;
 
     transition: .15s;
 
     position: absolute;
     z-index: 100;
-    top: 10px;
-    right: 10px;
+    top: 7px;
+    right: 7px;
 }
 
 .rolodexCloseBtn:active {
@@ -78,15 +79,13 @@
 }
 
 .cbSect {
-    width: 100%;
-    height: 100%;
+    width: 90px;
+    height: 200px;
     padding: 15px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 
     display: flex;
-    gap: 15px;
-    padding-top: 50px;
-
+    align-items: center;
     position: relative;
 
     border-radius: 12px;
@@ -94,22 +93,16 @@
 }
 
 .cbs1 {
-    padding-bottom: 50px;
+    gap: 10%;
+    padding: 10px 70px 10px 70px;
+
+    /* margin-right: -100px; */
+
     overflow-x: scroll;
-}
+    scroll-snap-type: x mandatory;
+    /* scroll-behavior: smooth; */
 
-.cbs1 .card::before {
-    content: attr(data-friendlyName);
-
-    position: absolute;
-    z-index: 20;
-    bottom: -40px;
-    font-size: 13px;
-
-    background-color: white;
-    color: black !important;
-    border-radius: 10px;
-    padding: 5px 10px;
+    pointer-events: none;
 }
 
 .cbs2 {
@@ -120,15 +113,154 @@
 
 .cbSect::before {
     content: attr(data-sectName);
-    font-size: 18px;
-    font-family: GST-Med;
+    font-size: 22px;
+    font-weight: 500;
 
     position: fixed;
-    top: 62.5px;
+    top: 60px;
+    left: 250px;
+    /* transform: translateX(-50%); */
 }
 
-/* Card stuff */
+.rolodex.empty .cbSect::before {
+    top: 100px;
+}
 
-.cbSect .card:hover {
-    margin-bottom: none !important;
+.cbSect::after {
+    content: attr(data-cardDesc);
+    font-size: 13px;
+    font-weight: normal;
+    opacity: .75;
+
+    position: fixed;
+    top: 90px;
+    left: 250px;
+    margin-right: 20px;
+    /* transform: translateX(-50%); */
+}
+
+.rolodex.empty .cbSect::after {
+    top: 130px;
+}
+
+/* fdhsjkfldhsjfkdls */
+
+.cbs1 .card {
+    scroll-snap-align: center;
+    pointer-events: none;
+}
+
+.cbs1 .card:not(.hoveredCard) {
+    opacity: .5;
+    transform: scale(.7) !important;
+}
+
+.cbs1 .card.hoveredCard {
+    opacity: 1;
+    transform: none !important;
+}
+
+.rolodex.empty .addBtn,
+.rolodex.empty .moveCtrls {
+    display: none;
+}
+
+.addBtn,
+.rssBtn {
+    background-color: rgb(38, 164, 38);
+    color: white;
+    bottom: 7px;
+    right: 7px;
+
+    width: max-content;
+    height: 35px;
+    border-radius: 40px;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    gap: 7px;
+    padding: 0 10px;
+
+    position: absolute;
+
+    font-size: 14px;
+    transition: .2s;
+}
+
+.addBtn:hover,
+.rssBtn:hover {
+    background-color: rgb(60, 190, 60);
+}
+
+.addBtn:active,
+.rssBtn:active {
+    transform: scale(.9);
+}
+
+.rssBtn {
+    right: 80px;
+}
+
+/* Move controls */
+
+.moveCtrls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+
+    position: absolute;
+    bottom: 7px;
+    left: 245px;
+}
+
+.mvCtrl {
+    background-color: rgba(255, 255, 255, 0.75);
+
+    width: 50px;
+    height: 35px;
+    border-radius: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+
+    position: relative;
+
+    font-size: 15px;
+    transition: .2s;
+    /* padding-bottom: 2px; */
+}
+
+.rolodex.darkModeOn .moveCtrls .mvCtrl {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mvCtrl::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    border-radius: inherit;
+    background-color: inherit;
+    opacity: 0;
+
+    transition: .15s;
+}
+
+.mvCtrl:hover::after {
+    opacity: 1;
+}
+
+.mvCtrl:active {
+    transform: scale(.9);
 }

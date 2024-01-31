@@ -1,0 +1,77 @@
+.weatherCard {
+    background: linear-gradient(360deg, #0e63d1, rgb(92, 168, 255));
+}
+
+.weatherCard.squareCard .temp {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 3px;
+}
+
+.weatherCard.squareCard * {
+    transform: none !important;
+}
+
+.weatherCard.squareCard #weatherIcon {
+    margin-bottom: -20px;
+    margin-top: -15px;
+}
+
+.weatherCard.squareCard .temp {
+    font-size: 20px;
+}
+
+.weatherCard.rectCard #weatherIcon {
+    z-index: 21;
+    /* position: absolute !important; */
+    /* left: 1px; */
+}
+
+#weatherIcon {
+    height: 78px;
+    aspect-ratio: 1/1;
+
+    transition: .2s;
+}
+
+.temp {
+    font-size: 25px;
+    transform: translateX(-10px);
+    transition: .2s;
+    color: white;
+    font-weight: 500;
+}
+
+.weatherCard.rectCard .temp,
+.weatherCard.expanded .temp {
+    padding: 0;
+    padding-left: 20px;
+
+    font-size: 30px;
+
+    box-sizing: border-box;
+    transform: translateZ(15px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weatherCard>i {
+    color: white;
+    position: absolute;
+    top: 14px;
+    left: 12px;
+
+    font-size: 20px;
+}
+
+.weatherCard.squareCard>i {
+    display: none;
+}
+
+.weatherCard.expanded>i,
+.weatherCard.rectCard>i {
+    display: flex;
+}

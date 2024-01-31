@@ -6,6 +6,10 @@
     display: none;
 }
 
+*:not(textarea) {
+    user-select: none !important;
+}
+
 /* Card types */
 
 .squareCard {

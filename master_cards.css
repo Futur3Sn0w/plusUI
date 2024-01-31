@@ -1,21 +1,63 @@
-@import url('css/cards/clockCard.css');
-@import url('css/cards/wallCard.css');
-@import url('css/cards/emojiLocaleCard.css');
-@import url('css/cards/snowDbgCard.css');
-@import url('css/cards/siriDbgCard.css');
-@import url('css/cards/shortcutCard.css');
-@import url('css/cards/batteryCard.css');
-@import url('css/cards/weatherCard.css');
-@import url('css/cards/calendarCard.css');
-@import url('css/cards/textCard.css');
-@import url('css/cards/youtubeCard.css');
-@import url('css/cards/youtubeBrowseCard.css');
-@import url('css/cards/todoCard.css');
-@import url('css/cards/winsiderCard.css');
+@import url('css/stock_cards/clockCard.css');
+@import url('css/stock_cards/emojiLocaleCard.css');
+@import url('css/stock_cards/snowDbgCard.css');
+@import url('css/stock_cards/siriDbgCard.css');
+@import url('css/stock_cards/shortcutCard.css');
+@import url('css/stock_cards/batteryCard.css');
+@import url('css/stock_cards/weatherCard.css');
+@import url('css/stock_cards/calendarCard.css');
+@import url('css/stock_cards/textCard.css');
+@import url('css/stock_cards/youtubeCard.css');
+@import url('css/stock_cards/youtubeBrowseCard.css');
+@import url('css/stock_cards/todoCard.css');
+@import url('css/stock_cards/winsiderCard.css');
 
 :root {
     --glow-l: linear-gradient(90deg, transparent, white 80%);
     --glow-d: linear-gradient(90deg, transparent, black 80%);
+}
+
+.shelf.darkModeOn .shelfLabel {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    color: white;
+}
+
+body:has(.context-selected-card) .shelfLabel {
+    transform: translateX(-50%) scale(.85) !important;
+    filter: blur(10px) !important;
+    opacity: 0 !important;
+}
+
+.shelfLabel {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    /* backdrop-filter: blur(10px) saturate(20); */
+    color: black;
+    border-radius: 100px;
+
+    font-size: 19px;
+    font-weight: 500;
+    padding: 7px 12px;
+
+    pointer-events: none;
+
+    position: absolute;
+    top: -50px;
+    transform: scale(.85);
+    left: 50%;
+    filter: blur(10px);
+    opacity: 0;
+    z-index: 2;
+
+    transform-origin: center center;
+
+    transition: .2s;
+}
+
+.shelf:has(.card:hover) .shelfLabel,
+.shelfLabel.show {
+    transform: scale(1) !important;
+    filter: blur(0) !important;
+    opacity: 1 !important;
 }
 
 .shelf {
@@ -31,7 +73,7 @@
     display: flex;
 
     box-sizing: border-box;
-    padding: 0 30px 25px 30px;
+    padding: 0 15px 15px 15px;
 
     transition: .3s;
 
@@ -41,23 +83,56 @@
 .shelf.float {
     width: 100vw !important;
     align-items: flex-end;
-    padding: 0;
+    /* padding: 0; */
+    padding-bottom: 20px;
     margin-bottom: -1px;
-    background: linear-gradient(transparent, black);
+    /* background: linear-gradient(transparent, black); */
 }
 
-.shelf.float .cards {
-    margin: 0 !important;
-    margin-bottom: -1px !important;
-    width: 100%;
+.shelfBack {
+    width: 100vw;
+    height: 150px;
+
+    opacity: 0;
+
+    transition: .4s;
+
+    backdrop-filter: blur(0) saturate(1);
+    display: flex;
+
+    mask-image: linear-gradient(to bottom, transparent, black 50%);
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
 }
 
-.shelf.float .cards .subCards {
-    background-color: transparent;
-    backdrop-filter: none !important;
-    box-shadow: none !important;
-    border: none !important;
+body:has(.timeDate.ccOpen .ccb:not(.ccb2).selected) .shelfBack {
+    backdrop-filter: blur(40px) saturate(2) brightness(2);
+}
+
+
+body:has(.shelf.float) .shelfBack {
+    height: 250px;
+    backdrop-filter: blur(40px) saturate(2);
+    opacity: 1;
+}
+
+.shelfBack::after {
+    background-color: var(--section-l);
+    opacity: 0;
+
+
+    content: '';
     width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.shelfBack.darkModeOn::after {
+    background-color: var(--section-d);
+    /* DISPLAY: NONE !important; */
 }
 
 .shelf.left .spcLeft {
@@ -92,44 +167,10 @@
     /* background: purple; */
 }
 
-.cards {
-    width: 100%;
-    max-width: calc(100vw - 215px);
-    height: 150px;
-    /* margin: 0 0 13px 10px !important; */
-    z-index: 1;
-
-    flex-shrink: 0;
-
-    transform: translateX(0);
-    border-radius: 0 !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    border: none !important;
-
-    transition: .3s;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 15px;
-
-    /* padding: 10px; */
-    /* padding-left: 215px; */
-    /* padding-right: 20px; */
-    box-sizing: border-box;
-}
-
-.shelf.right .cards {
-    flex-direction: row-reverse;
-}
-
 .subCards {
     width: fit-content;
     max-width: calc(100% - 50px);
-    height: 110px;
+    height: 90px;
 
     display: flex;
     align-items: center;
@@ -137,84 +178,54 @@
     flex-shrink: 0;
 
     position: relative;
-    padding-left: 207px;
-    padding-right: 10px;
-    overflow-x: scroll;
-    margin-left: -217px !important;
+    padding: 8px;
+    /* padding-left: 0; */
+    overflow: hidden;
     margin-right: 0;
 
     background-color: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(100px) saturate(6);
     box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 19px !important;
+    border-radius: 21px !important;
 
     transition: .2s;
 }
 
-.shelf.left .cards:not(.collapsed) .subCards {
-    margin-left: -207px !important;
-}
-
-.shelf.right .cards:not(.collapsed) .subCards {
-    margin-right: -207px !important;
-    margin-left: 0 !important;
-    padding-left: 10px;
-    padding-right: 200px;
-}
-
-.cards.collapsed .subCards {
-    height: 137px;
-    width: 197px;
-    max-width: unset;
-    padding-left: 0;
-    margin-right: -217px;
-    margin-left: 0;
-    border-radius: 30px !important;
-}
-
-.cards.collapsed .subCards .card {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.cards.darkModeOn::after {
-    background-color: rgba(0, 0, 0, 0.65);
-    color: white;
-    backdrop-filter: blur(50px) saturate(7);
-
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.shelf.float .cards {
-    width: 100vw !important;
+.shelf.float .subCards {
+    /* width: 100vw !important; */
     margin: 0;
+    margin-bottom: -20px;
+    padding: 15px;
+    padding-bottom: 20px !important;
+
+    /* background-color: orange; */
 
     border-radius: 0 !important;
     background-color: transparent;
     border: none !important;
     box-shadow: none;
     backdrop-filter: unset;
+    overflow-x: scroll;
 
-    max-width: unset !important;
+    gap: 20px;
+
+    /* max-width: unset !important; */
 }
 
-.cards.collapsed {
-    width: 220px;
-
-    padding: 0;
-    margin: 0;
-    /* transform: translateX(-8px); */
-
-    border-radius: 31px !important;
+.shelf:not(.float) .subCards.right-circle {
+    border-top-right-radius: 55px !important;
+    border-bottom-right-radius: 55px !important;
 }
 
-.cards.collapsed .card {
-    opacity: 0;
+.shelf:not(.float) .subCards.left-circle {
+    border-top-left-radius: 55px !important;
+    border-bottom-left-radius: 55px !important;
 }
 
 .card {
     height: 90px;
+    max-width: 180px;
     flex-shrink: 0;
 
     border-radius: 16px;
@@ -229,8 +240,6 @@
 
     position: relative;
 
-    user-select: none;
-
     transform-style: preserve-3d;
     transform: perspective(1000px);
     transform-origin: center;
@@ -238,8 +247,27 @@
     transition: .2s;
 }
 
+.card.removing {
+    overflow: hidden;
+    width: 0 !important;
+    height: 0 !important;
+    filter: blur(20px) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+}
+
+.card.md {
+    transition: none !important;
+}
+
+.card>* {
+    user-select: none !important;
+}
+
 .card.parallax {
-    transition: opacity .2s, transform 0, outline .15s, width .2s !important;
+    transition: opacity .2s, transform 0, outline .15s, width .2s, margin-bottom .2s !important;
 }
 
 .card.parallax-disabled {
@@ -249,6 +277,13 @@
 .card.darkModeOn {
     background-color: #222222;
     color: white;
+}
+
+.card.expanded {
+    width: 100%;
+    height: 100%;
+    max-width: unset;
+    /* filter: blur(10px) grayscale(.5); */
 }
 
 .cardOptions {
@@ -308,7 +343,7 @@
     opacity: 0;
 
     background-color: white;
-    bottom: 142px;
+    bottom: 122px;
 
     display: flex;
     flex-direction: column;
@@ -322,7 +357,7 @@
 
 .contextMenuDiv.show {
     opacity: 1;
-    bottom: 162px;
+    bottom: 135px;
     pointer-events: all;
 }
 
@@ -344,6 +379,11 @@
 
     user-select: none;
     cursor: pointer;
+}
+
+.cmItem:hover {
+    background-color: white !important;
+    color: rgba(0, 0, 0, 0.75);
 }
 
 .cmItem i {
@@ -369,32 +409,6 @@
 
 .cmi-disableCard::after {
     padding-left: 3px;
-}
-
-.cmItem::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-
-    transition: 90ms;
-}
-
-.surface.darkModeOn .cmItem::before {
-    background-color: rgba(255, 255, 255, 0.8);
-}
-
-.cmItem:hover::before {
-    opacity: .20;
-}
-
-.cmItem:active::before {
-    opacity: .1;
 }
 
 .cmSep {
@@ -452,6 +466,7 @@
     animation-timing-function: linear;
 
     transform-origin: center center;
+    transition: 0 !important;
 }
 
 .editMode .card * {

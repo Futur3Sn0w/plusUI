@@ -1,0 +1,75 @@
+.calendarCard {
+    flex-direction: column;
+}
+
+.calendarCard>* {
+    font-weight: 500;
+}
+
+.calendarCard .month {
+    width: 100%;
+    min-height: 25px;
+
+    background: linear-gradient(to bottom, #fa4c5b, red);
+    color: white;
+
+    font-size: 14px;
+
+    border-radius: inherit;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    transform: translateZ(3px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendarCard .calenDayNo {
+    font-size: 42px;
+    height: 50px;
+
+    margin: 0;
+    padding: 0;
+
+    transform: translateZ(15px);
+}
+
+.calendarCard .calenDay {
+    font-size: 11.5px;
+    font-weight: normal;
+    height: 50px;
+
+    margin-top: -3px;
+    padding: 0;
+
+    transform: translateZ(10px);
+}
+
+.calendarCard.expanded .calenDay,
+.calendarCard.expanded .calenDayNo,
+.calendarCard.expanded .month {
+    opacity: 0;
+}
+
+.calendarCard.expanded {
+    background-color: transparent !important;
+}
+
+.calendarCard .expView {
+    display: none;
+
+    width: 100%;
+    height: 100%;
+    background-color: purple;
+
+    filter: blur(20px);
+    opacity: .75;
+
+    position: absolute;
+}
+
+.calendarCard.expanded .expView {
+    display: flex;
+}

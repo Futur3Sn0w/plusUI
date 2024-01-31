@@ -1,0 +1,40 @@
+.youtubeCard {
+    background: linear-gradient(rgb(255, 89, 89), rgb(255, 0, 43));
+
+    display: flex;
+    flex-direction: row;
+}
+
+.youtubeCard i {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+
+    color: white;
+}
+
+.ytThumb {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+
+    width: 115px;
+    aspect-ratio: 16/9;
+
+    background-color: white;
+    border-radius: 12px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cmi-ytcurl input {
+    border: none !important;
+    background-color: transparent !important;
+    outline: none !important;
+
+    color: inherit;
+
+    width: 100px;
+}
