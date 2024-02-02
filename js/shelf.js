@@ -89,24 +89,25 @@ $('.cmi-disableCard').on('click', function () {
         $('.context-selected-card').appendTo($('.cbSect.cbs1'));
         $('.context-selected-card').removeClass('removing');
         $('.context-selected-card').removeClass('context-selected-card');
+
+        $(".card").each(function (i, e) {
+            var enabled = $(this).attr('data-enabled');
+            var card = $(e).attr('id');
+
+            localStorage.setItem(card, enabled);
+            // localStorage.setItem(card + '-index', $(this).attr('data-index'))
+        });
+
+        saveCards();
+        $(".subCards").sortable("refresh");
+        dockRadi();
+        alignShelfLabel();
+
+        $('.shelfLabel').addClass('show').text(friendlyName + " removed");
+        setTimeout(() => {
+            $('.shelfLabel').removeClass('show')
+        }, 6000);
     }, 1000);
-
-    $(".card").each(function (i, e) {
-        var enabled = $(this).attr('data-enabled');
-        var card = $(e).attr('id');
-
-        localStorage.setItem(card, enabled);
-        // localStorage.setItem(card + '-index', $(this).attr('data-index'))
-    });
-
-    $('.shelfLabel').addClass('show').text(friendlyName + " removed");
-    setTimeout(() => {
-        $('.shelfLabel').removeClass('show')
-    }, 6000);
-
-    $(".subCards").sortable("refresh");
-    dockRadi();
-    alignShelfLabel();
 })
 
 $('.editMode .card').click(function (e) {

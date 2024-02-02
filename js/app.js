@@ -67,10 +67,9 @@ window.onload = function () {
 
     $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
     $('body').css('background-image', "url(" + backdropImg + ")");
-    refreshWall();
     repeater = setInterval(refreshWall, 60000);
 
-    cardSmarts();
+    // cardSmarts();
 
     $('.card').each(function (i, e) {
         var curCard = $(e).attr('id');
@@ -102,6 +101,7 @@ window.onload = function () {
 
 $('.reloadPage').on('click', function () {
     window.location.reload();
+    refreshWall();
 });
 
 $(document).mouseup(function (e) {
@@ -160,6 +160,7 @@ $('#openWallpaperBtn').click(function (e) {
 });
 
 $('#refreshWallBtn').on('click', function (e) {
+    clearInterval(repeater)
     refreshWall();
     repeater = setInterval(refreshWall, 60000);
     e.stopPropagation();

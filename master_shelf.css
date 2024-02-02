@@ -1,0 +1,210 @@
+:root {
+    --glow-l: linear-gradient(90deg, transparent, white 80%);
+    --glow-d: linear-gradient(90deg, transparent, black 80%);
+}
+
+.shelf.darkModeOn .shelfLabel {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    color: white;
+}
+
+body:has(.context-selected-card) .shelfLabel {
+    transform: translateX(-50%) scale(.85) !important;
+    filter: blur(10px) !important;
+    opacity: 0 !important;
+}
+
+.shelfLabel {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    /* backdrop-filter: blur(10px) saturate(20); */
+    color: black;
+    border-radius: 100px;
+
+    font-size: 19px;
+    font-weight: 500;
+    padding: 7px 12px;
+
+    pointer-events: none;
+
+    position: absolute;
+    top: -50px;
+    transform: scale(.85);
+    left: 50%;
+    filter: blur(10px);
+    opacity: 0;
+    z-index: 2;
+
+    transform-origin: center center;
+
+    transition: .2s;
+}
+
+.shelf:has(.card:hover) .shelfLabel,
+.shelfLabel.show {
+    transform: scale(1) !important;
+    filter: blur(0) !important;
+    opacity: 1 !important;
+}
+
+.shelf {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+
+    width: 100vw;
+    max-width: 100%;
+    height: fit-content;
+
+    display: flex;
+
+    box-sizing: border-box;
+    padding: 0 15px 15px 15px;
+
+    transition: .3s;
+
+    /* background-color: white; */
+}
+
+.shelf.float {
+    width: 100vw !important;
+    align-items: flex-end;
+    /* padding: 0; */
+    padding-bottom: 20px;
+    margin-bottom: -1px;
+    /* background: linear-gradient(transparent, black); */
+}
+
+.shelfBack {
+    width: 100vw;
+    height: 150px;
+
+    opacity: 0;
+
+    transition: .4s;
+
+    backdrop-filter: blur(0) saturate(1);
+    display: flex;
+
+    mask-image: linear-gradient(to bottom, transparent, black 50%);
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+}
+
+body:has(.timeDate.ccOpen .ccb:not(.ccb2).selected) .shelfBack {
+    backdrop-filter: blur(40px) saturate(2) brightness(2);
+}
+
+
+body:has(.shelf.float) .shelfBack {
+    height: 250px;
+    backdrop-filter: blur(40px) saturate(2);
+    opacity: 1;
+}
+
+.shelfBack::after {
+    background-color: var(--section-l);
+    opacity: 0;
+
+
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.shelfBack.darkModeOn::after {
+    background-color: var(--section-d);
+    /* DISPLAY: NONE !important; */
+}
+
+.shelf.left .spcLeft {
+    width: 0;
+}
+
+.shelf.center .spcLeft {
+    width: 100%;
+}
+
+.shelf.right .spcLeft {
+    width: 100%;
+}
+
+.shelf.left .spcRight {
+    width: 100%;
+}
+
+.shelf.center .spcRight {
+    width: 100%;
+}
+
+.shelf.right .spcRight {
+    width: 0;
+}
+
+.shelf .spacerA {
+    position: relative;
+    z-index: 1000;
+    transition: width .45s;
+    height: 20px;
+    /* background: purple; */
+}
+
+.subCards {
+    width: fit-content;
+    max-width: calc(100% - 50px);
+    height: 90px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+
+    position: relative;
+    padding: 8px;
+    /* padding-left: 0; */
+    overflow: hidden;
+    margin-right: 0;
+
+    background-color: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(100px) saturate(6);
+    box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 21px !important;
+
+    transition: .2s;
+}
+
+.shelf.float .subCards {
+    /* width: 100vw !important; */
+    margin: 0;
+    margin-bottom: -20px;
+    padding: 15px;
+    padding-bottom: 20px !important;
+
+    /* background-color: orange; */
+
+    border-radius: 0 !important;
+    background-color: transparent;
+    border: none !important;
+    box-shadow: none;
+    backdrop-filter: unset;
+    overflow-x: scroll;
+
+    gap: 20px;
+
+    /* max-width: unset !important; */
+}
+
+.shelf:not(.float) .subCards.right-circle {
+    border-top-right-radius: 55px !important;
+    border-bottom-right-radius: 55px !important;
+}
+
+.shelf:not(.float) .subCards.left-circle {
+    border-top-left-radius: 55px !important;
+    border-bottom-left-radius: 55px !important;
+}

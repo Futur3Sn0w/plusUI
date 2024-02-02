@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no">
 
-    <link rel="stylesheet" href="master_cards.css">
     <link rel="stylesheet" href="master_structure.css">
+    <link rel="stylesheet" href="master_cards.css">
+    <link rel="stylesheet" href="master_shelf.css">
     <link rel="stylesheet" href="master_modal.css">
     <link rel="stylesheet" href="master_controlPanel.css">
     <link rel="stylesheet" href="master_rolodex.css">
@@ -96,12 +97,12 @@
                 <div class="dcExpt interactable-hov">
                     <input type="checkbox" name="monoMode" id="cbMonoMode">
                     <i class="fa-solid fa-cube"></i>
-                    <label for="">Mono Widgets</label>
+                    <label for="">Mono theme</label>
                 </div>
                 <div class="dcExpt interactable-hov floatModeCardOptGroup">
                     <input type="checkbox" name="floatMode" id="cbFloatMode">
                     <i class="fa-solid fa-diagram-next"></i>
-                    <label for="floatMode">Floating shelf</label>
+                    <label for="floatMode">Floating cards</label>
                 </div>
             </div>
             <div class="shelfAlign" data-optName="Alignment">
@@ -333,14 +334,14 @@
                 data-cardDesc="A customizable text block (saves automatically)" id="textCard">
                 <textarea name="notes" id="textCardTB"></textarea>
             </div>
-            <div class="batteryCard card labeled rectCard" data-enabled="y" data-resizableCard="y" data-parallaxCard="y"
+            <!-- <div class="batteryCard card labeled rectCard" data-enabled="y" data-resizableCard="y" data-parallaxCard="y"
                 data-friendlyName="Battery" data-cardDesc="Keep an eye on your device's battery" id="batteryCard">
                 <div class="bcIndicator">
                     <i class="fa-solid fa-bolt chargingIcon"></i>
                     <div class="bciProg"></div>
                 </div>
                 <div class="batteryText"></div>
-            </div>
+            </div> -->
             <div class="shortcutCard card expandable labeled actionable squareCard" data-enabled="y"
                 data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Shortcuts"
                 data-cardDesc="Shortcuts to your favorite places on the web" id="shortcutCard">

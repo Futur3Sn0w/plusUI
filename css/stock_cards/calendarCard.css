@@ -27,11 +27,12 @@
 }
 
 .subCards.plated .calendarCard .month {
-    background: #000;
+    background: #0000007c;
 }
 
 .subCards:not(.darkModeOn).plated .calendarCard .month {
-    background: #fff;
+    background: #ffffff7c;
+    color: black
 }
 
 .calendarCard .calenDayNo {

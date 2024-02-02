@@ -161,11 +161,12 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    margin-right: 1px;
+    /* margin-right: 1px; */
 
-    height: 42px;
-    width: 42px;
-    flex-shrink: 0;
+    height: 40px;
+    width: 40px;
+    margin-right: 1px;
+    /* flex-shrink: 0; */
 
     transition: .20s;
 

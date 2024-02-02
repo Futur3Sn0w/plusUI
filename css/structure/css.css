@@ -1,6 +1,39 @@
+/* Card types */
+
+.squareCard {
+    width: 90px;
+}
+
+.circleCard {
+    width: 90px;
+    border-radius: 200px !important;
+}
+
+.rectCard {
+    width: 180px;
+}
+
+/*  */
+
 html,
 body {
     overscroll-behavior: none;
+}
+
+.override-hidden {
+    display: none !important;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+*:not(textarea) {
+    user-select: none !important;
+}
+
+.displayNone {
+    display: none !important;
 }
 
 body {
@@ -15,6 +48,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url('../../resc/light.png');
 
     background-color: black;
     background-position: center;
@@ -26,8 +60,17 @@ body {
     font-family: SFPro, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+body:has(.darkModeOn) {
+    background-image: url('../../resc/dark.png');
+}
+
 .backDrop {
     pointer-events: none;
+    background-image: url('../../resc/light.png');
+}
+
+body:has(.darkModeOn) .backDrop {
+    background-image: url('../../resc/dark.png');
 }
 
 body::before {
@@ -72,7 +115,7 @@ body:has(.modal-about.visible)::before {
 
     background-color: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(70px) saturate(6);
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .35);
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .25);
     border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 16px;
 
@@ -82,7 +125,7 @@ body:has(.modal-about.visible)::before {
 
 .surface.darkModeOn,
 .modal-about.darkModeOn {
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(34, 34, 34, 0.65);
     color: white;
     backdrop-filter: blur(50px) saturate(7);
 
