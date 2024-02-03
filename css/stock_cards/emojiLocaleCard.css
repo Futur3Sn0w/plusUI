@@ -4,7 +4,6 @@
     /* border: 5px solid rgba(0, 0, 0, 0.4); */
     box-sizing: border-box;
     border-radius: 5000px;
-    overflow: hidden;
 }
 
 .emojiLocaleCard p:first-of-type {

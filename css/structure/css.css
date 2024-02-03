@@ -13,6 +13,20 @@
     width: 180px;
 }
 
+/* Global Variables */
+
+:root {
+    --section-l: rgba(255, 255, 255, .5);
+    --section-input-l: rgba(255, 255, 255, 0.5);
+    --section-inputBorder-l: rgba(0, 0, 0, .25);
+    --surface-button-l: rgba(0, 0, 0, .15);
+
+    --section-d: rgba(34, 34, 34, 0.6);
+    --section-input-d: rgba(255, 255, 255, 0.2);
+    --section-inputBorder-d: rgba(0, 0, 0, .2);
+    --surface-button-d: rgba(255, 255, 255, 0.15);
+}
+
 /*  */
 
 html,
@@ -88,7 +102,7 @@ body::before {
 
 body:has(.rolodex.visible)::before,
 body:has(.timeDate.ccOpen .ccb:not(.ccb2).selected)::before,
-body:has(.modal-about.visible)::before {
+body:has(.about-modal.visible)::before {
     opacity: 1;
 }
 

@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="master_structure.css">
     <link rel="stylesheet" href="master_cards.css">
     <link rel="stylesheet" href="master_shelf.css">
-    <link rel="stylesheet" href="master_modal.css">
     <link rel="stylesheet" href="master_controlPanel.css">
+    <link rel="stylesheet" href="master_topChrome.css">
     <link rel="stylesheet" href="master_rolodex.css">
     <link rel="stylesheet" href="master_expandable.css">
 
@@ -41,45 +41,19 @@
 <body>
     <div class="loader"></div>
 
-    <div class="surface modal modal-about">
-        <div class="header">
-            <img src="favicons/android-chrome-192x192.png" alt="">
-            <p id="title">(PlusUI)</p>
-            <p class="siteVer" id="ver">vNext</p>
-            <div class="close" id="aboutModalClose">
-                <i class="fa-solid fa-close"></i>
-            </div>
-        </div>
-        <div class="aboutText">
-            A hybrid dashboard and digital display for large-format screens, heavily inspired by TV & VisionOS
-            <!-- PlusUI is your one-stop-shop for all your information, shortcuts, notes, and more. <br>PlusUI is currently
-            in beta/Open Demo, meaning it won't be super customizable yet, but it will save your changes for
-            later.<br>Feel free to report bugs on
-            the project's GitHub (link below)! -->
-        </div>
-        <div class="aboutLinks">
-            <div class="alink" onclick="window.open('https://www.github.com/')">
-                <i class="fa-brands fa-github"></i>
-            </div>
-            <div class="alink" onclick="window.open('https://www.twitter.com/futur3sn0w')">
-                <i class="fa-brands fa-twitter"></i>
-            </div>
-            <div class="alink" onclick="window.open('https://www.')">
-                <i class="fa-solid fa-home"></i>
-            </div>
-        </div>
-    </div>
-
     <div class="backDrop" id="backDrop2"></div>
 
-    <div class="surface aboutBtn interactable-hov" id="topChromeAboutBtn"></div>
-    <div class="surface timeDate interactable-hov">
+    <div class="surface aboutBtn" id="topChromeAboutBtn">
+        <div class="logo"></div>
+    </div>
+    <div class="surface timeDate notLoaded">
         <div class="tdm time" id="time"></div>
         <div class="ccButtons">
             <div class="ccb ccb1" label="Personalize"><i class="fa-solid fa-brush"></i></div>
             <div class="ccb ccb2" label="Backdrop"><i class="fa-solid fa-image"></i></div>
             <!-- <div class="ccb ccb3" label="User"><i class="fa-solid fa-user"></i></div> -->
             <div class="ccb ccb4" label="Labs"><i class="fa-solid fa-flask"></i></div>
+            <div class="ccb ccb5" label="About"><i class="fa-solid fa-info"></i></div>
         </div>
         <div class="tdSep"></div>
         <div class="ccb rolodexOpen" data-btnName="Cards" id="rolodexOpenBtn" label="Cards">
@@ -147,15 +121,40 @@
             </div>
         </div>
 
-        <!-- <div class="surface controlPanelOptGroup shelfOpts" data-sect="About You">
-            
-        </div> -->
+        <!-- <div class="surface controlPanelOptGroup shelfOpts" data-sect="About You"></div> -->
+
         <div class="surface controlPanelOptGroup debugCards" data-sect="Labs">
             <p class="tip">Looks like there aren't any labs available... Check again later!</p>
             <!-- <div class="dcExpt customBackdropOptGroup">
                     <input type="checkbox" name="customBackdrops" id="cbCustomBackdrops">
                     <label for="customBackdrops">Custom Backdrops</label>
                 </div> -->
+        </div>
+
+        <div class="surface controlPanelOptGroup aboutOpts">
+            <div class="header">
+                <img src="favicons/android-chrome-192x192.png" alt="">
+                <p id="title">(PlusUI)</p>
+                <p class="siteVer" id="ver">vNext</p>
+            </div>
+            <div class="aboutText">
+                A hybrid dashboard and digital display for large-format screens, heavily inspired by TV & VisionOS
+                <!-- PlusUI is your one-stop-shop for all your information, shortcuts, notes, and more. <br>PlusUI is currently
+                in beta/Open Demo, meaning it won't be super customizable yet, but it will save your changes for
+                later.<br>Feel free to report bugs on
+                the project's GitHub (link below)! -->
+            </div>
+            <div class="aboutLinks">
+                <div class="alink dcExpt interactable-hov" onclick="window.open('https://www.github.com/')">
+                    <i class="fa-brands fa-github"></i>
+                </div>
+                <div class="alink dcExpt interactable-hov" onclick="window.open('https://www.twitter.com/futur3sn0w')">
+                    <i class="fa-brands fa-twitter"></i>
+                </div>
+                <div class="alink dcExpt interactable-hov" onclick="window.open('https://www.futur3sn0w.me')">
+                    <i class="fa-solid fa-home"></i>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -186,7 +185,7 @@
     </div> -->
 
     <div class="surface rolodex" data-sectName="Card Deck">
-        <div class="rolodexCloseBtn">
+        <div class="rolodexCloseBtn interactable-hov">
             <i class="fa-solid fa-xmark"></i>
         </div>
 
@@ -287,16 +286,16 @@
         </div>
         <!-- <div class="cbSect cbs2" data-sectName="Dev"></div> -->
         <div class="moveCtrls">
-            <div class="mvCtrl left"> <i class="fa-solid fa-chevron-left"></i> </div>
-            <div class="mvCtrl right"> <i class="fa-solid fa-chevron-right"></i> </div>
+            <div class="mvCtrl left interactable-hov"> <i class="fa-solid fa-chevron-left"></i> </div>
+            <div class="mvCtrl right interactable-hov"> <i class="fa-solid fa-chevron-right"></i> </div>
         </div>
-        <div class="addBtn">Add<i class="fa-solid fa-plus"></i></div>
+        <div class="addBtn interactable-hov">Add<i class="fa-solid fa-plus"></i></div>
         <!-- <div class="rssBtn disabled">Add RSS<i class="fa-solid fa-rss"></i></div> -->
     </div>
 
     <div class="shelfBack"></div>
 
-    <div class="shelf left">
+    <div class="shelf left notLoaded">
         <div class="shelfLabel surface">Shelf</div>
         <div class="spacerA spcLeft"></div>
         <div class="surface subCards">
@@ -346,14 +345,16 @@
                 data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Shortcuts"
                 data-cardDesc="Shortcuts to your favorite places on the web" id="shortcutCard">
                 <div class="cardOptions">
-                    <div class="cmItem"></div>
+                    <div class="cmItem cmi-IDENTIFIER interactable-hov" data-btnLabel="">
+                        <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="">
+                    </div>
                 </div>
                 <div class="collapseIcon">
                     <i class="fa-solid fa-list-ul"></i>
                 </div>
                 <div class="shortcuts">
                     <div class="scApp" id="scaDeviantart" data-fn="DeviantArt" data-launch="deviantart"
-                        style="background-color: #181C21; color: #30a628;">
+                        style="color: #30a628;">
                         <i class="fa-brands fa-deviantart"></i>
                     </div>
                     <div class="scApp" id="scaFeedly" data-fn="Feedly" data-launch="feedly" style="color: #30a628;">

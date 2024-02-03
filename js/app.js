@@ -19,6 +19,11 @@ window.onload = function () {
         $('.greeting').addClass('hidden');
     }, 10000);
 
+    $('.aboutBtn').attr('ver', 'PlusUI ' + $('.siteVer').text()).addClass('visible');
+    setTimeout(() => {
+        $('.aboutBtn').removeClass('visible');
+    }, 6000);
+
     if (isTouchScreendevice()) {
         $('.card').removeClass('parallax');
     } else {
@@ -29,12 +34,6 @@ window.onload = function () {
         });
     }
 
-    $('.rolodex').draggable({
-        containment: "parent",
-        handle: ".header"
-    })
-
-    // applyKeys();
     weatherBalloon(lsOwmCity);
 
     setTheme();
@@ -89,13 +88,14 @@ window.onload = function () {
     recallCards();
     dockRadi();
 
-    $('#topChromeAboutBtn').text($('.siteVer').text());
 
     // doTheBatteryThing();
     // chargingIndic();
 
     setTimeout(() => {
         $('.loader').addClass('loaded');
+        $('.shelf').removeClass('notLoaded');
+        $('.timeDate').removeClass('notLoaded');
     }, 1000);
 }
 
@@ -114,6 +114,7 @@ $(document).mouseup(function (e) {
     if (!$(".controlPanel").is(e.target) && !$(".controlPanel *").is(e.target) && !$(".timeDate").is(e.target) && !$(".timeDate *").is(e.target)) {
         // $('.topChrome').scrollTop(800)
         $('.ccb.ccb1').click()
+        $('.controlPanelOptGroup').removeClass('visible');
         $('.controlPanel').removeClass('expanded')
         $('.timeDate').removeClass('ccOpen')
     }
@@ -127,10 +128,6 @@ $(document).mouseup(function (e) {
     if (!$(".context-selected-card").is(e.target) && !$(".context-selected-card *").is(e.target) && !$(".contextMenuDiv").is(e.target) && !$(".contextMenuDiv *").is(e.target)) {
         $('.cmSep').children().appendTo($('.context-selected-card').children('.cardOptions'));
         $('.context-selected-card').removeClass('context-selected-card')
-    }
-
-    if (!$(".modal-about").is(e.target) && !$(".modal-about *").is(e.target)) {
-        $('#aboutModalClose').click();
     }
 
     if (!$(".rolodex").is(e.target) && !$(".rolodex *").is(e.target)) {

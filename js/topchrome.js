@@ -308,13 +308,3 @@ function showDate() {
     $('.calendarCard .calenDayNo').text(currentDate);
     $('.calendarCard .calenDay').text(currentDay);
 }
-
-// About modal functions
-
-$('#aboutModalClose').click(function (e) {
-    $('.modal-about').removeClass('visible')
-});
-
-$('.aboutBtn').click(function (e) {
-    $('.modal-about').addClass('visible')
-});
