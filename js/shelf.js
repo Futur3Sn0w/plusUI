@@ -43,6 +43,11 @@ $('.cmi-resize').on('click', function () {
 });
 
 $('.cmi-expand').on('click', function () {
+    // if (isTouchScreendevice()) {
+    //     $('.card').removeClass('parallax');
+    // } else {
+    //     $(tilt).methods.destroy.call(tilt)
+    // }
     $('.context-selected-card').addClass('removing');
     setTimeout(() => {
         $('.context-selected-card').removeClass('removing');
@@ -51,10 +56,17 @@ $('.cmi-expand').on('click', function () {
 
             elementToMove.addClass('expanded');
 
-            var expandableWindow = $('<div class="surface expandableWindow visible">');
+            var expandableWindow = $('<div class="expandableWindow visible">');
             expandableWindow.attr('cardName', elementToMove.attr('data-friendlyName'));
-            $('<div class="return interactable-hov">').appendTo(expandableWindow);
-            $('<i class="fa-solid fa-down-left-and-up-right-to-center">').appendTo(expandableWindow.children('.return'));
+            var windowOpts = $('<div class="windowOpts">').appendTo(expandableWindow);
+
+            var returnBtn = $('<div class="return interactable-hov">');
+            $('<i class="fa-solid fa-close">').appendTo(returnBtn);
+            returnBtn.appendTo(windowOpts);
+            $('<div class="grabber">').appendTo(expandableWindow.children('.windowOpts'));
+            windowOpts.appendTo(expandableWindow);
+
+
 
             expandableWindow.appendTo('body');
 
@@ -64,6 +76,15 @@ $('.cmi-expand').on('click', function () {
                 containment: "parent"
             })
         }
+        // if (isTouchScreendevice()) {
+        //     $('.card').removeClass('parallax');
+        // } else {
+        //     tilty = $('.subCards .card[data-parallaxCard="y"]').tilt({
+        //         perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
+        //         scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
+        //         speed: 500    // Speed of the enter/exit transition
+        //     });
+        // }
         setTheme();
         dockRadi();
         $('.context-selected-card').removeClass('context-selected-card')
@@ -200,7 +221,7 @@ function cardContextMenu(e) {
             $('.cmi-resize').removeClass('override-hidden');
         }
         $(e).addClass('context-selected-card');
-        var cmLeft = $(".context-selected-card").offset().left - $(document).scrollLeft() + 5;
+        var cmLeft = $(".context-selected-card").offset().left - $(document).scrollLeft() - 5;
         var cmLeftS = $(".context-selected-card").offset().left - $(document).scrollLeft() - 40;
         if ($('.context-selected-card').hasClass('rectCard')) {
             $('.contextMenuDiv').css('left', cmLeft);

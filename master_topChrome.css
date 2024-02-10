@@ -164,10 +164,10 @@
     justify-content: center;
     overflow: hidden;
     box-sizing: border-box;
-    margin-right: 2px;
+    margin-right: 5px;
 
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     /* flex-shrink: 0; */
 
     transition: .25s;
@@ -193,7 +193,9 @@
 
 .rolodexOpen:hover {
     width: 80px;
+    height: 40px;
     gap: 5px;
+    margin-right: 2px;
 
     background-color: rgba(255, 255, 255) !important;
     color: rgba(0, 0, 0, .75) !important;

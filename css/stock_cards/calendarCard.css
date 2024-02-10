@@ -73,11 +73,15 @@
     height: 100%;
     background-color: purple;
 
-    filter: blur(20px);
     opacity: .75;
 
     position: absolute;
 }
+
+.calendarCard .expView::after {
+    content: "Calendar fullview";
+}
+
 
 .calendarCard.expanded .expView {
     display: flex;

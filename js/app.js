@@ -9,6 +9,7 @@ function isTouchScreendevice() {
 };
 
 var repeater;
+let tilt;
 
 window.onload = function () {
     showTime();
@@ -24,15 +25,15 @@ window.onload = function () {
         $('.aboutBtn').removeClass('visible');
     }, 6000);
 
-    if (isTouchScreendevice()) {
-        $('.card').removeClass('parallax');
-    } else {
-        $('.card[data-parallaxCard="y"]').tilt({
-            perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
-            scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
-            speed: 500    // Speed of the enter/exit transition
-        });
-    }
+    // if (isTouchScreendevice()) {
+    //     $('.card').removeClass('parallax');
+    // } else {
+    //     tilt = $('.subCards .card[data-parallaxCard="y"]').tilt({
+    //         perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
+    //         scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
+    //         speed: 500    // Speed of the enter/exit transition
+    //     });
+    // }
 
     weatherBalloon(lsOwmCity);
 
@@ -265,18 +266,18 @@ $('.addBtn').on('click', function (e) {
 // Expandable card functionality
 
 $(document).on('click', '.expandableWindow .return', function () {
-    $(this).parent().addClass('closing');
+    $(this).parent().parent().addClass('closing');
     setTimeout(() => {
 
-        $(this).parent().children('.card.expanded').addClass('removing').removeClass('expanded')
-        $(this).parent().children('.card').prependTo('.subCards');
+        $(this).parent().parent().children('.card.expanded').addClass('removing').removeClass('expanded')
+        $(this).parent().parent().children('.card').prependTo('.subCards');
 
         setTimeout(() => {
             $('.card.removing').removeClass('removing');
             dockRadi();
             $(".subCards").sortable("refresh");
 
-            $(this).parent().remove();
+            $(this).parent().parent().remove();
         }, 200);
 
 

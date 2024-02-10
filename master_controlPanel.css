@@ -96,8 +96,9 @@
     align-items: center;
     justify-content: center;
 
-    font-weight: 500;
-    font-size: 14px;
+    opacity: .75;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .controlPanelOptGroup p.tip {
@@ -114,8 +115,9 @@
     width: 100%;
     text-align: center;
 
-    font-weight: 500;
-    font-size: 14px;
+    opacity: .75;
+    font-weight: 600;
+    font-size: 15px;
 
     margin-top: 5px;
 }
@@ -313,8 +315,9 @@
 
     text-align: center;
     user-select: none;
-    font-weight: 500;
-    font-size: 14px;
+    opacity: .75;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .dcExpt:not(.pageScalingGroup):active,

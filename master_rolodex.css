@@ -204,6 +204,30 @@
     right: 80px;
 }
 
+.addBtn {
+    width: 35px !important;
+    padding: 0;
+}
+
+.addBtn:hover {
+    padding: 0 10px;
+    width: 45px !important;
+}
+
+.addBtn::after {
+    content: 'Add';
+    width: fit-content;
+    overflow: hidden;
+    max-width: 0;
+    margin-left: -7px;
+    transition: .2s;
+}
+
+.addBtn:hover::after {
+    max-width: 100px;
+    margin-left: 0;
+}
+
 /* Move controls */
 
 .moveCtrls {

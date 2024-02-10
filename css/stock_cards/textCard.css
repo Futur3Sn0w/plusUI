@@ -58,7 +58,7 @@
     width: calc(100% - 10px);
     bottom: 4px;
     border-radius: 13px;
-    background-color: inherit;
+    background-color: white;
 }
 
 .textCard.expanded textarea {
@@ -67,7 +67,7 @@
     bottom: -2px !important;
     top: -2px !important;
     border-radius: 13px;
-    background-color: inherit;
+    background-color: white;
 }
 
 .textCard textarea {
