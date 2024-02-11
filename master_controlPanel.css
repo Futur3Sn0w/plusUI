@@ -41,7 +41,7 @@
 }
 
 .controlPanelOptGroup {
-    width: 240px;
+    width: 230px;
     height: fit-content;
     flex-shrink: 0;
 
@@ -306,6 +306,30 @@
     width: 100%;
 }
 
+.group-b {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* gap: 10px; */
+    padding: 0;
+}
+
+.group-b .dcExpt {
+    width: 45px;
+    padding-left: 0 !important;
+    justify-content: center;
+}
+
+.group-b .dcExpt i {
+    margin-left: 0;
+    font-size: 20px;
+    background-color: transparent !important;
+}
+
+.group-b .dcExpt:hover i {
+    background-color: transparent !important;
+}
+
 .sectLabel {
     width: 100%;
 
@@ -397,7 +421,7 @@
 }
 
 .dcExpt i {
-    font-size: 17px;
+    font-size: 18px;
     position: relative;
     z-index: 2;
     pointer-events: none;

@@ -91,7 +91,7 @@ body:has(.darkModeOn) .backDrop {
 body::before {
     content: '';
     width: 100vw;
-    height: 100vw;
+    height: 100%;
 
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(25px);

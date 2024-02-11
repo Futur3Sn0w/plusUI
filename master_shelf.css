@@ -34,7 +34,7 @@ body:has(.context-selected-card) .shelfLabel {
 
     transform-origin: center center;
 
-    transition: .2s;
+    transition: transform .2s, filter .2s, opacity .2s;
 }
 
 .shelf:has(.card:hover) .shelfLabel,
@@ -46,12 +46,11 @@ body:has(.context-selected-card) .shelfLabel {
 
 .shelf {
     position: absolute;
-    bottom: 0;
+    top: calc(100% - 135px);
     left: 0;
-    z-index: 10;
+    z-index: 12;
 
     width: 100vw;
-    max-width: 100%;
     height: 135px;
 
     display: flex;
@@ -92,6 +91,7 @@ body:has(.context-selected-card) .shelfLabel {
 
     backdrop-filter: blur(0) saturate(1);
     display: flex;
+    pointer-events: none;
 
     mask-image: linear-gradient(to bottom, transparent, black 50%);
 
@@ -162,7 +162,7 @@ body:has(.shelf.float) .shelfBack {
 
 .subCards {
     width: fit-content;
-    max-width: calc(100% - 50px);
+    max-width: calc(100%);
     height: fit-content;
 
     display: flex;

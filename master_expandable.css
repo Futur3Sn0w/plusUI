@@ -1,3 +1,17 @@
+.eWinSurface {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 135px - 70px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* background-color: purple; */
+}
+
 .expandableWindow {
     display: flex;
     align-items: center;
@@ -15,7 +29,7 @@
     /* pointer-events: none;  */
 
     position: absolute;
-    z-index: 10000;
+    z-index: 9;
     /* overflow: hidden; */
 }
 
@@ -76,7 +90,8 @@ body:has(.darkModeOn) .expandableWindow {
 
 .expandableWindow .windowOpts {
     height: 30px;
-    width: 100%;
+    width: fit-content;
+    padding: 0 10px;
     position: absolute;
     bottom: 0;
 

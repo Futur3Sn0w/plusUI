@@ -49,39 +49,6 @@ function drawWeather(d) {
 
 //
 
-let touchstartX = 0
-let touchendX = 0
-
-function checkDirectionWC() {
-    if (touchendX < touchstartX) {
-        // left swipe
-        if ($('.shelf').hasClass('right')) {
-            $('#saoC-radio').click()
-        } else if ($('.shelf').hasClass('center')) {
-            $('#saoL-radio').click()
-        }
-    } else if (touchendX > touchstartX) {
-        // right swipe
-        if ($('.shelf').hasClass('left')) {
-            $('#saoC-radio').click()
-        } else if ($('.shelf').hasClass('center')) {
-            $('#saoR-radio').click()
-        }
-    }
-}
-
-// document.querySelector('.shelf:not(.subCards)').addEventListener('touchstart', e => {
-//     touchstartX = e.changedTouches[0].screenX
-// })
-
-// document.querySelector('.shelf:not(.subCards)').addEventListener('touchend', e => {
-//     touchendX = e.changedTouches[0].screenX
-//     checkDirectionWC()
-//     e.stopPropagation();
-// })
-
-//
-
 // Shortcuts
 
 $('.scApp').on('click', function () {

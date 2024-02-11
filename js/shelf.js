@@ -18,13 +18,7 @@ function dockRadi() {
 $('.card').on('contextmenu', function (e) {
     e.preventDefault();
     if (!$(this).hasClass('deckCard') && !$(this).hasClass('expanded')) {
-        if (isTouchScreendevice()) {
-            $('.subCards').addClass('editMode');
-            $('.subCards').sortable('enable');
-            $('.context-selected-card').removeClass('context-selected-card')
-        } else {
-            cardContextMenu(this);
-        }
+        cardContextMenu(this);
     }
 });
 
@@ -43,11 +37,6 @@ $('.cmi-resize').on('click', function () {
 });
 
 $('.cmi-expand').on('click', function () {
-    // if (isTouchScreendevice()) {
-    //     $('.card').removeClass('parallax');
-    // } else {
-    //     $(tilt).methods.destroy.call(tilt)
-    // }
     $('.context-selected-card').addClass('removing');
     setTimeout(() => {
         $('.context-selected-card').removeClass('removing');
@@ -66,25 +55,16 @@ $('.cmi-expand').on('click', function () {
             $('<div class="grabber">').appendTo(expandableWindow.children('.windowOpts'));
             windowOpts.appendTo(expandableWindow);
 
-
-
-            expandableWindow.appendTo('body');
+            expandableWindow.appendTo('.eWinSurface');
 
             elementToMove.appendTo(expandableWindow);
 
             expandableWindow.draggable({
-                containment: "parent"
+                containment: "parent",
+                handle: ".windowOpts"
             })
         }
-        // if (isTouchScreendevice()) {
-        //     $('.card').removeClass('parallax');
-        // } else {
-        //     tilty = $('.subCards .card[data-parallaxCard="y"]').tilt({
-        //         perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
-        //         scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
-        //         speed: 500    // Speed of the enter/exit transition
-        //     });
-        // }
+
         setTheme();
         dockRadi();
         $('.context-selected-card').removeClass('context-selected-card')
@@ -222,7 +202,7 @@ function cardContextMenu(e) {
         }
         $(e).addClass('context-selected-card');
         var cmLeft = $(".context-selected-card").offset().left - $(document).scrollLeft() - 5;
-        var cmLeftS = $(".context-selected-card").offset().left - $(document).scrollLeft() - 40;
+        var cmLeftS = $(".context-selected-card").offset().left - $(document).scrollLeft() - 50;
         if ($('.context-selected-card').hasClass('rectCard')) {
             $('.contextMenuDiv').css('left', cmLeft);
         } else {
@@ -245,19 +225,61 @@ function cardContextMenu(e) {
 
 // Card context menu swipeup gesture (Touch only)
 
-let touchstartY = 0
-let touchendY = 0
+// let touchstartY = 0
+// let touchendY = 0
 
-$('.subCards .card').on('touchstart', function (e) {
-    touchstartY = e.changedTouches[0].screenY
-    $(this).removeClass('fnDown');
+// $('.subCards .card').on('touchstart', function (e) {
+//     touchstartY = e.changedTouches[0].screenY
+//     $(this).removeClass('fnDown');
+// })
+
+// $('.subCards .card').on('touchend', function (e) {
+//     touchendY = e.changedTouches[0].screenY
+//     $(this).addClass('fnDown');
+//     if (touchendY < touchstartY) {
+//         // up swipe
+//         cardContextMenu(this)
+//         $('.fnCard').removeClass('fnCard');
+//     }
+// })
+
+// Swipe to align shelf
+
+let touchstartX = 0
+let touchendX = 0
+
+function checkDirectionWC() {
+    if (touchendX < touchstartX) {
+        // left swipe
+        if ($('.shelf').hasClass('right')) {
+            $('#saoC-radio').click()
+        } else if ($('.shelf').hasClass('center')) {
+            $('#saoL-radio').click()
+        }
+    } else if (touchendX > touchstartX) {
+        // right swipe
+        if ($('.shelf').hasClass('left')) {
+            $('#saoC-radio').click()
+        } else if ($('.shelf').hasClass('center')) {
+            $('#saoR-radio').click()
+        }
+    }
+}
+
+document.querySelector('.subCards').addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX
 })
 
-$('.subCards .card').on('touchend', function (e) {
-    touchendY = e.changedTouches[0].screenY
-    $(this).addClass('fnDown');
-    if (touchendY < touchstartY) {
-        // up swipe
+document.querySelector('.subCards').addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX
+    checkDirectionWC()
+    e.stopPropagation();
+})
+
+// Context menu action for touch
+
+$('.subCards .card').on('dblclick', function (e) {
+    if (!$('.subCards').hasClass('editMode') && $(this).parent().hasClass('.subCards')) {
         cardContextMenu(this)
         $('.fnCard').removeClass('fnCard');
     }
