@@ -99,7 +99,7 @@ body::before,
     opacity: 0;
 
     position: absolute;
-    z-index: 1;
+    z-index: -1;
     transition: .4s;
 }
 
@@ -114,6 +114,9 @@ body:has(.about-modal.visible)::before {
     opacity: 1;
     display: flex;
     z-index: 0;
+
+    background-color: transparent !important;
+    backdrop-filter: none !important;
 }
 
 body:has(.timeDate.ccOpen .ccb2.selected) .siteDrop {

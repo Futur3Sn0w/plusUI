@@ -25,23 +25,28 @@ window.onload = function () {
         $('.aboutBtn').removeClass('visible');
     }, 6000);
 
-    // if (isTouchScreendevice()) {
-    //     $('.card').removeClass('parallax');
-    // } else {
-    //     tilt = $('.subCards .card[data-parallaxCard="y"]').tilt({
-    //         perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
-    //         scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
-    //         speed: 500    // Speed of the enter/exit transition
-    //     });
-    // }
+    if (isTouchScreendevice()) {
+        $('.card').removeClass('parallax');
+    } else {
+        tilt = $('.subCards .card[data-parallaxCard="y"]').tilt({
+            perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
+            scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
+            speed: 500    // Speed of the enter/exit transition
+        });
+    }
 
-    // weatherBalloon(lsOwmCity);
+    $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
+    $('body').css('background-image', "url(" + backdropImg + ")");
+    repeater = setInterval(refreshWall, 60000);
 
     if (localStorage.getItem('liveLink') == null) {
         localStorage.setItem('liveLink', 'https://flux.sandydoo.me')
+        clearInterval(repeater)
     }
 
     if (localStorage.getItem('liveWall') == 'true') {
+        $('#backDrop2').css('background-image', "url(resc/dark.png)");
+        $('body').css('background-image', "none");
         $('<embed src="' + localStorage.getItem('liveLink') + '" type="">').appendTo('.siteDrop');
         $('#liveLinkTB').val(localStorage.getItem('liveLink'));
         $('#siteDropToggle').prop('checked', true);
@@ -83,10 +88,6 @@ window.onload = function () {
         $('.subCards').addClass('plated');
         $('#cbMonoMode').prop('checked', true);
     }
-
-    $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
-    $('body').css('background-image', "url(" + backdropImg + ")");
-    repeater = setInterval(refreshWall, 60000);
 
     // cardSmarts();
 
