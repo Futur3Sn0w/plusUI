@@ -2,24 +2,17 @@
     background: linear-gradient(360deg, #0e63d1, rgb(92, 168, 255));
 }
 
-.weatherCard.squareCard .temp {
+.weatherCard.squareCard .tempGroup {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
-    gap: 3px;
+
+    font-size: 20px;
+    gap: 0 !important;
 }
 
 .weatherCard.squareCard * {
     transform: none !important;
-}
-
-.weatherCard.squareCard #weatherIcon {
-    margin-bottom: -20px;
-    margin-top: -15px;
-}
-
-.weatherCard.squareCard .temp {
-    font-size: 20px;
 }
 
 .weatherCard.rectCard #weatherIcon {
@@ -29,7 +22,7 @@
 }
 
 #weatherIcon {
-    height: 78px;
+    height: 48px;
     aspect-ratio: 1/1;
 
     transition: .2s;
@@ -41,43 +34,44 @@
 }
 
 
-.temp {
-    font-size: 25px;
-    transform: translateX(-10px);
+#temp {
+    flex-shrink: 0;
     transition: .2s;
     color: white;
-    font-weight: 500;
+    font-weight: 600;
 }
 
-.weatherCard.rectCard .temp,
-.weatherCard.expanded .temp {
-    padding: 0;
-    padding-left: 20px;
+#temp::after {
+    content: attr(feel);
+    position: absolute;
+    font-weight: 500;
 
-    font-size: 30px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: max-content;
+    opacity: .75;
+
+    font-size: 15px;
+}
+
+.weatherCard.squareCard #temp::after {
+    display: none;
+}
+
+.weatherCard.rectCard .tempGroup,
+.weatherCard.expanded .tempGroup {
+    font-size: 25px;
+    gap: 10px;
 
     box-sizing: border-box;
     transform: translateZ(15px);
 
+    margin-top: -15px;
+
+    flex-direction: row-reverse;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.weatherCard>i {
-    color: white;
-    position: absolute;
-    top: 14px;
-    left: 12px;
-
-    font-size: 20px;
-}
-
-.weatherCard.squareCard>i {
-    display: none;
-}
-
-.weatherCard.expanded>i,
-.weatherCard.rectCard>i {
-    display: flex;
 }

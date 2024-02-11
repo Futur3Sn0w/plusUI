@@ -20,31 +20,96 @@
 //     }
 // });
 
-// Weather
+// Weather (rejuv)
 
-var lsOwmAPI = "984b3d6c3b801e60a2eaf094da08b866";
-var lsOwmCity = "4791259";
+var tempUnit = 'f';
+var lat = localStorage.getItem('locLat');
+var lon = localStorage.getItem('locLon');
+const weatherCodes = {
+    0: "Clear sky",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Foggy",
+    48: "Depositing rime fog",
+    51: "Light Drizzle",
+    53: "Moderate Drizzle",
+    55: "Dense Drizzle",
+    56: "Light Freezing Drizzle",
+    57: "Dense Freezing Drizzle",
+    61: "Slight Rain",
+    63: "Moderate Rain",
+    65: "Heavy Rain",
+    66: "Light Freezing Rain",
+    67: "Heavy Freezing Rain",
+    71: "Slight Snow fall",
+    73: "Moderate Snow fall",
+    75: "Heavy Snow fall",
+    77: "Snow grains",
+    80: "Slight Rain showers",
+    81: "Moderate Rain showers",
+    82: "Violent Rain showers",
+    85: "Slight snow showers ",
+    86: "Heavy snow showers ",
+    95: "Thunderstorm with slight hail",
+    96: "Thunderstorm with hail",
+    99: "Thunderstorm with heavy hail"
+};
 
-function applyKeys() {
-    // weatherBalloon(lsOwmCity);
-    // window.setInterval("weatherBalloon(lsOwmCity);", 10000);
+function weather() {
+    if (navigator.geolocation) {
+        console.log("Geolocation is supported.");
+        getLatLon().catch((error) => {
+            console.log(`Error: ${error.message}`);
+            $('.weatherCard').hide();
+        });
+    } else {
+        console.log("Geolocation is not enabled and/or supported by this device.");
+        $('.weatherCard').hide();
+    }
+    newWeatherBalloon(lat, lon);
+    window.setInterval("newWeatherBalloon(lat, lon);", 10000);
 }
 
-function weatherBalloon(cityID) {
-    fetch('https://api.openweathermap.org/data/2.5/weather?id=' + cityID + '&appid=' + lsOwmAPI)
+async function getLatLon() {
+    try {
+        const response = await fetch(`http://ip-api.com/json`);
+        const { lat, lon } = await response.json();
+
+        localStorage.setItem("locLat", lat);
+        localStorage.setItem("locLon", lon);
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+function newWeatherBalloon() {
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&daily=weathercode&current_weather=true&timezone=auto&forecast_days=1')
         .then(function (resp) { return resp.json() }) // Convert data to json
         .then(function (data) {
-
-            setTimeout(drawWeather(data), 10000);
-
+            $('.weatherCard').show();
+            setTimeout(newDrawWeather(data), 10000);
         })
+        .catch(function (error) {
+            // location.reload();
+            $('.weatherCard').hide();
+            console.error('An error occurred:', error);
+        });
 }
 
-function drawWeather(d) {
-    var fahrenheit = Math.round(((parseFloat(d.main.temp) - 273.15) * 1.8) + 32);
-    document.getElementById('temp').innerText = fahrenheit + '°';
-    var wIcon = d.weather[0].icon;
-    $('#weatherIcon').attr('src', "http://openweathermap.org/img/wn/" + wIcon + "@4x.png");
+function newDrawWeather(d) {
+    var feel = weatherCodes[d.current_weather.weathercode];
+    var tempPref;
+    if (tempUnit == 'c') {
+        tempPref = Math.round(d.current_weather.temperature);
+    } else if (tempUnit == 'f') {
+        tempPref = Math.round((d.current_weather.temperature * 1.8) + 32);
+    }
+    document.getElementById('temp').innerText = tempPref + '°';
+
+    $('#weatherIcon').attr('src', "resc/weather/" + weatherCodes[d.current_weather.weathercode].replace(/\s+/g, "").toLowerCase() + '.svg');
+    $('#temp').attr('feel', feel)
 }
 
 //

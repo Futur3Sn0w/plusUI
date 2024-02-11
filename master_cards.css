@@ -152,7 +152,7 @@
 }
 
 .contextMenuDiv.show::after {
-    opacity: .75;
+    opacity: .6;
 }
 
 .contextMenuDiv.show {
@@ -176,6 +176,7 @@
     padding-left: 4px;
     border-radius: 12px;
     gap: 5px;
+    color: white !important;
 
     margin-bottom: -30px;
 
@@ -192,7 +193,7 @@
 
 .cmItem:hover {
     background-color: white !important;
-    color: rgba(0, 0, 0, 0.75);
+    color: rgba(0, 0, 0, 0.75) !important;
 }
 
 .cmItem i {
@@ -278,14 +279,17 @@
 
 .cmItem.cmi-resize i {
     background-color: #63E369;
+    color: rgba(0, 0, 0, 0.75) !important;
 }
 
 .cmItem.cmi-expand i {
     background-color: #3CD1F7;
+    color: rgba(0, 0, 0, 0.75) !important;
 }
 
 .cmItem.cmi-disableCard i {
     background-color: #FB794D;
+    color: rgba(0, 0, 0, 0.75) !important;
 }
 
 .cmItem.cmi-editMode i {

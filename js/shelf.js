@@ -285,27 +285,3 @@ $('.subCards .card').on('dblclick', function (e) {
     }
 })
 
-// Float mode
-
-$('#cbFloatMode').click(function () {
-    if ($(this).is(':checked')) {
-        $('.shelf').addClass('float');
-        localStorage.setItem('float', 'true');
-    } else {
-        $('.shelf').removeClass('float');
-        localStorage.setItem('float', 'false');
-    }
-    alignShelfLabel();
-});
-
-// Monochrome mode
-
-$('#cbMonoMode').click(function () {
-    if ($(this).is(':checked')) {
-        $('.subCards').addClass('plated');
-        localStorage.setItem('monoCards', 'true');
-    } else {
-        $('.subCards').removeClass('plated');
-        localStorage.setItem('monoCards', 'false');
-    }
-});

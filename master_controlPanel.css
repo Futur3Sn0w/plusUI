@@ -314,19 +314,32 @@
     padding: 0;
 }
 
-.group-b .dcExpt {
+.group-b.liveLinkCont {
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.group-b.liveLinkCont .dcExpt {
+    width: calc(50% - 5px);
+}
+
+.dcExpt.button {
     width: 45px;
     padding-left: 0 !important;
     justify-content: center;
 }
 
-.group-b .dcExpt i {
+.dcExpt.button::after {
+    display: none;
+}
+
+.dcExpt.button i {
     margin-left: 0;
     font-size: 20px;
     background-color: transparent !important;
 }
 
-.group-b .dcExpt:hover i {
+.dcExpt.button:hover i {
     background-color: transparent !important;
 }
 
@@ -425,6 +438,7 @@
     position: relative;
     z-index: 2;
     pointer-events: none;
+    flex-shrink: 0;
 
     width: 30px;
     height: 30px;
@@ -509,4 +523,15 @@
     width: 55%;
     margin-left: auto;
     margin-right: 10px;
+}
+
+/* Live display fixes */
+
+.backdropCont:has(#siteDropToggle:checked) .wallList,
+.backdropCont:has(#siteDropToggle:checked) .unsplashTagsCont {
+    display: none;
+}
+
+.backdropCont:not(:has(#siteDropToggle:checked)) .liveLinkCont {
+    display: none;
 }

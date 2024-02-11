@@ -35,7 +35,26 @@ window.onload = function () {
     //     });
     // }
 
-    weatherBalloon(lsOwmCity);
+    // weatherBalloon(lsOwmCity);
+
+    if (localStorage.getItem('liveLink') == null) {
+        localStorage.setItem('liveLink', 'https://flux.sandydoo.me')
+    }
+
+    if (localStorage.getItem('liveWall') == 'true') {
+        $('<embed src="' + localStorage.getItem('liveLink') + '" type="">').appendTo('.siteDrop');
+        $('#liveLinkTB').val(localStorage.getItem('liveLink'));
+        $('#siteDropToggle').prop('checked', true);
+    }
+
+    if (tempUnit == null) {
+        localStorage.setItem('tempUnit', 'c');
+    } else if (tempUnit == 'f') {
+        localStorage.setItem('tempUnit', 'f');
+    } else if (tempUnit == 'c') {
+        localStorage.setItem('tempUnit', 'c');
+    }
+    weather();
 
     setTheme();
     if (localStorage.getItem('theme') == null) {
@@ -100,11 +119,6 @@ window.onload = function () {
     }, 1000);
 }
 
-$('.reloadPage').on('click', function () {
-    window.location.reload();
-    refreshWall();
-});
-
 $(document).mouseup(function (e) {
     saveCards();
 
@@ -153,14 +167,22 @@ function refreshWall() {
 }
 
 $('#openWallpaperBtn').click(function (e) {
-    window.open(localStorage.getItem('backdropURL'));
+    if (localStorage.getItem('liveWall') == 'true') {
+        window.open(localStorage.getItem('liveLink'));
+    } else {
+        window.open(localStorage.getItem('backdropURL'));
+    }
     e.stopPropagation();
 });
 
 $('#refreshWallBtn').on('click', function (e) {
-    clearInterval(repeater)
-    refreshWall();
-    repeater = setInterval(refreshWall, 60000);
+    if (localStorage.getItem('liveWall') == 'true') {
+        $('.siteDrop').children('embed').attr('src', localStorage.getItem('liveLink'))
+    } else {
+        clearInterval(repeater)
+        refreshWall();
+        repeater = setInterval(refreshWall, 60000);
+    }
     e.stopPropagation();
 });
 
@@ -169,99 +191,6 @@ function clearWall(e) {
     $('body').css('background-image', $(e).css('background-image'));
     clearInterval(repeater)
 }
-
-// Rolodex Actions
-
-$('.rolodexOpen').on('click', function (e) {
-    i = 0
-    $('.rolodex').addClass('visible');
-    $('.cbs1').scrollLeft(0);
-
-    if ($('.cbs1').children().length == 0) {
-        // $('.cbs1').children().first().addClass('hoveredCard')
-        $('.cbs1').attr('data-sectName', 'Your card deck is empty')
-        $('.cbs1').attr('data-cardDesc', 'Move a card to the deck from the shelf.')
-        $('.rolodex').addClass('empty')
-    } else {
-        $('.cbs1').children().first().addClass('hoveredCard')
-        $('.cbs1').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
-        $('.cbs1').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
-        $('.rolodex').removeClass('empty')
-    }
-
-    e.stopPropagation();
-})
-
-$('.rolodexCloseBtn').on('click', function () {
-    $('.rolodex').removeClass('visible');
-})
-
-let i = 0
-// var scroller = $('.cbs1').children();
-
-$('.mvCtrl.left').on('click', function () {
-    i = i - 1
-    if (i == -1) {
-        i = 0
-        $('.cbs1').scrollLeft(0)
-    } else {
-        $('.cbs1').scrollLeft($('.cbs1').scrollLeft() - 100);
-    }
-    // alert(i)
-    $('.hoveredCard').removeClass('hoveredCard')
-    $('.cbs1').children().eq(i).addClass('hoveredCard')
-    $('.cbs1').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
-    $('.cbs1').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
-})
-
-$('.mvCtrl.right').on('click', function () {
-    i = i + 1
-    if (i == $('.cbs1').children().length) {
-        i = 0
-        $('.cbs1').scrollLeft(0)
-    } else {
-        $('.cbs1').scrollLeft($('.cbs1').scrollLeft() + 100);
-    }
-    // alert(i)
-    $('.hoveredCard').removeClass('hoveredCard')
-    $('.cbs1').children().eq(i).addClass('hoveredCard')
-    $('.cbs1').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
-    $('.cbs1').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
-})
-
-$('.addBtn').on('click', function (e) {
-    $('.hoveredCard').attr('data-enabled', 'y');
-    $('.hoveredCard').removeClass('deckCard').addClass('removing').appendTo($('.subCards'));
-    setTimeout(() => {
-        $('.hoveredCard').removeClass('removing').removeClass('.hoveredCard');
-    }, 500);
-    $(".subCards").sortable("enable");
-    $(".subCards").sortable("refresh");
-    $(".subCards").sortable("disable");
-    $(".card").each(function (i, e) {
-        var enabled = $(e).attr('data-enabled');
-        var card = $(e).attr('id');
-
-        localStorage.setItem(card, enabled);
-        // $(this).attr('data-index', $(this).index());
-    });
-    dockRadi();
-    saveCards();
-
-    if ($('.cbs1').children().length == 0) {
-        // $('.cbs1').children().first().addClass('hoveredCard')
-        $('.cbs1').attr('data-sectName', 'Your card deck is empty')
-        $('.cbs1').attr('data-cardDesc', 'Move a card to the deck from the shelf.')
-        $('.rolodex').addClass('empty')
-    } else {
-        $('.cbs1').children().first().addClass('hoveredCard')
-        $('.cbs1').scrollLeft(0)
-        i = 0;
-        $('.cbs1').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
-        $('.cbs1').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
-        $('.rolodex').removeClass('empty')
-    }
-})
 
 // Expandable card functionality
 

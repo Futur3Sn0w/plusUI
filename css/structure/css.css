@@ -88,7 +88,8 @@ body:has(.darkModeOn) .backDrop {
     background-image: url('../../resc/dark.png');
 }
 
-body::before {
+body::before,
+.siteDrop {
     content: '';
     width: 100vw;
     height: 100%;
@@ -98,7 +99,7 @@ body::before {
     opacity: 0;
 
     position: absolute;
-    z-index: 0;
+    z-index: 1;
     transition: .4s;
 }
 
@@ -107,6 +108,21 @@ body:has(.rolodex.visible)::before,
 body:has(.timeDate.ccOpen .ccb:not(.ccb2).selected)::before,
 body:has(.about-modal.visible)::before {
     opacity: 1;
+}
+
+.siteDrop {
+    opacity: 1;
+    display: flex;
+    z-index: 0;
+}
+
+body:has(.timeDate.ccOpen .ccb2.selected) .siteDrop {
+    z-index: 1;
+}
+
+.siteDrop embed {
+    width: 100%;
+    height: 100%;
 }
 
 .customBackdrop {
