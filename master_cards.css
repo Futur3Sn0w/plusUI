@@ -133,16 +133,16 @@
 .contextMenuDiv::after {
     content: '';
     width: 190px;
-    height: 190px;
+    height: 150%;
     border-radius: 50%;
     background-color: white;
 
     position: absolute;
-    bottom: -130px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     z-index: -10;
-    filter: blur(190px);
+    filter: blur(160px);
     pointer-events: none;
 
     opacity: 0;
