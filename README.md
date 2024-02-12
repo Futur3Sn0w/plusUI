@@ -1,31 +1,58 @@
 # PlusUI (Codename: WebNT)
 PlusUI is my ever-evolving, multi-year long project to create a hybrid dashboard & smart display for large-format screens that is both beautiful, and multi-functional. PlusUI looks best on larger screens, but it's made to scale properly on all screen sizes.  
 This project was hand-written from the ground up in pure HTML/CSS/JS (vanilla jQuery), with exception of plugins not created by me.  
+The name PlusUI is from it's large-screen nature, and it's codename (WebNT) is a mix of web for it's web-based nature, and NT for both "new technology" and "new tab", as the project originated as a new-tab replacement.  
 
-The name PlusUI is from it's large-screen nature, and it's codename (WebNT) is a mix of web for it's web-based nature, and NT for both "new technology" and "new tab", as the project originated as a new-tab replacement.
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/49c1b259-262c-4c0a-aec3-aa2b37d9b9f8)  
 
 ### tvOS meets VisionOS
 The first thing you'll notice about PlusUI is its Apple-inspired UI. All the user elements, from the shelf, to the card deck, to the control panel are heavily inspired by Apple's and design elements and guidelines. It takes the most inspiration from the tvOS home screen, although everything is tweaked and refined to work a bit better with different input types.  
+
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/102ae4df-9237-4d38-b966-cd3e08cf2d82)  
+  
 Aside from just being blurry, the UI also saturates the color behind it, making it change and adapt based on your backdrop. Whether you have expandables open, or just want to view the background, PlusUI always looks gorgeous on your screen.  
 
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/14c9042e-2a71-45c0-af25-db6fd89ba905)  
+
 ### Refreshingly New
-PlusUI's layout resembles that of the tvOS home screen, but with some unique changes and additions. The time is always in the top right, and the shelf is always at the bottom. Clicking the time opens control panel, and next to it is the 'card deck' button, which is hidden while the control panel is open. When you first arrive at the home page, you're greeted with your name (customizable from control panel), and a badge in the top-left with PlusUI's version number.
-Behind the UI is the 'backdrop' area, which shows either an image slideshow, or static website (read below).
+PlusUI's layout resembles that of the tvOS home screen, but with some unique changes and additions. The time is always in the top right, and the shelf is always at the bottom. Clicking the time opens control panel, and next to it is the 'card deck' button, which is hidden while the control panel is open. When you first arrive at the home page, you're greeted with your name (customizable from control panel), and a badge in the top-left with PlusUI's version number.  
+Behind the UI is the 'backdrop' area, which shows either an image slideshow, or static website (see "backdrop").  
+
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/6d7f1a7b-e0b7-4926-907e-7780d111a1dd)
+
 
 ### The Shelf & Cards
 The main interaction point of PlusUI is the shelf at the bottom of the screen, which holds small widgets called 'cards'. PlusUI's cards can display a glimpse of information, or act as a visual identifier for a link or action on the web. Information on the card is dynamic, and updates & saves in real time. Cards vary in size, shape, and appearance, as well as functionality; some cards are interactive, while others just display information.  
-To access options for a card, you can right-click or tap and hold to open the context menu. Not all cards have the same options, and some may have specific options available only on that card.
-Edit mode allows you to change the order of cards, so you don't accidentally move a card while otherwise interacting with it. Drag and release the card in edit mode to rearrange its position in the shelf.
+
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/b36ad33f-6e25-4263-9912-9ce22f5a0452)  
+
+
+To access options for a card, you can right-click or tap and hold to open the context menu. Not all cards have the same options, and some may have specific options available only on that card.  
+
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/d65b9aa3-e055-4e84-a135-2d5936afcf28)  
+
+Edit mode allows you to change the order of cards, so you don't accidentally move a card while otherwise interacting with it. Drag and release the card in edit mode to rearrange its position in the shelf.  
+
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/1c274daf-fff4-4d26-90cd-f53d648f245b)  
+
 
 ### Expandables
-Some cards have an option to pop them out into a window (accessible via context menu). These cards are known as 'expandables', and their windows are known as the 'expanded view'. Expandables allow you to view even more information that won't fit in the shelf card view. Expandables can be moved around with the grabber at the bottom, and can be returned to the dock by selecting the smaller dot to the left of the move grabber. The height of each window varies, but the width will always stay the same. Expandables may include interactive or otherwise hidden information that may not be visible in the card's shelf view.
+Some cards have an option to pop them out into a window (accessible via context menu). These cards are known as 'expandables', and their windows are known as the 'expanded view'.  
+Expandables allow you to view even more information that won't fit in the shelf card view. Expandables can be moved around with the grabber at the bottom, and can be returned to the dock by selecting the smaller dot to the left of the move grabber. The height of each window varies, but the width will always stay the same. Expandables may include interactive or otherwise hidden information that may not be visible in the card's shelf view.
+
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/5fb18b38-0c9c-4126-bdc0-1f962a1372e8)
 
 ### Card deck (Codename: Rolodex)
 The card deck stores cards that have been removed from the shelf. New cards developed for PlusUI will be added to the deck instead of directly to the shelf. Any and every card can be moved to and from the deck, and the state of a card moved to the deck will remain for later.  
 The deck displays an extended description of the current card, as well as the option to add it. Available cards can be browsed in the carousel with the left/right buttons. To move a card to the deck, use the relevant option in the card's context menu.  
 
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/76abe504-e501-48b8-a327-88e7c901b623)  
+
 ### Control Panel
 PlusUI's control panel hosts a range of options to tweak PlusUI to your liking. You can open it at any time by clicking the time in the top-right corner. Control panel can host multiple panes, which can be switched between via the page buttons that appear when control panel is open.  
+
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/bae894c9-6357-44d2-b42f-30d4d97dc213)  
+
 Here's a list of appearance & user options (as of v2.5) from left-to-right, top-to-bottom:  
  - Theme  
    Change the theme of the UI and cards to light or dark themes, or make the site match your system setting.
@@ -46,12 +73,15 @@ Here's a list of appearance & user options (as of v2.5) from left-to-right, top-
 
 ### Backdrop
 PlusUI comes with a built-in 'backdrop' feature that can display different images/media as the background of the page, which will fade in or out based on what you're doing. To see the full view of any backdrop, click the expand button in control panel to open it in a new tab.  
+
 The backdrop can be customized via it's page in control panel, and both options comes with settings to choose from:
  - Unsplash Random  
    Rotate through thousands of free stock images on Unsplash.  
    - You can filter what kind of images are displayed with the filter box (separate filters with commas).  
    - Automatically switches every 60 seconds, or whenever you open PlusUI.  
-   - Manually switch images by clicking the reload button. 
+   - Manually switch images by clicking the reload button.
+
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/5f6bc9a3-4287-420f-b4cf-a2d6b5a5d29c)  
 
  - "Live Display"  
    Use any website or otherwise embeddable content as the background of PlusUI.  
@@ -60,3 +90,4 @@ The backdrop can be customized via it's page in control panel, and both options 
    - Interact with the site only while control panel is open.
    - Refresh the selected page with the reload button.
    
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/e3da7a1b-13f8-40c5-b36b-d6dab3c48787)  
