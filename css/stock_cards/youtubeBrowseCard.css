@@ -20,12 +20,11 @@
     left: 10px;
 }
 
-.darkModeOn .youtubeCard-browse.squareCard::before {
+body:has(.darkModeOn) .youtubeCard-browse.squareCard::before {
     color: white;
 }
 
-
-.darkModeOn .youtubeCard-browse {
+body:has(.darkModeOn) .youtubeCard-browse {
     background: #0F0F0F;
 }
 
@@ -53,7 +52,7 @@
 }
 
 .searchCont>i::after {
-    content: "";
+    /* content: ""; */
     width: 9px;
     height: 9px;
 
@@ -85,7 +84,7 @@
     opacity: 0;
 }
 
-.darkModeOn .youtubeCard-browse .searchCont .ytSearch {
+body:has(.darkModeOn) .youtubeCard-browse .searchCont .ytSearch {
     background-color: #212121;
     color: white;
 }
@@ -125,7 +124,7 @@
     transition: .15s;
 }
 
-.darkModeOn .youtubeCard-browse .browseBtns .browseBtn {
+body:has(.darkModeOn) .youtubeCard-browse .browseBtns .browseBtn {
     /* background-color: #212121; */
     color: white;
 }
@@ -136,10 +135,9 @@
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.darkModeOn .youtubeCard-browse .browseBtns .browseBtn:hover {
+body:has(.darkModeOn) .youtubeCard-browse .browseBtns .browseBtn:hover {
     background-color: rgba(35, 35, 35, 0.5) !important;
 }
-
 
 .browseBtns .browseBtn::before {
     content: attr(data-btnLabel);
@@ -160,8 +158,51 @@
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.darkModeOn .youtubeCard-browse .browseBtns .browseBtn:not(:last-of-type)::after {
+body:has(.darkModeOn) .youtubeCard-browse .browseBtns .browseBtn:not(:last-of-type)::after {
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Expanded */
+
+.youtubeCard-browse.expanded {
+    background-image: unset !important;
+}
+
+.youtubeCard-browse.expanded .searchCont .ytSearch {
+    padding-left: 10px;
+    margin-top: 65px;
+}
+
+.youtubeCard-browse.expanded .searchCont i {
+    top: 10px;
+    color: transparent;
+    height: 40px;
+    width: 25%;
+
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.youtubeCard-browse.expanded .searchCont i.fa-youtube {
+    right: unset;
+    left: 12.5%;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg');
+}
+
+.youtubeCard-browse.expanded .searchCont i.fa-youtube-music {
+    left: unset;
+    right: 12.5%;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6a/Youtube_Music_icon.svg');
+}
+
+.youtubeCard-browse.expanded .searchCont i::after {
+    display: none;
+}
+
+.youtubeCard-browse.expanded .searchCont .ytSearch {
+    margin-left: 5%;
+    width: 90%;
 }
 
 .youtubeCard-browse.expanded .browseBtns {
@@ -171,4 +212,12 @@
 .youtubeCard-browse.expanded .browseBtn {
     width: 100%;
     height: 50px;
+}
+
+.youtubeCard-browse.expanded .browseBtns .bb2::before {
+    content: 'Subscriptions';
+
+    position: absolute;
+    bottom: 4px;
+    font-size: 9px;
 }

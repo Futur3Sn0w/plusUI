@@ -256,7 +256,7 @@
     width: 90%;
     height: 115%;
 
-    border: 1px solid black;
+    border: 1px solid white;
     opacity: .5;
     border-left-color: transparent !important;
     border-right-color: transparent !important;
@@ -271,10 +271,6 @@
 .cmSep.custom .cmItem {
     z-index: 12;
     position: relative;
-}
-
-.contextMenuDiv.darkModeOn .cmSep.custom::after {
-    border: 1px solid white;
 }
 
 .cmItem.cmi-resize i {

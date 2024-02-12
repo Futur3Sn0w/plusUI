@@ -314,22 +314,6 @@
     padding: 0;
 }
 
-.liveLinkCont {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.liveLinkCont .dcExpt {
-    width: 100%;
-}
-
-.liveLinkCont .dcExpt label {
-    width: fit-content;
-    margin-left: 5px;
-    margin-right: auto;
-}
-
 .dcExpt.button {
     width: 45px;
     padding-left: 0 !important;
@@ -537,7 +521,37 @@
     margin-right: 5px;
 }
 
-/* Live display fixes */
+/* Live display */
+
+.liveLinkCont {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.liveLinkCont:not(.keyTBOptGroup) {
+    width: 230px;
+    padding: 10px;
+    padding-top: 0;
+    margin-bottom: -10px;
+    margin-left: -11px;
+    box-sizing: border-box;
+
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: visible;
+}
+
+.liveLinkCont .dcExpt {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.liveLinkCont .dcExpt label {
+    width: fit-content;
+    margin-left: 5px;
+    margin-right: auto;
+}
 
 .backdropCont:has(#siteDropToggle:checked) .wallList,
 .backdropCont:has(#siteDropToggle:checked) .unsplashTagsCont {

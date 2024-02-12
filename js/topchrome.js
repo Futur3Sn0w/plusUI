@@ -412,7 +412,7 @@ function showDate() {
     const currentYear = localDate.getFullYear();
     // document.getElementById('date').innerText = currentDay + ", " + currentMonth + " " + currentDate;
 
-    $('.calendarCard .month').text(currentMonth);
+    $('.calendarCard .calenMonth').text(currentMonth);
     $('.calendarCard .calenDayNo').text(currentDate);
     $('.calendarCard .calenDay').text(currentDay);
 }

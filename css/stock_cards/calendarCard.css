@@ -6,7 +6,7 @@
     font-weight: 500;
 }
 
-.calendarCard .month {
+.calendarCard .calenMonth {
     width: 100%;
     min-height: 25px;
 
@@ -26,11 +26,11 @@
     justify-content: center;
 }
 
-.subCards.plated .calendarCard .month {
+.subCards.plated .calendarCard .calenMonth {
     background: #0000007c;
 }
 
-.subCards:not(.darkModeOn).plated .calendarCard .month {
+.subCards:not(.darkModeOn).plated .calendarCard .calenMonth {
     background: #ffffff7c;
     color: black
 }
@@ -56,33 +56,157 @@
     transform: translateZ(10px);
 }
 
+/* Expanded view */
+
+.calendarCard.expanded .calenMonth,
 .calendarCard.expanded .calenDay,
-.calendarCard.expanded .calenDayNo,
-.calendarCard.expanded .month {
-    opacity: 0;
+.calendarCard.expanded .calenDayNo {
+    display: none;
 }
 
 .calendarCard.expanded {
-    background-color: transparent !important;
+    height: 287px !important;
 }
 
-.calendarCard .expView {
-    display: none;
-
+.calendarCard .wrapper {
     width: 100%;
     height: 100%;
-    background-color: purple;
-
-    opacity: .75;
-
     position: absolute;
+    display: none;
+    /* background: #fff; */
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
-.calendarCard .expView::after {
-    content: "Calendar fullview";
-}
-
-
-.calendarCard.expanded .expView {
+.calendarCard.expanded .wrapper {
     display: flex;
+    flex-direction: column;
+}
+
+.wrapper .header {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    padding-left: 10px;
+    margin-bottom: auto;
+
+    background: linear-gradient(to bottom, #fa4c5b, red);
+    color: white;
+}
+
+.wrapper .header p {
+    margin: 0;
+    padding: 0;
+}
+
+.header .icons {
+    display: flex;
+}
+
+.header .icons i {
+    height: 35px;
+    width: 35px;
+    color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    user-select: none;
+    border-radius: 50%;
+}
+
+body:has(.darkModeOn) .header .icons i {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.header .icons i:hover {
+    background-color: white;
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.header .current-date {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.calendar {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
+    padding: 5px;
+}
+
+.calendar ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.calendar .days {
+    margin-bottom: 20px;
+}
+
+.calendar li {
+    color: rgba(0, 0, 0, 0.75);
+    width: calc(100% / 7);
+    aspect-ratio: 1/1;
+    font-size: 1.07rem;
+}
+
+body:has(.darkModeOn) .calendar li {
+    color: rgba(255, 255, 255, 1);
+}
+
+.days li.inactive {
+    opacity: .5;
+}
+
+.days li.active {
+    box-shadow: inset 0 0 0 2px rgb(0, 0, 0);
+}
+
+body:has(.darkModeOn) .days li.active {
+    box-shadow: inset 0 0 0 2px rgb(255, 255, 255);
+}
+
+.calendar .weeks li {
+    font-size: 15px;
+    opacity: .75;
+    font-weight: 500;
+    height: 20.70835px;
+}
+
+.calendar .days li {
+    z-index: 1;
+    position: relative;
+    margin-top: 1px;
+    border-radius: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .days li::before {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    height: 40px;
+    width: 40px;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: .15s;
+}
+*/
+
+.days li:hover {
+    opacity: 1;
+    color: rgba(0, 0, 0, 0.75) !important;
+    background-color: white !important;
 }

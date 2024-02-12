@@ -120,9 +120,7 @@
 
         <div class="surface controlPanelOptGroup backdropOpts" data-sect="Backdrop">
             <div class="backdropCont">
-                <div class="wallList">
-                    <!-- <div class="prevWall"></div> -->
-                </div>
+
                 <div class="wallBtns">
                     <div class="dcExpt siteDropToggleCont">
                         <input type="checkbox" name="siteDropToggle" id="siteDropToggle">
@@ -138,18 +136,45 @@
                         <i class="fa-solid fa-refresh"></i>
                     </div>
                 </div>
-                <div class="ccSep"></div>
                 <div class="dcExpt keyTBOptGroup solo interactable-hov unsplashTagsCont">
                     <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="unsplashTags">
                 </div>
                 <div class="dcExpt keyTBOptGroup solo interactable-hov liveLinkCont">
                     <input class="keyTB" type="text" placeholder="Site URL" name="" id="liveLinkTB">
                 </div>
+                <div class="ccSep"></div>
+                <div class="wallList">
+                    <!-- <div class="prevWall"></div> -->
+                </div>
                 <form class="liveLinkCont" name="liveLinkPresets">
+                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
+                        url="https://lodev09.github.io/web-screensavers/flat-surface-shader">
+                        <input type="radio" name="liveLinkPresets" id="">
+                        <i class="fa-solid fa-f"></i>
+                        <label>Flat Surface Shader</label>
+                    </div>
+                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
+                        url="https://roycurtis.github.io/Flurry-WebGL/">
+                        <input type="radio" name="liveLinkPresets" id="">
+                        <i class="fa-solid fa-f"></i>
+                        <label>Flurry</label>
+                    </div>
                     <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://flux.sandydoo.me">
                         <input type="radio" name="liveLinkPresets" id="">
                         <i class="fa-solid fa-f"></i>
                         <label>Flux</label>
+                    </div>
+                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
+                        url="https://lodev09.github.io/web-screensavers/jellyfish">
+                        <input type="radio" name="liveLinkPresets" id="">
+                        <i class="fa-solid fa-j"></i>
+                        <label>Jellyfish</label>
+                    </div>
+                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
+                        url="https://lodev09.github.io/web-screensavers/matrix">
+                        <input type="radio" name="liveLinkPresets" id="">
+                        <i class="fa-solid fa-m"></i>
+                        <label>Matrix</label>
                     </div>
                     <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://1j01.github.io/pipes/">
                         <input type="radio" name="liveLinkPresets" id="">
@@ -157,10 +182,16 @@
                         <label>Pipes</label>
                     </div>
                     <div class="dcExpt interactable-hov liveLinkPreset" id=""
-                        url="https://roycurtis.github.io/Flurry-WebGL/">
+                        url="https://lodev09.github.io/web-screensavers/plankton?title=⠀&subtitle=⠀&web=⠀">
                         <input type="radio" name="liveLinkPresets" id="">
-                        <i class="fa-solid fa-f"></i>
-                        <label>Flurry</label>
+                        <i class="fa-solid fa-p"></i>
+                        <label>Plankton</label>
+                    </div>
+                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
+                        url="https://lodev09.github.io/web-screensavers/stardust?title=⠀&subtitle=⠀&web=⠀">
+                        <input type="radio" name="liveLinkPresets" id="">
+                        <i class="fa-solid fa-s"></i>
+                        <label>Stardust</label>
                     </div>
                     <div class="dcExpt interactable-hov liveLinkPreset" id=""
                         url="https://www.logan-cooper.com/starry-night/">
@@ -186,7 +217,7 @@
             <div class="header">
                 <img src="favicons/android-chrome-192x192.png" alt="">
                 <p id="title">(PlusUI)</p>
-                <p class="siteVer" id="ver">v2.4.2</p>
+                <p class="siteVer" id="ver">v2.5</p>
             </div>
             <div class="aboutText">
                 A hybrid dashboard and digital display for large-format screens, heavily inspired by TV & VisionOS
@@ -284,6 +315,7 @@
                 id="youtubeCard">
                 <div class="searchCont">
                     <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-youtube-music"></i>
                     <input type="text" class="ytSearch" placeholder="Search YouTube">
                 </div>
                 <div class="browseBtns">
@@ -373,12 +405,32 @@
             <div class="calendarCard card expandable labeled squareCard" data-enabled="y" data-resizableCard="n"
                 data-parallaxCard="y" data-friendlyName="Calendar" data-cardDesc="Day of the week and month"
                 id="calendarCard">
-                <div class="month"></div>
+                <div class="calenMonth"></div>
                 <div class="calenDayNo"></div>
                 <div class="calenDay"></div>
 
 
-                <div class="expView"></div>
+                <div class="wrapper">
+                    <div class="header">
+                        <p class="current-date"></p>
+                        <div class="icons">
+                            <i id="prev" class="fa-solid fa-chevron-left interactable-hov"></i>
+                            <i id="next" class="fa-solid fa-chevron-right interactable-hov"></i>
+                        </div>
+                    </div>
+                    <div class="calendar">
+                        <ul class="weeks">
+                            <li>Sun</li>
+                            <li>Mon</li>
+                            <li>Tue</li>
+                            <li>Wed</li>
+                            <li>Thu</li>
+                            <li>Fri</li>
+                            <li>Sat</li>
+                        </ul>
+                        <ul class="days"></ul>
+                    </div>
+                </div>
 
             </div>
             <div class="textCard card labeled expandable actionable squareCard" data-enabled="y" data-resizableCard="y"
@@ -397,11 +449,11 @@
             <div class="shortcutCard card expandable labeled actionable squareCard" data-enabled="y"
                 data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Shortcuts"
                 data-cardDesc="Choose between 4 or 8 shortcuts to your favorite places on the web" id="shortcutCard">
-                <div class="cardOptions">
+                <!-- <div class="cardOptions">
                     <div class="cmItem cmi-IDENTIFIER interactable-hov" data-btnLabel="">
                         <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="">
                     </div>
-                </div>
+                </div> -->
                 <div class="shortcuts">
                     <div class="scApp" id="scaDeviantart" data-fn="DeviantArt" data-url="deviantart.com"
                         style="color: #30a628;">
