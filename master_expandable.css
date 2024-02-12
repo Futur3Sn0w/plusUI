@@ -14,8 +14,9 @@
 
 .expandableWindow {
     display: flex;
+    flex-direction: column-reverse;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 
     width: 300px;
     height: 200px;
@@ -92,8 +93,8 @@ body:has(.darkModeOn) .expandableWindow {
     height: 30px;
     width: fit-content;
     padding: 0 10px;
-    position: absolute;
-    bottom: 0;
+    /* position: absolute; */
+    /* bottom: 0; */
 
     display: flex;
     align-items: center;
@@ -142,10 +143,23 @@ body:has(.darkModeOn) .expandableWindow {
     transform: none !important;
     border-radius: 16px !important;
     overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
+    /* position: absolute; */
+    /* top: 0; */
+    /* left: 0; */
     width: 100%;
     height: calc(100% - 30px);
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .25);
+
+    color: black;
+    background-color: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(70px) saturate(6);
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .25);
+    border: 1px solid transparent;
+}
+
+body:has(.darkModeOn) .expandableWindow .card {
+    background-color: rgba(34, 34, 34, 0.65);
+    color: white;
+    backdrop-filter: blur(50px) saturate(7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }

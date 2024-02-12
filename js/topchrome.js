@@ -266,7 +266,18 @@ $('#cbDisablePara').on('click', function () {
     }
 })
 
-// Live display 
+// Live display
+
+// https://www.google.com/s2/favicons?domain=${domain}&sz=${size}
+
+// Technically the below works, but all but 1 of the currently listed presets returns nothing :(
+
+// $(document).ready(function () {
+//     $('.liveLinkPreset').each(function () {
+//         var url = $(this).attr('url');
+//         $(this).find('i').css('background-image', 'url(https://www.google.com/s2/favicons?domain=' + url + '&sz=16)');
+//     });
+// });
 
 $('#siteDropToggle').click(function () {
     if (localStorage.getItem('liveLink') == null) {
@@ -278,6 +289,8 @@ $('#siteDropToggle').click(function () {
     } else {
         localStorage.setItem('liveWall', 'false')
         $('.siteDrop').children('embed').remove();
+        $('#backDrop2').css('background-image', "url(resc/dark.png)");
+        $('body').css('background-image', "url(resc/dark.png)");
     }
 })
 

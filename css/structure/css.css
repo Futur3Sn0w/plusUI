@@ -113,7 +113,7 @@ body:has(.about-modal.visible)::before {
 .siteDrop {
     opacity: 1;
     display: flex;
-    z-index: 0;
+    z-index: -2;
 
     background-color: transparent !important;
     backdrop-filter: none !important;

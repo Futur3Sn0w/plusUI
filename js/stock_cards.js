@@ -117,7 +117,16 @@ function newDrawWeather(d) {
 // Shortcuts
 
 $('.scApp').on('click', function () {
-    window.open('https://' + $(this).attr('data-launch') + '.com');
+    window.open('https://' + $(this).attr('data-url'));
+});
+
+// https://www.google.com/s2/favicons?domain=${domain}&sz=${size}
+
+$(document).ready(function () {
+    $('.scApp').each(function () {
+        var url = 'https://' + $(this).attr('data-url');
+        $(this).find('i').css('background-image', 'url(https://www.google.com/s2/favicons?domain=' + url + '&sz=32)');
+    });
 });
 
 // Battery

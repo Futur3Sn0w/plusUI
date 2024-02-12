@@ -68,8 +68,14 @@ $('.cmi-expand').on('click', function () {
         setTheme();
         dockRadi();
         $('.context-selected-card').removeClass('context-selected-card')
+        $('.shelfLabel').addClass('show').text("Expanded " + elementToMove.attr('data-friendlyName'));
         alignShelfLabel();
     }, 500);
+
+    setTimeout(() => {
+        $('.shelfLabel').removeClass('show')
+        alignShelfLabel();
+    }, 6000);
 })
 
 $('.cmi-editMode').click(function (e) {

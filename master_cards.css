@@ -93,7 +93,7 @@
 /* Context Menu stuff */
 
 .subCards:has(.card.context-selected-card) .card:not(.card.context-selected-card) {
-    filter: grayscale(.5);
+    filter: grayscale(.5) blur(5px);
     opacity: .5;
 }
 

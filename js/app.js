@@ -25,19 +25,15 @@ window.onload = function () {
         $('.aboutBtn').removeClass('visible');
     }, 6000);
 
-    if (isTouchScreendevice()) {
-        $('.card').removeClass('parallax');
-    } else {
-        tilt = $('.subCards .card[data-parallaxCard="y"]').tilt({
-            perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
-            scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
-            speed: 500    // Speed of the enter/exit transition
-        });
-    }
-
-    $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
-    $('body').css('background-image', "url(" + backdropImg + ")");
-    repeater = setInterval(refreshWall, 60000);
+    // if (isTouchScreendevice()) {
+    //     $('.card').removeClass('parallax');
+    // } else {
+    //     tilt = $('.subCards .card[data-parallaxCard="y"]').tilt({
+    //         perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
+    //         scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
+    //         speed: 500    // Speed of the enter/exit transition
+    //     });
+    // }
 
     if (localStorage.getItem('liveLink') == null) {
         localStorage.setItem('liveLink', 'https://flux.sandydoo.me')
@@ -50,7 +46,19 @@ window.onload = function () {
         $('<embed src="' + localStorage.getItem('liveLink') + '" type="">').appendTo('.siteDrop');
         $('#liveLinkTB').val(localStorage.getItem('liveLink'));
         $('#siteDropToggle').prop('checked', true);
+    } else {
+        $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
+        $('body').css('background-image', "url(" + backdropImg + ")");
+        repeater = setInterval(refreshWall, 60000);
     }
+
+    $('.liveLinkPreset').each(function () {
+        var url = $(this).attr('url');
+        // alert(url + ", " + localStorage.getItem('liveLink'))
+        if (url == localStorage.getItem('liveLink')) {
+            $(this).children('input').prop('checked', true);
+        }
+    });
 
     if (tempUnit == null) {
         localStorage.setItem('tempUnit', 'c');

@@ -33,7 +33,6 @@
     color: black;
 }
 
-
 #temp {
     flex-shrink: 0;
     transition: .2s;

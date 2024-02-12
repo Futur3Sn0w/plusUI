@@ -2,10 +2,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: visible !important;
+}
+
+.shortcutCard:not(.expanded) {
     background-color: transparent !important;
     background: transparent !important;
     box-shadow: none !important;
-    overflow: visible !important;
 }
 
 .shortcutCard .collapseIcon {
@@ -69,6 +72,45 @@
     opacity: 0;
     pointer-events: none;
     height: 0;
+    width: 0;
+}
+
+.scApp i {
+    width: 100%;
+    height: 100%;
+
+    font-size: 0 !important;
+    position: relative;
+    border-radius: inherit;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.scApp i::after {
+    content: '';
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    position: absolute;
+    z-index: 0;
+    filter: blur(20px);
+    opacity: .6;
+
+    font-size: 0 !important;
+
+    background-image: inherit;
+    background-size: 48px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .scApp::after {
@@ -77,7 +119,7 @@
     height: 100%;
 
     background-color: white;
-    border-radius: 120px;
+    border-radius: inherit;
     opacity: 0;
 
     position: absolute;
@@ -89,27 +131,32 @@
     opacity: .5;
 }
 
-/* .shortcutCard.squareCard .shortcuts .scApp:nth-of-type(3),
-.shortcutCard.squareCard .shortcuts .scApp:nth-of-type(7) {
-    margin-left: 5px;
-} */
-
 #scaDeviantart {
     color: #00EAA6;
 }
 
+.shortcutCard.expanded {
+    height: calc(100% - 40px) !important;
+}
+
 .shortcutCard.expanded .shortcuts {
-    gap: 20px !important;
-    margin: 10px;
-    margin-top: 0;
-    height: 140px;
+    gap: 25px 15px;
+    height: fit-content;
+    margin-top: -17px;
 }
 
 .shortcutCard.expanded .scApp {
-    width: 50px !important;
+    width: 60px !important;
     height: 50px !important;
+    border-radius: 11px;
     /* margin-bottom: auto; */
 }
+
+.shortcutCard.expanded .scApp i {
+    background-size: 24px;
+}
+
+/* Label for expanded card */
 
 .scApp::before {
     content: attr(data-fn);
@@ -129,9 +176,9 @@
     display: flex;
     width: max-content !important;
     bottom: -20px;
-    color: black !important;
+    color: black;
 }
 
-.shelf.darkModeOn .shortcutCard.expanded .scApp::before {
-    color: white !important;
+body:has(.darkModeOn) .shortcutCard .scApp::before {
+    color: white;
 }
