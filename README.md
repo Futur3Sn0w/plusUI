@@ -100,3 +100,9 @@ The backdrop can be customized via it's page in control panel, and both options 
    - Refresh the selected page with the reload button.
    
 ![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/e3da7a1b-13f8-40c5-b36b-d6dab3c48787)  
+
+## Tips and tricks  
+This section will be more unorganized, but I'll leave some fun usage notes and such while at PlusUI!  
+
+ - **Tip:** On touchscreens, you can swipe the dock left or right to move it in that direction
+ - **Tip:** While an expandable is open, click the chevron in the card's placeholder on the shelf to close the expanded view
