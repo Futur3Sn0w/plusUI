@@ -477,6 +477,16 @@
     margin-bottom: -5px;
 }
 
+.wallList:empty {
+    padding: 0 !important;
+    gap: 0 !important;
+    margin-bottom: -12px;
+}
+
+.backdropCont:has(.wallList:empty) .ccSep.backdropsep {
+    opacity: 0;
+}
+
 .prevWall {
     width: 160px;
     height: 90px;
@@ -532,7 +542,7 @@
 .liveLinkCont:not(.keyTBOptGroup) {
     width: 230px;
     padding: 10px;
-    padding-top: 0;
+    margin-top: -10px;
     margin-bottom: -10px;
     margin-left: -11px;
     box-sizing: border-box;
@@ -570,8 +580,8 @@
 
 .liveLinkCont .dcExpt input::after {
     content: '';
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
     border: 2px solid rgba(0, 0, 0, .75);
     color: white;
     border-radius: 500px;

@@ -2,7 +2,7 @@
 
 .card {
     height: 90px;
-    max-width: 180px;
+    /* max-width: 180px; */
     flex-shrink: 0;
 
     border-radius: 16px;
@@ -67,19 +67,23 @@
     transform: scale(1.075);
 }
 
-.card.darkModeOn {
+body:has(.darkModeOn) .card {
     background-color: var(--section-d);
     color: white;
 }
 
-.card.expanded {
+.card:not(.expanded) .expView {
+    display: none;
+}
+
+.card.expanded .expView {
     width: 100%;
     height: 100%;
     max-width: unset;
     /* filter: blur(10px) grayscale(.5); */
 }
 
-.cardOptions {
+.card .cardOptions {
     display: none !important;
     opacity: 0;
     pointer-events: none;
@@ -88,9 +92,11 @@
     z-index: -10;
 }
 
-/* Demo cards in Rolodex */
-
 /* Context Menu stuff */
+
+.subCards:has(.card.context-selected-card).freeze {
+    pointer-events: none;
+}
 
 .subCards:has(.card.context-selected-card) .card:not(.card.context-selected-card) {
     filter: grayscale(.5) blur(5px);
@@ -104,30 +110,34 @@
 
 .contextMenuDiv {
     position: absolute;
-    z-index: 11;
-    width: 190px;
-    height: fit-content;
-
-    opacity: 0;
-
-    /* background-color: white; */
     bottom: 112px;
+    z-index: 11;
+
+    width: max-content;
+    height: fit-content;
+    min-width: 150px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5px;
-    gap: 2px !important;
+    padding: 8px;
+    gap: 8px !important;
+
     pointer-events: none;
 
-    background-color: transparent !important;
-    backdrop-filter: blur(0) saturate(1) !important;
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(10px) saturate(1) !important;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0) !important;
-    border: 1px solid rgba(0, 0, 0, 0) !important;
-    border-radius: 0;
-    transform: scale(.9);
+    border: 0px solid rgba(0, 0, 0, 0) !important;
+    border-radius: 16px;
 
+    transform: scale(.9);
     transition: bottom .2s, opacity .2s, transform .2s !important;
+}
+
+body:has(.darkModeOn) .contextMenuDiv {
+    background-color: rgba(34, 34, 34, .85) !important;
 }
 
 .contextMenuDiv::after {
@@ -149,10 +159,24 @@
 
     transition: .5s;
     transition-delay: .15s;
+
+    animation: fader 2.5s linear 0s infinite alternate forwards;
 }
 
 .contextMenuDiv.show::after {
-    opacity: .6;
+    opacity: .2;
+}
+
+@keyframes fader {
+    from {
+        opacity: 0.15;
+        transform: translate(-50%, -50%) scale(.75);
+    }
+
+    to {
+        opacity: 0.25;
+        transform: translate(-50%, -50%) scale(.9);
+    }
 }
 
 .contextMenuDiv.show {
@@ -162,26 +186,20 @@
     pointer-events: all;
 }
 
-.contextMenuDiv.show .cmItem {
-    margin-bottom: 0;
-}
-
 .cmItem {
     width: 100%;
     overflow: hidden;
     position: relative;
 
     box-sizing: border-box;
-    padding: 5px 8px;
-    padding-left: 4px;
-    border-radius: 12px;
-    gap: 5px;
-    color: white !important;
+    padding: 7px 11px;
+    padding-left: 8px;
+    border-radius: 16px;
+    gap: 8px;
+    color: black;
 
-    margin-bottom: -30px;
-
-    background-color: inherit;
-    font-size: 13px;
+    background-color: transparent;
+    font-size: 15px;
 
     display: flex;
     align-items: center;
@@ -191,19 +209,24 @@
     cursor: pointer;
 }
 
-.cmItem:hover {
+body:has(.darkModeOn) .cmItem {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.cmItem:hover,
+.cmSep.custom .cmItem:hover {
     background-color: white !important;
     color: rgba(0, 0, 0, 0.75) !important;
 }
 
 .cmItem i {
-    width: 35px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     flex-shrink: 0;
-    font-size: 14px;
+    font-size: 13.5px;
     border-radius: 50px;
 
-    background-color: white;
+    background-color: #eee;
     color: rgba(0, 0, 0, 0.75);
 
     display: flex;
@@ -214,22 +237,21 @@
 .cmi-resize::after,
 .cmi-disableCard::after {
     content: attr(data-btnLabel);
-    width: min-content;
+    width: max-content;
     white-space: nowrap;
-}
-
-.cmi-disableCard::after {
-    padding-left: 3px;
 }
 
 .cmSep {
     width: 90%;
     height: 1px;
     margin: 2px 0;
+    background-color: black;
 
-    background-color: inherit;
-    /* filter: invert(1); */
-    opacity: .25;
+    opacity: .3;
+}
+
+body:has(.darkModeOn) .cmSep:not(.custom) {
+    background-color: white;
 }
 
 .cmSep.custom {
@@ -238,17 +260,14 @@
     justify-content: center;
     height: fit-content;
     width: 100%;
-    margin: 10px 0;
+    margin: 5px 0;
     background-color: transparent;
     /* filter: invert(0); */
+    color: inherit;
     opacity: 1;
     position: relative;
 
     border-radius: 12px;
-}
-
-.cmSep.custom .cmItem {
-    height: 38px !important;
 }
 
 .cmSep.custom::after {
@@ -257,7 +276,7 @@
     height: 115%;
 
     border: 1px solid white;
-    opacity: .5;
+    opacity: .3;
     border-left-color: transparent !important;
     border-right-color: transparent !important;
 
@@ -269,8 +288,81 @@
 }
 
 .cmSep.custom .cmItem {
+    padding: 11px 8px;
+    /* height: 38px !important; */
     z-index: 12;
     position: relative;
+}
+
+.cmSep.custom .cmItem i {
+    height: 27px;
+}
+
+.cmSep.custom .cmItem:has(input[type="checkbox"]) {
+    padding-right: 40px;
+}
+
+.cmSep.custom .cmItem input[type="checkbox"] {
+    appearance: none;
+    width: 100%;
+    height: 100%;
+
+    /* background-color: orange; */
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+}
+
+.cmSep.custom .cmItem input[type="checkbox"]::after {
+    content: '';
+    width: 13px;
+    height: 13px;
+    border: 2px solid rgba(0, 0, 0, .75);
+    color: white;
+    border-radius: 500px;
+    font-weight: 600;
+    font-size: 11px;
+
+    transition: .15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    right: 10px;
+}
+
+.cmSep.custom .cmItem input[type="checkbox"]:hover::after {
+    border-color: rgba(0, 0, 0, .75) !important;
+}
+
+body:has(.darkModeOn) .cmSep.custom .cmItem input[type="checkbox"]::after {
+    border-color: rgba(255, 255, 255, 0.75);
+}
+
+.cmSep.custom .cmItem input[type="checkbox"]:checked::after {
+    content: '✓';
+    border: 2px solid transparent;
+    background-color: rgba(0, 0, 0, .75);
+    color: white;
+}
+
+.cmSep.custom .cmItem input[type="checkbox"]:checked:hover::after {
+    background-color: rgba(0, 0, 0, .75) !important;
+    color: white;
+}
+
+.cmSep.custom .cmItem input[type="checkbox"]:checked::after {
+    border: 2px solid transparent;
+    background-color: rgba(255, 255, 255, 0.75);
+    color: black;
 }
 
 .cmItem.cmi-resize i {

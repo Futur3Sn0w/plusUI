@@ -98,6 +98,11 @@ window.onload = function () {
         $('#cbMonoMode').prop('checked', true);
     }
 
+    if (localStorage.getItem('allowTextCardDarkMode') == 'true') {
+        $('.textCard').addClass('allowDark');
+        $('#allowTextCardDarkMode').prop('checked', true);
+    }
+
     // cardSmarts();
 
     $('.card').each(function (i, e) {
@@ -118,6 +123,7 @@ window.onload = function () {
     recallCards();
     dockRadi();
 
+    outputStars();
 
     // doTheBatteryThing();
     // chargingIndic();
@@ -147,12 +153,16 @@ $(document).mouseup(function (e) {
     if (!$(".card").is(e.target) && !$(".card *").is(e.target)) {
         $('.editMode').removeClass('editMode');
         $('.subCards').sortable('disable');
-        $('.contextMenuDiv').removeClass('show');
+        $('.subCards').removeClass('freeze');
     }
 
     if (!$(".context-selected-card").is(e.target) && !$(".context-selected-card *").is(e.target) && !$(".contextMenuDiv").is(e.target) && !$(".contextMenuDiv *").is(e.target)) {
-        $('.cmSep').children().appendTo($('.context-selected-card').children('.cardOptions'));
-        $('.context-selected-card').removeClass('context-selected-card')
+        $('.context-selected-card').addClass('temp').removeClass('context-selected-card');
+        setTimeout(() => {
+            $('.cmSep').children().appendTo('.card.temp .cardOptions');
+        }, 300);
+        $('.subCards').removeClass('freeze');
+        $('.contextMenuDiv').removeClass('show');
     }
 
     if (!$(".rolodex").is(e.target) && !$(".rolodex *").is(e.target)) {

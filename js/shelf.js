@@ -33,6 +33,7 @@ $('.cmi-resize').on('click', function () {
         localStorage.setItem(card + '-size', 'rectCard')
     }
     $('.context-selected-card').removeClass('context-selected-card')
+    $('.subCards').removeClass('freeze');
     alignShelfLabel();
 });
 
@@ -69,6 +70,7 @@ $('.cmi-expand').on('click', function () {
         dockRadi();
         $('.context-selected-card').removeClass('context-selected-card')
         $('.shelfLabel').addClass('show').text("Expanded " + elementToMove.attr('data-friendlyName'));
+        $('.subCards').removeClass('freeze');
         alignShelfLabel();
     }, 500);
 
@@ -79,6 +81,7 @@ $('.cmi-expand').on('click', function () {
 })
 
 $('.cmi-editMode').click(function (e) {
+    $('.subCards').removeClass('freeze');
     $('.subCards').addClass('editMode');
     $('.subCards').sortable('enable');
     $('.context-selected-card').removeClass('context-selected-card')
@@ -105,16 +108,18 @@ $('.cmi-disableCard').on('click', function () {
             // localStorage.setItem(card + '-index', $(this).attr('data-index'))
         });
 
-        saveCards();
         $(".subCards").sortable("refresh");
+        $('.subCards').removeClass('freeze');
         dockRadi();
         alignShelfLabel();
+        saveCards();
 
         $('.shelfLabel').addClass('show').text(friendlyName + " removed");
         setTimeout(() => {
             $('.shelfLabel').removeClass('show')
         }, 6000);
     }, 1000);
+    saveCards();
 })
 
 $('.editMode .card').click(function (e) {
@@ -188,8 +193,6 @@ function cardContextMenu(e) {
     } else if ($(e).hasClass('rectCard')) {
         var cardSize = 'Smaller'
         $('#cmi-resize-icn').addClass('fa-down-left-and-up-right-to-center').removeClass('fa-up-right-and-down-left-from-center');
-    } else {
-        var cardSize = 'else'
     }
 
     if ($(e).hasClass('expandable')) {
@@ -207,13 +210,6 @@ function cardContextMenu(e) {
             $('.cmi-resize').removeClass('override-hidden');
         }
         $(e).addClass('context-selected-card');
-        var cmLeft = $(".context-selected-card").offset().left - $(document).scrollLeft() - 5;
-        var cmLeftS = $(".context-selected-card").offset().left - $(document).scrollLeft() - 50;
-        if ($('.context-selected-card').hasClass('rectCard')) {
-            $('.contextMenuDiv').css('left', cmLeft);
-        } else {
-            $('.contextMenuDiv').css('left', cmLeftS);
-        }
 
         if ($(e).children().hasClass('cardOptions')) {
             $('.cmSep').addClass('custom');
@@ -225,8 +221,15 @@ function cardContextMenu(e) {
         $('.cmi-resize').attr('data-btnLabel', cardSize);
         $('.cmi-expand').attr('data-btnLabel', 'Expand ' + $('.context-selected-card').attr('data-friendlyName'));
         // $('.cmi-disableCard').attr('data-btnLabel', $('.context-selected-card').attr('data-friendlyName'));
+
+        var leftPosi = ($('.context-selected-card').offset().left + 2 + ($('.context-selected-card').width() / 2)) - (($(".contextMenuDiv").outerWidth() / 2));
+        $(".contextMenuDiv").css("left", leftPosi + "px");
         $('.contextMenuDiv').addClass('show');
     }
+
+    setTimeout(() => {
+        $('.subCards').addClass('freeze');
+    }, 500);
 }
 
 // Card context menu swipeup gesture (Touch only)

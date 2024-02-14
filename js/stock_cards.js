@@ -22,9 +22,10 @@
 
 // Weather (rejuv)
 
-var tempUnit = 'f';
+var tempUnit = localStorage.getItem('tempUnit');
 var lat = localStorage.getItem('locLat');
 var lon = localStorage.getItem('locLon');
+let isDay;
 const weatherCodes = {
     0: "Clear sky",
     1: "Mainly clear",
@@ -85,7 +86,7 @@ async function getLatLon() {
 }
 
 function newWeatherBalloon() {
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&daily=weathercode&current_weather=true&timezone=auto&forecast_days=1')
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,is_day,precipitation,weather_code&current_weather=true&timezone=auto')
         .then(function (resp) { return resp.json() }) // Convert data to json
         .then(function (data) {
             $('.weatherCard').show();
@@ -99,18 +100,30 @@ function newWeatherBalloon() {
 }
 
 function newDrawWeather(d) {
-    var feel = weatherCodes[d.current_weather.weathercode];
+    var wcFeel = weatherCodes[d.current_weather.weathercode];
+    var feel = wcFeel.replace('Clear sky', 'Clear ' + isDay);
+    // alert(isDay)
     var tempPref;
     if (tempUnit == 'c') {
         tempPref = Math.round(d.current_weather.temperature);
-    } else if (tempUnit == 'f') {
+    } else {
         tempPref = Math.round((d.current_weather.temperature * 1.8) + 32);
     }
     document.getElementById('temp').innerText = tempPref + '°';
 
-    $('#weatherIcon').attr('src', "resc/weather/" + weatherCodes[d.current_weather.weathercode].replace(/\s+/g, "").toLowerCase() + '.svg');
+    $('#weatherIcon').attr('src', "resc/weather/" + feel.replace(/\s+/g, "").toLowerCase() + '.svg');
     $('#temp').attr('feel', feel)
+    $('.cmi-tempUnit').attr('tempunit', tempUnit);
 }
+
+$('.cmi-tempUnit').click(function () {
+    var newTempUnit = (tempUnit == "f") ? "c" : "f"
+    tempUnit = newTempUnit;
+    $('.cmi-tempUnit').attr('tempunit', tempUnit);
+    localStorage.setItem('tempUnit', newTempUnit);
+
+    weather()
+})
 
 //
 
@@ -283,4 +296,59 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
         }
         renderCalendar(); // calling renderCalendar function
     });
+});
+
+// Weather stars
+
+const numberOfStars = 50;
+const twinkleFrequencyMinimum = 2; // seconds
+const twinkleFrequencyMaximum = 6; // ''
+
+const constructUniverse = () => {
+
+    for (let i = 0; i < numberOfStars; i++) {
+
+        const xAxis = Math.floor(Math.random() * 180);
+        const yAxis = Math.floor(Math.random() * 90);
+
+        const star = $("<div></div>").addClass("star");
+        star.css({
+            top: yAxis,
+            left: xAxis
+        });
+        $(".weather_stars").append(star);
+
+    }
+
+    const randomRange = (min, max) => {
+        return Math.floor(Math.random() * (max + 1 - min) + min);
+    };
+
+    $(".star").each(function () {
+        let randNum = randomRange(twinkleFrequencyMinimum, twinkleFrequencyMaximum);
+        $(this).css("animation-duration", randNum + "s");
+    });
+
+};
+
+const outputStars = () => {
+    const starCollection = $(".star");
+    if (starCollection.length === 0) {
+        constructUniverse();
+    } else {
+        starCollection.remove();
+        constructUniverse();
+    }
+};
+
+let timerIsActive = false;
+
+$(window).resize(() => {
+    if (!timerIsActive) {
+        timerIsActive = true;
+        setTimeout(() => {
+            outputStars();
+            timerIsActive = false;
+        }, 500);
+    }
 });

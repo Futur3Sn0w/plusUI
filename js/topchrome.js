@@ -185,9 +185,20 @@ $('.refreshPageBtn').on('click', function () {
     window.location.reload();
 })
 
-var elem = document.documentElement;
+$('#allowTextCardDarkMode').click(function () {
+    if ($(this).is(':checked')) {
+        $('.textCard').addClass('allowDark');
+        localStorage.setItem('allowTextCardDarkMode', 'true');
+    } else {
+        $('.textCard').removeClass('allowDark');
+        localStorage.setItem('allowTextCardDarkMode', 'false');
+    }
+});
 
 /* View in fullscreen */
+
+var elem = document.documentElement;
+
 function openFullscreen() {
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
@@ -198,7 +209,6 @@ function openFullscreen() {
     }
 }
 
-/* Close fullscreen */
 function closeFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -268,8 +278,6 @@ $('#cbDisablePara').on('click', function () {
 
 // Live display
 
-// https://www.google.com/s2/favicons?domain=${domain}&sz=${size}
-
 // Technically the below works, but all but 1 of the currently listed presets returns nothing :(
 
 // $(document).ready(function () {
@@ -278,6 +286,14 @@ $('#cbDisablePara').on('click', function () {
 //         $(this).find('i').css('background-image', 'url(https://www.google.com/s2/favicons?domain=' + url + '&sz=16)');
 //     });
 // });
+
+// The below will set the icon of each preset to the first letter of it's name, as set in it's label
+
+$(document).ready(function () {
+    $('.liveLinkPreset').find('.fa-solid').each(function () {
+        $(this).addClass('fa-' + $(this).siblings('label').text().charAt(0).toLowerCase());
+    });
+});
 
 $('#siteDropToggle').click(function () {
     if (localStorage.getItem('liveLink') == null) {
@@ -295,6 +311,7 @@ $('#siteDropToggle').click(function () {
 })
 
 $('#liveLinkTB').on('keyup', function (event) {
+    ldURLMatch();
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if (keycode == '13') {
         localStorage.setItem('liveLink', $('#liveLinkTB').val());
@@ -304,6 +321,20 @@ $('#liveLinkTB').on('keyup', function (event) {
         $('.siteDrop').children('embed').attr('src', localStorage.getItem('liveLink'));
     }
 });
+
+function ldURLMatch() {
+    $('.liveLinkPreset').each(function () {
+        if ($(this).is('[url="' + $('#liveLinkTB').val() + '"]')) {
+            $(this).find('input').prop('checked', true)
+                .closest('.liveLinkPreset').siblings().find('input').prop('checked', false);
+            localStorage.setItem('liveLink', $(this).attr('url'));
+            return;
+        } else {
+            $('.liveLinkPreset input').prop('checked', false);
+            localStorage.setItem('liveLink', $('#liveLinkTB').val());
+        }
+    });
+}
 
 $('.liveLinkPreset').click(function () {
     localStorage.setItem('liveLink', $(this).attr('url'));
@@ -361,6 +392,8 @@ function showTime() {
         ee = "PM";
     }
 
+    isDay = (ee == 'PM') ? "night" : "day"
+
     if (h == 0) {
         h = 12;
     }
@@ -376,12 +409,14 @@ function showTime() {
     $('.greeting').text(greetingMain);
     document.getElementById("time").innerText = time;
 
+    $('.weatherCard #temp').attr('tod', isDay)
+
     setTimeout(showTime, 5000);
 }
 
 function showDate() {
     const localDate = new Date();
-    const months = [
+    const monthsLong = [
         "January",
         "February",
         "March",
@@ -396,7 +431,7 @@ function showDate() {
         "December",
     ];
 
-    const days = [
+    const daysLong = [
         "Sunday",
         "Monday",
         "Tuesday",
@@ -406,13 +441,40 @@ function showDate() {
         "Saturday",
     ];
 
-    const currentDay = days[localDate.getDay()];
+    const monthsShort = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+    ];
+
+    const daysShort = [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+    ];
+
+    const currentDayShort = daysShort[localDate.getDay()];
+    const currentDayLong = daysLong[localDate.getDay()];
     const currentDate = localDate.getDate();
-    const currentMonth = months[localDate.getMonth()];
+    const currentMonthShort = monthsShort[localDate.getMonth()];
+    const currentMonthLong = monthsLong[localDate.getMonth()];
     const currentYear = localDate.getFullYear();
     // document.getElementById('date').innerText = currentDay + ", " + currentMonth + " " + currentDate;
 
-    $('.calendarCard .calenMonth').text(currentMonth);
+    $('.calendarCard .calenMonth').text(currentMonthShort);
     $('.calendarCard .calenDayNo').text(currentDate);
-    $('.calendarCard .calenDay').text(currentDay);
+    $('.calendarCard .calenDay').text(currentDayShort);
 }

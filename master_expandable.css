@@ -35,7 +35,6 @@
 }
 
 body:has(.darkModeOn) .expandableWindow {
-    background-color: var(--section-d);
     color: white;
 }
 
@@ -147,8 +146,7 @@ body:has(.darkModeOn) .expandableWindow {
     /* top: 0; */
     /* left: 0; */
     width: 100%;
-    height: auto;
-    min-height: 200px;
+    height: 200px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .25);
 
     color: black;
@@ -159,8 +157,8 @@ body:has(.darkModeOn) .expandableWindow {
 }
 
 body:has(.darkModeOn) .expandableWindow .card {
-    background-color: rgba(34, 34, 34, 0.65);
+    background-color: rgba(34, 34, 34, 0.8);
     color: white;
-    backdrop-filter: blur(50px) saturate(7);
+    backdrop-filter: blur(40px) saturate(7);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }

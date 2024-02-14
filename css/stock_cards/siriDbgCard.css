@@ -1,9 +1,7 @@
 .siriDbgCard {
     font-size: 2em;
 
-    background-image: url(https://cdn.dribbble.com/users/32512/screenshots/3820721/brain_natural_os_by_gleb.gif);
-    background-size: 185%;
-    background-position: center;
+    background-color: #1D182C !important;
 }
 
 .siriDbgCard div {
@@ -15,15 +13,32 @@
     background-position: center;
     mix-blend-mode: lighten;
 
+    background-repeat: no-repeat;
+
     border-radius: inherit;
 }
 
 .siriDbgCard .layer1 {
-    background-image: url(https://cdn.dribbble.com/users/129227/screenshots/3556417/siri.gif);
+    background-image: url(https://cdn.dribbble.com/users/32512/screenshots/3820721/brain_natural_os_by_gleb.gif);
     mix-blend-mode: screen;
     opacity: .6;
 }
 
 .siriDbgCard .layer2 {
+    background-image: url(https://cdn.dribbble.com/users/129227/screenshots/3556417/siri.gif);
+    mix-blend-mode: screen;
+    opacity: .6;
+}
+
+.siriDbgCard .layer3 {
     background-image: url(https://cdn.dribbble.com/users/32512/screenshots/3546148/apple_siri_motion_animation_by_gleb.gif);
+}
+
+/* Expanded view */
+
+.siriDbgCard.expanded .layer1,
+.siriDbgCard.expanded .layer2,
+.siriDbgCard.expanded .layer3 {
+    background-size: 140%;
+    background-position: 0% 0%;
 }

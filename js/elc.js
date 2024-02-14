@@ -57,3 +57,34 @@ $('.emojiLocaleCard').on('click', function () {
 setInterval(() => {
     elc();
 }, 5000);
+
+$(document).ready(function () {
+    emojis.forEach(emoji => {
+        $('<div class="emojiItem interactable-hov">').attr('text', emoji).appendTo('.emojiLocaleCard .list');
+    });
+});
+
+$(document).on('click', '.emojiItem', function () {
+    var copyText = $(this).text();
+
+    // Use Clipboard API for modern browsers
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(copyText)
+            .then(() => {
+                console.log("Copied emoji: " + copyText);
+                $('.emojiLocaleCard .expView').attr("text", "Copied")
+                setTimeout(() => {
+                    $('.emojiLocaleCard .expView').attr("text", "Click to copy")
+                }, 5000);
+            })
+            .catch(err => {
+                console.error("Failed to copy emoji:", err);
+                // Handle error gracefully, e.g., display a user-friendly message
+            });
+    } else {
+        // Fallback for older browsers using execCommand
+        $(this).select();
+        document.execCommand("copy");
+        console.log("Copied emoji: " + copyText);
+    }
+})

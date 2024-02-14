@@ -16,7 +16,7 @@
     transition: .15s;
 }
 
-.emojiLocaleCard div {
+.emojiLocaleCard:not(.expanded) div {
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -47,4 +47,105 @@
 
 .emojiLocaleCard:active p:first-of-type {
     opacity: 0;
+}
+
+/* Expanded view */
+
+.emojiLocaleCard.expanded {
+    height: 250px;
+}
+
+.emojiLocaleCard.expanded .expView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.emojiLocaleCard.expanded .expView::before {
+    content: attr(text);
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 15px;
+    margin-top: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.emojiLocaleCard.expanded p:first-of-type {
+    display: none;
+}
+
+.emojiLocaleCard .list {
+    width: 100%;
+    height: 100%;
+    margin-top: 5px;
+    border-radius: 16px;
+
+    gap: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    padding: 5px;
+
+    overflow-y: scroll;
+}
+
+.emojiItem {
+    width: calc((100% / 6) - 5px);
+    height: 35px;
+    border-radius: 9px;
+
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    flex-shrink: 0;
+    font-size: 20px;
+}
+
+.emojiItem:hover {
+    box-shadow: 0px 6px 9px rgba(0, 0, 0, 0.226);
+    background-color: white !important;
+}
+
+.emojiLocaleCard .list .emojiItem,
+.emojiLocaleCard.expanded .expView::before {
+    background-color: rgba(255, 255, 255, .6);
+    color: black;
+}
+
+body:has(.darkModeOn) .emojiLocaleCard .list .emojiItem,
+body:has(.darkModeOn) .emojiLocaleCard.expanded .expView::before {
+    background-color: rgba(34, 34, 34, .6);
+    color: white;
+}
+
+.emojiItem::before,
+.emojiItem::after {
+    content: attr(text);
+    position: relative;
+    z-index: 2;
+}
+
+.emojiItem::after {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 1;
+    filter: blur(15px) saturate(5);
+    opacity: .9;
+
+    font-size: 65px;
 }

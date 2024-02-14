@@ -6,9 +6,13 @@
     /* background-color: white; */
 }
 
-.shelf.darkModeOn .subCards .textCard {
-    /* background-color: #222222; */
-    /* color: white; */
+.textCard:not(.allowDark) {
+    background-color: var(--section-l) !important;
+    color: black !important;
+}
+
+.shelf.darkModeOn .subCards .textCard.allowDark {
+    color: white;
 }
 
 .textCard.expanded::before {
@@ -58,7 +62,6 @@
     width: calc(100% - 10px);
     bottom: 4px;
     border-radius: 13px;
-    background-color: white;
 }
 
 .textCard.expanded textarea {
@@ -67,8 +70,18 @@
     bottom: -2px !important;
     top: -2px !important;
     border-radius: 13px;
+}
+
+.textCard.rectCard textarea,
+.textCard.expanded textarea {
     background-color: white;
     color: #000;
+}
+
+.textCard.allowDark.rectCard textarea,
+.textCard.allowDark.expanded textarea {
+    background-color: #222;
+    color: #eee;
 }
 
 .textCard textarea {
