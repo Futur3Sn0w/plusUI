@@ -23,7 +23,7 @@ window.onload = function () {
     $('.aboutBtn').attr('ver', 'PlusUI ' + $('.siteVer').text()).addClass('visible');
     setTimeout(() => {
         $('.aboutBtn').removeClass('visible');
-    }, 6000);
+    }, 5000);
 
     // if (isTouchScreendevice()) {
     //     $('.card').removeClass('parallax');
@@ -218,10 +218,14 @@ $(document).on('click', '.expandableWindow .return', function () {
     $(this).parent().parent().addClass('closing');
     setTimeout(() => {
 
+        var thiscard = $(this).parent().parent().attr('returncard')
+        $('.card.placeholderCard[returncard="' + thiscard + '"]').addClass('removing');
+
         $(this).parent().parent().children('.card.expanded').addClass('removing').removeClass('expanded')
-        $(this).parent().parent().children('.card').prependTo('.subCards');
 
         setTimeout(() => {
+            $('.placeholderCard[returncard="' + thiscard + '"]').after($(this).parent().parent().children('.card'));
+            $('.card.placeholderCard[returncard="' + thiscard + '"]').remove();
             $('.card.removing').removeClass('removing');
             dockRadi();
             $(".subCards").sortable("refresh");
@@ -230,7 +234,12 @@ $(document).on('click', '.expandableWindow .return', function () {
         }, 200);
 
 
-    }, 500);
+    }, 300);
+
+    $('.shelfLabel').addClass('show').text("Expandable closed");
+    setTimeout(() => {
+        $('.shelfLabel').removeClass('show')
+    }, 5000);
 })
 
 $(document).on('mousedown', '.expandableWindow', function () {

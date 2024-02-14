@@ -50,17 +50,31 @@ $('.cmi-resize').on('click', function () {
     alignShelfLabel();
 });
 
+
 $('.cmi-expand').on('click', function () {
     $('.context-selected-card').addClass('removing');
+
+    var placeholderCard = $('<div class="card placeholderCard"><i class="fa-solid fa-chevron-up"></i></div>');
+
+    if ($('.context-selected-card').attr("class").indexOf("rectCard") !== -1) {
+        placeholderCard.addClass("rectCard");
+    } else if ($('.context-selected-card').attr("class").indexOf("squareCard") !== -1) {
+        placeholderCard.addClass("squareCard");
+    } else if ($('.context-selected-card').attr("class").indexOf("circleCard") !== -1) {
+        placeholderCard.addClass("circleCard");
+    }
+    placeholderCard.attr('returnCard', $('.context-selected-card').attr('id'));
+
     setTimeout(() => {
         $('.context-selected-card').removeClass('removing');
+        $('.context-selected-card').after(placeholderCard);
         if ($('.context-selected-card').parent().hasClass('subCards')) {
             var elementToMove = $('.context-selected-card');
 
             elementToMove.addClass('expanded');
 
             var expandableWindow = $('<div class="expandableWindow visible">');
-            expandableWindow.attr('cardName', elementToMove.attr('data-friendlyName'));
+            expandableWindow.attr('cardName', elementToMove.attr('data-friendlyName')).attr('returnCard', $('.context-selected-card').attr('id'));
             var windowOpts = $('<div class="windowOpts">').appendTo(expandableWindow);
 
             var returnBtn = $('<div class="return interactable-hov">');
@@ -82,14 +96,14 @@ $('.cmi-expand').on('click', function () {
         hideContextMenu();
         setTheme();
         dockRadi();
-        $('.shelfLabel').addClass('show').text("Expanded " + elementToMove.attr('data-friendlyName'));
+        $('.shelfLabel').addClass('show').text(elementToMove.attr('data-friendlyName') + " expanded");
         alignShelfLabel();
     }, 250);
 
     setTimeout(() => {
         $('.shelfLabel').removeClass('show')
         alignShelfLabel();
-    }, 6000);
+    }, 5000);
 })
 
 function hideContextMenu() {
@@ -104,6 +118,11 @@ function hideContextMenu() {
     $('.subCards').sortable('refresh');
 
 }
+
+$(document).on("click", '.placeholderCard', function (e) {
+    var thisID = $(this).attr('returncard');
+    $('.expandableWindow[returncard="' + thisID + '"]').children('.windowOpts').children('.return').click();
+})
 
 $('.cmi-editMode').click(function (e) {
     hideContextMenu();
@@ -141,7 +160,7 @@ $('.cmi-disableCard').on('click', function () {
         $('.shelfLabel').addClass('show').text(friendlyName + " removed");
         setTimeout(() => {
             $('.shelfLabel').removeClass('show')
-        }, 6000);
+        }, 5000);
     }, 250);
     saveCards();
 })
@@ -154,11 +173,13 @@ $('.editMode .card').click(function (e) {
 });
 
 $('.card').on('mouseover', function (e) {
-    if ($(this).parent().hasClass('subCards')) {
-        $('.shelfLabel').removeClass('show');
-        $('.shelfLabel').text($(this).attr('data-friendlyName'));
+    if (!$(this).hasClass('placeholderCard')) {
+        if ($(this).parent().hasClass('subCards')) {
+            $('.shelfLabel').removeClass('show');
+            $('.shelfLabel').text($(this).attr('data-friendlyName'));
+        }
+        alignShelfLabel();
     }
-    alignShelfLabel();
 })
 
 $('.card').on('mousedown', function (e) {

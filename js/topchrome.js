@@ -369,13 +369,14 @@ $('#cbMonoMode').click(function () {
 
 // timeCard time and date
 
+let tod
+
 function showTime() {
     var date = new Date();
     var h = date.getHours(); // 0 - 23
     var h2 = date.getHours(); // 0 - 23
     var h3 = date.getHours(); // 0 - 23
     var m = date.getMinutes(); // 0 - 59
-    var tod = "";
     var ee = "";
 
     if (h2 < 12) {
@@ -392,7 +393,7 @@ function showTime() {
         ee = "PM";
     }
 
-    isDay = (ee == 'PM') ? "night" : "day"
+    isDay = (h3 >= 17) ? "night" : "day"
 
     if (h == 0) {
         h = 12;

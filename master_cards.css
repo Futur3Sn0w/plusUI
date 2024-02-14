@@ -26,9 +26,8 @@
 
 .card.removing {
     overflow: hidden;
-    width: 0 !important;
-    height: 0 !important;
     filter: blur(20px) !important;
+    margin-top: -50px !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
     margin-left: -10px !important;
@@ -385,6 +384,11 @@ body:has(.darkModeOn) .cmSep.custom .cmItem input[type="checkbox"]::after {
     color: white !important;
 }
 
+body:has(.expandableWindow) .cmItem.cmi-editMode,
+body:has(.expandableWindow) .cmSep:not(.custom) {
+    display: none;
+}
+
 /* Edit mode specs */
 
 .editMode .card {
@@ -422,4 +426,59 @@ body:has(.darkModeOn) .cmSep.custom .cmItem input[type="checkbox"]::after {
     to {
         transform: scale(.9) rotate(3deg);
     }
+}
+
+/* Placeholder card */
+
+.card.placeholderCard {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    transform: none !important;
+
+    color: rgba(0, 0, 0, .5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body:has(.darkModeOn) .card.placeholderCard {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.card.placeholderCard::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: var(--section-l) !important;
+    filter: blur(10px);
+
+    position: absolute;
+    z-index: 1;
+}
+
+body:has(.darkModeOn) .card.placeholderCard::after {
+    background-color: var(--section-d) !important;
+}
+
+.card.placeholderCard i {
+    position: relative;
+    z-index: 2;
+
+    padding: 10px;
+    border-radius: 50px;
+
+    transition: .15s;
+}
+
+.card.placeholderCard:hover i {
+    transform: scale(1.075) rotate(180deg);
+    background-color: white;
+    color: black !important;
+}
+
+.card.placeholderCard:active i {
+    transform: scale(.8) rotate(180deg) !important;
+    opacity: .7 !important;
 }

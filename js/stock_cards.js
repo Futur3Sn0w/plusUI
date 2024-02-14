@@ -101,7 +101,7 @@ function newWeatherBalloon() {
 
 function newDrawWeather(d) {
     var wcFeel = weatherCodes[d.current_weather.weathercode];
-    var feel = wcFeel.replace('Clear sky', 'Clear ' + isDay);
+    var feel = wcFeel.replace('Clear sky', 'Clear ' + tod);
     // alert(isDay)
     var tempPref;
     if (tempUnit == 'c') {
@@ -109,10 +109,10 @@ function newDrawWeather(d) {
     } else {
         tempPref = Math.round((d.current_weather.temperature * 1.8) + 32);
     }
-    document.getElementById('temp').innerText = tempPref + '°';
+    $('#temp').text(tempPref + "°")
 
-    $('#weatherIcon').attr('src', "resc/weather/" + feel.replace(/\s+/g, "").toLowerCase() + '.svg');
-    $('#temp').attr('feel', feel)
+    $('#weatherIcon').attr('src', "resc/weather/" + wcFeel.replace('Clear sky', 'Clear ' + isDay).replace(/\s+/g, "").toLowerCase() + '.svg');
+    $('#temp').attr('feel', wcFeel.replace('Clear sky', 'Clear ' + tod))
     $('.cmi-tempUnit').attr('tempunit', tempUnit);
 }
 

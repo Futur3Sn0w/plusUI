@@ -37,7 +37,7 @@ body:has(.context-selected-card) .shelfLabel {
     transition: transform .2s, filter .2s, opacity .2s;
 }
 
-.shelf:has(.card:hover) .shelfLabel,
+.shelf:has(.card:not(.placeholderCard):hover) .shelfLabel,
 .shelfLabel.show {
     transform: scale(1) !important;
     filter: blur(0) !important;
