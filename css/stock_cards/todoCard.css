@@ -2,26 +2,50 @@
     display: flex;
     box-sizing: border-box;
     /* overflow: hidden; */
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding: 4px;
 }
 
 .todoCard .items {
-    display: flex;
+    width: 100%;
     height: 100%;
-    gap: 3px;
-    border-radius: 12px;
+
+    display: flex;
     flex-direction: column;
+    gap: 3px;
+
+    border-radius: 12px;
     overflow: scroll;
+}
+
+.todoCard.rectCard .items {
+    padding: 0;
+    border-radius: 15px;
+    overflow: hidden !important;
+    flex-wrap: wrap;
 }
 
 .todoCard .items .item {
     display: flex;
     position: relative;
 
-    background-color: rgb(255, 255, 255);
+    height: 25px;
+
+    background-color: #eee;
     border-radius: 5px;
+    box-sizing: border-box;
     padding: 2px;
+}
+
+body:has(.darkModeOn) .todoCard .items .item {
+    background-color: #444;
+}
+
+.todoCard.rectCard .items .item {
+    width: calc(50% - 3px);
+}
+
+.item:has(input:checked) {
+    opacity: .6;
 }
 
 .todoCard .items .item input[type='checkbox'] {
@@ -39,6 +63,10 @@
     outline: none !important;
 }
 
+body:has(.darkModeOn) .item input[type="text"] {
+    color: white !important;
+}
+
 .todoCard .items .item::after {
     content: "";
     width: 55px;
@@ -50,4 +78,8 @@
 
     opacity: .5;
     background-color: black;
+}
+
+body:has(.darkModeOn) .todoCard .items .item::after {
+    background-color: rgb(255, 255, 255);
 }
