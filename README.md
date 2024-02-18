@@ -1,12 +1,14 @@
+![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/49c1b259-262c-4c0a-aec3-aa2b37d9b9f8)  
 # PlusUI (Codename: WebNT)
 PlusUI is my ever-evolving, multi-year long project to create a hybrid dashboard & smart display for large-format screens that is both beautiful, and multi-functional. PlusUI looks best on larger screens, but it's made to scale properly on all screen sizes.  
 This project was hand-written from the ground up in pure HTML/CSS/JS (vanilla jQuery), with exception of plugins not created by me.  
 The name PlusUI is from it's large-screen nature, and it's codename (WebNT) is a mix of web for it's web-based nature, and NT for both "new technology" and "new tab", as the project originated as a new-tab replacement.  
 
-Read below for more information and usage of PlusUI.  
-_**Note:** PlusUI is in active development. Features and appearances may be changed or removed at any time._
-
-![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/49c1b259-262c-4c0a-aec3-aa2b37d9b9f8)  
+Read below for more information and usage.  
+**IMPORTANT:** 
+ - PlusUI is in active development.
+ - Images shown below may show older version/builds of PlusUI. 
+ - Features and appearances may be changed or removed at any time.
 
 ### tvOS meets VisionOS
 The first thing you'll notice about PlusUI is its Apple-inspired UI. All the user elements, from the shelf, to the card deck, to the control panel are heavily inspired by Apple's and design elements and guidelines. It takes the most inspiration from the tvOS home screen, although everything is tweaked and refined to work a bit better with different input types.  
@@ -100,3 +102,12 @@ The backdrop can be customized via it's page in control panel, and both options 
    - Refresh the selected page with the reload button.
    
 ![image](https://github.com/Futur3Sn0w/plusUI/assets/18166632/e3da7a1b-13f8-40c5-b36b-d6dab3c48787)  
+
+## Tips, tricks, and fun(?) facts
+This section will be more unorganized, but I'll leave some usage notes and such of PlusUI!  
+
+ - **Tip:** On touchscreens, you can swipe the dock left or right to move it in that direction
+ - **Tip:** While an expandable is open, click the chevron in the card's placeholder on the shelf to close the expanded view
+ - **Fun fact:** The earliest iteration of PlusUI was technically a watered-down RSS reader. The background was black, and there were no options, just a grey box with a few blocks of text!
+
+~ ~
