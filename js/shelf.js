@@ -303,14 +303,14 @@ let touchstartX = 0
 let touchendX = 0
 
 function checkDirectionWC() {
-    if (touchendX < touchstartX) {
+    if (touchendX < touchstartX - 20) {
         // left swipe
         if ($('.shelf').hasClass('right')) {
             $('#saoC-radio').click()
         } else if ($('.shelf').hasClass('center')) {
             $('#saoL-radio').click()
         }
-    } else if (touchendX > touchstartX) {
+    } else if (touchendX > touchstartX + 20) {
         // right swipe
         if ($('.shelf').hasClass('left')) {
             $('#saoC-radio').click()
@@ -329,13 +329,3 @@ document.querySelector('.subCards').addEventListener('touchend', e => {
     checkDirectionWC()
     e.stopPropagation();
 })
-
-// Context menu action for touch
-
-$('.subCards .card').on('dblclick', function (e) {
-    if (!$('.subCards').hasClass('editMode') && $(this).parent().hasClass('.subCards')) {
-        cardContextMenu(this)
-        $('.fnCard').removeClass('fnCard');
-    }
-})
-

@@ -1,0 +1,18 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<foreignObject width="100%" height="100px">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="margin: 0 100px;">
+        <svg width="132" height="132" viewBox="0 0 132 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_1_2)">
+<path d="M90.4 16H41.6C32.6392 16 28.1587 16 24.7362 17.7439C21.7256 19.2779 19.2779 21.7256 17.7439 24.7362C16 28.1587 16 32.6392 16 41.6V90.4C16 99.3608 16 103.841 17.7439 107.264C19.2779 110.274 21.7256 112.722 24.7362 114.256C28.1587 116 32.6392 116 41.6 116H90.4C99.3608 116 103.841 116 107.264 114.256C110.274 112.722 112.722 110.274 114.256 107.264C116 103.841 116 99.3608 116 90.4V41.6C116 32.6392 116 28.1587 114.256 24.7362C112.722 21.7256 110.274 19.2779 107.264 17.7439C103.841 16 99.3608 16 90.4 16Z" fill="rgba(0,0,0,.5)"/>
+</g>
+<defs>
+<filter id="filter0_f_1_2" x="4" y="4" width="124" height="124" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="6" result="effect1_foregroundBlur_1_2"/>
+</filter>
+</defs>
+</svg>
+    </div>
+</foreignObject>
+</svg>

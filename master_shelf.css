@@ -37,6 +37,10 @@ body:has(.context-selected-card) .shelfLabel {
     transition: transform .2s, filter .2s, opacity .2s;
 }
 
+.shelf.float .shelfLabel {
+    top: -60%;
+}
+
 .shelf:has(.card:not(.placeholderCard):hover) .shelfLabel,
 .shelfLabel.show {
     transform: scale(1) !important;
@@ -81,53 +85,6 @@ body:has(.context-selected-card) .shelfLabel {
     /* background: linear-gradient(transparent, black); */
 }
 
-.shelfBack {
-    width: 100vw;
-    height: 150px;
-
-    opacity: 0;
-
-    transition: .4s;
-
-    backdrop-filter: blur(0) saturate(1);
-    display: flex;
-    pointer-events: none;
-
-    mask-image: linear-gradient(to bottom, transparent, black 50%);
-
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 9;
-}
-
-body:has(.timeDate.ccOpen .ccb:not(.ccb2).selected) .shelfBack {
-    backdrop-filter: blur(40px) saturate(2) brightness(2);
-}
-
-
-body:has(.shelf.float) .shelfBack {
-    height: 260px;
-    backdrop-filter: blur(40px) saturate(2);
-    opacity: 1;
-}
-
-.shelfBack::after {
-    background-color: var(--section-l);
-    opacity: 0;
-
-
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-
-.shelfBack.darkModeOn::after {
-    background-color: var(--section-d);
-    /* DISPLAY: NONE !important; */
-}
-
 .shelf.left .spcLeft {
     width: 0;
 }
@@ -162,7 +119,7 @@ body:has(.shelf.float) .shelfBack {
 
 .subCards {
     width: fit-content;
-    max-width: calc(100%);
+    max-width: 100%;
     height: fit-content;
 
     display: flex;
@@ -180,7 +137,7 @@ body:has(.shelf.float) .shelfBack {
     backdrop-filter: blur(100px) saturate(6);
     box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 21px !important;
+    border-radius: 22px !important;
 
     transition: .4s;
 }
@@ -195,18 +152,93 @@ body:has(.shelf.float) .shelfBack {
     border: none !important;
     box-shadow: none;
     backdrop-filter: unset;
-    overflow-x: scroll;
 
-    gap: 20px;
+    margin-bottom: 50px;
+    /* overflow-x: scroll; */
+
+    overflow: visible !important;
+    gap: 25px;
 }
 
-/* .shelf.right.float .subCards {
-    padding-right: 15px;
+body:has(.timeDate.ccOpen .ccb2.selected) .subCards {
+    -webkit-filter: blur(7.5px) grayscale(.75);
+    filter: blur(7.5px) grayscale(.75);
+    opacity: .75;
+    pointer-events: none;
 }
 
-.shelf.left.float .subCards {
-    padding-left: 15px;
-} */
+body:has(.shelf.float) .subCards::after {
+    opacity: 1;
+    -webkit-backdrop-filter: blur(25px) saturate(2);
+    backdrop-filter: blur(25px) saturate(2);
+    /* filter: blur(10px); */
+}
+
+.subCards::after {
+    content: '';
+
+    opacity: 0;
+    transition: .4s;
+    transition-delay: .4s;
+    pointer-events: none;
+
+    overflow: hidden;
+
+    position: absolute;
+    z-index: -1;
+    inset: -55px -65px;
+
+    background-color: rgba(238, 238, 238, 0.15);
+
+    -webkit-backdrop-filter: blur(0px) saturate(1);
+    backdrop-filter: blur(0px) saturate(1);
+
+    mask:
+        linear-gradient(to top,
+            transparent 0%,
+            red 50px calc(100% - 50px),
+            transparent 100%),
+        linear-gradient(to left,
+            transparent 0%,
+            red 50px calc(100% - 50px),
+            transparent 100%);
+
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+}
+
+body[browser="Firefox"] .subCards::after {
+    border-radius: 70px;
+    mask: none !important;
+    mask-composite: unset !important;
+    -webkit-mask-composite: unset !important;
+
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+
+    width: calc(100% + 45px);
+    height: calc(100% + 45px);
+    margin-top: -22.5px !important;
+    margin-left: -22.5px !important;
+
+    inset: 0 !important;
+}
+
+
+body:has(.darkModeOn) .subCards::after {
+    background-color: rgba(34, 34, 34, 0.15);
+}
+
+body:has(.contextMenuDiv.show) .subCards::after,
+body:has(.rolodex.visible) .subCards::after,
+body:has(.timeDate.ccOpen .ccb.selected) .subCards::after,
+body:has(.about-modal.visible) .subCards::after {
+    -webkit-backdrop-filter: blur(0px) saturate(1);
+    backdrop-filter: blur(0px) saturate(1) !important;
+    background-color: transparent !important;
+
+    transition-delay: 0s;
+}
 
 .shelf:not(.float) .subCards.right-circle {
     border-top-right-radius: 55px !important;

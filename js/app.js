@@ -15,6 +15,8 @@ window.onload = function () {
     showTime();
     showDate();
 
+    setAgent();
+
     $('.greeting').removeClass('hidden');
     setTimeout(() => {
         $('.greeting').addClass('hidden');
@@ -172,6 +174,33 @@ $(document).mouseup(function (e) {
     dockRadi();
 });
 
+function setAgent() {
+    var browser = {
+        // More granular detection for Chrome & Chromium-based browsers
+        isChrome: window.chrome && !window.opera && !window.opr && typeof navigator.webkit !== 'undefined',
+        isFirefox: /^((?!chrome|android).)*firefox/i.test(navigator.userAgent),
+        isSafari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+    };
+
+    if (browser.isChrome) {
+        // console.log("Chrome-based");
+        localStorage.setItem('reportedBrowserAgent', "Chrome-based");
+        $('body').attr('browser', "Chrome");
+    } else if (browser.isFirefox) {
+        // console.log("Firefox");
+        localStorage.setItem('reportedBrowserAgent', "Firefox");
+        $('body').attr('browser', "Firefox");
+    } else if (browser.isSafari) {
+        // console.log("Safari");
+        localStorage.setItem('reportedBrowserAgent', "Safari");
+        $('body').attr('browser', "Safari");
+    } else {
+        // console.log("Else/unsupported");
+        localStorage.setItem('reportedBrowserAgent', "Else/unsupported");
+        $('body').attr('browser', "Else");
+    }
+}
+
 function refreshWall() {
     $('<div class="prevWall interactable-hov" onclick="clearWall(this)">').prependTo('.wallList').css('background-image', $('#backDrop2').css('background-image'));
 
@@ -232,7 +261,6 @@ $(document).on('click', '.expandableWindow .return', function () {
 
             $(this).parent().parent().remove();
         }, 200);
-
 
     }, 300);
 

@@ -34,6 +34,91 @@
     background-image: url(https://cdn.dribbble.com/users/32512/screenshots/3546148/apple_siri_motion_animation_by_gleb.gif);
 }
 
+.siriDbgCard[target="gemini"] .layer1,
+.siriDbgCard[target="gemini"] .layer2,
+.siriDbgCard[target="gemini"] .layer3,
+.siriDbgCard[target="gemini"] .shadow,
+.siriDbgCard:not([target="gemini"]) svg {
+    display: none;
+}
+
+.siriDbgCard[target="gemini"] .shadow {
+    display: flex;
+}
+
+.siriDbgCard[target="gemini"] {
+    background-color: white !important;
+}
+
+.siriDbgCard[target="gemini"] .geminicon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    background-color: transparent;
+    border-radius: 50px;
+
+    opacity: 1;
+    margin-bottom: 20px;
+
+    animation:
+        bounce2 3s ease infinite,
+        gradient 4s linear infinite;
+}
+
+@keyframes bounce2 {
+    0% {
+        transform: translateY(0px);
+        box-shadow: 0 20px 20px #000;
+    }
+
+    25% {
+        transform: translateY(20px);
+        box-shadow: 0 0 20px #000;
+    }
+
+    50% {
+        transform: translateY(0px);
+        box-shadow: 0 20px 20px #000;
+    }
+
+    75% {
+        transform: translateY(20px);
+        box-shadow: 0 0 20px #000;
+    }
+
+    100% {
+        transform: translateY(0px) rotate(180deg);
+        box-shadow: 0 20px 20px #000;
+    }
+}
+
+@keyframes gradient {
+    0% {
+        filter: invert(59%) sepia(87%) saturate(2708%) hue-rotate(186deg) brightness(96%) contrast(84%);
+    }
+
+    20% {
+        filter: invert(72%) sepia(95%) saturate(1071%) hue-rotate(184deg) brightness(101%) contrast(97%);
+    }
+
+    40% {
+        filter: invert(98%) sepia(2%) saturate(607%) hue-rotate(332deg) brightness(93%) contrast(99%);
+    }
+
+    60% {
+        filter: invert(56%) sepia(17%) saturate(1261%) hue-rotate(209deg) brightness(89%) contrast(89%);
+    }
+
+    80% {
+        filter: invert(32%) sepia(50%) saturate(2708%) hue-rotate(201deg) brightness(96%) contrast(113%);
+    }
+
+    100% {
+        filter: invert(55%) sepia(37%) saturate(2043%) hue-rotate(315deg) brightness(91%) contrast(73%);
+    }
+}
+
+
 /* Expanded view */
 
 .siriDbgCard.expanded .layer1,
