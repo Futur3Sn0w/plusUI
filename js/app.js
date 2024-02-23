@@ -9,7 +9,6 @@ function isTouchScreendevice() {
 };
 
 var repeater;
-let tilt;
 
 window.onload = function () {
     showTime();
@@ -22,20 +21,25 @@ window.onload = function () {
         $('.greeting').addClass('hidden');
     }, 10000);
 
-    $('.aboutBtn').attr('ver', 'PlusUI ' + $('.siteVer').text()).addClass('visible');
+    $('.aboutBtn').attr('ver', $('.siteVer').text()).addClass('visible');
     setTimeout(() => {
         $('.aboutBtn').removeClass('visible');
     }, 5000);
 
-    // if (isTouchScreendevice()) {
-    //     $('.card').removeClass('parallax');
-    // } else {
-    //     tilt = $('.subCards .card[data-parallaxCard="y"]').tilt({
-    //         perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
-    //         scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
-    //         speed: 500    // Speed of the enter/exit transition
-    //     });
-    // }
+    if (isTouchScreendevice()) {
+        $('.card').removeClass('parallax');
+    } else {
+        if (localStorage.getItem('parallax') == 'true') {
+            VanillaTilt.init(paraCards, {
+                reverse: true,
+                max: 15,
+                scale: 1.075,
+                gyroscope: false,
+                speed: 400
+            });
+            $('#cbParallaxToggle').prop('checked', true);
+        }
+    }
 
     if (localStorage.getItem('liveWall') == 'true') {
         clearInterval(repeater)
@@ -137,6 +141,27 @@ window.onload = function () {
     }, 1000);
 }
 
+let paraCards = document.querySelectorAll(".card[data-parallaxCard='y']");
+
+$('#cbParallaxToggle').click(function () {
+    if ($(this).is(':checked')) {
+        VanillaTilt.init(paraCards, {
+            reverse: true,
+            max: 15,
+            scale: 1.075,
+            gyroscope: false,
+            speed: 400
+        });
+        localStorage.setItem('parallax', 'true');
+
+    } else {
+        paraCards.forEach(box => {
+            box.vanillaTilt.destroy();
+        });
+        localStorage.setItem('parallax', 'false');
+    }
+});
+
 $(document).mouseup(function (e) {
     saveCards();
 
@@ -167,8 +192,11 @@ $(document).mouseup(function (e) {
         $('.contextMenuDiv').removeClass('show');
     }
 
-    if (!$(".rolodex").is(e.target) && !$(".rolodex *").is(e.target)) {
-        $('.rolodexCloseBtn').click();
+    if (!$(".rolodex").is(e.target) && !$(".rolodex *").is(e.target) && !$(".rolodexOpen").is(e.target)) {
+        if ($('.rolodex').hasClass('visible')) {
+            // $('.aboutBtn').removeClass('visible').attr('about', 'PlusUI').attr('ver', $('.siteVer').text());
+            $('.rolodex').removeClass('visible')
+        }
     }
 
     dockRadi();

@@ -46,21 +46,26 @@
 
     <div class="backDrop" id="backDrop2"></div>
 
-    <div class="surface aboutBtn" id="topChromeAboutBtn">
+    <div class="surface aboutBtn" id="topChromeAboutBtn" about="PlusUI" ver="">
         <div class="logo"></div>
     </div>
-    <div class="surface timeDate notLoaded">
-        <div class="tdm time" id="time"></div>
-        <div class="ccButtons">
-            <div class="ccb ccb1" label="Personalize"><i class="fa-solid fa-brush"></i></div>
-            <div class="ccb ccb2" label="Backdrop"><i class="fa-solid fa-image"></i></div>
-            <!-- <div class="ccb ccb3" label="User"><i class="fa-solid fa-user"></i></div> -->
-            <!-- <div class="ccb ccb4" label="Labs"><i class="fa-solid fa-flask"></i></div> -->
-            <div class="ccb ccb5" label="About"><i class="fa-solid fa-info"></i></div>
-        </div>
-        <div class="tdSep"></div>
-        <div class="ccb rolodexOpen" data-btnName="Cards" id="rolodexOpenBtn" label="Cards">
+    <div class="topChromeItems">
+        <div class="surface rolodexOpen" data-btnName="Cards" id="rolodexOpenBtn" label="Cards">
             <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="surface timeDate notLoaded">
+            <div class="tdm time" id="time"></div>
+            <div class="ccButtons">
+                <div class="ccb ccb1" label="Personalize"><i class="fa-solid fa-brush"></i></div>
+                <div class="ccb ccb2" label="Backdrop"><i class="fa-solid fa-image"></i></div>
+                <!-- <div class="ccb ccb3" label="User"><i class="fa-solid fa-user"></i></div> -->
+                <!-- <div class="ccb ccb4" label="Labs"><i class="fa-solid fa-flask"></i></div> -->
+                <div class="ccb ccb5" label="About"><i class="fa-solid fa-info"></i></div>
+            </div>
+            <div class="tdSep"></div>
+            <div class="ccb dummy">
+                <i class="fa-solid fa-sliders"></i>
+            </div>
         </div>
     </div>
     <div class="surface greeting hidden" data-username="User"></div>
@@ -72,15 +77,29 @@
             </div>
             <div class="group">
                 <div class="dcExpt interactable-hov">
-                    <input type="checkbox" name="monoMode" id="cbMonoMode">
-                    <i class="fa-solid fa-cube"></i>
-                    <label for="">Mono theme</label>
+                    <input type="checkbox" name="" id="cbParallaxToggle">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <label for="">Parallax cards</label>
                 </div>
                 <div class="dcExpt interactable-hov floatModeCardOptGroup">
                     <input type="checkbox" name="floatMode" id="cbFloatMode">
                     <i class="fa-solid fa-diagram-next"></i>
-                    <label for="floatMode">Floating cards</label>
+                    <label for="floatMode">Floating shelf</label>
                 </div>
+            </div>
+            <div class="group-b">
+                <div class="dcExpt button fullscreenBtn interactable-hov">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+                <div class="dcExpt button refreshPageBtn interactable-hov">
+                    <i class="fa-solid fa-refresh"></i>
+                </div>
+
+            </div>
+            <div class="dcExpt interactable-hov monoModeDCE">
+                <input type="checkbox" name="monoMode" id="cbMonoMode">
+                <i class="fa-solid fa-cube"></i>
+                <label for="">Mono theme</label>
             </div>
             <div class="shelfAlign" data-optName="Alignment">
                 <div class="sa-opt saoL interactable-hov">
@@ -94,20 +113,6 @@
                 <div class="sa-opt saoR interactable-hov">
                     <input class="sao-radio" type="radio" name="shelfAlign" id="saoR-radio">
                     <label for="saoR-radio">Right</label>
-                </div>
-            </div>
-            <div class="group-b">
-                <div class="dcExpt button fullscreenBtn interactable-hov">
-                    <i class="fa-solid fa-expand"></i>
-                </div>
-                <div class="dcExpt button refreshPageBtn interactable-hov">
-                    <i class="fa-solid fa-refresh"></i>
-                </div>
-                <div class="dcExpt button interactable-hov">
-                    <i class="fa-solid fa-question"></i>
-                </div>
-                <div class="dcExpt button interactable-hov">
-                    <i class="fa-solid fa-question"></i>
                 </div>
             </div>
 
@@ -217,7 +222,7 @@
             <div class="header">
                 <img src="favicons/android-chrome-192x192.png" alt="">
                 <p id="title">(PlusUI)</p>
-                <p class="siteVer" id="ver">v2.6.3</p>
+                <p class="siteVer" id="ver">v2.7</p>
             </div>
             <div class="aboutText">
                 A hybrid dashboard and digital display for large-format screens, heavily inspired by TV & VisionOS
@@ -258,21 +263,10 @@
 
     <div class="eWinSurface"></div>
 
-    <!-- <div class="surface expandableWindow">
-        <div class="return">
-            <i class="fa-solid fa-down-left-and-up-right-to-center"></i>
-        </div>
-        <div class="widget"></div>
-    </div> -->
-
     <div class="surface rolodex" data-sectName="Card Deck">
-        <div class="rolodexCloseBtn interactable-hov">
-            <i class="fa-solid fa-xmark"></i>
-        </div>
+        <div class="roloCardInfo"></div>
 
-        <div class="header"></div>
-
-        <div class="cbSect cbs1" data-sectName="Available Cards" data-currentCard="Card">
+        <div class="cbSect cbs1">
             <div class="snowCard card deckCard labeled squareCard" data-enabled="n" data-resizableCard="n"
                 data-parallaxCard="y" data-friendlyName="Sn0w"
                 data-cardDesc="[DEBUG] A display of various card API demos including parallax, transparency, and onClick action"
@@ -371,21 +365,34 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="winsiderCard card deckCard labeled squareCard" data-enabled="n" data-resizableCard="y" data-parallaxCard="y" data-friendlyName="Insider" data-cardDesc="Always know the latest Insider build" id="winsiderCard">
-            <p>Insider</p>
-            <div class="insChannel icBuild" data-channel="Latest"></div>
-            <div class="insChannel icRP" data-channel="RP">22000</div>
-            <div class="insChannel icBeta" data-channel="Beta">22100</div>
-            <div class="insChannel icDev" data-channel="Dev">23000</div>
-            <div class="insChannel icCanary" data-channel="Canary">25000</div>
-            </div> -->
+            <div class="yearProgCard card deckCard labeled rectCard" data-enabled="n" data-resizableCard="y"
+                data-parallaxCard="y" data-friendlyName="Year Progress"
+                data-cardDesc="View the year's progress as a percentage + other statistics" id="yearProgCard">
+                <div class="yearLabel" ce="20" ye="24"></div>
+                <div class="percLabel">
+                    <span> - </span>
+                </div>
+                <div class="percBar">
+                    <div class="fill"></div>
+                </div>
+            </div>
+            <div class="characterCopyCard card deckCard labeled squareCard" data-enabled="n" data-resizableCard="n"
+                data-parallaxCard="y" data-friendlyName="Character Copy"
+                data-cardDesc="Click to copy commonly access symbols and characters" id="characterCopyCard">
+                <div class="grid">
+                    <div class="gridItem gi1">⠀</div>
+                    <div class="gridItem gi2"></div>
+                    <div class="gridItem gi3">°</div>
+                    <div class="gridItem gi4">×</div>
+                </div>
+            </div>
         </div>
         <!-- <div class="cbSect cbs2" data-sectName="Dev"></div> -->
         <div class="moveCtrls">
             <div class="mvCtrl left interactable-hov"> <i class="fa-solid fa-chevron-left"></i> </div>
+            <div class="addBtn interactable-hov"><i class="fa-solid fa-plus"></i></div>
             <div class="mvCtrl right interactable-hov"> <i class="fa-solid fa-chevron-right"></i> </div>
         </div>
-        <div class="addBtn interactable-hov"><i class="fa-solid fa-plus"></i></div>
         <!-- <div class="rssBtn disabled">Add RSS<i class="fa-solid fa-rss"></i></div> -->
     </div>
 
@@ -396,7 +403,7 @@
         <div class="spacerA spcLeft"></div>
         <div class="surface subCards">
 
-            <div class="weatherCard card labeled rectCard" data-enabled="y" data-resizableCard="y" data-parallaxCard="y"
+            <div class="weatherCard card labeled rectCard" data-enabled="y" data-resizableCard="y" data-parallaxCard="n"
                 data-friendlyName="Weather" data-cardDesc="Current temperature in local units" id="weatherCard">
                 <div class="cardOptions">
                     <div class="cmItem interactable-hov cmi-tempUnit" data-btnLabel="">
@@ -410,7 +417,7 @@
                 </div>
                 <div class="weather_stars"></div>
             </div>
-            <div class="clockCard card labeled circleCard" data-enabled="y" data-resizableCard="y" data-parallaxCard="y"
+            <div class="clockCard card labeled circleCard" data-enabled="y" data-resizableCard="n" data-parallaxCard="y"
                 data-friendlyName="Clock" data-cardDesc="A simple analog clock" id="clockCard">
                 <div id="clockContainer">
                     <div class="clockHand" id="hour"></div>
@@ -514,7 +521,8 @@
         <div class="spacerA spcRight"></div>
     </div>
 
-    <script src="js/tilt.jquery.js"></script>
+    <script type="text/javascript" src="js/vanilla-tilt.js"></script>
+    <!-- <script src="js/tilt.jquery.js"></script> -->
 
     <script src="js/app.js"></script>
     <script src="js/topchrome.js"></script>

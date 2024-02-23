@@ -50,6 +50,10 @@
     color: white;
 }
 
+body:has(.rolodex.visible) .card {
+    pointer-events: none !important;
+}
+
 .card.md {
     transition: none !important;
 }
@@ -114,7 +118,7 @@ body:has(.darkModeOn) .card {
 .contextMenuDiv {
     position: absolute;
     bottom: 112px;
-    z-index: 11;
+    z-index: 15;
 
     width: max-content;
     height: fit-content;
@@ -454,7 +458,7 @@ body:has(.darkModeOn) .card.placeholderCard {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.card.placeholderCard::after {
+/* .card.placeholderCard::after {
     content: '';
     width: 100%;
     height: 100%;
@@ -467,11 +471,12 @@ body:has(.darkModeOn) .card.placeholderCard {
 
 body:has(.darkModeOn) .card.placeholderCard::after {
     background-color: var(--section-d) !important;
-}
+} */
 
 .card.placeholderCard i {
     position: relative;
     z-index: 2;
+    background-color: var(--section-l);
 
     padding: 10px;
     border-radius: 50px;
@@ -479,9 +484,13 @@ body:has(.darkModeOn) .card.placeholderCard::after {
     transition: .15s;
 }
 
+body:has(.darkModeOn) .card.placeholderCard i {
+    background-color: var(--section-d);
+}
+
 .card.placeholderCard:hover i {
     transform: scale(1.075) rotate(180deg);
-    background-color: white;
+    background-color: white !important;
     color: black !important;
 }
 

@@ -8,7 +8,8 @@
     color: white;
 }
 
-body:has(.context-selected-card) .shelfLabel {
+body:has(.context-selected-card) .shelfLabel,
+body:has(.rolodex.visible) .shelfLabel {
     display: none;
 }
 

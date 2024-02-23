@@ -1,21 +1,27 @@
-.timeDate {
+.topChromeItems {
+    display: flex;
+    width: fit-content;
+
     position: absolute;
     top: 10px;
     right: 10px;
     z-index: 98;
+}
+
+.timeDate {
     font-weight: 500;
 
     display: flex;
     align-items: center;
     /* gap: 3px; */
     box-sizing: border-box;
-    border-radius: 50px;
+    border-radius: 13px 50px 50px 13px;
 
+    max-width: 250px;
     height: 46px;
-    min-width: max-content;
     overflow: hidden;
 
-    transition: .2s;
+    transition: .3s;
     user-select: none;
     transform: scale(1);
     opacity: 1;
@@ -29,7 +35,14 @@
 
 .timeDate.ccOpen {
     height: 50px;
+    border-radius: 50px;
     transform: none !important;
+}
+
+body:has(.rolodex.visible) .timeDate {
+    max-width: 0px;
+    opacity: 0;
+    margin-left: -5px;
 }
 
 .timeDate:not(.timeDate.ccOpen):hover {
@@ -135,11 +148,13 @@
     transform: scale(.9);
 }
 
-.timeDate.ccOpen .ccb.selected {
+.timeDate.ccOpen .ccb.selected,
+.timeDate .ccb.dummy {
     background-color: var(--surface-button-l);
 }
 
-.timeDate.darkModeOn.ccOpen .ccb.selected {
+.timeDate.darkModeOn.ccOpen .ccb.selected,
+.timeDate.darkModeOn .ccb.dummy {
     background-color: var(--surface-button-d);
 }
 
@@ -151,6 +166,27 @@
     background-color: rgba(255, 255, 255) !important;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, .25);
     color: rgba(0, 0, 0, .75);
+}
+
+.ccb.dummy {
+    pointer-events: none;
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+    margin-right: 5px;
+    overflow: hidden;
+}
+
+.timeDate:hover .ccb.dummy {
+    background-color: rgba(255, 255, 255) !important;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, .25);
+    color: rgba(0, 0, 0, .75);
+}
+
+.timeDate.ccOpen .ccb.dummy {
+    width: 0;
+    height: 0;
+    margin-right: 0;
 }
 
 /* Card deck button */
@@ -165,15 +201,28 @@
     box-sizing: border-box;
     margin-right: 5px;
 
-    height: 35px;
-    width: 35px;
+    height: 46px;
+    width: 46px;
     /* flex-shrink: 0; */
 
     transition: .2s;
 
     font-size: 20px;
 
+    border-radius: 50px 13px 13px 50px;
+}
+
+.rolodexOpen i {
+    transition: .3s;
+}
+
+body:has(.rolodex.visible) .rolodexOpen i {
+    transform: rotate(135deg);
+}
+
+body:has(.rolodex.visible) .rolodexOpen {
     border-radius: 50px;
+    pointer-events: all !important;
 }
 
 .timeDate.darkModeOn .rolodexOpen {
@@ -181,7 +230,7 @@
     color: rgba(255, 255, 255, .75);
 }
 
-.timeDate.ccOpen .rolodexOpen {
+body:has(.timeDate.ccOpen) .rolodexOpen {
     opacity: 0;
     filter: blur(10px);
     width: 0;
@@ -191,11 +240,11 @@
 }
 
 .rolodexOpen:hover {
-    width: 80px;
-    height: 40px;
-    gap: 5px;
-    margin-right: 2px;
+    width: 90px;
+    height: 45px;
+    gap: 8px;
 
+    transform: scale(1.075);
     background-color: rgba(255, 255, 255) !important;
     color: rgba(0, 0, 0, .75) !important;
 }
@@ -254,7 +303,8 @@
 
 .aboutBtn {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     /* justify-content: center; */
     /* gap: 20px; */
 
@@ -262,7 +312,9 @@
     top: 14px;
     left: 14px;
     height: 45px;
-    width: 105px;
+    width: fit-content;
+    padding-left: 44px;
+    padding-right: 14px;
     z-index: 100000;
 
     font-size: 12px;
@@ -289,20 +341,35 @@
 
 .aboutBtn.visible,
 body:has(.aboutOpts.visible) .aboutBtn,
-body:has(.controlPanel.expanded) .aboutBtn {
+body:has(.controlPanel.expanded) .aboutBtn,
+body:has(.rolodex.visible) .aboutBtn {
     filter: blur(0) !important;
     opacity: 1 !important;
     transform: scale(1) !important;
 }
 
+body:has(.rolodex.visible) .aboutBtn::before {
+    content: "Card Deck";
+}
+
+body:has(.rolodex.visible) .aboutBtn::after {
+    content: "Codename: Rolodex";
+}
+
+.aboutBtn::before {
+    font-size: 15px;
+    content: attr(about);
+}
+
 .aboutBtn::after {
+    font-size: 12px;
+    opacity: .7;
     content: attr(ver);
 }
 
 .aboutBtn .logo {
     width: 30px;
     height: 30px;
-    margin: 0 8px;
     flex-shrink: 0;
     display: flex;
 
@@ -314,6 +381,9 @@ body:has(.controlPanel.expanded) .aboutBtn {
     background-size: calc(100% - 12px);
     background-repeat: no-repeat;
     background-position: center;
+
+    position: absolute;
+    left: 8px;
 }
 
 .aboutBtn.darkModeOn .logo {

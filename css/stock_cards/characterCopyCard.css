@@ -1,0 +1,75 @@
+.characterCopyCard {
+    display: flex;
+
+
+    transform: perspective(1000px);
+}
+
+.characterCopyCard::before,
+.characterCopyCard::after {
+    background: radial-gradient(black, transparent 70%);
+}
+
+body:has(.darkModeOn) .characterCopyCard::before,
+body:has(.darkModeOn) .characterCopyCard::after {
+    background: radial-gradient(white, transparent 70%);
+}
+
+.characterCopyCard::before {
+    content: '';
+    width: 100%;
+    height: 3px;
+
+    position: absolute;
+    left: 0;
+
+    opacity: .7;
+}
+
+.characterCopyCard::after {
+    content: '';
+    height: 100%;
+    width: 3px;
+
+    position: absolute;
+    top: 0;
+}
+
+.characterCopyCard .grid {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 3px;
+    box-sizing: border-box;
+    transform: translateZ(15px);
+}
+
+.characterCopyCard .grid .gridItem {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    z-index: 2;
+
+    cursor: pointer;
+}
+
+.characterCopyCard .grid .gridItem::before,
+.characterCopyCard .grid .gridItem::after {
+    opacity: .5;
+    content: '"';
+}
+
+.characterCopyCard .grid .gridItem:hover {
+    background-color: rgba(255, 255, 255, .25);
+}

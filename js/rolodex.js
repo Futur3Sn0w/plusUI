@@ -2,26 +2,29 @@
 
 $('.rolodexOpen').on('click', function (e) {
     i = 0
-    $('.rolodex').addClass('visible');
-    $('.cbs1').scrollLeft(0);
-
-    if ($('.cbs1').children().length == 0) {
-        // $('.cbs1').children().first().addClass('hoveredCard')
-        $('.cbs1').attr('data-sectName', 'Your card deck is empty')
-        $('.cbs1').attr('data-cardDesc', 'Move a card to the deck from the shelf.')
-        $('.rolodex').addClass('empty')
+    if ($('.rolodex').hasClass('visible')) {
+        // $('.aboutBtn').removeClass('visible').attr('about', 'PlusUI').attr('ver', $('.siteVer').text());
+        $('.rolodex').removeClass('visible');
     } else {
-        $('.cbs1').children().first().addClass('hoveredCard')
-        $('.cbs1').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
-        $('.cbs1').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
-        $('.rolodex').removeClass('empty')
+        // $('.aboutBtn').attr('about', 'Card Deck').attr('ver', 'Codename: Rolodex').addClass('visible');
+        $('.rolodex').addClass('visible');
+        $('.cbs1').scrollLeft(0);
+
+        if ($('.cbs1').children().length == 0) {
+            // $('.cbs1').children().first().addClass('hoveredCard')
+            $('.roloCardInfo').attr('data-sectName', 'Your card deck is empty')
+            $('.roloCardInfo').attr('data-cardDesc', 'Move a card to the deck from the shelf.')
+            $('.rolodex').addClass('empty')
+        } else {
+            $('.cbs1').children().first().addClass('hoveredCard')
+            $('.roloCardInfo').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
+            $('.roloCardInfo').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
+            $('.rolodex').removeClass('empty')
+        }
     }
 
-    e.stopPropagation();
-})
 
-$('.rolodexCloseBtn').on('click', function () {
-    $('.rolodex').removeClass('visible');
+    e.stopPropagation();
 })
 
 let i = 0
@@ -38,8 +41,8 @@ $('.mvCtrl.left').on('click', function () {
     // alert(i)
     $('.hoveredCard').removeClass('hoveredCard')
     $('.cbs1').children().eq(i).addClass('hoveredCard')
-    $('.cbs1').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
-    $('.cbs1').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
+    $('.roloCardInfo').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
+    $('.roloCardInfo').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
 })
 
 $('.mvCtrl.right').on('click', function () {
@@ -53,8 +56,8 @@ $('.mvCtrl.right').on('click', function () {
     // alert(i)
     $('.hoveredCard').removeClass('hoveredCard')
     $('.cbs1').children().eq(i).addClass('hoveredCard')
-    $('.cbs1').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
-    $('.cbs1').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
+    $('.roloCardInfo').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
+    $('.roloCardInfo').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
 })
 
 $('.addBtn').on('click', function (e) {
@@ -78,15 +81,15 @@ $('.addBtn').on('click', function (e) {
 
     if ($('.cbs1').children().length == 0) {
         // $('.cbs1').children().first().addClass('hoveredCard')
-        $('.cbs1').attr('data-sectName', 'Your card deck is empty')
-        $('.cbs1').attr('data-cardDesc', 'Move a card to the deck from the shelf.')
+        $('.roloCardInfo').attr('data-sectName', 'Your card deck is empty')
+        $('.roloCardInfo').attr('data-cardDesc', 'Move a card to the deck from the shelf.')
         $('.rolodex').addClass('empty')
     } else {
         $('.cbs1').children().first().addClass('hoveredCard')
         $('.cbs1').scrollLeft(0)
         i = 0;
-        $('.cbs1').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
-        $('.cbs1').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
+        $('.roloCardInfo').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
+        $('.roloCardInfo').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
         $('.rolodex').removeClass('empty')
     }
 })

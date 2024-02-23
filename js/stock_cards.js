@@ -1,25 +1,3 @@
-// Windows Insider card
-
-// const rssUrl = "https://rss.app/feeds/lsUWpCbadyqdyXzI.xml";
-
-// $.ajax({
-//     url: rssUrl,
-//     success: function (data) {
-//         // find the element that contains the build number
-//         var element = $(data).text();
-
-//         var build = element.trim().match(/Build [0-9]{5}/); // returns ["string"]
-//         var branch = element.trim().match(/[0-9]{5} to the .*? .*?/); // returns ["string"]
-//         var firstBuild = build[0].replace('Build ', ''); // returns "string"
-//         var firstBranch = branch[0].replace(/[0-9]{5} to the /, '');
-//         // alert(firstMatch); // displays "string"
-
-//         $('.icBuild').text(firstBuild);
-//         $('.icBuild').attr('data-channel', firstBranch);
-//         // alert(firstBranch)
-//     }
-// });
-
 // Weather (rejuv)
 
 var tempUnit = localStorage.getItem('tempUnit');
@@ -352,3 +330,50 @@ $(window).resize(() => {
         }, 500);
     }
 });
+
+// Year progress card
+
+var currentYear;
+var daysLeft;
+
+function getYearCompletionPercentage() {
+    const today = new Date();
+    currentYear = today.getFullYear();
+    const daysInYear = isLeapYear(currentYear) ? 366 : 365;
+    const daysPassed = today.getDate() + (today.getMonth() * 30) + (Math.floor(today.getDate() / 4) - Math.floor(today.getMonth() / 2));
+    daysLeft = daysInYear - daysPassed;
+    return Math.round((daysPassed / daysInYear) * 100);
+}
+
+function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+}
+
+// Example usage
+const percentage = getYearCompletionPercentage();
+$('.yearProgCard .percLabel').attr("a", percentage + '%').attr('b', daysLeft + ' days');
+// $('.yearProgCard .yearLabel').text(currentYear);
+$('.yearProgCard .percBar .fill').css('width', percentage + '%');
+
+// Copy character card
+
+$(document).on('click', '.characterCopyCard .grid .gridItem', function () {
+    var copyText = $(this).text().replace(/"/g, "");
+
+    // Use Clipboard API for modern browsers
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(copyText)
+            .then(() => {
+                console.log("Copied symbol: " + copyText);
+            })
+            .catch(err => {
+                console.error("Failed to copy symbol:", err);
+                // Handle error gracefully, e.g., display a user-friendly message
+            });
+    } else {
+        // Fallback for older browsers using execCommand
+        $(this).select();
+        document.execCommand("copy");
+        console.log("Copied symbol: " + copyText);
+    }
+})

@@ -258,23 +258,15 @@ function getBase64Image(img) {
 
 // Tilt
 
-$('#cbDisablePara').on('click', function () {
-    if ($('.parallax').hasClass('parallax-disabled')) {
-        const tilt = $('.parallax').tilt();
-        tilt.methods.destroy.call(tilt);
-        localStorage.setItem('parallax', 'false');
-        $('.parallax').addClass('parallax-disabled');
-    } else {
-        localStorage.setItem('parallax', 'true');
-        $('.parallax').removeClass('parallax-disabled');
+// $('#cbParallaxToggle').on('click', function () {
+//     if ($('.subCards .card[data-parallaxCard="y"]').hasClass('parallax-disabled')) {
 
-        $('.parallax').tilt({
-            perspective: 350,   // Transform perspective, the lower the more extreme the tilt gets.
-            scale: 1.075,      // 2 = 200%, 1.5 = 150%, etc..
-            speed: 500    // Speed of the enter/exit transition
-        });
-    }
-})
+//     } else {
+
+//     }
+// })
+
+
 
 // Live display
 
