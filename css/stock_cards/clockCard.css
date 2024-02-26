@@ -1,7 +1,7 @@
 #clockContainer {
     position: relative;
     margin: auto;
-    height: 75%;
+    height: 80%;
     aspect-ratio: 1/1;
     background-image: url("../../resc/clock_numbs_black.svg");
     background-repeat: no-repeat;
@@ -11,6 +11,15 @@
     border-radius: 50%;
 
     transform: translateZ(13px);
+}
+
+.clockCard.style-b {
+    border-radius: 16px !important;
+}
+
+.clockCard.style-b #clockContainer {
+    border-radius: 13px !important;
+    height: 86%;
 }
 
 .clockCard.darkModeOn #clockContainer {
@@ -25,18 +34,6 @@
 .subCards.plated .clockCard.darkModeOn #clockContainer {
     background-color: #0000007c;
 }
-
-.clockCard.rectCard {
-    box-sizing: border-box;
-    padding-right: 50px;
-    padding-left: 2px;
-}
-
-.clockCard.rectCard #clockContainer {
-    margin-left: 15%;
-    transform: translateZ(13px) translateX(-15%);
-}
-
 
 #clockContainer::after {
     content: "";

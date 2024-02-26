@@ -4,17 +4,22 @@
 
 /* Stock cards */
 
-@import url('css/stock_cards/batteryCard.css');
+/* @import url('css/stock_cards/batteryCard.css'); */
+@import url('css/stock_cards/calculatorCard.css');
 @import url('css/stock_cards/calendarCard.css');
-@import url('css/stock_cards/clockCard.css');
+@import url('css/stock_cards/cattoCard.css');
 @import url('css/stock_cards/characterCopyCard.css');
+@import url('css/stock_cards/clockCard.css');
 @import url('css/stock_cards/emojiLocaleCard.css');
+@import url('css/stock_cards/nasaCard.css');
+@import url('css/stock_cards/pupperCard.css');
 @import url('css/stock_cards/shortcutCard.css');
 @import url('css/stock_cards/siriDbgCard.css');
 @import url('css/stock_cards/snowDbgCard.css');
 @import url('css/stock_cards/textCard.css');
 @import url('css/stock_cards/todoCard.css');
+@import url('css/stock_cards/uselessFactsCard.css');
 @import url('css/stock_cards/weatherCard.css');
 @import url('css/stock_cards/yearProgCard.css');
 @import url('css/stock_cards/youtubeBrowseCard.css');
-@import url('css/stock_cards/youtubeCard.css');
+/* @import url('css/stock_cards/youtubeCard.css'); */

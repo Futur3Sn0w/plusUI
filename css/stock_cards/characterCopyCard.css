@@ -58,6 +58,7 @@ body:has(.darkModeOn) .characterCopyCard::after {
     align-items: center;
     justify-content: center;
 
+    transition: .15s;
     position: relative;
     z-index: 2;
 

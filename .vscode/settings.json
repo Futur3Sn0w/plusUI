@@ -1,0 +1,6 @@
+{
+    "editor.wrappingStrategy": "advanced",
+    "editor.wrappingIndent": "none",
+    "editor.wordWrap": "off",
+    "html.format.wrapLineLength": 0
+}

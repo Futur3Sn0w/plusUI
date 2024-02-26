@@ -318,7 +318,15 @@
     width: calc(50% - 5px);
 }
 
-.dcExpt.button {
+.group-a:has(.dcExpt.monoModeDCE)~.group-b {
+    width: 100%;
+}
+
+.group-a:has(.dcExpt.monoModeDCE)~.group-b .dcExpt {
+    width: calc(50% - 5px);
+}
+
+.group-a:not(:has(.dcExpt.monoModeDCE)) .dcExpt.button {
     width: 45px;
     padding-left: 0 !important;
     justify-content: center;
@@ -328,13 +336,21 @@
     display: none;
 }
 
-.dcExpt.button i {
+.group-a:not(:has(.dcExpt.monoModeDCE))~.group-b .dcExpt.button {
+    padding-left: 8px !important;
+}
+
+.group-a:not(:has(.dcExpt.monoModeDCE))~.group-b .dcExpt.button label {
+    display: none;
+}
+
+.group-a:not(:has(.dcExpt.monoModeDCE))~.group-b .dcExpt.button i {
     margin-left: 0;
     font-size: 20px;
     background-color: transparent !important;
 }
 
-.dcExpt.button:hover i {
+.group-a:not(:has(.dcExpt.monoModeDCE))~.group-b .dcExpt.button:hover i {
     background-color: transparent !important;
 }
 
@@ -460,7 +476,7 @@
     background-color: var(--section-input-d);
 }
 
-/* Backdrop */
+/* Backdrop (page 2) */
 
 .backdropCont {
     display: flex;
@@ -625,4 +641,182 @@ body:has(.darkModeOn) .liveLinkCont .dcExpt input:checked::after {
     border: 2px solid transparent;
     background-color: rgba(255, 255, 255, 0.75);
     color: black;
+}
+
+/* About (last page) */
+
+.aboutOpts {
+    width: 320px;
+    gap: 8px;
+
+    padding: 0 10px;
+    padding-top: 68px;
+
+    user-select: none;
+
+    flex-direction: column;
+}
+
+.aboutOpts::before {
+    display: none !important;
+}
+
+.aboutOpts .header {
+    width: calc(100% - 16px);
+    height: 50px;
+
+    padding: 5px 10px;
+    position: absolute;
+    top: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+
+    border-radius: 14px;
+    background-color: inherit;
+}
+
+.aboutOpts .header img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.aboutOpts .header #title {
+    font-size: 20px;
+    height: 20px;
+}
+
+.aboutOpts .header #ver {
+    font-size: 13px;
+    font-weight: 500;
+
+    padding: 3px 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 100px;
+
+    margin: 0 0 20px 2px;
+}
+
+.aboutOpts .header .close {
+    display: none;
+}
+
+.aboutOpts .aboutText {
+    width: 100%;
+    font-size: 13px;
+
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.aboutOpts .aboutStats {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+
+    position: relative;
+
+    padding-top: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.aboutOpts .aboutStats::before {
+    content: attr(cc);
+    text-transform: uppercase;
+    font-size: 11px;
+    opacity: .5;
+    position: absolute;
+    left: 0;
+    top: -27px;
+}
+
+.aboutOpts .aboutStats .debugCode {
+    font-size: 16px;
+    font-family: monospace;
+    text-transform: uppercase;
+    font-weight: 500;
+
+    background-color: var(--section-l);
+    color: black;
+    opacity: .5;
+    padding: 7px 12px;
+    border-radius: 8px;
+    transition: .15s;
+
+    margin-bottom: 25px;
+
+    position: relative;
+    z-index: 2;
+}
+
+body:has(.darkModeOn) .aboutOpts .aboutStats .debugCode {
+    background-color: var(--section-l);
+    color: white;
+}
+
+.aboutOpts .aboutStats .debugCode:hover {
+    transform: scale(1.075);
+    opacity: 1;
+    background-color: white !important;
+    color: #222 !important;
+}
+
+.aboutOpts .aboutStats .debugCode:active {
+    transform: scale(1);
+    opacity: .5;
+}
+
+.aboutOpts .aboutChanges {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+
+    position: relative;
+
+    padding-top: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.aboutOpts .aboutChanges::before {
+    content: attr(cc);
+    text-transform: uppercase;
+    font-size: 11px;
+    opacity: .5;
+    position: absolute;
+    left: 0;
+    top: -27px;
+}
+
+.aboutOpts .aboutChanges object {
+    appearance: none !important;
+    border: none;
+    font-size: 13px;
+    mask-image: linear-gradient(to bottom, black 90%, transparent);
+    margin-top: -8px;
+    margin-bottom: -8px;
+}
+
+.aboutOpts .aboutLinks {
+    width: fit-content;
+    margin: 8px;
+    margin-left: 3px;
+
+    display: flex;
+    gap: 10px;
+}
+
+.aboutOpts .aboutLinks .alink {
+    width: 45px;
+    background-color: var(--section-input-l);
+}
+
+.aboutOpts .aboutLinks .alink i {
+    background-color: transparent !important;
 }

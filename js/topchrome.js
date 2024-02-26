@@ -13,15 +13,6 @@ $('.timeDate').on('click', function () {
     }
 });
 
-// $('.controlPanel').on('wheel', function (e) {
-//     if (e.originalEvent.deltaY > 10) {
-//         console.log('right');
-//     } else {
-//         console.log('left');
-//     }
-// });
-
-
 $('.ccb').on('mouseover', function () {
     $('.timeDate').addClass('static')
 })
@@ -31,6 +22,7 @@ $('.ccb').on('mouseout', function () {
 })
 
 $('.ccb:not(.rolodexOpen)').on('click', function (e) {
+    aboutStats();
     var index = $(this).index();
 
     $('.controlPanelOptGroup').removeClass('visible');
@@ -41,9 +33,6 @@ $('.ccb:not(.rolodexOpen)').on('click', function (e) {
 
     e.stopPropagation();
 })
-
-// $('.controlPanel').on('scroll', function () {
-// })
 
 // User name stuff
 
@@ -256,18 +245,6 @@ function getBase64Image(img) {
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 
-// Tilt
-
-// $('#cbParallaxToggle').on('click', function () {
-//     if ($('.subCards .card[data-parallaxCard="y"]').hasClass('parallax-disabled')) {
-
-//     } else {
-
-//     }
-// })
-
-
-
 // Live display
 
 // Technically the below works, but all but 1 of the currently listed presets returns nothing :(
@@ -293,10 +270,10 @@ $('#siteDropToggle').click(function () {
     }
     if ($(this).is(':checked')) {
         localStorage.setItem('liveWall', 'true')
-        $('<embed src="' + localStorage.getItem('liveLink') + '" type="">').appendTo('.siteDrop');
+        $('<embed class="siteDrop" src="' + localStorage.getItem('liveLink') + '" type="">').appendTo('body');
     } else {
         localStorage.setItem('liveWall', 'false')
-        $('.siteDrop').children('embed').remove();
+        $('.siteDrop').remove();
         $('#backDrop2').css('background-image', "url(resc/dark.png)");
         $('body').css('background-image', "url(resc/dark.png)");
     }
@@ -310,7 +287,7 @@ $('#liveLinkTB').on('keyup', function (event) {
         if (localStorage.getItem('liveLink') == '') {
             localStorage.setItem('liveLink', 'https://flux.sandydoo.me');
         }
-        $('.siteDrop').children('embed').attr('src', localStorage.getItem('liveLink'));
+        $('.siteDrop').attr('src', localStorage.getItem('liveLink'));
     }
 });
 
@@ -330,7 +307,7 @@ function ldURLMatch() {
 
 $('.liveLinkPreset').click(function () {
     localStorage.setItem('liveLink', $(this).attr('url'));
-    $('.siteDrop').children('embed').attr('src', localStorage.getItem('liveLink'));
+    $('.siteDrop').attr('src', localStorage.getItem('liveLink'));
     $('#liveLinkTB').val(localStorage.getItem('liveLink'));
 })
 
@@ -358,6 +335,62 @@ $('#cbMonoMode').click(function () {
         localStorage.setItem('monoCards', 'false');
     }
 });
+
+// About stuff
+
+function aboutStats() {
+    // This creates a unique 'debug code' that can be shared (by clicking it) to better assist in debugging and troubleshooting
+    // The below will contain some info about each of the devstats
+
+    // First, empty the container:
+    $('.debugCode').empty();
+
+    // Number of cards PlusUI has successfully loaded:
+    $('.debugCode').append($('.card').not('.placeholderCard').length + "l:");
+
+    // Number of cards successfully restored to the shelf:
+    $('.debugCode').append($('.subCards .card').not('.placeholderCard').length + "s:");
+
+    // Number of cards remaining in rolodex:
+    $('.debugCode').append($('.cbs1 .card').not('.placeholderCard').length + "r:");
+
+    // Is siteDrop currently enabled:
+    $('.debugCode').append($('.siteDrop').length ? "sd:" : "");
+
+    // Use navigator.useragent to get additional browser info (unreliable, consider migrating)
+    var plat = (navigator.userAgent.match(/Macintosh|Win|Linux|Android/) || [''])[0];
+    var browser = (navigator.userAgent.match(/Chrome|Firefox|Safari|Edge/) || [''])[0];
+    $('.debugCode').append(plat.charAt(0) + ":" + browser.charAt(0));
+}
+
+$(document).on('click', '.aboutStats .debugCode', function () {
+    var copyText = $(this).text().toUpperCase();
+
+    // Use Clipboard API for modern browsers
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(copyText)
+            .then(() => {
+                console.log("Copied debug code: " + copyText);
+                $('.aboutStats').attr('cc', 'Debug code (Copied)');
+                setTimeout(() => {
+                    $('.aboutStats').attr('cc', 'Debug code (Click to copy)');
+                }, 5000);
+            })
+            .catch(err => {
+                console.error("Failed to copy debug code:", err);
+                // Handle error gracefully, e.g., display a user-friendly message
+            });
+    } else {
+        // Fallback for older browsers using execCommand
+        $(this).select();
+        document.execCommand("copy");
+        console.log("Copied debug code: " + copyText);
+        $('.aboutStats').attr('cc', 'Debug code (Copied)');
+        setTimeout(() => {
+            $('.aboutStats').attr('cc', 'Debug code (Click to copy)');
+        }, 5000);
+    }
+})
 
 // timeCard time and date
 

@@ -1,3 +1,43 @@
+// Set default localStorage values if they don't exist:
+
+function setupLSVals() {
+    if (localStorage.getItem('tempUnit') == null) {
+        localStorage.setItem('tempUnit', 'c');
+    }
+
+    if (localStorage.getItem('theme') == null) {
+        localStorage.setItem('theme', 'light')
+    }
+
+    if (localStorage.getItem('liveWall') == null) {
+        localStorage.setItem('liveWall', 'false')
+    }
+
+    if (localStorage.getItem('liveLink') == null) {
+        localStorage.setItem('liveLink', 'https://flux.sandydoo.me')
+    }
+
+    if (localStorage.getItem('parallax') == null) {
+        localStorage.setItem('parallax', 'true')
+    }
+
+    if (localStorage.getItem('clockStyle') == null) {
+        localStorage.setItem('clockStyle', '1')
+    }
+
+    if (localStorage.getItem('float') == null) {
+        localStorage.setItem('float', 'true')
+    }
+
+    if (localStorage.getItem('allowTextCardDarkMode') == null) {
+        localStorage.setItem('allowTextCardDarkMode', 'false')
+    }
+
+    if (localStorage.getItem('monoCards') == null) {
+        localStorage.setItem('monoCards', 'false')
+    }
+}
+
 // Weather (rejuv)
 
 var tempUnit = localStorage.getItem('tempUnit');
@@ -38,7 +78,16 @@ const weatherCodes = {
 function weather() {
     if (navigator.geolocation) {
         console.log("Geolocation is supported.");
-        getLatLon().catch((error) => {
+        getLatLon().then(({ lat, lon }) => {
+            if (lat !== null) {
+                localStorage.setItem("locLat", lat);
+                localStorage.setItem("locLon", lon);
+
+                newWeatherBalloon(lat, lon);
+            } else {
+                $('.weatherCard').hide();
+            }
+        }).catch((error) => {
             console.log(`Error: ${error.message}`);
             $('.weatherCard').hide();
         });
@@ -46,8 +95,6 @@ function weather() {
         console.log("Geolocation is not enabled and/or supported by this device.");
         $('.weatherCard').hide();
     }
-    newWeatherBalloon(lat, lon);
-    window.setInterval("newWeatherBalloon(lat, lon);", 10000);
 }
 
 async function getLatLon() {
@@ -55,26 +102,38 @@ async function getLatLon() {
         const response = await fetch(`http://ip-api.com/json`);
         const { lat, lon } = await response.json();
 
-        localStorage.setItem("locLat", lat);
-        localStorage.setItem("locLon", lon);
+        return ({ lat, lon });
     } catch (error) {
         console.log(error);
         throw error;
     }
 }
 
-function newWeatherBalloon() {
+function newWeatherBalloon(lat, lon) {
     fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,is_day,precipitation,weather_code&current_weather=true&timezone=auto')
         .then(function (resp) { return resp.json() }) // Convert data to json
         .then(function (data) {
             $('.weatherCard').show();
-            setTimeout(newDrawWeather(data), 10000);
+            setTimeout(newDrawWeather(data), 5000);
         })
         .catch(function (error) {
             // location.reload();
             $('.weatherCard').hide();
             console.error('An error occurred:', error);
         });
+    setInterval(() => {
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,is_day,precipitation,weather_code&current_weather=true&timezone=auto')
+            .then(function (resp) { return resp.json() }) // Convert data to json
+            .then(function (data) {
+                $('.weatherCard').show();
+                setTimeout(newDrawWeather(data), 5000);
+            })
+            .catch(function (error) {
+                // location.reload();
+                $('.weatherCard').hide();
+                console.error('An error occurred:', error);
+            });
+    }, 10000);
 }
 
 function newDrawWeather(d) {
@@ -192,6 +251,18 @@ setInterval(() => {
     second.style.transform = `rotate(${sec_rotation}deg)`;
 }, 1000);
 
+$('.cmi-clockCardStyle1').click(function () {
+    $('.cmi-clockCardStyle').not(this).children('input').prop('checked', false);
+    $('.clockCard').removeClass('style-b').addClass('style-a')
+    localStorage.setItem('clockStyle', '1')
+})
+
+$('.cmi-clockCardStyle2').click(function () {
+    $('.cmi-clockCardStyle').not(this).children('input').prop('checked', false);
+    $('.clockCard').removeClass('style-a').addClass('style-b')
+    localStorage.setItem('clockStyle', '2')
+})
+
 // Text/notes card
 
 $('#textCardTB').on('keypress', function () {
@@ -276,6 +347,13 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
     });
 });
 
+$('.calendarCard').click(function () {
+    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+        $(this).addClass('context-selected-card');
+        $('.cmi-expand').click();
+    }
+})
+
 // Weather stars
 
 const numberOfStars = 50;
@@ -304,7 +382,9 @@ const constructUniverse = () => {
 
     $(".star").each(function () {
         let randNum = randomRange(twinkleFrequencyMinimum, twinkleFrequencyMaximum);
+        let randZ = randomRange(-15, 15);
         $(this).css("animation-duration", randNum + "s");
+        $(this).css("transform", 'translateZ(' + randZ + 'px)');
     });
 
 };
@@ -375,5 +455,265 @@ $(document).on('click', '.characterCopyCard .grid .gridItem', function () {
         $(this).select();
         document.execCommand("copy");
         console.log("Copied symbol: " + copyText);
+    }
+})
+
+// Emoji card
+
+var emojis = [
+    '😄', '😃', '😀', '😊', '😉', '😍', '😘', '😚', '😗', '😙', '😜', '😝', '😛', '😳', '😁', '😔', '😌',
+    '😒', '😞', '😣', '😢', '😂', '😭', '😪', '😥', '😰', '😅', '😓', '😩', '😫', '😨', '😱', '😠', '😡', '😤',
+    '😖', '😆', '😋', '😷', '😎', '😴', '😵', '😲', '😟', '😦', '😧', '😈', '👿', '😮', '😬', '😐', '😕', '😯',
+    '😶', '😇', '😏', '👩', '👴', '👵', '👱', '👼', '👸', '😺', '😸', '😻', '😽', '😼', '🙀', '😿', '😹', '😾',
+    '👹', '👺', '🙈', '🙉', '🙊', '💀', '👽', '💩', '🔥', '✨', '🌟', '💫', '💥', '💢', '💦', '💧', '💤', '💨',
+    '👂', '👀', '👃', '👅', '👄', '👍', '👎', '👌', '👊', '✊', '✌', '👋', '✋', '👐', '👆', '👇', '👉', '👈',
+    '🙌', '🙏', '👏', '💪', '🚶', '🏃', '💃', '👫', '👪', '👬', '👭', '💏', '💑', '👯', '🙆', '🙅', '💁',
+    '🙋', '💆', '💇', '💅', '👰', '🙎', '🙍', '🙇', '🎩', '👑', '👒', '👟', '👞', '👡', '👠', '👢', '👕', '👔',
+    '👚', '👗', '🎽', '👖', '👘', '👙', '💼', '👜', '👝', '👛', '👓', '🎀', '🌂', '💄', '💛', '💙', '💜', '💚',
+    '💔', '💗', '💓', '💕', '💖', '💞', '💘', '💌', '💋', '💍', '💎', '👤', '👥', '💬', '👣', '💭', '🐶',
+    '🐺', '🐱', '🐭', '🐹', '🐰', '🐸', '🐯', '🐨', '🐻', '🐷', '🐽', '🐮', '🐗', '🐵', '🐒', '🐴', '🐑', '🐘',
+    '🐼', '🐧', '🐦', '🐤', '🐥', '🐣', '🐔', '🐍', '🐢', '🐛', '🐝', '🐜', '🐞', '🐌', '🐙', '🐚', '🐠', '🐟',
+    '🐬', '🐳', '🐋', '🐄', '🐏', '🐀', '🐃', '🐅', '🐇', '🐉', '🐎', '🐐', '🐓', '🐕', '🐖', '🐁', '🐂', '🐲',
+    '🐡', '🐊', '🐫', '🐪', '🐆', '🐈', '🐩', '🐾', '💐', '🌸', '🌷', '🍀', '🌹', '🌻', '🌺', '🍁', '🍃', '🍂',
+    '🌿', '🌾', '🍄', '🌵', '🌴', '🌲', '🌳', '🌰', '🌱', '🌼', '🌐', '🌞', '🌝', '🌚', '🌑', '🌒', '🌓', '🌔',
+    '🌕', '🌖', '🌗', '🌘', '🌜', '🌛', '🌙', '🌍', '🌎', '🌏', '🌋', '🌌', '🌠', '⭐', '⛅', '⛄', '🌀',
+    '🌁', '🌈', '🌊', '🎍', '💝', '🎎', '🎒', '🎓', '🎏', '🎆', '🎇', '🎐', '🎑', '🎃', '👻',
+    '🎅', '🎄', '🎁', '🎋', '🎉', '🎊', '🎈', '🎌', '🔮', '🎥', '📷', '📹', '📼', '💿', '📀', '💽', '💾', '💻',
+    '📱', '📞', '📟', '📠', '📡', '📺', '📻', '🔊', '🔉', '🔈', '🔇', '🔔', '🔕', '📢', '📣', '⏳', '⌛',
+    '⏰', '⌚', '🔓', '🔒', '🔏', '🔐', '🔑', '🔎', '💡', '🔦', '🔌', '🔋', '🔍', '🛁', '🛀', '🚿',
+    '🚽', '🔧', '🔩', '🔨', '🚪', '🚬', '💣', '🔫', '🔪', '💊', '💉', '💰', '💴', '💵', '💷', '💶', '💳', '💸',
+    '📲', '📧', '📥', '📤', '📩', '📨', '📯', '📫', '📪', '📬', '📭', '📮', '📦', '📝', '📄', '📃', '📑',
+    '📊', '📈', '📉', '📜', '📋', '📅', '📆', '📇', '📁', '📂', '✂', '📌', '📎', '📏', '📐', '📕', '📗',
+    '📘', '📙', '📓', '📔', '📒', '📚', '📖', '🔖', '📛', '🔬', '🔭', '📰', '🎨', '🎬', '🎤', '🎧', '🎼', '🎵',
+    '🎶', '🎹', '🎻', '🎺', '🎷', '🎸', '👾', '🎮', '🃏', '🎴', '🀄', '🎲', '🎯', '🏈', '🏀', '⚽', '⚾', '🎾',
+    '🎱', '🏉', '🎳', '⛳', '🚵', '🚴', '🏁', '🏇', '🏆', '🎿', '🏂', '🏊', '🏄', '🎣', '🍵', '🍶', '🍼',
+    '🍺', '🍻', '🍸', '🍹', '🍷', '🍴', '🍕', '🍔', '🍟', '🍗', '🍖', '🍝', '🍛', '🍤', '🍱', '🍣', '🍥', '🍙',
+    '🍘', '🍚', '🍜', '🍲', '🍢', '🍡', '🍳', '🍞', '🍩', '🍮', '🍦', '🍨', '🍧', '🎂', '🍰', '🍪', '🍫', '🍬',
+    '🍭', '🍯', '🍎', '🍏', '🍊', '🍋', '🍒', '🍇', '🍉', '🍓', '🍑', '🍈', '🍌', '🍐', '🍍', '🍠', '🍆', '🍅',
+    '🌽', '🏠', '🏡', '🏫', '🏢', '🏣', '🏥', '🏦', '🏪', '🏩', '🏨', '💒', '⛪', '🏬', '🏤', '🌇', '🌆', '🏯',
+    '🏰', '⛺', '🏭', '🗼', '🗾', '🗻', '🌄', '🌅', '🌃', '🗽', '🌉', '🎠', '🎡', '⛲', '🎢', '🚢', '⛵', '🚤',
+    '🚣', '🚀', '💺', '🚁', '🚂', '🚊', '🚉', '🚞', '🚆', '🚄', '🚅', '🚈', '🚇', '🚝', '🚋', '🚃',
+    '🚎', '🚌', '🚍', '🚙', '🚘', '🚗', '🚕', '🚖', '🚛', '🚚', '🚨', '🚓', '🚔', '🚒', '🚑', '🚐', '🚲', '🚡',
+    '🚟', '🚠', '🚜', '💈', '🚏', '🎫', '🚦', '🚥', '🚧', '🔰', '⛽', '🏮', '🎰', '🗿', '🎪', '🎭',
+    '📍', '🚩', '🔠', '🔡', '🔤', '🔄', '🔼', '🔽', 'ℹ', '⏪', '⏩', '⏫', '⏬', '🆗', '🔀', '🔁', '🔂', '🆕',
+    '🆙', '🆒', '🆓', '🆖', '📶', '🎦', '🈁', '🈯', '🈳', '🈵', '🈴', '🈲', '🉐', '🈹', '🈺', '🈶', '🈚', '🚻',
+    '🚹', '🚺', '🚼', '🚾', '🚰',
+    '🚮', '🅿', '🚭', '🈸', '🛂', '🛄', '🛅', '🛃', '🉑', '🆑', '🆘', '🆔', '🚫',
+    '🔞', '📵', '🚯', '🚱', '🚳', '🚷', '🚸', '⛔', '❎', '✅', '💟', '🆚', '📳', '📴',
+    '🆎', '💠', '⛎', '🔯', '🏧', '💹', '❌', '⭕', '❗', '❓', '❕', '❔', '🔃', '🕛', '➕', '➖',
+    '➗', '💮', '💯', '🔘', '🔗', '➰', '🔱', '🔲', '🔳', '🔺', '⬜', '⬛', '⚫', '⚪', '🔴',
+    '🔵', '🔻', '🔶', '🔷', '🔸', '🔹'
+];
+
+function elc() {
+    setInterval(() => {
+        var current = emojis[Math.floor(Math.random() * emojis.length)];
+        $('.emojiLocaleCard p').text(current);
+    }, 5000);
+}
+
+$('.emojiLocaleCard').on('click', function () {
+    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+        $(this).addClass('context-selected-card');
+        $('.cmi-expand').click();
+    }
+})
+
+$(document).ready(function () {
+    emojis.forEach(emoji => {
+        $('<div class="emojiItem interactable-hov">').attr('text', emoji).appendTo('.emojiLocaleCard .list');
+    });
+});
+
+$(document).on('click', '.emojiItem', function () {
+    var copyText = $(this).text();
+
+    // Use Clipboard API for modern browsers
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(copyText)
+            .then(() => {
+                console.log("Copied emoji: " + copyText);
+                $('.emojiLocaleCard .expView').attr("text", "Copied")
+                setTimeout(() => {
+                    $('.emojiLocaleCard .expView').attr("text", "Click to copy")
+                }, 5000);
+            })
+            .catch(err => {
+                console.error("Failed to copy emoji:", err);
+                // Handle error gracefully, e.g., display a user-friendly message
+            });
+    } else {
+        // Fallback for older browsers using execCommand
+        $(this).select();
+        document.execCommand("copy");
+        console.log("Copied emoji: " + copyText);
+    }
+})
+
+// Doggy card
+
+function doggyCard() {
+    $.ajax({
+        url: "https://dog.ceo/api/breeds/image/random", // Replace with your actual API endpoint
+        dataType: "json", // Specify data type as JSON
+        success: function (data) {
+            // Set the image URL for the element
+            $(".pupperCard img").attr("src", data.message);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error("Error fetching image:", textStatus, errorThrown);
+            // Handle errors appropriately, e.g., display an error message
+            $('.pupperCard').remove();
+        }
+    });
+}
+
+doggyCard();
+
+$('.doggyCard').click(function () {
+    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+        doggyCard();
+    }
+})
+
+// Catto card
+
+function cattoCard() {
+    const imageElement = document.querySelector('.cattoCard img');
+
+    fetch('https://placekitten.com/200/300')
+        .then(response => {
+            // Check for successful response
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.blob();
+        })
+        .then(blob => {
+            const imageUrl = URL.createObjectURL(blob);
+
+            // Set the image source
+            imageElement.src = imageUrl;
+
+            // Remember to revoke the object URL when no longer needed
+            imageElement.onload = () => URL.revokeObjectURL(imageUrl);
+        })
+        .catch(error => {
+            console.error(error);
+            $('.cattoCard').remove();
+        });
+}
+
+cattoCard();
+
+$('.cattoCard').click(function () {
+    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+        cattoCard();
+    }
+})
+
+// NASA card
+
+function nasaCard() {
+    const randomDate = getRandomDate();
+    var nasaURL = "https://api.nasa.gov/planetary/apod?api_key=oP0tzzSuhXvoNURURjkHU9ew16bKEY0CF3nzuK9W&date=" + randomDate;
+
+    $.ajax({
+        url: nasaURL, // Replace with your actual API endpoint
+        dataType: "json", // Specify data type as JSON
+        success: function (data) {
+            // Set the image URL for the element
+            $(".nasaCard img").attr("src", data.hdurl);
+            $(".nasaCard").attr("data-subLbl", data.title);
+            $(".nasaCard").attr("data-imgDate", data.date);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error("Error fetching image:", textStatus, errorThrown);
+            $('.nasaCard').remove();
+        }
+    });
+}
+
+nasaCard();
+
+function getRandomDate() {
+    // Set the minimum and maximum dates in milliseconds
+    const minDate = new Date(1995, 5, 16).getTime();
+    const maxDate = new Date().getTime();
+
+    // Generate a random number between the minimum and maximum dates
+    const randomDate = Math.floor(Math.random() * (maxDate - minDate + 1)) + minDate;
+
+    // Create a new Date object from the random milliseconds
+    const date = new Date(randomDate);
+
+    // Format the date in YYYY-MM-DD format
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+}
+
+$('.nasaCard').click(function () {
+    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+        nasaCard();
+    }
+})
+
+// Useless facts card
+
+function uselessFactsCard() {
+    $.ajax({
+        url: "https://uselessfacts.jsph.pl/api/v2/facts/random",
+        dataType: "json", // Specify data type as JSON
+        success: function (data) {
+            $('.uselessFactsCard .fact').remove();
+            $('.uselessFactsCard .source').remove();
+
+            // Set the image URL for the element
+            $('<div>').addClass('fact').text(data.text).appendTo('.uselessFactsCard');
+            $('<div>').addClass('source').text(data.source).appendTo('.uselessFactsCard');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error("Error fetching data:", textStatus, errorThrown);
+            $('.uselessFactsCard').remove();
+        }
+    });
+}
+
+uselessFactsCard();
+
+$('.uselessFactsCard').click(function () {
+    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+        $(this).addClass('context-selected-card');
+        $('.cmi-expand').click();
+    }
+})
+
+$('.cmi-ufCardRefresh').on('click', function () {
+    uselessFactsCard();
+})
+
+// Calculator card
+
+$('.calcBtn').on('click', function () {
+    var val = $(this).attr('value');
+    if (val == 'c') {
+        $('.calcResult').val("0");
+    } else if (val == '=') {
+        let x = $('.calcResult').val();
+        let y = eval(x)
+        $('.calcResult').val(y)
+    } else {
+        if ($(".calcResult").val() == '0') {
+            if ($.isNumeric(val)) {
+                $(".calcResult").val(val);
+            } else {
+                $(".calcResult").val($(".calcResult").val() + val);
+            }
+        } else {
+            $(".calcResult").val($(".calcResult").val() + val);
+        }
     }
 })

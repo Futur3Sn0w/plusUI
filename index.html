@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no">
 
-    <link rel="stylesheet" href="master_structure.css">
-    <link rel="stylesheet" href="master_cards.css">
-    <link rel="stylesheet" href="master_shelf.css">
-    <link rel="stylesheet" href="master_controlPanel.css">
-    <link rel="stylesheet" href="master_topChrome.css">
-    <link rel="stylesheet" href="master_rolodex.css">
-    <link rel="stylesheet" href="master_expandable.css">
+    <link rel="stylesheet" href="main_structure.css">
+    <link rel="stylesheet" href="main_cards.css">
+    <link rel="stylesheet" href="main_shelf.css">
+    <link rel="stylesheet" href="main_controlPanel.css">
+    <link rel="stylesheet" href="main_topChrome.css">
+    <link rel="stylesheet" href="main_rolodex.css">
+    <link rel="stylesheet" href="main_expandable.css">
 
     <script src="https://kit.fontawesome.com/a1fc6f0f3a.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js" crossorigin="anonymous"></script>
@@ -41,15 +41,28 @@
 <body>
     <div class="loader"></div>
 
-    <div class="siteDrop">
-    </div>
-
     <div class="backDrop" id="backDrop2"></div>
+
+    <div class="firstVisitExperience">
+        <div class="header">Welcome!</div>
+        <p class="subHead">Looks like this is your first time checking out <b>PlusUI</b>. Thanks for
+            visiting!<br><br>This first visit requires a refresh, which will
+            <b>only happen once.</b><br>Optionally, type a nickname below and then click or tap Done.<br><br>Clicking
+            Done will
+            refresh into <b>PlusUI</b>
+        </p>
+
+        <div class="dcExpt userName interactable-hov">
+            <input class="keyTB" type="text" id="userNameTextbox" onchange="" placeholder="Your name">
+        </div>
+
+        <div class="fveDone">Done</div>
+    </div>
 
     <div class="surface aboutBtn" id="topChromeAboutBtn" about="PlusUI" ver="">
         <div class="logo"></div>
     </div>
-    <div class="topChromeItems">
+    <div class="topChromeItems fve">
         <div class="surface rolodexOpen" data-btnName="Cards" id="rolodexOpenBtn" label="Cards">
             <i class="fa-solid fa-plus"></i>
         </div>
@@ -75,7 +88,7 @@
             <div class="lightDark btnCont interactable-hov" data-theme="Auto">
                 <i class="fa-solid fa-circle-half-stroke"></i>
             </div>
-            <div class="group">
+            <div class="group group-a">
                 <div class="dcExpt interactable-hov">
                     <input type="checkbox" name="" id="cbParallaxToggle">
                     <i class="fa-solid fa-layer-group"></i>
@@ -90,11 +103,12 @@
             <div class="group-b">
                 <div class="dcExpt button fullscreenBtn interactable-hov">
                     <i class="fa-solid fa-expand"></i>
+                    <label for="">Full screen</label>
                 </div>
                 <div class="dcExpt button refreshPageBtn interactable-hov">
                     <i class="fa-solid fa-refresh"></i>
+                    <label for="">Reload</label>
                 </div>
-
             </div>
             <div class="dcExpt interactable-hov monoModeDCE">
                 <input type="checkbox" name="monoMode" id="cbMonoMode">
@@ -150,14 +164,12 @@
                 <div class="ccSep backdropsep"></div>
                 <div class="wallList"></div>
                 <form class="liveLinkCont" name="liveLinkPresets">
-                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
-                        url="https://lodev09.github.io/web-screensavers/flat-surface-shader">
+                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://lodev09.github.io/web-screensavers/flat-surface-shader">
                         <input type="radio" name="liveLinkPresets" id="">
                         <i class="fa-solid"></i>
                         <label>Flat Surface Shader</label>
                     </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
-                        url="https://roycurtis.github.io/Flurry-WebGL/">
+                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://roycurtis.github.io/Flurry-WebGL/">
                         <input type="radio" name="liveLinkPresets" id="">
                         <i class="fa-solid"></i>
                         <label>Flurry</label>
@@ -172,14 +184,12 @@
                         <i class="fa-solid"></i>
                         <label>Gradiyent</label>
                     </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
-                        url="https://lodev09.github.io/web-screensavers/jellyfish">
+                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://lodev09.github.io/web-screensavers/jellyfish">
                         <input type="radio" name="liveLinkPresets" id="">
                         <i class="fa-solid"></i>
                         <label>Jellyfish</label>
                     </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
-                        url="https://lodev09.github.io/web-screensavers/matrix">
+                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://lodev09.github.io/web-screensavers/matrix">
                         <input type="radio" name="liveLinkPresets" id="">
                         <i class="fa-solid"></i>
                         <label>Matrix</label>
@@ -189,20 +199,17 @@
                         <i class="fa-solid"></i>
                         <label>Pipes</label>
                     </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
-                        url="https://lodev09.github.io/web-screensavers/plankton?title=⠀&subtitle=⠀&web=⠀">
+                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://lodev09.github.io/web-screensavers/plankton?title=⠀&subtitle=⠀&web=⠀">
                         <input type="radio" name="liveLinkPresets" id="">
                         <i class="fa-solid"></i>
                         <label>Plankton</label>
                     </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
-                        url="https://lodev09.github.io/web-screensavers/stardust?title=⠀&subtitle=⠀&web=⠀">
+                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://lodev09.github.io/web-screensavers/stardust?title=⠀&subtitle=⠀&web=⠀">
                         <input type="radio" name="liveLinkPresets" id="">
                         <i class="fa-solid"></i>
                         <label>Stardust</label>
                     </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id=""
-                        url="https://www.logan-cooper.com/starry-night/">
+                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://www.logan-cooper.com/starry-night/">
                         <input type="radio" name="liveLinkPresets" id="">
                         <i class="fa-solid"></i>
                         <label>Starry Night</label>
@@ -222,11 +229,19 @@
             <div class="header">
                 <img src="favicons/android-chrome-192x192.png" alt="">
                 <p id="title">(PlusUI)</p>
-                <p class="siteVer" id="ver">v2.7</p>
+                <p class="siteVer" id="ver">v2.8</p>
             </div>
             <div class="aboutText">
                 A hybrid dashboard and digital display for large-format screens, heavily inspired by TV & VisionOS
                 <!-- PlusUI is your one-stop-shop for all your information, shortcuts, notes, and more. <br>PlusUI is currently in beta/Open Demo, meaning it won't be super customizable yet, but it will save your changes for later.<br>Feel free to report bugs on the project's GitHub (link below)! -->
+            </div>
+            <div class="aboutStats" cc="Debug code (click to copy)">
+                <div class="debugCode"></div>
+            </div>
+            <div class="aboutChanges" cc="What's New">
+                <object data="changelog.html" width="300" height="200">
+                    Time traveller? ⏲️
+                </object>
             </div>
             <div class="aboutLinks">
                 <div class="alink dcExpt interactable-hov" onclick="window.open('https://www.github.com/')">
@@ -263,36 +278,39 @@
 
     <div class="eWinSurface"></div>
 
+    <div class="surface categoryBar">
+    </div>
+
     <div class="surface rolodex" data-sectName="Card Deck">
         <div class="roloCardInfo"></div>
+        <div class="infoChips">
+            <div class="infoChip ic1" infoType="Parallax">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <div class="infoChip ic2" infoType="Resizable">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </div>
+            <div class="infoChip ic3" infoType="Expandable">
+                <i class="fa-solid fa-clone"></i>
+            </div>
+        </div>
 
         <div class="cbSect cbs1">
-            <div class="snowCard card deckCard labeled squareCard" data-enabled="n" data-resizableCard="n"
-                data-parallaxCard="y" data-friendlyName="Sn0w"
-                data-cardDesc="[DEBUG] A display of various card API demos including parallax, transparency, and onClick action"
-                id="snowDbgCard">
+            <div class="snowCard card deckCard squareCard" data-category="Display" data-expandableCard="n" data-enabled="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Sn0w" data-cardDesc="A display of various card feature demos including parallax, transparency, and onClick action" id="snowDbgCard">
                 <img src="resc/snow-fore.svg" id="snowFore">
             </div>
-            <div class="siriDbgCard card deckCard labeled circleCard" data-enabled="n" target="siri"
-                data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Assistant"
-                data-cardDesc="[DEBUG] A card API demo featuring a Siri-like animated loop" id="siriDbgCard">
+            <div class="siriDbgCard card deckCard circleCard" data-category="Display" data-expandableCard="n" data-enabled="n" target="siri" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Assistant" data-cardDesc="A card feature demo featuring a Siri-like animated loop" id="siriDbgCard">
                 <div class="layer1"></div>
                 <div class="layer2"></div>
                 <div class="layer3"></div>
 
-                <svg class="geminicon" width="160" height="160" viewBox="0 0 160 160" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M80 0C80 44.1828 44.1828 80 0 80C44.1828 80 80 115.817 80 160C80 115.817 115.817 80 160 80C115.817 80 80 44.1828 80 0Z"
-                        fill="black" />
+                <svg class="geminicon" width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M80 0C80 44.1828 44.1828 80 0 80C44.1828 80 80 115.817 80 160C80 115.817 115.817 80 160 80C115.817 80 80 44.1828 80 0Z" fill="black" />
                 </svg>
                 <div class="shadow"></div>
 
             </div>
-            <div class="emojiLocaleCard card deckCard expandable labeled circleCard" data-enabled="n"
-                data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Emoji"
-                data-cardDesc="Demo card with hundreds of emoji, click to refresh manually, or wait for the auto refresh. Expand to view an emoji picker."
-                id="emojiLocaleCard">
+            <div class="emojiLocaleCard card deckCard circleCard" data-category="Utility" data-enabled="n" data-expandableCard="y" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Emoji" data-subLbl="Click for emoji picker" data-cardDesc="Demo card with hundreds of emoji, auto-refreshes every 5 seconds. Click/expand to view an emoji picker." id="emojiLocaleCard">
                 <p>❤️</p>
                 <div id="back">
                     <p>❤️</p>
@@ -302,7 +320,7 @@
                     <div class="list"></div>
                 </div>
             </div>
-            <!-- <div class="youtubeCard card deckCard labeled rectCard override-hidden" data-enabled="n"
+            <!-- <div class="youtubeCard card deckCard rectCard override-hidden" data-enabled="n"
                 data-resizableCard="n" data-parallaxCard="n" data-friendlyName="YouTube" id="youtubeCard">
                 <div class="cardOptions">
                     <div class="cmItem cmi-ytcurl">
@@ -314,10 +332,7 @@
 
                 <div class="ytThumb"></div>
             </div> -->
-            <div class="youtubeCard-browse expandable card deckCard labeled rectCard" data-enabled="n"
-                data-resizableCard="y" data-parallaxCard="n" data-friendlyName="YouTube"
-                data-cardDesc="Instantly search YouTube from the search bar, or access various YouTube places"
-                id="youtubeCard">
+            <div class="youtubeCard-browse card deckCard rectCard" data-category="Web" data-enabled="n" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="YouTube" data-cardDesc="Instantly search YouTube from the search bar, or access various YouTube locations" id="youtubeCard">
                 <div class="searchCont">
                     <i class="fa-brands fa-youtube"></i>
                     <i class="fa-brands fa-youtube-music"></i>
@@ -335,9 +350,7 @@
                     </a>
                 </div>
             </div>
-            <div class="todoCard card deckCard labeled actionable squareCard" data-enabled="n" data-resizableCard="y"
-                data-parallaxCard="n" data-friendlyName="To-Do"
-                data-cardDesc="Keep a customizable checklist of up to 6 items" id="todoCard">
+            <div class="todoCard card deckCard actionable squareCard" data-category="Utility" data-enabled="n" data-expandableCard="n" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="To-Do" data-cardDesc="Keep a scrollable checklist of up to 6 items. Enlarge to view all 6 at once." id="todoCard">
                 <div class="items">
                     <div class="item">
                         <input type="checkbox" id="">
@@ -365,9 +378,7 @@
                     </div>
                 </div>
             </div>
-            <div class="yearProgCard card deckCard labeled rectCard" data-enabled="n" data-resizableCard="y"
-                data-parallaxCard="y" data-friendlyName="Year Progress"
-                data-cardDesc="View the year's progress as a percentage + other statistics" id="yearProgCard">
+            <div class="yearProgCard card deckCard rectCard" data-category="Information" data-enabled="n" data-expandableCard="n" data-resizableCard="y" data-parallaxCard="y" data-friendlyName="Year Progress" data-cardDesc="View the year's progress as a percentage, and count down the remaining days in the year" id="yearProgCard">
                 <div class="yearLabel" ce="20" ye="24"></div>
                 <div class="percLabel">
                     <span> - </span>
@@ -376,14 +387,63 @@
                     <div class="fill"></div>
                 </div>
             </div>
-            <div class="characterCopyCard card deckCard labeled squareCard" data-enabled="n" data-resizableCard="n"
-                data-parallaxCard="y" data-friendlyName="Character Copy"
-                data-cardDesc="Click to copy commonly access symbols and characters" id="characterCopyCard">
+            <div class="characterCopyCard card deckCard squareCard" data-category="Utility" data-enabled="n" data-expandableCard="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Character Board" data-subLbl="Click to copy" data-cardDesc="Click to copy any of 4 symbols and characters" id="characterCopyCard">
                 <div class="grid">
                     <div class="gridItem gi1">⠀</div>
                     <div class="gridItem gi2"></div>
                     <div class="gridItem gi3">°</div>
                     <div class="gridItem gi4">×</div>
+                </div>
+            </div>
+            <div class="pupperCard card deckCard rectCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Dog Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Slideshow of adorable dogs from Dog.ceo's open API" id="pupperCard">
+                <img src="" alt="">
+            </div>
+            <div class="cattoCard card deckCard rectCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Cat Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Slideshow of adorable cats from PlaceholderCat's open API" id="cattoCard">
+                <img src="" alt="">
+            </div>
+            <div class="nasaCard card deckCard rectCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="NASA Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Random image of from NASA's APOD open API, ranging from 1955 until now" id="nasaCard">
+                <img src="" alt="">
+            </div>
+            <div class="uselessFactsCard card deckCard rectCard" data-category="Entertainment" data-enabled="n" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Useless Fact" data-expandableCard="y" data-subLbl="Click for more" data-cardDesc="Random useless fact from the UselessFacts open API (dedicated to Wil)" id="uselessFactsCard">
+                <div class="cardOptions">
+                    <div class="cmItem interactable-hov cmi-ufCardRefresh" data-btnLabel="">
+                        <i class="fa-solid fa-refresh"></i>
+                        Refresh
+                    </div>
+                </div>
+                <i class="fa-solid fa-comment-dots be"></i>
+            </div>
+            <div class="calculatorCard card deckCard rectCard" data-category="Utility" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Calculator" data-expandableCard="n" data-subLbl="Expand for more" data-cardDesc="Do simple maths straight from the shelf, e̶x̶p̶a̶n̶d̶ ̶f̶o̶r̶ ̶a̶n̶ ̶a̶d̶v̶a̶n̶c̶e̶d̶ ̶v̶i̶e̶w̶" id="calculatorCard">
+                <input type="text" class="calcResult" value="0">
+
+                <div class="calcCont">
+                    <div class="nos">
+                        <div class="calcBtn" value="1" label="1"></div>
+                        <div class="calcBtn" value="2" label="2"></div>
+                        <div class="calcBtn" value="3" label="3"></div>
+                        <div class="calcBtn" value="4" label="4"></div>
+                        <div class="calcBtn" value="5" label="5"></div>
+                        <div class="calcBtn" value="6" label="6"></div>
+                        <div class="calcBtn" value="7" label="7"></div>
+                        <div class="calcBtn" value="8" label="8"></div>
+                        <div class="calcBtn" value="9" label="9"></div>
+                    </div>
+                    <div class="sub">
+                        <div class="calcBtn" value="." label="."></div>
+                        <div class="calcBtn" value="0" label="0"></div>
+                        <div class="calcBtn" value="=" label="="></div>
+                    </div>
+                    <div class="ops">
+                        <div class="calcBtn" value="c" label="">
+                            <i class="fa-solid fa-delete-left"></i>
+                        </div>
+                        <div class="sub">
+                            <div class="calcBtn" value="/" label="÷"></div>
+                            <div class="calcBtn" value="*" label="×"></div>
+                            <div class="calcBtn" value="-" label="-"></div>
+                            <div class="calcBtn" value="+" label="+"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -398,37 +458,44 @@
 
     <div class="shelfBack"></div>
 
-    <div class="shelf left notLoaded">
+    <div class="shelf left notLoaded fve">
         <div class="shelfLabel surface">Shelf</div>
         <div class="spacerA spcLeft"></div>
         <div class="surface subCards">
 
-            <div class="weatherCard card labeled rectCard" data-enabled="y" data-resizableCard="y" data-parallaxCard="n"
-                data-friendlyName="Weather" data-cardDesc="Current temperature in local units" id="weatherCard">
+            <div class="weatherCard card rectCard" data-category="Information" data-enabled="y" data-expandableCard="n" data-resizableCard="y" data-parallaxCard="y" data-friendlyName="Weather" data-cardDesc="Current temperature and 'feel' in local unit, change unit from context menu" id="weatherCard">
                 <div class="cardOptions">
                     <div class="cmItem interactable-hov cmi-tempUnit" data-btnLabel="">
                         <i class="fa-solid fa-temperature-high"></i>
                         Temperature unit
                     </div>
                 </div>
+                <div class="weather_stars"></div>
                 <div class="tdm tempGroup">
                     <div class="tdm" id="temp"></div>
                     <img src="" alt="" id="weatherIcon">
                 </div>
-                <div class="weather_stars"></div>
             </div>
-            <div class="clockCard card labeled circleCard" data-enabled="y" data-resizableCard="n" data-parallaxCard="y"
-                data-friendlyName="Clock" data-cardDesc="A simple analog clock" id="clockCard">
+            <div class="clockCard card circleCard" data-category="Information" data-enabled="y" data-expandableCard="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Clock" data-cardDesc="A simple analog clock" id="clockCard">
+                <div class="cardOptions">
+                    <div class="cmItem interactable-hov cmi-clockCardStyle cmi-clockCardStyle1" data-btnLabel="">
+                        <i class="fa-solid fa-circle"></i>
+                        Style 1
+                        <input type="checkbox" name="" id="clockCardStyle1">
+                    </div>
+                    <div class="cmItem interactable-hov cmi-clockCardStyle cmi-clockCardStyle2" data-btnLabel="">
+                        <i class="fa-solid fa-square"></i>
+                        Style 2
+                        <input type="checkbox" name="" id="clockCardStyle2">
+                    </div>
+                </div>
                 <div id="clockContainer">
                     <div class="clockHand" id="hour"></div>
                     <div class="clockHand" id="minute"></div>
                     <div class="clockHand" id="second"></div>
                 </div>
             </div>
-            <div class="calendarCard card expandable labeled squareCard" data-enabled="y" data-resizableCard="n"
-                data-parallaxCard="y" data-friendlyName="Calendar"
-                data-cardDesc="Numerical and wordmark day of the week, and current month wordmark. Expand to display an interactive monthly calendar view."
-                id="calendarCard">
+            <div class="calendarCard card squareCard" data-category="Utility" data-enabled="y" data-expandableCard="y" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Calendar" data-subLbl="Click to open" data-cardDesc="Numerical and wordmark day of the week, and current month wordmark. Expand to display an interactive monthly calendar view." id="calendarCard">
                 <div class="calenDay"></div>
                 <div class="calenMonth"></div>
                 <div class="calenDayNo"></div>
@@ -457,10 +524,7 @@
                 </div>
 
             </div>
-            <div class="textCard card labeled expandable actionable squareCard" data-enabled="y" data-resizableCard="y"
-                data-parallaxCard="n" data-friendlyName="Notes"
-                data-cardDesc="A customizable text block that saves as you type. Expand to view an even larger text canvas."
-                id="textCard">
+            <div class="textCard card actionable squareCard" data-category="Utility" data-enabled="y" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Notes" data-subLbl="Changes save automatically" data-cardDesc="A customizable text block that saves as you type. Expand to view an even larger text canvas." id="textCard">
                 <div class="cardOptions">
                     <div class="cmItem interactable-hov" data-btnLabel="">
                         <i id="" class="fa-solid fa-circle-half-stroke"></i>
@@ -470,7 +534,7 @@
                 </div>
                 <textarea name="notes" id="textCardTB"></textarea>
             </div>
-            <!-- <div class="batteryCard card labeled rectCard" data-enabled="y" data-resizableCard="y" data-parallaxCard="y"
+            <!-- <div class="batteryCard card rectCard" data-enabled="y" data-resizableCard="y" data-parallaxCard="y"
                 data-friendlyName="Battery" data-cardDesc="Keep an eye on your device's battery" id="batteryCard">
                 <div class="bcIndicator">
                     <i class="fa-solid fa-bolt chargingIcon"></i>
@@ -478,17 +542,14 @@
                 </div>
                 <div class="batteryText"></div>
             </div> -->
-            <div class="shortcutCard card expandable labeled actionable squareCard" data-enabled="y"
-                data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Shortcuts"
-                data-cardDesc="Choose between 4 or 8 shortcuts to your favorite places on the web" id="shortcutCard">
+            <div class="shortcutCard card actionable squareCard" data-category="Utility" data-enabled="y" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Shortcuts" data-subLbl="Click to open" data-cardDesc="Choose between 4 or 8 shortcuts to your favorite places on the web" id="shortcutCard">
                 <!-- <div class="cardOptions">
                     <div class="cmItem cmi-IDENTIFIER interactable-hov" data-btnLabel="">
                         <input class="keyTB" type="text" placeholder="Unsplash filters" name="" id="">
                     </div>
                 </div> -->
                 <div class="shortcuts">
-                    <div class="scApp" id="scaDeviantart" data-fn="DeviantArt" data-url="deviantart.com"
-                        style="color: #30a628;">
+                    <div class="scApp" id="scaDeviantart" data-fn="DeviantArt" data-url="deviantart.com" style="color: #30a628;">
                         <i class="fa-brands fa-deviantart"></i>
                     </div>
                     <div class="scApp" id="scaFeedly" data-fn="Feedly" data-url="feedly.com" style="color: #30a628;">
@@ -506,8 +567,7 @@
                     <div class="scApp" id="scaDiscord" data-fn="Discord" data-url="discord.com" style="color: #626FF3;">
                         <i class="fa-brands fa-discord"></i>
                     </div>
-                    <div class="scApp" id="scaYTM" data-fn="YouTube Music" data-url="music.youtube.com"
-                        style="color: #ff0101;">
+                    <div class="scApp" id="scaYTM" data-fn="YouTube Music" data-url="music.youtube.com" style="color: #ff0101;">
                         <i class="fa-solid fa-play"></i>
                     </div>
                     <div class="scApp" id="scaYouTube" data-fn="YouTube" data-url="youtube.com" style="color: #ff0101;">
@@ -526,11 +586,11 @@
 
     <script src="js/app.js"></script>
     <script src="js/topchrome.js"></script>
+    <script src="js/contextMenu.js"></script>
     <script src="js/rolodex.js"></script>
     <script src="js/shelf.js"></script>
 
     <script src="js/stock_cards.js"></script>
-    <script src="js/elc.js"></script>
 </body>
 
 </html>

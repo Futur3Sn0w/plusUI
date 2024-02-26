@@ -14,6 +14,21 @@ window.onload = function () {
     showTime();
     showDate();
 
+    setupLSVals();
+
+    if (localStorage.getItem('firstVisit') == '1') {
+        $('.firstVisitExperience').remove();
+        $('.aboutBtn').removeClass('fve');
+        $('.shelf').removeClass('fve');
+        $('.topChromeItems').removeClass('fve');
+    } else {
+        $('.firstVisitExperience').addClass('show');
+        $('.aboutBtn').addClass('fve');
+        $('.shelf').addClass('fve');
+        $('.topChromeItems').addClass('fve');
+        localStorage.setItem('firstVisit', '1');
+    }
+
     setAgent();
 
     $('.greeting').removeClass('hidden');
@@ -28,6 +43,8 @@ window.onload = function () {
 
     if (isTouchScreendevice()) {
         $('.card').removeClass('parallax');
+        $('#cbParallaxToggle').parent().remove();
+        $('.monoModeDCE').detach().appendTo('.themeOpts .group');
     } else {
         if (localStorage.getItem('parallax') == 'true') {
             VanillaTilt.init(paraCards, {
@@ -46,10 +63,7 @@ window.onload = function () {
         $('#backDrop2').css('background-image', "url(resc/dark.png)");
         $('body').css('background-image', "none");
 
-        if (localStorage.getItem('liveLink') == null) {
-            localStorage.setItem('liveLink', 'https://flux.sandydoo.me')
-        }
-        $('<embed src="' + localStorage.getItem('liveLink') + '" type="">').appendTo('.siteDrop');
+        $('<embed class="siteDrop" src="' + localStorage.getItem('liveLink') + '" type="">').appendTo('body');
 
         $('.liveLinkPreset').each(function () {
             var url = $(this).attr('url');
@@ -65,21 +79,13 @@ window.onload = function () {
         $('#backDrop2').css('background-image', "url(" + backdropImg + ")");
         $('body').css('background-image', "url(" + backdropImg + ")");
         repeater = setInterval(refreshWall, 60000);
+        $('#siteDropToggle').prop('checked', false);
     }
 
-    if (tempUnit == null) {
-        localStorage.setItem('tempUnit', 'c');
-    } else if (tempUnit == 'f') {
-        localStorage.setItem('tempUnit', 'f');
-    } else if (tempUnit == 'c') {
-        localStorage.setItem('tempUnit', 'c');
-    }
+
     weather();
 
     setTheme();
-    if (localStorage.getItem('theme') == null) {
-        localStorage.setItem('theme', 'light')
-    }
     $('.lightDark').attr('data-theme', localStorage.getItem('theme'));
 
     alignShelf();
@@ -109,6 +115,10 @@ window.onload = function () {
         $('#allowTextCardDarkMode').prop('checked', true);
     }
 
+    var newClass = localStorage.getItem('clockStyle') == '1' ? 'a' : 'b';
+    $('.clockCard').addClass('style-' + newClass);
+    $('#clockCardStyle' + localStorage.getItem('clockStyle')).prop('checked', true);
+
     // cardSmarts();
 
     $('.card').each(function (i, e) {
@@ -130,6 +140,7 @@ window.onload = function () {
     dockRadi();
 
     outputStars();
+    aboutStats();
 
     // doTheBatteryThing();
     // chargingIndic();
@@ -162,6 +173,11 @@ $('#cbParallaxToggle').click(function () {
     }
 });
 
+$('.fveDone').click(function () {
+    localStorage.setItem('firstVisit', '1');
+    location.reload();
+})
+
 $(document).mouseup(function (e) {
     saveCards();
 
@@ -192,12 +208,14 @@ $(document).mouseup(function (e) {
         $('.contextMenuDiv').removeClass('show');
     }
 
-    if (!$(".rolodex").is(e.target) && !$(".rolodex *").is(e.target) && !$(".rolodexOpen").is(e.target)) {
-        if ($('.rolodex').hasClass('visible')) {
-            // $('.aboutBtn').removeClass('visible').attr('about', 'PlusUI').attr('ver', $('.siteVer').text());
-            $('.rolodex').removeClass('visible')
-        }
-    }
+    // if (!$(".rolodex").is(e.target) && !$(".rolodex *").is(e.target) && !$(".rolodexOpen").is(e.target)) {
+    //     if (!isTouchScreendevice()) {
+    //         if ($('.rolodex').hasClass('visible')) {
+    //             // $('.aboutBtn').removeClass('visible').attr('about', 'PlusUI').attr('ver', $('.siteVer').text());
+    //             $('.rolodex').removeClass('visible')
+    //         }
+    //     }
+    // }
 
     dockRadi();
 });
@@ -254,7 +272,7 @@ $('#openWallpaperBtn').click(function (e) {
 
 $('#refreshWallBtn').on('click', function (e) {
     if (localStorage.getItem('liveWall') == 'true') {
-        $('.siteDrop').children('embed').attr('src', localStorage.getItem('liveLink'))
+        $('.siteDrop').attr('src', localStorage.getItem('liveLink'))
     } else {
         clearInterval(repeater)
         refreshWall();

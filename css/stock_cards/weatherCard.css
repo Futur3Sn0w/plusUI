@@ -1,6 +1,6 @@
 .weatherCard {
     background: linear-gradient(to top, #0e63d1, rgb(92, 168, 255));
-    overflow: hidden !important;
+    transform: perspective(1000px);
 }
 
 .weatherCard:has(#temp[tod="night"]) {
@@ -19,8 +19,12 @@
     gap: 0 !important;
 }
 
+.weatherCard .tempGroup {
+    transform: translateZ(20px);
+}
+
 .weatherCard.squareCard * {
-    transform: none !important;
+    transform: none;
 }
 
 .weatherCard.rectCard #weatherIcon {
@@ -73,7 +77,6 @@
     gap: 10px;
 
     box-sizing: border-box;
-    transform: translateZ(15px);
 
     margin-top: -15px;
 
@@ -86,18 +89,24 @@
 /* Stars */
 
 .weatherCard .weather_stars {
-    display: none;
-}
-
-.weatherCard:has(#temp[tod="night"]) .weather_stars {
     width: 100%;
     height: 100%;
-    display: flex;
+    display: none;
+    transform: translateZ(10px);
+
+    border-radius: 16px;
+    overflow: hidden;
+
+    mask-image: linear-gradient(to bottom, black, transparent);
 
     z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.weatherCard:has(#temp[tod="night"]) .weather_stars {
+    display: flex;
 }
 
 .weather_stars .star {

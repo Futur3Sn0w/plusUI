@@ -268,6 +268,7 @@ body:has(.darkModeOn) .cmSep:not(.custom) {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     height: fit-content;
     width: 100%;
     margin: 5px 0;
