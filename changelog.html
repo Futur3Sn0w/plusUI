@@ -36,6 +36,10 @@
             /* text-align: right; */
         }
 
+        .changelog.darkModeOn {
+            color: white !important;
+        }
+
         .changelog>p {
             margin: 0;
             padding: 0;
@@ -43,8 +47,8 @@
             font-size: 13px;
         }
 
-        .changelog ul:first-of-type {
-            margin-top: 20px;
+        .changelog p:first-of-type {
+            margin-bottom: 20px;
         }
 
         .changelog ul {
@@ -66,76 +70,87 @@
             font-size: 12px;
             margin-left: 0px !important;
         }
+
+        .li-sub {
+            font-size: 12px;
+            margin-left: 10px !important;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.7.0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="changelog">
-        Version 2.8 of PlusUI brings a plethora of changes and enhancements across the board, and introduces the onboarding UI for first-time visitors.
+        New:
+        - The shortcutCard now has an advanced editor where you can add and remove links
+        -- Access from context menu
+        - The clockCard has a new style option
+        - The debug code is now shown at FVE incase of issues
+        - Devstat for number of potentially-failed cards
+        - You can now click a card in the shelf to move it to Rolodex while it's open
+        - Rolodex now shows if the selected card has any context menu items
 
-        Onboarding:
-        - "FirstVisitExperience" prompts first-time users with a welcome screen and username box
-        - Settings now are now set+saved during FVE to their initial/default values
+        Fixes:
+        - Fixed a layout bug in backdrop control panel settings introduced in 2.8
+        - Fixed changelog not being visible in dark mode
+        - Fixed mono theme for a few cards
+        - Fixed a bug where an expanded card would return to the front of the shelf if the page was reloaded
+        - Fixed a bug with textCard saving blank text as 'undefined'
+        - Fixed a bug where custom context menu items would get stuck in the menu
 
-        Rolodex:
-        - Further improved new immersive view padding, spacing, and colors
-        - New category bar; click a category to view all of it's cards, or click 'all cards' to view all available cards
-        - New 'info chips'; 3 small chips will show if the current card is parallax, expand, or resize compatible
-        - No longer closes when clicked outside
-        - Cards in the Rolodex now appear in alphabetical order, rather than when they were added
-        - Some cards can now be clicked to instantly expand them, rather than needing the context menu
-
-        Control panel:
-        - New "Debug code"; gives a ton of useful troubleshooting info in a short code. Click to copy and share. Available on about page.
-        - New “What’s New”; Mirrors changelog found in LATEST GitHub release, scroll to view more. Available on about page.
-        - Touchscreen users will now see slightly tweaked options in control panel
-        - Further improved new rolodex&timedate buttons
-
-        Cards:
-        - New calculator card; do simple maths straight from the shelf!
-        - New dog/cat pics card; slideshow of adorable dogs/cats, click for new image!
-        - New NASA card; View a random NASA APOD from 1955 onward, click for more details
-        - New Useless Facts card: A random (useless) fact, dedicated to my older brother
-        - Clock card now has a new square style, available in the context menu
-        - Made some changes to the weather card for better performance and retrieval of info
-
-        UI (Shelf, context menu, etc):
-        - About button now shows contextual information about where you are, and what page you’re on. Rolodex shows current category, control panel shows current page.
-        - The shelf label can now show contextual info about the hovered card
-        - Fixed custom context menu options appearing horizontally in the menu
-
-        Misc/Meta:
-        - siteDrop is now appended directly to the body rather than to a separate element
-        - Context menu actions have been moved to their own js file
+        Changes:
+        - Removed and refined A TON of code
+        - The shelf is now center-aligned by default
+        - The shelf label position is now always consistent
+        - Expanded cards will now return to the deck when Rolodex is opened
+        - Significantly reworked the card saving/recalling system to be more streamlined and performant
     </div>
 
     <script>
         $(document).ready(function () {
             $(".changelog").each(function () {
-                var lines = $(this).text().split("\n"); // Split text by line breaks
-                $(this).empty(); // Clear the existing content
-                var currentList = null; // Track the current UL element
+                var lines = $(this).text().split("\n");
+                $(this).empty();
+                var currentList = null;
 
                 for (var i = 0; i < lines.length; i++) {
                     var line = lines[i];
-                    var isList = line.endsWith(":"); // Check if line ends with ":"
-                    var isListItem = line.startsWith("        - ") && currentList; // Check for dash-prefixed line following a UL
+                    var isList = line.endsWith(":");
+                    var isListItem = line.startsWith("        - ") && currentList;
+                    var isListSubItem = line.startsWith("        -- ") && currentList;
 
                     if (isList) {
-                        currentList = $("<ul>").appendTo(this); // Create and append new UL
-                        currentList.append("<li class='li-head'>" + line.substring(0, line.length - 1) + "</li>"); // Add line as separate LI, excluding colon
+                        currentList = $("<ul>").appendTo(this);
+                        currentList.append("<li class='li-head'>" + line.substring(0, line.length - 1) + "</li>");
                     } else if (isListItem) {
-                        currentList.append("<li class='li-bullet'>" + line.substring(10) + "</li>"); // Add line as LI, removing leading dash
+                        currentList.append("<li class='li-bullet'>" + line.substring(10) + "</li>");
+                    } else if (isListSubItem) {
+                        currentList.append("<li class='li-bullet li-sub'>" + line.substring(11) + "</li>");
                     } else {
                         var newParagraph = $("<p>" + line + "</p>");
                         if (newParagraph.text().trim() !== "") {
                             $(this).append(newParagraph);
                         }
-                        currentList = null; // Reset current list tracker
+                        currentList = null;
                     }
                 }
             });
+
+            if (localStorage.getItem('theme') == 'light') {
+                $('.changelog').removeClass('darkModeOn');
+            } else if (localStorage.getItem('theme') == 'dark') {
+                $('.changelog').addClass('darkModeOn');
+            } else if (localStorage.getItem('theme') == 'auto') {
+                $('.changelog').removeClass('darkModeOn');
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    $('.changelog').addClass('darkModeOn');
+                } else {
+                    $('.changelog').removeClass('darkModeOn');
+                }
+            } else {
+                $('.changelog').removeClass('darkModeOn');
+            }
+
         });
     </script>
 </body>

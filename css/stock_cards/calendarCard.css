@@ -31,13 +31,7 @@ body:has(.darkModeOn) .calendarCard .calenMonth {
     color: white;
 }
 
-
-.subCards.plated .calendarCard .calenMonth {
-    background: #0000007c;
-}
-
 .subCards:not(.darkModeOn).plated .calendarCard .calenMonth {
-    background: #ffffff7c;
     color: black
 }
 

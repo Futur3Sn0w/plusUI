@@ -5,6 +5,10 @@
     overflow: visible !important;
 }
 
+.subCards.plated .shortcutCard {
+    background: transparent !important;
+}
+
 .shortcutCard:not(.expanded) {
     background-color: transparent !important;
     background: transparent !important;
@@ -31,6 +35,18 @@
     justify-content: center;
 
     transition: .2s;
+}
+
+.shortcuts:empty {
+    margin-bottom: 0;
+}
+
+.shortcuts:empty::before {
+    content: 'No shortcuts! Add one from the expanded view.';
+    font-size: 12px;
+    opacity: .5;
+    position: absolute;
+    text-align: center;
 }
 
 .shortcutCard.rectCard .shortcuts .scApp {
@@ -61,7 +77,7 @@
     /* overflow: hidden; */
 }
 
-.shelf.darkModeOn .subCards .shortcutCard .shortcuts .scApp {
+body:has(.darkModeOn) .scApp {
     background-color: rgba(34, 34, 34, .6);
 }
 
@@ -79,7 +95,6 @@
     width: 100%;
     height: 100%;
 
-    font-size: 0 !important;
     position: relative;
     border-radius: inherit;
 
@@ -94,12 +109,15 @@
 }
 
 .scApp i::before {
-    content: '';
     width: 100%;
     height: 100%;
 
     display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .15s;
 
+    font-size: 0;
     position: absolute;
     z-index: 2;
 
@@ -107,6 +125,14 @@
     background-size: 20px;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.scApp:not(:hover) i::before {
+    content: '';
+}
+
+.subCards.plated .scApp i::after {
+    opacity: 0;
 }
 
 .scApp i::after {
@@ -147,19 +173,43 @@
     opacity: .35;
 }
 
-#scaDeviantart {
-    color: #00EAA6;
-}
+/* Expanded view */
 
 .shortcutCard.expanded {
-    height: 160px !important;
+    height: fit-content !important;
     min-height: unset !important;
+    flex-direction: column;
+}
+
+.shortcutCard.expanded .shortcuts:empty::before {
+    content: 'No shortcuts! Add one above.';
+    font-size: 12px;
+    opacity: .5;
+    position: absolute;
+    text-align: center;
+}
+
+.shortcutCard.expanded .shortcuts::before {
+    content: 'Click a shortcut above to remove it';
+    font-size: 12px;
+    opacity: .5;
+    position: absolute;
+    top: calc(100% - 25px);
+    text-align: center;
+}
+
+.shortcutCard.expanded .shortcuts {
+    padding-bottom: 55px;
+}
+
+.shortcutCard.expanded .shortcuts:empty {
+    padding-bottom: 25px;
 }
 
 .shortcutCard.expanded .shortcuts {
     gap: 25px 15px;
     height: fit-content;
-    margin-top: -17px;
+    /* margin-top: auto; */
 }
 
 .shortcutCard.expanded .scApp {
@@ -167,10 +217,6 @@
     height: 50px !important;
     border-radius: 11px;
     /* margin-bottom: auto; */
-}
-
-.shortcutCard.expanded .scApp i {
-    background-size: 24px;
 }
 
 /* Label for expanded card */
@@ -198,4 +244,66 @@
 
 body:has(.darkModeOn) .shortcutCard .scApp::before {
     color: white;
+}
+
+.shortcutCard.expanded .scApp:hover::after {
+    background-color: red;
+}
+
+.shortcutCard.expanded .scApp:hover i::before {
+    background-size: 0%;
+    font-size: 20px;
+}
+
+/* Expanded view items */
+
+.shortcutCard .expandedViewItems {
+    display: none;
+    width: 100%;
+    height: 41px;
+    gap: 5px;
+
+    box-sizing: border-box;
+    padding: 3px 3px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+
+    position: relative;
+}
+
+.shortcutCard.expanded .expandedViewItems {
+    display: flex;
+}
+
+.expandedViewItems .dcExpt {
+    height: 35px;
+    width: 100%;
+    border-radius: 14px !important;
+}
+
+.expandedViewItems .dcExpt:has(.shortcutLinkNameTB) {
+    width: 90px;
+    flex-shrink: 0;
+}
+
+.shortcutLinkAdd {
+    height: 100%;
+    width: 35px;
+    border-radius: 50px;
+    flex-shrink: 0;
+
+    background-color: #26a426;
+    color: white;
+
+    transition: .15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shortcutLinkAdd:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.075);
 }

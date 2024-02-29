@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: column;
 
+}
+
+body:has(.subCards:not(.plated)) .calculatorCard {
     background-color: #111 !important;
 }
 

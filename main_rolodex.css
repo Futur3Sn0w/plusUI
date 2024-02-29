@@ -1,15 +1,16 @@
 .rolodex {
     position: absolute;
-    top: 60px;
+    /* top: 60px; */
 
     width: fit-content;
-    height: calc(100% - 250px);
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 7px;
+    gap: 15px;
 
+    margin-top: -40px;
     transform: scale(1.1);
     opacity: 0;
     pointer-events: none;
@@ -32,14 +33,53 @@
     pointer-events: unset;
 }
 
+.roloCardInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.roloCardInfo::before {
+    content: attr(data-sectName);
+    font-size: 32px;
+    font-weight: 700;
+
+    /* position: fixed; */
+    /* top: 60px; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    width: max-content;
+    /* transform: translateX(-50%); */
+}
+
+.rolodex.empty .roloCardInfo::before {
+    top: 100px;
+}
+
+.roloCardInfo::after {
+    content: attr(data-cardDesc);
+    font-size: 13px;
+    font-weight: 500;
+    opacity: .75;
+
+    /* position: fixed; */
+    /* top: 100px; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    width: max-content;
+    /* transform: translateX(-50%); */
+}
+
+.rolodex.empty .roloCardInfo::after {
+    /* top: 130px; */
+}
+
 .infoChips {
     display: flex;
     gap: 5px;
 
-    position: fixed;
-    top: 140px;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: max-content;
 }
 
@@ -94,96 +134,52 @@ body:has(.darkModeOn) .infoChips .infoChip {
     font-weight: 500;
 }
 
+.roloCardOptions::after {
+    content: attr(avail);
+    font-size: 12px;
+    opacity: .5;
+}
+
 .cbSect {
     width: 90px;
-    height: 150px;
+    height: 140px;
     padding: 15px;
-    /* box-sizing: border-box; */
 
     display: flex;
     align-items: center;
     position: relative;
 
     border-radius: 12px;
-}
 
-.cbs1 {
     gap: 15%;
     padding: 10px 120px 10px 120px;
+    /* margin-top: 170px; */
 
     transform: scale(1.2);
-    /* margin-right: -100px; */
 
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-    /* scroll-behavior: smooth; */
 
-    /* position: absolute; */
     mask-image: linear-gradient(to left, transparent, black, black, black, black, transparent);
-    margin-top: 100px;
 
     pointer-events: none;
 }
 
-.cbs2 {
-    border-radius: 10px 10px 14px 14px !important;
-    height: 20px;
-    display: none;
-}
-
-.roloCardInfo::before {
-    content: attr(data-sectName);
-    font-size: 32px;
-    font-weight: 700;
-
-    position: fixed;
-    top: 60px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: max-content;
-    /* transform: translateX(-50%); */
-}
-
-.rolodex.empty .roloCardInfo::before {
-    top: 100px;
-}
-
-.roloCardInfo::after {
-    content: attr(data-cardDesc);
-    font-size: 13px;
-    font-weight: 500;
-    opacity: .75;
-
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: max-content;
-    /* transform: translateX(-50%); */
-}
-
-.rolodex.empty .roloCardInfo::after {
-    top: 130px;
-}
-
-/* fdhsjkfldhsjfkdls */
-
-.cbs1 .card {
+.cbSect .card {
     scroll-snap-align: center;
     pointer-events: none;
 }
 
-.cbs1 .card:not(.hoveredCard) {
+.cbSect .card:not(.hoveredCard) {
     opacity: .5;
     transform: scale(.7) !important;
 }
 
-.cbs1 .card.hoveredCard {
+.cbSect .card.hoveredCard {
     opacity: 1;
     transform: none !important;
 }
 
-.rolodex.empty .addBtn,
 .rolodex.empty .moveCtrls {
     display: none;
 }
@@ -256,9 +252,10 @@ body:has(.darkModeOn) .infoChips .infoChip {
     align-items: center;
     justify-content: center;
     gap: 7px;
+    margin-top: auto;
 
-    position: absolute;
-    bottom: -10px;
+    /* position: absolute; */
+    /* bottom: -10px; */
 }
 
 .mvCtrl {

@@ -468,11 +468,11 @@
     background-color: var(--surface-button-l) !important;
 }
 
-.controlPanel.darkModeOn .dcExpt i {
+body:has(.darkModeOn) .dcExpt i {
     background-color: var(--surface-button-d);
 }
 
-.controlPanel.darkModeOn .controlPanelOptGroup .dcExpt {
+body:has(.darkModeOn) .dcExpt {
     background-color: var(--section-input-d);
 }
 
@@ -536,6 +536,14 @@
     box-sizing: border-box;
 }
 
+.wallBtns .dcExpt:not(.siteDropToggleCont) {
+    width: 45px;
+}
+
+.wallBtns .dcExpt:not(.siteDropToggleCont) i {
+    background-color: transparent !important;
+}
+
 .wallBtns .dcExpt::after {
     content: attr(data-btnName);
     position: relative;
@@ -544,6 +552,14 @@
     width: 55%;
     margin-left: auto;
     margin-right: 10px;
+}
+
+.siteDropToggleCont {
+    width: calc(50% - 5px) !important;
+}
+
+.siteDropToggleCont:hover {
+    transform: scale(1.075);
 }
 
 .siteDropToggleCont i {
@@ -735,7 +751,7 @@ body:has(.darkModeOn) .liveLinkCont .dcExpt input:checked::after {
     top: -27px;
 }
 
-.aboutOpts .aboutStats .debugCode {
+.debugCode {
     font-size: 16px;
     font-family: monospace;
     text-transform: uppercase;
@@ -754,19 +770,19 @@ body:has(.darkModeOn) .liveLinkCont .dcExpt input:checked::after {
     z-index: 2;
 }
 
-body:has(.darkModeOn) .aboutOpts .aboutStats .debugCode {
+body:has(.darkModeOn) .debugCode {
     background-color: var(--section-l);
     color: white;
 }
 
-.aboutOpts .aboutStats .debugCode:hover {
+.debugCode:hover {
     transform: scale(1.075);
     opacity: 1;
     background-color: white !important;
     color: #222 !important;
 }
 
-.aboutOpts .aboutStats .debugCode:active {
+.debugCode:active {
     transform: scale(1);
     opacity: .5;
 }

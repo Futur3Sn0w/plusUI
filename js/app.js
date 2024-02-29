@@ -45,6 +45,7 @@ window.onload = function () {
         $('.card').removeClass('parallax');
         $('#cbParallaxToggle').parent().remove();
         $('.monoModeDCE').detach().appendTo('.themeOpts .group');
+        $('.shelf').addClass('touch');
     } else {
         if (localStorage.getItem('parallax') == 'true') {
             VanillaTilt.init(paraCards, {
@@ -82,9 +83,6 @@ window.onload = function () {
         $('#siteDropToggle').prop('checked', false);
     }
 
-
-    weather();
-
     setTheme();
     $('.lightDark').attr('data-theme', localStorage.getItem('theme'));
 
@@ -98,7 +96,6 @@ window.onload = function () {
     });
 
     $('.subCards').sortable('disable');
-    $('#textCardTB').val(localStorage.getItem('textCard'));
 
     if (localStorage.getItem('float') == 'true') {
         $('.shelf').addClass('float');
@@ -119,38 +116,27 @@ window.onload = function () {
     $('.clockCard').addClass('style-' + newClass);
     $('#clockCardStyle' + localStorage.getItem('clockStyle')).prop('checked', true);
 
-    // cardSmarts();
 
-    $('.card').each(function (i, e) {
-        var curCard = $(e).attr('id');
-
-        $(e).attr('data-enabled', localStorage.getItem(curCard));
-
-        if (localStorage.getItem(curCard + '-size') == 'rectCard') {
-            $(e).removeClass('squareCard').addClass('rectCard')
-        } else if (localStorage.getItem(curCard + '-size') == 'squareCard') {
-            $(e).removeClass('rectCard').addClass('squareCard')
-        }
-
-        $('.card[data-enabled=y]').removeClass('deckCard').detach().appendTo($('.subCards'));
-        $('.card[data-enabled=n]').addClass('deckCard').detach().appendTo($('.cbs1'));
-    })
-
-    recallCards();
+    if (localStorage.getItem('card-weatherCard-data') !== null) {
+        restoreCardData();
+    } else {
+        updateCardData();
+    }
+    // recallCards();
     dockRadi();
 
-    outputStars();
     aboutStats();
-
-    // doTheBatteryThing();
-    // chargingIndic();
 
     setTimeout(() => {
         $('.loader').addClass('loaded');
         $('.shelf').removeClass('notLoaded');
         $('.timeDate').removeClass('notLoaded');
-    }, 1000);
+    }, 750);
 }
+
+$(document).ready(function () {
+    startCards();
+})
 
 let paraCards = document.querySelectorAll(".card[data-parallaxCard='y']");
 
@@ -178,8 +164,11 @@ $('.fveDone').click(function () {
     location.reload();
 })
 
+// Fires whenever click/tapped
+
 $(document).mouseup(function (e) {
-    saveCards();
+    // saveCards();
+    updateCardData();
 
     $('.card').each(function (e) {
         // localStorage.setItem($(e).attr('id') + '-index', $(e).attr('data-index'))
@@ -200,12 +189,7 @@ $(document).mouseup(function (e) {
     }
 
     if (!$(".context-selected-card").is(e.target) && !$(".context-selected-card *").is(e.target) && !$(".contextMenuDiv").is(e.target) && !$(".contextMenuDiv *").is(e.target)) {
-        $('.context-selected-card').addClass('temp').removeClass('context-selected-card');
-        setTimeout(() => {
-            $('.cmSep').children().appendTo('.card.temp .cardOptions');
-        }, 300);
-        $('.subCards').removeClass('freeze');
-        $('.contextMenuDiv').removeClass('show');
+        hideContextMenu();
     }
 
     // if (!$(".rolodex").is(e.target) && !$(".rolodex *").is(e.target) && !$(".rolodexOpen").is(e.target)) {
@@ -247,6 +231,8 @@ function setAgent() {
     }
 }
 
+// Backdrop functions
+
 function refreshWall() {
     $('<div class="prevWall interactable-hov" onclick="clearWall(this)">').prependTo('.wallList').css('background-image', $('#backDrop2').css('background-image'));
 
@@ -287,6 +273,55 @@ function clearWall(e) {
     clearInterval(repeater)
 }
 
+// Set default localStorage values if they don't exist:
+
+function setupLSVals() {
+    if (localStorage.getItem('tempUnit') == null) {
+        localStorage.setItem('tempUnit', 'c');
+    }
+
+    if (localStorage.getItem('theme') == null) {
+        localStorage.setItem('theme', 'light')
+    }
+
+    if (localStorage.getItem('liveWall') == null) {
+        localStorage.setItem('liveWall', 'false')
+    }
+
+    if (localStorage.getItem('cardList') == null) {
+        localStorage.setItem('cardList', '')
+    }
+
+    if (localStorage.getItem('liveLink') == null) {
+        localStorage.setItem('liveLink', 'https://flux.sandydoo.me')
+    }
+
+    if (localStorage.getItem('shelfPos') == null) {
+        localStorage.setItem('shelfPos', 'saoC-radio')
+    }
+
+    if (localStorage.getItem('parallax') == null) {
+        localStorage.setItem('parallax', 'true')
+    }
+
+    if (localStorage.getItem('clockStyle') == null) {
+        localStorage.setItem('clockStyle', '1')
+    }
+
+    if (localStorage.getItem('float') == null) {
+        localStorage.setItem('float', 'true')
+    }
+
+    if (localStorage.getItem('allowTextCardDarkMode') == null) {
+        localStorage.setItem('allowTextCardDarkMode', 'false')
+    }
+
+    if (localStorage.getItem('monoCards') == null) {
+        localStorage.setItem('monoCards', 'false')
+    }
+
+}
+
 // Expandable card functionality
 
 $(document).on('click', '.expandableWindow .return', function () {
@@ -309,6 +344,8 @@ $(document).on('click', '.expandableWindow .return', function () {
         }, 200);
 
     }, 300);
+
+    updateCardData();
 
     $('.shelfLabel').addClass('show').text("Expandable closed");
     setTimeout(() => {

@@ -1,42 +1,107 @@
-// Set default localStorage values if they don't exist:
+// Main function to start each card
 
-function setupLSVals() {
-    if (localStorage.getItem('tempUnit') == null) {
-        localStorage.setItem('tempUnit', 'c');
+var cardClickingEnabled = true;
+var links;
+var storedLinks;
+var sampleLinks = [
+    { name: "Google", url: "https://www.google.com/" },
+    { name: "YouTube", url: "https://www.youtube.com/" },
+    { name: "Wikipedia", url: "https://en.wikipedia.org/" },
+    { name: "Facebook", url: "https://www.facebook.com/" },
+    { name: "Twitter", url: "https://twitter.com/" },
+    { name: "Amazon", url: "https://www.amazon.com/" },
+    { name: "Apple", url: "https://www.apple.com/" },
+    { name: "Netflix", url: "https://www.netflix.com/" }
+];
+
+
+function startCards() {
+    weather();
+
+    // cardSmarts();
+    outputStars();
+    // doTheBatteryThing();
+    // chargingIndic();
+
+    if (localStorage.getItem('clockStyle')) {
+        $('.cmi-clockCardStyle' + localStorage.getItem('clockStyle')).click();
+        $('.clockCard').removeClass('style-a').removeClass('style-b').removeClass('style-c')
+        $('.cmi-clockCardStyle' + localStorage.getItem('clockStyle')).click();
     }
 
-    if (localStorage.getItem('theme') == null) {
-        localStorage.setItem('theme', 'light')
+    if (localStorage.getItem('textCard') == null || localStorage.getItem('textCard') == 'undefined') {
+        localStorage.setItem('textCard', '');
+    }
+    $('#textCardTB').val(localStorage.getItem('textCard'));
+
+    links = [];
+
+    // Load existing links from localStorage, if any
+    storedLinks = localStorage.getItem("savedLinks");
+    if (!storedLinks) {
+        links = sampleLinks;
+        updateAndSaveLinks(); // Save the sample data
+    } else {
+        // If found, parse the stored data from localStorage
+        links = JSON.parse(storedLinks);
     }
 
-    if (localStorage.getItem('liveWall') == null) {
-        localStorage.setItem('liveWall', 'false')
-    }
+    $.each(links, function (index, linkObject) {
+        // Get the name and URL from the current object
+        var name = linkObject.name;
+        var url = linkObject.url;
 
-    if (localStorage.getItem('liveLink') == null) {
-        localStorage.setItem('liveLink', 'https://flux.sandydoo.me')
-    }
+        // Create the shortcut item element
+        var theSCApp = $('<div class="scApp"><i class="fa-solid fa-close"></i></div>');
+        theSCApp.attr('data-url', url);
+        theSCApp.attr('data-fn', name);
+        theSCApp.find('i').css('background-image', 'url(https://www.google.com/s2/favicons?domain=' + url + '&sz=32)');
 
-    if (localStorage.getItem('parallax') == null) {
-        localStorage.setItem('parallax', 'true')
-    }
+        // Append the shortcut item to the shortcuts container
+        $('.shortcutCard .shortcuts').append(theSCApp);
+    });
 
-    if (localStorage.getItem('clockStyle') == null) {
-        localStorage.setItem('clockStyle', '1')
-    }
+    setInterval(() => {
+        d = new Date(); //object of date()
+        hr = d.getHours();
+        min = d.getMinutes();
+        sec = d.getSeconds();
+        hr_rotation = 30 * hr + min / 2; //converting current time
+        min_rotation = 6 * min;
+        sec_rotation = 6 * sec;
 
-    if (localStorage.getItem('float') == null) {
-        localStorage.setItem('float', 'true')
-    }
+        hour.style.transform = `rotate(${hr_rotation}deg)`;
+        minute.style.transform = `rotate(${min_rotation}deg)`;
+        second.style.transform = `rotate(${sec_rotation}deg)`;
+    }, 1000);
 
-    if (localStorage.getItem('allowTextCardDarkMode') == null) {
-        localStorage.setItem('allowTextCardDarkMode', 'false')
-    }
+    setInterval(() => {
+        var current = emojis[Math.floor(Math.random() * emojis.length)];
+        $('.emojiLocaleCard p').text(current);
+    }, 5000);
 
-    if (localStorage.getItem('monoCards') == null) {
-        localStorage.setItem('monoCards', 'false')
-    }
+    emojis.forEach(emoji => {
+        $('<div class="emojiItem interactable-hov">').attr('text', emoji).appendTo('.emojiLocaleCard .list');
+    });
+
+    doggyCard();
+    cattoCard();
+    nasaCard();
+    uselessFactsCard();
+
 }
+
+// Edit mode card function
+
+$('.card').on('click', function (e) {
+    if (!cardClickingEnabled && $('.rolodex').hasClass('visible')) {
+        $(this).addClass('context-selected-card');
+        $('.cmi-disableCard').click();
+
+        createCategoryBtns();
+        $('.allCardsCategory').click();
+    }
+})
 
 // Weather (rejuv)
 
@@ -162,21 +227,86 @@ $('.cmi-tempUnit').click(function () {
     weather()
 })
 
-//
-
 // Shortcuts
 
-$('.scApp').on('click', function () {
-    window.open('https://' + $(this).attr('data-url'));
+function updateAndSaveLinks() {
+    localStorage.setItem("savedLinks", JSON.stringify(links));
+}
+
+$(".shortcutLinkAdd").click(function () {
+    var name = $(".shortcutLinkNameTB").val();
+    var url = $(".shortcutLinkTB").val();
+
+    if (links.length >= 8) {
+        alert("You can only add up to 8 shortcuts.");
+        return;
+    } else {
+
+        if (name && /^(?:(http(s)?:\/\/)?|(www\.))?[^\s]+$/.test(url)) {
+            var linkObject = { name: name, url: url };
+
+            links.push(linkObject);
+
+            $(".shortcutLinkNameTB").val("");
+            $(".shortcutLinkTB").val("");
+
+            updateAndSaveLinks();
+
+            var theSCApp = $('<div class="scApp"><i class="fa-solid fa-close"></i></div>');
+            theSCApp.attr('data-url', url);
+            theSCApp.attr('data-fn', name);
+            theSCApp.find('i').css('background-image', 'url(https://www.google.com/s2/favicons?domain=' + url + '&sz=32)');
+            $('.shortcutCard .shortcuts').append(theSCApp);
+        } else if (name == "" && url == "" && $('.shortcutCard .shortcuts').is(':empty')) {
+            alert('Adding default shortcuts...')
+            $.each(sampleLinks, function (index, linkObject) {
+                var name = linkObject.name;
+                var url = linkObject.url;
+
+                var linkObject = { name: name, url: url };
+                links.push(linkObject);
+
+                var theSCApp = $('<div class="scApp"><i class="fa-solid fa-close"></i></div>');
+                theSCApp.attr('data-url', url);
+                theSCApp.attr('data-fn', name);
+                theSCApp.find('i').css('background-image', 'url(https://www.google.com/s2/favicons?domain=' + url + '&sz=32)');
+
+                $('.shortcutCard .shortcuts').append(theSCApp);
+            });
+            updateAndSaveLinks();
+        } else {
+            alert("Unable to validate URL. Please try again.");
+        }
+    }
 });
 
-// https://www.google.com/s2/favicons?domain=${domain}&sz=${size}
+$(document).on('click', '.shortcutCard .scApp', function () {
+    if ($(this).parent().parent().hasClass('expanded')) {
+        var url = $(this).data('url');
+        var name = $(this).data('fn');
 
-$(document).ready(function () {
-    $('.scApp').each(function () {
-        var url = 'https://' + $(this).attr('data-url');
-        $(this).find('i').css('background-image', 'url(https://www.google.com/s2/favicons?domain=' + url + '&sz=32)');
-    });
+        var index = links.findIndex(function (linkObject) {
+            return linkObject.url === url;
+        });
+
+        // Check if the index was found
+        if (index !== -1) {
+            links.splice(index, 1);
+
+            updateAndSaveLinks();
+
+            $(this).remove();
+
+        }
+    } else {
+        window.open($(this).attr('data-url'));
+    }
+});
+
+$(".shortcutLinkTB").keypress(function (event) {
+    if (event.keyCode === 13) {
+        $('.shortcutLinkAdd').click();
+    }
 });
 
 // Battery
@@ -237,31 +367,41 @@ function cardSmarts() {
 
 // Analog clock
 
-setInterval(() => {
-    d = new Date(); //object of date()
-    hr = d.getHours();
-    min = d.getMinutes();
-    sec = d.getSeconds();
-    hr_rotation = 30 * hr + min / 2; //converting current time
-    min_rotation = 6 * min;
-    sec_rotation = 6 * sec;
-
-    hour.style.transform = `rotate(${hr_rotation}deg)`;
-    minute.style.transform = `rotate(${min_rotation}deg)`;
-    second.style.transform = `rotate(${sec_rotation}deg)`;
-}, 1000);
-
-$('.cmi-clockCardStyle1').click(function () {
+$('.cmi-clockCardStyle').click(function () {
     $('.cmi-clockCardStyle').not(this).children('input').prop('checked', false);
-    $('.clockCard').removeClass('style-b').addClass('style-a')
-    localStorage.setItem('clockStyle', '1')
+
+    $('.clockCard').removeClass('style-a').removeClass('style-b').removeClass('style-c')
+
+    const clickedClass = $(this).attr("class").match(/cmi-clockCardStyle(\d+)/);
+    var number;
+    var letter;
+
+    number = parseInt(clickedClass[1]);
+    if (number >= 1 && number <= 26) {
+        letter = String.fromCharCode(number + 96);
+    }
+    $('.clockCard').addClass('style-' + letter);
+
+    localStorage.setItem('clockStyle', number)
 })
 
-$('.cmi-clockCardStyle2').click(function () {
-    $('.cmi-clockCardStyle').not(this).children('input').prop('checked', false);
-    $('.clockCard').removeClass('style-a').addClass('style-b')
-    localStorage.setItem('clockStyle', '2')
-})
+// $('.cmi-clockCardStyle1').click(function () {
+//     $('.cmi-clockCardStyle').not(this).children('input').prop('checked', false);
+//     $('.clockCard').removeClass('style-b').addClass('style-a')
+//     localStorage.setItem('clockStyle', '1')
+// })
+
+// $('.cmi-clockCardStyle2').click(function () {
+//     $('.cmi-clockCardStyle').not(this).children('input').prop('checked', false);
+//     $('.clockCard').removeClass('style-a').addClass('style-b')
+//     localStorage.setItem('clockStyle', '2')
+// })
+
+// $('.cmi-clockCardStyle3').click(function () {
+//     $('.cmi-clockCardStyle').not(this).children('input').prop('checked', false);
+//     $('.clockCard').removeClass('style-a').addClass('style-b')
+//     localStorage.setItem('clockStyle', '3')
+// })
 
 // Text/notes card
 
@@ -295,60 +435,56 @@ const daysTag = document.querySelector(".calendarCard .days"),
     currentDate = document.querySelector(".calendarCard .current-date"),
     prevNextIcon = document.querySelectorAll(".calendarCard .icons i");
 
-// getting new date, current year and month
 let date = new Date(),
     currYear = date.getFullYear(),
     currMonth = date.getMonth();
 
-// storing full name of all months in array
 const months = ["January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"];
 
 const renderCalendar = () => {
-    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
-        lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
-        lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
-        lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
+    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(),
+        lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(),
+        lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(),
+        lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate();
     let liTag = "";
 
-    for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
+    for (let i = firstDayofMonth; i > 0; i--) {
         liTag += `<li class="inactive interactable-hov">${lastDateofLastMonth - i + 1}</li>`;
     }
 
-    for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
-        // adding active class to li if the current day, month, and year matched
+    for (let i = 1; i <= lastDateofMonth; i++) {
         let isToday = i === date.getDate() && currMonth === new Date().getMonth()
             && currYear === new Date().getFullYear() ? "active" : "";
         liTag += `<li class="${isToday} interactable-hov">${i}</li>`;
     }
 
-    for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
+    for (let i = lastDayofMonth; i < 6; i++) {
         liTag += `<li class="inactive interactable-hov">${i - lastDayofMonth + 1}</li>`
     }
-    currentDate.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
+    currentDate.innerText = `${months[currMonth]} ${currYear}`;
     daysTag.innerHTML = liTag;
 }
-renderCalendar();
 
-prevNextIcon.forEach(icon => { // getting prev and next icons
-    icon.addEventListener("click", () => { // adding click event on both icons
-        // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
+prevNextIcon.forEach(icon => {
+    icon.addEventListener("click", () => {
         currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
 
-        if (currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
-            // creating a new date of current year & month and pass it as date value
+        if (currMonth < 0 || currMonth > 11) {
+
             date = new Date(currYear, currMonth, new Date().getDate());
-            currYear = date.getFullYear(); // updating current year with new date year
-            currMonth = date.getMonth(); // updating current month with new date month
+            currYear = date.getFullYear();
+            currMonth = date.getMonth();
         } else {
-            date = new Date(); // pass the current date as date value
+            date = new Date();
         }
-        renderCalendar(); // calling renderCalendar function
+        renderCalendar();
     });
 });
 
 $('.calendarCard').click(function () {
-    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+    if (cardClickingEnabled && $(this).parent().hasClass('subCards') && !$('.subCards').hasClass('editMode')) {
+        renderCalendar();
         $(this).addClass('context-selected-card');
         $('.cmi-expand').click();
     }
@@ -429,10 +565,8 @@ function isLeapYear(year) {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }
 
-// Example usage
 const percentage = getYearCompletionPercentage();
 $('.yearProgCard .percLabel').attr("a", percentage + '%').attr('b', daysLeft + ' days');
-// $('.yearProgCard .yearLabel').text(currentYear);
 $('.yearProgCard .percBar .fill').css('width', percentage + '%');
 
 // Copy character card
@@ -440,7 +574,6 @@ $('.yearProgCard .percBar .fill').css('width', percentage + '%');
 $(document).on('click', '.characterCopyCard .grid .gridItem', function () {
     var copyText = $(this).text().replace(/"/g, "");
 
-    // Use Clipboard API for modern browsers
     if (navigator.clipboard) {
         navigator.clipboard.writeText(copyText)
             .then(() => {
@@ -448,10 +581,8 @@ $(document).on('click', '.characterCopyCard .grid .gridItem', function () {
             })
             .catch(err => {
                 console.error("Failed to copy symbol:", err);
-                // Handle error gracefully, e.g., display a user-friendly message
             });
     } else {
-        // Fallback for older browsers using execCommand
         $(this).select();
         document.execCommand("copy");
         console.log("Copied symbol: " + copyText);
@@ -505,34 +636,19 @@ var emojis = [
     '🔵', '🔻', '🔶', '🔷', '🔸', '🔹'
 ];
 
-function elc() {
-    setInterval(() => {
-        var current = emojis[Math.floor(Math.random() * emojis.length)];
-        $('.emojiLocaleCard p').text(current);
-    }, 5000);
-}
-
 $('.emojiLocaleCard').on('click', function () {
-    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+    if (cardClickingEnabled && $(this).parent().hasClass('subCards') && !$('.subCards').hasClass('editMode')) {
         $(this).addClass('context-selected-card');
         $('.cmi-expand').click();
     }
 })
 
-$(document).ready(function () {
-    emojis.forEach(emoji => {
-        $('<div class="emojiItem interactable-hov">').attr('text', emoji).appendTo('.emojiLocaleCard .list');
-    });
-});
-
 $(document).on('click', '.emojiItem', function () {
     var copyText = $(this).text();
 
-    // Use Clipboard API for modern browsers
     if (navigator.clipboard) {
         navigator.clipboard.writeText(copyText)
             .then(() => {
-                console.log("Copied emoji: " + copyText);
                 $('.emojiLocaleCard .expView').attr("text", "Copied")
                 setTimeout(() => {
                     $('.emojiLocaleCard .expView').attr("text", "Click to copy")
@@ -540,10 +656,8 @@ $(document).on('click', '.emojiItem', function () {
             })
             .catch(err => {
                 console.error("Failed to copy emoji:", err);
-                // Handle error gracefully, e.g., display a user-friendly message
             });
     } else {
-        // Fallback for older browsers using execCommand
         $(this).select();
         document.execCommand("copy");
         console.log("Copied emoji: " + copyText);
@@ -554,24 +668,20 @@ $(document).on('click', '.emojiItem', function () {
 
 function doggyCard() {
     $.ajax({
-        url: "https://dog.ceo/api/breeds/image/random", // Replace with your actual API endpoint
-        dataType: "json", // Specify data type as JSON
+        url: "https://dog.ceo/api/breeds/image/random",
+        dataType: "json",
         success: function (data) {
-            // Set the image URL for the element
             $(".pupperCard img").attr("src", data.message);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.error("Error fetching image:", textStatus, errorThrown);
-            // Handle errors appropriately, e.g., display an error message
             $('.pupperCard').remove();
         }
     });
 }
 
-doggyCard();
-
 $('.doggyCard').click(function () {
-    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+    if (cardClickingEnabled && $(this).parent().hasClass('subCards') && !$('.subCards').hasClass('editMode')) {
         doggyCard();
     }
 })
@@ -592,10 +702,8 @@ function cattoCard() {
         .then(blob => {
             const imageUrl = URL.createObjectURL(blob);
 
-            // Set the image source
             imageElement.src = imageUrl;
 
-            // Remember to revoke the object URL when no longer needed
             imageElement.onload = () => URL.revokeObjectURL(imageUrl);
         })
         .catch(error => {
@@ -604,10 +712,8 @@ function cattoCard() {
         });
 }
 
-cattoCard();
-
 $('.cattoCard').click(function () {
-    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+    if (cardClickingEnabled && $(this).parent().hasClass('subCards') && !$('.subCards').hasClass('editMode')) {
         cattoCard();
     }
 })
@@ -634,8 +740,6 @@ function nasaCard() {
     });
 }
 
-nasaCard();
-
 function getRandomDate() {
     // Set the minimum and maximum dates in milliseconds
     const minDate = new Date(1995, 5, 16).getTime();
@@ -656,7 +760,7 @@ function getRandomDate() {
 }
 
 $('.nasaCard').click(function () {
-    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+    if (cardClickingEnabled && $(this).parent().hasClass('subCards') && !$('.subCards').hasClass('editMode')) {
         nasaCard();
     }
 })
@@ -682,10 +786,8 @@ function uselessFactsCard() {
     });
 }
 
-uselessFactsCard();
-
 $('.uselessFactsCard').click(function () {
-    if ($(this).parent().hasClass('subCards') && !$(this).parent().hasClass('editMode')) {
+    if (cardClickingEnabled && $(this).parent().hasClass('subCards') && !$('.subCards').hasClass('editMode')) {
         $(this).addClass('context-selected-card');
         $('.cmi-expand').click();
     }

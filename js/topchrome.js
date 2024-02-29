@@ -96,6 +96,7 @@ function setTheme() {
     } else {
         $('.darkModeOn').removeClass('darkModeOn');
     }
+    $('.aboutChanges object').prop('data', 'changelog.html');
 }
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
@@ -130,7 +131,6 @@ function alignShelf() {
         $('#saoC-radio').attr('checked', false)
         $('#saoL-radio').attr('checked', false)
     }
-    alignShelfLabel();
 }
 
 $('#unsplashTags').focusout(function () {
@@ -148,40 +148,28 @@ $('#unsplashTags').keyup(function (event) {
 $('.lightDark').on('click', function () {
     if (localStorage.getItem('theme') == 'light') {
         localStorage.setItem('theme', 'dark');
-        setTheme();
     } else if (localStorage.getItem('theme') == 'dark') {
         localStorage.setItem('theme', 'auto');
-        setTheme();
     } else if (localStorage.getItem('theme') == 'auto') {
         localStorage.setItem('theme', 'light');
-        setTheme();
     }
+    setTheme();
     $('.lightDark').attr('data-theme', localStorage.getItem('theme'));
 });
 
 // dcExpt group-b (1x1 buttons)
 
 $('.fullscreenBtn').on('click', function () {
-    if ($(this).hasClass('a')) {
-        closeFullscreen();
-    } else {
-        openFullscreen()
-    }
-    $(this).toggleClass('a')
+    innerHeight == screen.height ? closeFullscreen() : openFullscreen();
 })
 
 $('.refreshPageBtn').on('click', function () {
-    window.location.reload();
+    location.reload();
 })
 
 $('#allowTextCardDarkMode').click(function () {
-    if ($(this).is(':checked')) {
-        $('.textCard').addClass('allowDark');
-        localStorage.setItem('allowTextCardDarkMode', 'true');
-    } else {
-        $('.textCard').removeClass('allowDark');
-        localStorage.setItem('allowTextCardDarkMode', 'false');
-    }
+    $(this).is(':checked') ? $('.textCard').addClass('allowDark') : $('.textCard').removeClass('allowDark');
+    localStorage.setItem('allowTextCardDarkMode', $(this).is(':checked'));
 });
 
 /* View in fullscreen */
@@ -207,43 +195,6 @@ function closeFullscreen() {
         document.msExitFullscreen();
     }
 }
-// Custom backdrop
-
-function customWall(input) {
-    if ($('.customBackdrop').hasClass('hidden')) {
-        if (input.files && input.files[0]) {
-
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('.customBackdrop').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-
-            bannerImage = document.getElementById('customBackdrop');
-            imgData = getBase64Image(bannerImage);
-            localStorage.setItem("imgData", imgData);
-
-            $('.customBackdrop').removeClass('hidden');
-        }
-    } else {
-        $('.customBackdrop').addClass('hidden');
-    }
-}
-
-function getBase64Image(img) {
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-
-    var dataURL = canvas.toDataURL("image/png");
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-}
 
 // Live display
 
@@ -265,14 +216,10 @@ $(document).ready(function () {
 });
 
 $('#siteDropToggle').click(function () {
-    if (localStorage.getItem('liveLink') == null) {
-        localStorage.setItem('liveLink', 'https://flux.sandydoo.me')
-    }
+    localStorage.setItem('liveWall', $(this).is(':checked'))
     if ($(this).is(':checked')) {
-        localStorage.setItem('liveWall', 'true')
         $('<embed class="siteDrop" src="' + localStorage.getItem('liveLink') + '" type="">').appendTo('body');
     } else {
-        localStorage.setItem('liveWall', 'false')
         $('.siteDrop').remove();
         $('#backDrop2').css('background-image', "url(resc/dark.png)");
         $('body').css('background-image', "url(resc/dark.png)");
@@ -314,33 +261,24 @@ $('.liveLinkPreset').click(function () {
 // Float mode
 
 $('#cbFloatMode').click(function () {
-    if ($(this).is(':checked')) {
-        $('.shelf').addClass('float');
-        localStorage.setItem('float', 'true');
-    } else {
-        $('.shelf').removeClass('float');
-        localStorage.setItem('float', 'false');
-    }
-    alignShelfLabel();
+    $(this).is(':checked') ? $('.shelf').addClass('float') : $('.shelf').removeClass('float');
+    localStorage.setItem('float', $(this).is(':checked'));
+
 });
 
 // Monochrome mode
 
 $('#cbMonoMode').click(function () {
-    if ($(this).is(':checked')) {
-        $('.subCards').addClass('plated');
-        localStorage.setItem('monoCards', 'true');
-    } else {
-        $('.subCards').removeClass('plated');
-        localStorage.setItem('monoCards', 'false');
-    }
+    $(this).is(':checked') ? $('.subCards').addClass('plated') : $('.subCards').removeClass('plated');
+    localStorage.setItem('monoCards', $(this).is(':checked'));
 });
 
 // About stuff
 
 function aboutStats() {
-    // This creates a unique 'debug code' that can be shared (by clicking it) to better assist in debugging and troubleshooting
-    // The below will contain some info about each of the devstats
+    // For easier troubleshooting in the future and for anyone reading the code, the below will include verbose comments+info
+
+    // This function creates a unique 'debug code' that can be shared (by clicking it) to better assist in debugging and troubleshooting
 
     // First, empty the container:
     $('.debugCode').empty();
@@ -353,6 +291,10 @@ function aboutStats() {
 
     // Number of cards remaining in rolodex:
     $('.debugCode').append($('.cbs1 .card').not('.placeholderCard').length + "r:");
+
+    // Number of potentially failed-to-load cards:
+    var loaded = $('.subCards .card:visible').not('.placeholderCard').length + $('.cbs1 .card:visible').not('.placeholderCard').length;
+    $('.debugCode').append(($('.card').not('.placeholderCard').length - loaded) + "p:");
 
     // Is siteDrop currently enabled:
     $('.debugCode').append($('.siteDrop').length ? "sd:" : "");

@@ -26,9 +26,8 @@ body:has(.rolodex.visible) .shelfLabel {
     pointer-events: none;
 
     position: absolute;
-    bottom: 100%;
+    bottom: calc(100% + 20px);
     transform: scale(.85);
-    left: 50%;
     filter: blur(10px);
     opacity: 0;
     z-index: 2;
@@ -43,10 +42,6 @@ body:has(.rolodex.visible) .shelfLabel {
     transition: transform .2s, filter .2s, opacity .2s;
 }
 
-.shelf.float .shelfLabel {
-    bottom: calc(100% + 50px);
-}
-
 .shelf:has(.card:not(.placeholderCard):hover) .shelfLabel,
 .shelfLabel.show {
     transform: scale(1) !important;
@@ -59,7 +54,7 @@ body:has(.rolodex.visible) .shelfLabel {
     font-size: 13px;
     opacity: .7;
 
-    max-width: 175px;
+    max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -106,6 +101,26 @@ body:has(.rolodex.visible) .shelfLabel {
     /* background: linear-gradient(transparent, black); */
 }
 
+body:has(.rolodex.visible) .shelf::after {
+    content: 'Click a card in your shelf to move it to the deck.';
+
+    position: absolute;
+    bottom: 15px;
+    z-index: 1000;
+    left: 50%;
+    transform: translateX(-50%);
+
+    color: black;
+
+    font-size: 12px;
+    font-weight: 500;
+    opacity: .5;
+}
+
+body:has(.rolodex.visible):has(.darkModeOn) .shelf::after {
+    color: white;
+}
+
 .shelf.left .spcLeft {
     width: 0;
 }
@@ -145,14 +160,14 @@ body:has(.rolodex.visible) .shelfLabel {
 
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     flex-shrink: 0;
     box-sizing: border-box;
 
     position: relative;
     padding: 8px;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    overflow: visible;
 
     background-color: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(100px) saturate(6);
@@ -161,6 +176,17 @@ body:has(.rolodex.visible) .shelfLabel {
     border-radius: 22px !important;
 
     transition: .4s;
+}
+
+body:has(.rolodex.visible) .subCards {
+    background-color: transparent !important;
+    backdrop-filter: blur(0) saturate(1) !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body:has(.rolodex.visible) .shelf:not(.float) .subCards {
+    margin-bottom: 40px;
 }
 
 .shelf.float .subCards {
@@ -209,7 +235,7 @@ body:has(.shelf.float) .subCards::after {
     z-index: -1;
     inset: -55px -65px;
 
-    background-color: rgba(238, 238, 238, 0.15);
+    background-color: rgba(238, 238, 238, 0.1);
 
     -webkit-backdrop-filter: blur(0px) saturate(1);
     backdrop-filter: blur(0px) saturate(1);

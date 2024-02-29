@@ -7,10 +7,13 @@ $('.rolodexOpen').on('click', function (e) {
 
     i = 0
     if ($('.rolodex').hasClass('visible')) {
-        // $('.aboutBtn').removeClass('visible').attr('about', 'PlusUI').attr('ver', $('.siteVer').text());
         $('.rolodex').removeClass('visible');
+        $('.card .roloClickBlock').remove();
+        cardClickingEnabled = true;
     } else {
-        // $('.aboutBtn').attr('about', 'Card Deck').attr('ver', 'Codename: Rolodex').addClass('visible');
+        cardClickingEnabled = false;
+
+        $('.expandableWindow .return').click();
         $('.rolodex').addClass('visible');
         $('.cbs1').scrollLeft(0);
 
@@ -24,9 +27,23 @@ $('.rolodexOpen').on('click', function (e) {
             $('.cbs1').children('.card:visible').first().addClass('hoveredCard')
             $('.roloCardInfo').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
             $('.roloCardInfo').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
+
+            if ($('.hoveredCard .cardOptions').children().length !== 0) {
+                $('.roloCardOptions').attr('avail', 'This card has ' + $('.hoveredCard .cardOptions').children().length + ' context menu item(s)')
+            } else {
+                $('.roloCardOptions').attr('avail', 'This card has no context menu items')
+            }
+
             $('.rolodex').removeClass('empty')
         }
+
+        $('.subCards .card').each(function () {
+            var clickBlock = $('<div class="roloClickBlock">');
+            clickBlock.text($(this).attr('data-friendlyName'));
+            $(this).prepend(clickBlock);
+        })
     }
+
 
     createCategoryBtns();
     $('.allCardsCategory').click();
@@ -102,6 +119,12 @@ $(document).on('click', '.categoryBtn', function () {
     $('.hoveredCard').attr('data-resizableCard') === 'y' ? $('.ic2').attr('avail', 'y') : $('.ic2').attr('avail', 'n');
     $('.hoveredCard').attr('data-expandableCard') === 'y' ? $('.ic3').attr('avail', 'y') : $('.ic3').attr('avail', 'n');
 
+    if ($('.hoveredCard .cardOptions').children().length !== 0) {
+        $('.roloCardOptions').attr('avail', 'This card has ' + $('.hoveredCard .cardOptions').children().length + ' context menu item(s)')
+    } else {
+        $('.roloCardOptions').attr('avail', 'This card has no context menu items')
+    }
+
     $(this).addClass('selected')
 })
 
@@ -126,6 +149,12 @@ $('.mvCtrl.left').on('click', function () {
     $('.hoveredCard').attr('data-resizableCard') === 'y' ? $('.ic2').attr('avail', 'y') : $('.ic2').attr('avail', 'n');
     $('.hoveredCard').attr('data-expandableCard') === 'y' ? $('.ic3').attr('avail', 'y') : $('.ic3').attr('avail', 'n');
 
+    if ($('.hoveredCard .cardOptions').children().length !== 0) {
+        $('.roloCardOptions').attr('avail', 'This card has ' + $('.hoveredCard .cardOptions').children().length + ' context menu item(s)')
+    } else {
+        $('.roloCardOptions').attr('avail', 'This card has no context menu items')
+    }
+
 })
 
 $('.mvCtrl.right').on('click', function () {
@@ -145,6 +174,12 @@ $('.mvCtrl.right').on('click', function () {
     $('.hoveredCard').attr('data-parallaxCard') === 'y' ? $('.ic1').attr('avail', 'y') : $('.ic1').attr('avail', 'n');
     $('.hoveredCard').attr('data-resizableCard') === 'y' ? $('.ic2').attr('avail', 'y') : $('.ic2').attr('avail', 'n');
     $('.hoveredCard').attr('data-expandableCard') === 'y' ? $('.ic3').attr('avail', 'y') : $('.ic3').attr('avail', 'n');
+
+    if ($('.hoveredCard .cardOptions').children().length !== 0) {
+        $('.roloCardOptions').attr('avail', 'This card has ' + $('.hoveredCard .cardOptions').children().length + ' context menu item(s)')
+    } else {
+        $('.roloCardOptions').attr('avail', 'This card has no context menu items')
+    }
 })
 
 $('.addBtn').on('click', function (e) {
@@ -156,27 +191,27 @@ $('.addBtn').on('click', function (e) {
     $(".subCards").sortable("enable");
     $(".subCards").sortable("refresh");
     $(".subCards").sortable("disable");
-    $(".card").each(function (i, e) {
-        var enabled = $(e).attr('data-enabled');
-        var card = $(e).attr('id');
-
-        localStorage.setItem(card, enabled);
-        // $(this).attr('data-index', $(this).index());
-    });
     dockRadi();
-    saveCards();
+    // saveCards();
+    updateCardData();
 
     if ($('.cbs1').children().length == 0) {
-        // $('.cbs1').children().first().addClass('hoveredCard')
         $('.roloCardInfo').attr('data-sectName', 'Your card deck is empty')
         $('.roloCardInfo').attr('data-cardDesc', 'Move a card to the deck from the shelf.')
         $('.rolodex').addClass('empty')
     } else {
+        i = 0;
         $('.cbs1').children('.card:visible').first().addClass('hoveredCard')
         $('.cbs1').scrollLeft(0)
-        i = 0;
         $('.roloCardInfo').attr('data-sectName', $('.hoveredCard').attr('data-friendlyName'))
         $('.roloCardInfo').attr('data-cardDesc', $('.hoveredCard').attr('data-cardDesc'))
+        if ($('.hoveredCard .cardOptions').children().length !== 0) {
+            $('.roloCardOptions').attr('avail', 'This card has ' + $('.hoveredCard .cardOptions').children().length + ' context menu item(s)')
+        } else {
+            $('.roloCardOptions').attr('avail', 'This card has no context menu items')
+        }
         $('.rolodex').removeClass('empty')
     }
+
+    createCategoryBtns();
 })

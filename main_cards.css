@@ -28,6 +28,48 @@
     box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.4);
 }
 
+.shelf.touch .card:active {
+    transform: scale(0.9) !important;
+}
+
+.card .roloClickBlock {
+    transform: translateZ(30px);
+    z-index: 9999999999999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: inherit;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 14px;
+
+    opacity: 0;
+
+    background-color: rgba(255, 0, 0, 0.515) !important;
+    color: white !important;
+
+    transition: .2s;
+
+    width: 100%;
+    height: 100%;
+
+    backdrop-filter: blur(0px);
+}
+
+.card:hover .roloClickBlock {
+    backdrop-filter: blur(15px) !important;
+    opacity: 1 !important;
+}
+
+.card:has(.roloClickBlock) {
+    transform: none !important;
+}
+
 .card.removing {
     overflow: hidden;
     filter: blur(20px) !important;
@@ -39,19 +81,13 @@
 }
 
 .plated .card {
-    background: var(--section-l);
-    background-color: var(--section-l);
-    color: black;
+    background: var(--section-l) !important;
+    background-color: var(--section-l) !important;
 }
 
 .plated.darkModeOn .card {
-    background: var(--section-d);
-    background-color: var(--section-d);
-    color: white;
-}
-
-body:has(.rolodex.visible) .card {
-    pointer-events: none !important;
+    background: var(--section-d) !important;
+    background-color: var(--section-d) !important;
 }
 
 .card.md {
@@ -77,17 +113,6 @@ body:has(.rolodex.visible) .card {
 body:has(.darkModeOn) .card {
     background-color: var(--section-d);
     color: white;
-}
-
-.card:not(.expanded) .expView {
-    display: none;
-}
-
-.card.expanded .expView {
-    width: 100%;
-    height: 100%;
-    max-width: unset;
-    /* filter: blur(10px) grayscale(.5); */
 }
 
 .card .cardOptions {
@@ -117,7 +142,7 @@ body:has(.darkModeOn) .card {
 
 .contextMenuDiv {
     position: absolute;
-    bottom: 112px;
+    bottom: 132px;
     z-index: 15;
 
     width: max-content;
@@ -224,7 +249,7 @@ body:has(.darkModeOn) .cmItem {
 }
 
 .cmItem:hover,
-.cmSep.custom .cmItem:hover {
+.contextMenuDiv .cardOptions .cmItem:hover {
     background-color: white !important;
     color: rgba(0, 0, 0, 0.75) !important;
 }
@@ -264,16 +289,22 @@ body:has(.darkModeOn) .cmSep:not(.custom) {
     background-color: white;
 }
 
-.cmSep.custom {
+.cms-b {
+    display: none;
+}
+
+.contextMenuDiv:has(.cardOptions) .cms-b {
+    display: flex;
+}
+
+.contextMenuDiv .cardOptions {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     height: fit-content;
     width: 100%;
-    margin: 5px 0;
     background-color: transparent;
-    /* filter: invert(0); */
     color: inherit;
     opacity: 1;
     position: relative;
@@ -281,44 +312,25 @@ body:has(.darkModeOn) .cmSep:not(.custom) {
     border-radius: 12px;
 }
 
-.cmSep.custom::after {
-    content: "";
-    width: 90%;
-    height: 115%;
-
-    border: 1px solid white;
-    opacity: .3;
-    border-left-color: transparent !important;
-    border-right-color: transparent !important;
-
-    position: absolute;
-    top: -10%;
-    left: 50%;
-
-    transform: translateX(-50%);
-}
-
-.cmSep.custom .cmItem {
+.contextMenuDiv .cardOptions .cmItem {
     padding: 11px 8px;
-    /* height: 38px !important; */
     z-index: 12;
     position: relative;
 }
 
-.cmSep.custom .cmItem i {
+.contextMenuDiv .cardOptions .cmItem i {
     height: 27px;
 }
 
-.cmSep.custom .cmItem:has(input[type="checkbox"]) {
+.contextMenuDiv .cardOptions .cmItem:has(input[type="checkbox"]) {
     padding-right: 40px;
 }
 
-.cmSep.custom .cmItem input[type="checkbox"] {
+.contextMenuDiv .cardOptions .cmItem input[type="checkbox"] {
     appearance: none;
     width: 100%;
     height: 100%;
 
-    /* background-color: orange; */
     position: absolute;
     top: 0;
     left: 0;
@@ -331,7 +343,7 @@ body:has(.darkModeOn) .cmSep:not(.custom) {
     padding: 0;
 }
 
-.cmSep.custom .cmItem input[type="checkbox"]::after {
+.contextMenuDiv .cardOptions .cmItem input[type="checkbox"]::after {
     content: '';
     width: 13px;
     height: 13px;
@@ -350,27 +362,27 @@ body:has(.darkModeOn) .cmSep:not(.custom) {
     right: 10px;
 }
 
-.cmSep.custom .cmItem input[type="checkbox"]:hover::after {
+.contextMenuDiv .cardOptions .cmItem input[type="checkbox"]:hover::after {
     border-color: rgba(0, 0, 0, .75) !important;
 }
 
-body:has(.darkModeOn) .cmSep.custom .cmItem input[type="checkbox"]::after {
+body:has(.darkModeOn) .contextMenuDiv .cardOptions .cmItem input[type="checkbox"]::after {
     border-color: rgba(255, 255, 255, 0.75);
 }
 
-.cmSep.custom .cmItem input[type="checkbox"]:checked::after {
+.contextMenuDiv .cardOptions .cmItem input[type="checkbox"]:checked::after {
     content: '✓';
     border: 2px solid transparent;
     background-color: rgba(0, 0, 0, .75);
     color: white;
 }
 
-.cmSep.custom .cmItem input[type="checkbox"]:checked:hover::after {
+.contextMenuDiv .cardOptions .cmItem input[type="checkbox"]:checked:hover::after {
     background-color: rgba(0, 0, 0, .75) !important;
     color: white;
 }
 
-.cmSep.custom .cmItem input[type="checkbox"]:checked::after {
+.contextMenuDiv .cardOptions .cmItem input[type="checkbox"]:checked::after {
     border: 2px solid transparent;
     background-color: rgba(255, 255, 255, 0.75);
     color: black;

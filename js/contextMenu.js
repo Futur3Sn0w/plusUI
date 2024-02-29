@@ -15,14 +15,14 @@ $('.card').on('contextmenu', function (e) {
 function hideContextMenu() {
     $('.context-selected-card').addClass('temp').removeClass('context-selected-card');
     setTimeout(() => {
-        $('.cmSep').children().appendTo('.card.temp .cardOptions');
+        $('.contextMenuDiv .cardOptions').prependTo('.card.temp');
+        $('.card.temp').removeClass('temp');
     }, 300);
     $('.subCards').removeClass('freeze');
     $('.contextMenuDiv').removeClass('show');
     $('.subCards').removeClass('editMode');
     $('.subCards').sortable('enable');
     $('.subCards').sortable('refresh');
-
 }
 
 // Card context menu function
@@ -42,6 +42,14 @@ function cardContextMenu(e) {
         $('.cmi-expand').addClass('override-hidden');
     }
 
+    if ($(e).hasClass('shortcutCard')) {
+        $('.cmi-expand').text('Edit');
+        $('<i id="#cmi-expand-icn" class="fa-solid">').addClass('fa-pencil').prependTo('.cmi-expand');
+    } else {
+        $('.cmi-expand').text('Expand');
+        $('<i id="#cmi-expand-icn" class="fa-solid">').addClass('fa-clone').prependTo('.cmi-expand');
+    }
+
     $('.context-selected-card').removeClass('context-selected-card');
 
     if (!$(e).parent().hasClass('editMode')) {
@@ -53,15 +61,11 @@ function cardContextMenu(e) {
         $(e).addClass('context-selected-card');
 
         if ($(e).children().hasClass('cardOptions')) {
-            $('.cmSep').addClass('custom');
-            $(e).children('.cardOptions').children().appendTo($('.cmSep'));
-        } else {
-            $('.cmSep').removeClass('custom');
+            $('.cms-a').after($('.context-selected-card .cardOptions'));
         }
 
         $('.cmi-resize').attr('data-btnLabel', cardSize);
         $('.cmi-expand').attr('data-btnLabel', 'Expand ' + $('.context-selected-card').attr('data-friendlyName'));
-        // $('.cmi-disableCard').attr('data-btnLabel', $('.context-selected-card').attr('data-friendlyName'));
 
         var leftPosi = ($('.context-selected-card').offset().left + 2 + ($('.context-selected-card').width() / 2)) - (($(".contextMenuDiv").outerWidth() / 2));
         $(".contextMenuDiv").css("left", leftPosi + "px");
@@ -78,35 +82,28 @@ function cardContextMenu(e) {
 $('.cmi-resize').on('click', function () {
     if ($('.context-selected-card').hasClass('rectCard')) {
         $('.context-selected-card').addClass('squareCard').removeClass('rectCard');
-        var card = $('.context-selected-card').attr('id');
-        localStorage.setItem(card + '-size', 'squareCard')
 
         $(this).attr('data-btnLabel', 'Larger');
         $(this).children('#cmi-resize-icn').addClass('fa-up-right-and-down-left-from-center').removeClass('fa-down-left-and-up-right-to-center');
     } else if ($('.context-selected-card').hasClass('squareCard')) {
         $('.context-selected-card').addClass('rectCard').removeClass('squareCard');
-        var card = $('.context-selected-card').attr('id');
-        localStorage.setItem(card + '-size', 'rectCard')
 
         $(this).attr('data-btnLabel', 'Smaller');
         $(this).children('#cmi-resize-icn').addClass('fa-down-left-and-up-right-to-center').removeClass('fa-up-right-and-down-left-from-center');
     }
-
-    // $('.cmi-resize').attr('data-btnLabel', cardSize);
-    // $('.cmi-expand').attr('data-btnLabel', 'Expand ' + $('.context-selected-card').attr('data-friendlyName'));
 
     setTimeout(() => {
         var leftPosi = ($('.context-selected-card').offset().left + 2 + ($('.context-selected-card').width() / 2)) - (($(".contextMenuDiv").outerWidth() / 2));
         $(".contextMenuDiv").css("left", leftPosi + "px");
     }, 250);
 
-    alignShelfLabel();
+    updateCardData();
 });
 
 $('.cmi-expand').on('click', function () {
     $('.context-selected-card').addClass('removing');
 
-    var placeholderCard = $('<div class="card placeholderCard"><i class="fa-solid fa-chevron-up"></i></div>');
+    var placeholderCard = $('<div class="card placeholderCard"><i class="fa-solid fa-chevron-up"></i></div>').attr('id', $('.context-selected-card').attr('id') + '-ph');
 
     if ($('.context-selected-card').attr("class").indexOf("rectCard") !== -1) {
         placeholderCard.addClass("rectCard");
@@ -149,12 +146,10 @@ $('.cmi-expand').on('click', function () {
         setTheme();
         dockRadi();
         $('.shelfLabel').attr('subLbl', '').text(elementToMove.attr('data-friendlyName') + " expanded").addClass('show');
-        alignShelfLabel();
     }, 250);
 
     setTimeout(() => {
         $('.shelfLabel').removeClass('show')
-        alignShelfLabel();
     }, 5000);
 })
 
@@ -163,7 +158,6 @@ $('.cmi-editMode').click(function (e) {
 
     $('.subCards').addClass('editMode');
     $('.subCards').sortable('enable');
-    alignShelfLabel();
 });
 
 $('.cmi-disableCard').on('click', function () {
@@ -173,28 +167,18 @@ $('.cmi-disableCard').on('click', function () {
     setTimeout(() => {
         $('.context-selected-card').addClass('deckCard');
         $('.context-selected-card').attr('data-enabled', 'n');
-        // $('.context-selected-card').attr('data-index', '');
         $('.context-selected-card').appendTo($('.cbSect.cbs1'));
         $('.context-selected-card').removeClass('removing');
         $('.context-selected-card').removeClass('context-selected-card');
 
-        $(".card").each(function (i, e) {
-            var enabled = $(this).attr('data-enabled');
-            var card = $(e).attr('id');
-
-            localStorage.setItem(card, enabled);
-            // localStorage.setItem(card + '-index', $(this).attr('data-index'))
-        });
-
         hideContextMenu();
         dockRadi();
-        alignShelfLabel();
-        saveCards();
+        updateCardData();
 
         $('.shelfLabel').attr('subLbl', '').addClass('show').text(friendlyName + " removed");
         setTimeout(() => {
             $('.shelfLabel').removeClass('show')
         }, 5000);
     }, 250);
-    saveCards();
+    updateCardData();
 })

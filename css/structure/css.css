@@ -261,6 +261,13 @@ body:has(.timeDate.ccOpen .ccb2.selected) .siteDrop {
     text-align: center;
 }
 
+.firstVisitExperience .subHeadB {
+    font-size: 14px;
+    opacity: .5;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
 .firstVisitExperience .dcExpt {
     width: 40% !important;
     margin-top: 30px;
@@ -272,7 +279,6 @@ body:has(.timeDate.ccOpen .ccb2.selected) .siteDrop {
 
 .firstVisitExperience .fveDone {
     padding: 10px 30px;
-    margin-top: auto;
     margin-bottom: 20px;
 
     border-radius: 16px;

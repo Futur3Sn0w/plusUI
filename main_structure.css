@@ -1,5 +1,4 @@
 @import url('css/structure/css.css');
-@import url('css/structure/fonts.css');
 @import url('css/structure/responsive.css');
 
 /* Stock cards */
@@ -22,4 +21,3 @@
 @import url('css/stock_cards/weatherCard.css');
 @import url('css/stock_cards/yearProgCard.css');
 @import url('css/stock_cards/youtubeBrowseCard.css');
-/* @import url('css/stock_cards/youtubeCard.css'); */

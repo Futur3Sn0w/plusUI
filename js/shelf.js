@@ -20,13 +20,6 @@ $(document).on("click", '.placeholderCard', function (e) {
     $('.expandableWindow[returncard="' + thisID + '"]').children('.windowOpts').children('.return').click();
 })
 
-$('.editMode .card').click(function (e) {
-    // if ($('.cards').hasClass('editMode')) {
-    $(this).toggleClass('disabled');
-    alignShelfLabel();
-    // }
-});
-
 $('.card').on('mouseover', function (e) {
     if (!$(this).hasClass('placeholderCard')) {
         if ($(this).parent().hasClass('subCards')) {
@@ -38,7 +31,6 @@ $('.card').on('mouseover', function (e) {
                 $('.shelfLabel').attr('subLbl', '');
             }
         }
-        alignShelfLabel();
     }
 })
 
@@ -50,43 +42,62 @@ $('.card').on('mouseup', function (e) {
     $(this).removeClass('md');
 })
 
-function alignShelfLabel() {
-    const subCards = $('.subCards');
-    const shelfLabel = $('.shelfLabel');
-    const shelfContainer = $('.shelf');
-
-    // Get the widths of the elements
-    const subCardsWidth = subCards.outerWidth();
-    const shelfLabelWidth = shelfLabel.outerWidth();
-
-    // Get the positions of the elements within the shelf container
-    const subCardsLeft = subCards.offset().left - shelfContainer.offset().left;
-
-    // Calculate the left offset to center the .shelfLabel within the .subCards element
-    const leftOffset = subCardsLeft + (subCardsWidth - shelfLabelWidth) / 2;
-
-    // Set the css properties of the .shelfLabel
-    shelfLabel.css({
-        left: leftOffset + 'px'
-    });
-}
-
 // Save/recall card order in shelf
 
-function saveCards() {
-    var ids = $.map($('.subCards > .card:not(.placeholderCard)'), function (child) {
-        return child.id;
+function updateCardData() {
+    $(".card:not(.placeholderCard)").each(function () {
+        const card = $(this);
+        const cardId = card.attr("id");
+
+        if (cardId) {
+            const cardData = [];
+
+            cardData.push(card.hasClass("rectCard") ? "rectCard" :
+                card.hasClass("squareCard") ? "squareCard" : "circleCard");
+
+            cardData.push(card.data("enabled") === "y" ? "y" : "n");
+
+            const key = `card-${cardId}-data`;
+            localStorage.setItem(key, JSON.stringify(cardData));
+        }
+    });
+
+    var ids = $.map($('.subCards > .card'), function (child) {
+        // Check for the placeholderCard class
+        if ($(child).hasClass('placeholderCard')) {
+            // Remove the '-ph' suffix from the ID
+            return child.id.replace(/-ph$/, '');
+        } else {
+            // Return the original ID for other cards
+            return child.id;
+        }
     });
     localStorage.setItem('cardList', ids);
 }
 
-function recallCards() {
-    if (localStorage.getItem('cardList')) {
-        var cardList = localStorage.getItem('cardList').split(',');
-        $.each(cardList, function (i, card) {
-            $('#' + card).appendTo('.subCards').removeClass('deckCard');
-        });
-    }
+function restoreCardData() {
+    $(".card").each(function () {
+        const card = $(this);
+        const cardId = card.attr("id");
+        const key = `card-${cardId}-data`;
+
+        const cardData = JSON.parse(localStorage.getItem(key));
+
+        if (cardData) {
+            card.removeClass("rectCard squareCard circleCard");
+            card.addClass(cardData[0]);
+
+            card.attr("data-enabled", cardData[1] === "y" ? "y" : "n");
+        }
+    });
+
+    $('.card[data-enabled=y]').removeClass('deckCard').detach().appendTo($('.subCards'));
+    $('.card[data-enabled=n]').addClass('deckCard').detach().appendTo($('.cbs1'));
+
+    var cardList = localStorage.getItem('cardList').split(',');
+    $.each(cardList, function (i, card) {
+        $('#' + card).appendTo('.subCards');
+    });
 }
 
 let touchstartX = 0
