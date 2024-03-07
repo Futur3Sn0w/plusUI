@@ -5,7 +5,7 @@
 
 $('.card').on('contextmenu', function (e) {
     e.preventDefault();
-    if (!$(this).hasClass('deckCard') && !$(this).hasClass('expanded')) {
+    if (!$(this).parent().hasClass('card-container') && !$(this).hasClass('expanded') && !$('.rolodex').hasClass('visible')) {
         cardContextMenu(this);
     }
 });
@@ -61,7 +61,7 @@ function cardContextMenu(e) {
         $(e).addClass('context-selected-card');
 
         if ($(e).children().hasClass('cardOptions')) {
-            $('.cms-a').after($('.context-selected-card .cardOptions'));
+            $('.contextMenuDiv').prepend($('.context-selected-card .cardOptions'));
         }
 
         $('.cmi-resize').attr('data-btnLabel', cardSize);

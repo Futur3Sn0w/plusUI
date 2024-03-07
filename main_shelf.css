@@ -84,6 +84,10 @@ body:has(.rolodex.visible) .shelfLabel {
     transition: .4s;
 }
 
+body:has(.rolodex.visible) .shelf {
+    z-index: 51;
+}
+
 .shelf.notLoaded {
     transform: translateY(20px);
     opacity: 0;
@@ -102,7 +106,7 @@ body:has(.rolodex.visible) .shelfLabel {
 }
 
 body:has(.rolodex.visible) .shelf::after {
-    content: 'Click a card in your shelf to move it to the deck.';
+    /* content: 'Click a card in your shelf to move it to the deck.'; */
 
     position: absolute;
     bottom: 15px;
@@ -183,6 +187,11 @@ body:has(.rolodex.visible) .subCards {
     backdrop-filter: blur(0) saturate(1) !important;
     border: none !important;
     box-shadow: none !important;
+
+    margin-bottom: 0 !important;
+    padding-bottom: 10px !important;
+
+    pointer-events: none;
 }
 
 body:has(.rolodex.visible) .shelf:not(.float) .subCards {

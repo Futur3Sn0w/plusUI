@@ -74,6 +74,9 @@ body:has(.rolodex.visible) .timeDate {
     display: flex;
     align-items: center;
     padding: 0 10px;
+    width: max-content;
+    box-sizing: border-box;
+    flex-shrink: 0;
 
     /* background-color: orange; */
 }
@@ -195,80 +198,6 @@ body:has(.rolodex.visible) .timeDate {
     margin-right: 0;
 }
 
-/* Card deck button */
-
-.rolodexOpen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    box-sizing: border-box;
-
-    height: 46px;
-    width: fit-content;
-    padding: 0 14px;
-    gap: 8px;
-    /* flex-shrink: 0; */
-
-    position: relative;
-    z-index: 1;
-
-    transition: .2s;
-
-    font-size: 20px;
-
-    border-top-left-radius: 50px !important;
-    border-bottom-left-radius: 50px !important;
-}
-
-.rolodexOpen i {
-    transition: .3s;
-}
-
-body:has(.rolodex.visible) .rolodexOpen i {
-    transform: rotate(135deg);
-}
-
-body:has(.rolodex.visible) .rolodexOpen {
-    border-radius: 50px;
-    pointer-events: all !important;
-}
-
-body:has(.timeDate.ccOpen) .rolodexOpen {
-    opacity: 0;
-    filter: blur(10px);
-    width: 0;
-    padding: 0;
-    margin: 0;
-    pointer-events: none;
-}
-
-.rolodexOpen:hover {
-    margin-right: -2px;
-    padding: 0 12px;
-    transform: scale(1.075);
-    background-color: rgba(255, 255, 255) !important;
-    color: rgba(0, 0, 0, .75) !important;
-}
-
-.rolodexOpen:hover::after {
-    opacity: 1;
-    max-width: 200px;
-    margin-left: 0;
-}
-
-.rolodexOpen::after {
-    content: attr(label);
-    font-size: 14px;
-    opacity: .5;
-    transition: .2s;
-
-    opacity: 0;
-    width: fit-content;
-    max-width: 0;
-    margin-left: -8px;
-}
-
 /* Greeting (welcome user) */
 
 .greeting {
@@ -307,7 +236,7 @@ body:has(.timeDate.ccOpen) .rolodexOpen {
 
 /* About button & menu */
 
-.aboutBtn {
+.contextBadge {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -323,7 +252,6 @@ body:has(.timeDate.ccOpen) .rolodexOpen {
     padding-right: 14px;
     z-index: 999999992;
 
-
     font-size: 12px;
     font-weight: 600;
     border-radius: 15px;
@@ -338,74 +266,85 @@ body:has(.timeDate.ccOpen) .rolodexOpen {
     transform: scale(.75);
 }
 
-.aboutBtn.darkModeOn {
+.contextBadge.darkModeOn {
     background-color: var(--section-input-d);
 }
 
-.aboutBtn:active {
+.contextBadge:active {
     transform: scale(.9);
 }
 
-.aboutBtn.visible,
-.aboutBtn.fve,
-body:has(.aboutOpts.visible) .aboutBtn,
-body:has(.controlPanel.expanded) .aboutBtn,
-body:has(.rolodex.visible) .aboutBtn {
+.contextBadge.visible,
+.contextBadge.fve,
+body:has(.aboutOpts.visible) .contextBadge,
+body:has(.controlPanel.expanded) .contextBadge,
+body:has(.rolodex.visible) .contextBadge {
     filter: blur(0) !important;
     opacity: 1 !important;
     transform: scale(1) !important;
 }
 
-body:has(.rolodex.visible) .aboutBtn::before {
+body:has(.rolodex.visible) .contextBadge::before {
     content: "Card Deck";
 }
 
-body:has(.controlPanel.expanded) .aboutBtn::before {
+body:has(.controlPanel.expanded) .contextBadge::before {
     content: "Control Panel";
 }
 
-body:has(.controlPanel.expanded):has(.ccb1.selected) .aboutBtn::after {
+body:has(.controlPanel.expanded):has(.ccb1.selected) .contextBadge::after {
     content: "Appearance & Controls";
 }
 
-body:has(.controlPanel.expanded):has(.ccb2.selected) .aboutBtn::after {
+body:has(.controlPanel.expanded):has(.ccb2.selected) .contextBadge::after {
     content: "Backdrop & Live Display";
 }
 
-body:has(.controlPanel.expanded):has(.ccb5.selected) .aboutBtn::after {
+body:has(.controlPanel.expanded):has(.ccb5.selected) .contextBadge::after {
     content: "About PlusUI";
 }
 
-.aboutBtn::before {
+.contextBadge::before {
     font-size: 15px;
     content: attr(about);
 }
 
-.aboutBtn::after {
+.contextBadge::after {
     font-size: 12px;
     opacity: .7;
     content: attr(ver);
 }
 
-.aboutBtn .logo {
+.contextBadge .logo {
     width: 30px;
     height: 30px;
+
     flex-shrink: 0;
     display: flex;
+    align-items: center;
+    justify-content: center;
 
     /* box-sizing: border-box; */
     border-radius: 50px;
 
     background-color: var(--section-input-l);
-    background-image: url(favicons/fav@96.png);
-    background-size: calc(100% - 12px);
-    background-repeat: no-repeat;
-    background-position: center;
 
     position: absolute;
     left: 8px;
 }
 
-.aboutBtn.darkModeOn .logo {
+.contextBadge .logo img {
+    width: 18px;
+    height: 18px;
+    object-position: center;
+    object-fit: contain;
+    filter: contrast(0) brightness(0);
+}
+
+.contextBadge.darkModeOn .logo {
     background-color: var(--section-input-d);
+}
+
+.contextBadge.darkModeOn .logo img {
+    filter: contrast(0) brightness(100);
 }

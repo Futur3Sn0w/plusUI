@@ -10,6 +10,8 @@ function isTouchScreendevice() {
 
 var repeater;
 
+let paraCards = $('.card[data-parallaxCard="y"]');
+
 window.onload = function () {
     showTime();
     showDate();
@@ -18,12 +20,12 @@ window.onload = function () {
 
     if (localStorage.getItem('firstVisit') == '1') {
         $('.firstVisitExperience').remove();
-        $('.aboutBtn').removeClass('fve');
+        $('.contextBadge').removeClass('fve');
         $('.shelf').removeClass('fve');
         $('.topChromeItems').removeClass('fve');
     } else {
         $('.firstVisitExperience').addClass('show');
-        $('.aboutBtn').addClass('fve');
+        $('.contextBadge').addClass('fve');
         $('.shelf').addClass('fve');
         $('.topChromeItems').addClass('fve');
         localStorage.setItem('firstVisit', '1');
@@ -36,9 +38,9 @@ window.onload = function () {
         $('.greeting').addClass('hidden');
     }, 10000);
 
-    $('.aboutBtn').attr('ver', $('.siteVer').text()).addClass('visible');
+    $('.contextBadge').attr('ver', $('.siteVer').text()).addClass('visible');
     setTimeout(() => {
-        $('.aboutBtn').removeClass('visible');
+        $('.contextBadge').removeClass('visible');
     }, 5000);
 
     if (isTouchScreendevice()) {
@@ -48,12 +50,14 @@ window.onload = function () {
         $('.shelf').addClass('touch');
     } else {
         if (localStorage.getItem('parallax') == 'true') {
-            VanillaTilt.init(paraCards, {
-                reverse: true,
-                max: 15,
-                scale: 1.075,
-                gyroscope: false,
-                speed: 400
+            paraCards.each(function () {
+                VanillaTilt.init(this, {
+                    reverse: true,
+                    max: 15,
+                    scale: 1.075,
+                    gyroscope: false,
+                    speed: 400
+                });
             });
             $('#cbParallaxToggle').prop('checked', true);
         }
@@ -63,6 +67,8 @@ window.onload = function () {
         clearInterval(repeater)
         $('#backDrop2').css('background-image', "url(resc/dark.png)");
         $('body').css('background-image', "none");
+
+        liveLinks();
 
         $('<embed class="siteDrop" src="' + localStorage.getItem('liveLink') + '" type="">').appendTo('body');
 
@@ -138,27 +144,6 @@ $(document).ready(function () {
     startCards();
 })
 
-let paraCards = document.querySelectorAll(".card[data-parallaxCard='y']");
-
-$('#cbParallaxToggle').click(function () {
-    if ($(this).is(':checked')) {
-        VanillaTilt.init(paraCards, {
-            reverse: true,
-            max: 15,
-            scale: 1.075,
-            gyroscope: false,
-            speed: 400
-        });
-        localStorage.setItem('parallax', 'true');
-
-    } else {
-        paraCards.forEach(box => {
-            box.vanillaTilt.destroy();
-        });
-        localStorage.setItem('parallax', 'false');
-    }
-});
-
 $('.fveDone').click(function () {
     localStorage.setItem('firstVisit', '1');
     location.reload();
@@ -191,15 +176,6 @@ $(document).mouseup(function (e) {
     if (!$(".context-selected-card").is(e.target) && !$(".context-selected-card *").is(e.target) && !$(".contextMenuDiv").is(e.target) && !$(".contextMenuDiv *").is(e.target)) {
         hideContextMenu();
     }
-
-    // if (!$(".rolodex").is(e.target) && !$(".rolodex *").is(e.target) && !$(".rolodexOpen").is(e.target)) {
-    //     if (!isTouchScreendevice()) {
-    //         if ($('.rolodex').hasClass('visible')) {
-    //             // $('.aboutBtn').removeClass('visible').attr('about', 'PlusUI').attr('ver', $('.siteVer').text());
-    //             $('.rolodex').removeClass('visible')
-    //         }
-    //     }
-    // }
 
     dockRadi();
 });
@@ -320,6 +296,13 @@ function setupLSVals() {
         localStorage.setItem('monoCards', 'false')
     }
 
+    if (localStorage.getItem('musicLauncherTarget') == null) {
+        localStorage.setItem('musicLauncherTarget', 'AM')
+    }
+
+    if (localStorage.getItem('assistantTarget') == null) {
+        localStorage.setItem('assistantTarget', 'siri')
+    }
 }
 
 // Expandable card functionality

@@ -13,7 +13,7 @@ var sampleLinks = [
     { name: "Apple", url: "https://www.apple.com/" },
     { name: "Netflix", url: "https://www.netflix.com/" }
 ];
-
+var resultProg;
 
 function startCards() {
     weather();
@@ -45,6 +45,10 @@ function startCards() {
         // If found, parse the stored data from localStorage
         links = JSON.parse(storedLinks);
     }
+
+    resultProg = getRemainingDays();
+    $('.yearProgCard .percLabel').attr("a", resultProg.percentage + '%').attr('b', resultProg.days + ' days');
+    $('.yearProgCard .percBar .fill').css('width', resultProg.percentage + '%');
 
     $.each(links, function (index, linkObject) {
         // Get the name and URL from the current object
@@ -84,24 +88,22 @@ function startCards() {
         $('<div class="emojiItem interactable-hov">').attr('text', emoji).appendTo('.emojiLocaleCard .list');
     });
 
+    if (localStorage.getItem('musicLauncherTarget') !== null) {
+        var target = localStorage.getItem('musicLauncherTarget');
+        $('.cmi-musicApp[data-musicAppID="' + target + '"]').click();
+    }
+
+    if (localStorage.getItem('assistantTarget') !== null) {
+        var target = localStorage.getItem('assistantTarget');
+        $('.cmi-assistantTarget[data-assistantTargetID="' + target + '"]').click();
+    }
+
     doggyCard();
     cattoCard();
     nasaCard();
     uselessFactsCard();
 
 }
-
-// Edit mode card function
-
-$('.card').on('click', function (e) {
-    if (!cardClickingEnabled && $('.rolodex').hasClass('visible')) {
-        $(this).addClass('context-selected-card');
-        $('.cmi-disableCard').click();
-
-        createCategoryBtns();
-        $('.allCardsCategory').click();
-    }
-})
 
 // Weather (rejuv)
 
@@ -298,7 +300,7 @@ $(document).on('click', '.shortcutCard .scApp', function () {
             $(this).remove();
 
         }
-    } else {
+    } else if (cardClickingEnabled && $(this).parent().hasClass('subCards') && !$('.subCards').hasClass('editMode')) {
         window.open($(this).attr('data-url'));
     }
 });
@@ -308,6 +310,18 @@ $(".shortcutLinkTB").keypress(function (event) {
         $('.shortcutLinkAdd').click();
     }
 });
+
+// Assistant (siri, gemini)
+
+$('.cmi-assistantTarget').click(function () {
+    $('.cmi-assistantTarget').children('input').prop('checked', false);
+    $(this).children('input').prop('checked', true);
+    var thisAppID = $(this).attr('data-assistantTargetID');
+    var thisApp = $(this).text();
+
+    $('.siriDbgCard').attr('target', thisAppID).attr('data-subLbl', thisApp);
+    localStorage.setItem('assistantTarget', thisAppID);
+})
 
 // Battery
 
@@ -368,7 +382,8 @@ function cardSmarts() {
 // Analog clock
 
 $('.cmi-clockCardStyle').click(function () {
-    $('.cmi-clockCardStyle').not(this).children('input').prop('checked', false);
+    $('.cmi-clockCardStyle').children('input').prop('checked', false);
+    $(this).children('input').prop('checked', true);
 
     $('.clockCard').removeClass('style-a').removeClass('style-b').removeClass('style-c')
 
@@ -402,6 +417,43 @@ $('.cmi-clockCardStyle').click(function () {
 //     $('.clockCard').removeClass('style-a').addClass('style-b')
 //     localStorage.setItem('clockStyle', '3')
 // })
+
+// Music launcher card
+
+$('.cmi-musicApp').click(function () {
+    $('.cmi-musicApp').children('input').prop('checked', false);
+    $(this).children('input').prop('checked', true);
+    var thisAppID = $(this).attr('data-musicAppID');
+    var thisApp = $(this).text();
+
+    $('.musicLauncherCard').attr('target', thisAppID).attr('data-subLbl', thisApp);
+    localStorage.setItem('musicLauncherTarget', thisAppID);
+})
+
+$('.musicLauncherCard').click(function () {
+    if (cardClickingEnabled && $(this).parent().hasClass('subCards') && !$('.subCards').hasClass('editMode')) {
+        var target = $(this).attr('target');
+        if (target == 'AM') {
+            window.open('https://music.apple.com')
+        } else if (target == 'YTM') {
+            window.open('https://music.youtube.com')
+        } else if (target == 'SP') {
+            window.open('https://open.spotify.com')
+        } else if (target == 'PR') {
+            window.open('https://pandora.com')
+        } else if (target == 'TID') {
+            window.open('https://tidal.com')
+        }
+    }
+})
+
+$('.musicLauncherCard').mouseover(function () {
+    if ($(this).attr('data-subLbl')) {
+        $('.shelfLabel').attr('subLbl', $(this).attr('data-subLbl'));
+    } else {
+        $('.shelfLabel').attr('subLbl', '');
+    }
+})
 
 // Text/notes card
 
@@ -549,25 +601,25 @@ $(window).resize(() => {
 
 // Year progress card
 
-var currentYear;
-var daysLeft;
 
-function getYearCompletionPercentage() {
-    const today = new Date();
-    currentYear = today.getFullYear();
-    const daysInYear = isLeapYear(currentYear) ? 366 : 365;
-    const daysPassed = today.getDate() + (today.getMonth() * 30) + (Math.floor(today.getDate() / 4) - Math.floor(today.getMonth() / 2));
-    daysLeft = daysInYear - daysPassed;
-    return Math.round((daysPassed / daysInYear) * 100);
+function getRemainingDays() {
+    var today = new Date();
+    var year = today.getFullYear();
+    var endDate = new Date(year, 11, 31); // December 31st of the current year
+
+    var remainingMs = endDate.getTime() - today.getTime();
+
+    var remainingDays = Math.floor(remainingMs / (1000 * 60 * 60 * 24));
+
+    var percentageRemaining = 100 - ((remainingDays / 365) * 100);
+
+    return {
+        days: remainingDays,
+        percentage: Math.round(percentageRemaining)
+    };
 }
 
-function isLeapYear(year) {
-    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-}
-
-const percentage = getYearCompletionPercentage();
-$('.yearProgCard .percLabel').attr("a", percentage + '%').attr('b', daysLeft + ' days');
-$('.yearProgCard .percBar .fill').css('width', percentage + '%');
+resultProg = getRemainingDays();
 
 // Copy character card
 
@@ -784,6 +836,25 @@ function uselessFactsCard() {
             $('.uselessFactsCard').remove();
         }
     });
+
+    setInterval(() => {
+        $.ajax({
+            url: "https://uselessfacts.jsph.pl/api/v2/facts/random",
+            dataType: "json", // Specify data type as JSON
+            success: function (data) {
+                $('.uselessFactsCard .fact').remove();
+                $('.uselessFactsCard .source').remove();
+
+                // Set the image URL for the element
+                $('<div>').addClass('fact').text(data.text).appendTo('.uselessFactsCard');
+                $('<div>').addClass('source').text(data.source).appendTo('.uselessFactsCard');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("Error fetching data:", textStatus, errorThrown);
+                $('.uselessFactsCard').remove();
+            }
+        });
+    }, 60000);
 }
 
 $('.uselessFactsCard').click(function () {

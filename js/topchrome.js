@@ -172,6 +172,27 @@ $('#allowTextCardDarkMode').click(function () {
     localStorage.setItem('allowTextCardDarkMode', $(this).is(':checked'));
 });
 
+$('#cbParallaxToggle').click(function () {
+    if ($(this).is(':checked')) {
+        paraCards.each(function () {
+            VanillaTilt.init(this, {
+                reverse: true,
+                max: 15,
+                scale: 1.075,
+                gyroscope: false,
+                speed: 400
+            });
+        });
+        localStorage.setItem('parallax', 'true');
+
+    } else {
+        paraCards.each(function () {
+            this.vanillaTilt.destroy();
+        });
+        localStorage.setItem('parallax', 'false');
+    }
+});
+
 /* View in fullscreen */
 
 var elem = document.documentElement;
@@ -218,6 +239,7 @@ $(document).ready(function () {
 $('#siteDropToggle').click(function () {
     localStorage.setItem('liveWall', $(this).is(':checked'))
     if ($(this).is(':checked')) {
+        liveLinks();
         $('<embed class="siteDrop" src="' + localStorage.getItem('liveLink') + '" type="">').appendTo('body');
     } else {
         $('.siteDrop').remove();
@@ -257,6 +279,41 @@ $('.liveLinkPreset').click(function () {
     $('.siteDrop').attr('src', localStorage.getItem('liveLink'));
     $('#liveLinkTB').val(localStorage.getItem('liveLink'));
 })
+
+function liveLinks() {
+    var elements = $(".liveLinkCont p").map(function () {
+        var content = $(this).text().split(",");
+        return {
+            title: content[0].trim(),
+            url: content[1].trim(),
+            element: $(this),
+        };
+    }).get();
+
+    elements.sort(function (a, b) {
+        return a.title.localeCompare(b.title);
+    });
+
+    $.each(elements, function (index, item) {
+        var newDiv = $("<div></div>")
+            .addClass("dcExpt interactable-hov liveLinkPreset")
+            .append(
+                $("<label></label>")
+                    .text(item.title)
+            )
+            .prepend(
+                $("<i></i>")
+                    .addClass("fa-solid fa-" + item.title.charAt(0).toLowerCase())
+            )
+            .prepend(
+                $("<input>")
+                    .attr("type", "radio")
+                    .attr("name", "liveLinkPresets")
+            );
+
+        item.element.replaceWith(newDiv);
+    });
+}
 
 // Float mode
 

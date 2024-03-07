@@ -1,0 +1,63 @@
+.musicLauncherCard[target="AM"] {
+    background: linear-gradient(to bottom, #FB5C74, #FA243D) !important;
+    border-radius: 16px !important;
+}
+
+.musicLauncherCard>* {
+    display: none;
+    transform: translateZ(25px);
+    background-repeat: no-repeat;
+}
+
+.musicLauncherCard[target="AM"] svg.AM {
+    display: flex;
+    width: 48px;
+    margin-left: -5px;
+}
+
+.musicLauncherCard[target="YTM"] {
+    background: white !important;
+}
+
+.musicLauncherCard[target="YTM"] svg.YTM {
+    display: flex;
+    width: 70px;
+    transform: translateZ(25px);
+}
+
+.musicLauncherCard[target="SP"] {
+    background: black !important;
+}
+
+.musicLauncherCard[target="SP"] svg.SP {
+    display: flex;
+    width: 70px;
+    transform: translateZ(25px);
+}
+
+.musicLauncherCard[target="PR"] {
+    background: url(../../resc/pandorawaves.png) !important;
+    background-size: cover !important;
+    border-radius: 16px !important;
+}
+
+.musicLauncherCard[target="PR"] svg.PR {
+    filter: invert(1);
+    display: flex;
+    width: 55px;
+    height: 55px;
+    transform: translateZ(25px);
+}
+
+.musicLauncherCard[target="TID"] {
+    background: linear-gradient(to bottom, #3B3A3E, #070708) !important;
+    border-radius: 16px !important;
+}
+
+.musicLauncherCard[target="TID"] svg.TID {
+    filter: invert(1);
+    display: flex;
+    width: 60px;
+    height: 60px;
+    transform: translateZ(25px);
+}

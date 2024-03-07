@@ -2,6 +2,7 @@
     font-size: 2em;
 
     background-color: #1D182C !important;
+    transform: perspective(1000px);
 }
 
 .siriDbgCard div {
@@ -9,13 +10,14 @@
     height: 100%;
 
     position: absolute;
-    background-size: 195%;
+    background-size: 175%;
     background-position: center;
     mix-blend-mode: lighten;
 
     background-repeat: no-repeat;
 
     border-radius: inherit;
+    transform: translateZ(25px);
 }
 
 .siriDbgCard .layer1 {
@@ -62,33 +64,28 @@
 
     animation:
         bounce2 3s ease infinite,
-        gradient 4s linear infinite;
+        gradient 6s linear infinite;
 }
 
 @keyframes bounce2 {
     0% {
         transform: translateY(0px);
-        box-shadow: 0 20px 20px #000;
     }
 
     25% {
         transform: translateY(20px);
-        box-shadow: 0 0 20px #000;
     }
 
     50% {
         transform: translateY(0px);
-        box-shadow: 0 20px 20px #000;
     }
 
     75% {
         transform: translateY(20px);
-        box-shadow: 0 0 20px #000;
     }
 
     100% {
         transform: translateY(0px) rotate(180deg);
-        box-shadow: 0 20px 20px #000;
     }
 }
 

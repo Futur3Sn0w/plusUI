@@ -17,22 +17,23 @@
     <script src="https://kit.fontawesome.com/a1fc6f0f3a.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js" crossorigin="anonymous"></script>
 
-    <script src="jqui/jquery-ui.min.js"></script>
+    <script src="jqui/jquery-ui.js"></script>
     <link rel="stylesheet" href="jqui/jquery-ui.css">
-    <link rel="stylesheet" href="jqui/jquery-ui.min.css">
-    <link rel="stylesheet" href="jqui/jquery-ui.structure.min.css">
-    <link rel="stylesheet" href="jqui/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="jqui/jquery-ui.structure.css">
+    <link rel="stylesheet" href="jqui/jquery-ui.theme.css">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png?v2=3">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png?v2=3">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png?v2=3">
-    <link rel="manifest" href="favicons/site.webmanifest?v2=3">
-    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg?v2=3" color="#5bbad5">
-    <link rel="shortcut icon" href="favicons/favicon.ico?v2=3">
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png?v3=4">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png?v3=4">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png?v3=4">
+    <link rel="manifest" href="/favicons/site.webmanifest?v3=4">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg?v3=4" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicons/favicon.ico?v3=4">
     <meta name="apple-mobile-web-app-title" content="PlusUI">
     <meta name="application-name" content="PlusUI">
-    <meta name="msapplication-TileColor" content="#2d89ef">
-    <meta name="msapplication-config" content="favicons/browserconfig.xml?v2=3">
+    <meta name="msapplication-TileColor" content="#941739">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml?v3=4">
     <meta name="theme-color" content="#ffffff">
 
     <title>PlusUI</title>
@@ -44,7 +45,9 @@
     <div class="backDrop" id="backDrop2"></div>
 
     <div class="firstVisitExperience">
-        <div class="header">Welcome!</div>
+        <div class="header">
+            <div class="logo"></div>
+        </div>
         <p class="subHead">Looks like this is your first time checking out <b>PlusUI</b>. Thanks for
             visiting!<br><br>This first visit requires a refresh, which will
             <b>only happen once.</b><br>Optionally, type a nickname below and then click or tap Done.<br><br>Clicking
@@ -62,8 +65,10 @@
         <div class="fveDone">Done</div>
     </div>
 
-    <div class="surface aboutBtn" id="topChromeAboutBtn" about="PlusUI" ver="">
-        <div class="logo"></div>
+    <div class="surface contextBadge" id="topChromeContextBadge" about="PlusUI" ver="">
+        <div class="logo">
+            <img src="favicons/android-chrome-192x192.png" alt="">
+        </div>
     </div>
     <div class="topChromeItems fve">
         <div class="surface rolodexOpen" data-btnName="Cards" id="rolodexOpenBtn" label="Cards">
@@ -167,56 +172,19 @@
                 <div class="ccSep backdropsep"></div>
                 <div class="wallList"></div>
                 <form class="liveLinkCont" name="liveLinkPresets">
-                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://lodev09.github.io/web-screensavers/flat-surface-shader">
-                        <input type="radio" name="liveLinkPresets" id="">
-                        <i class="fa-solid"></i>
-                        <label>Flat Surface Shader</label>
-                    </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://roycurtis.github.io/Flurry-WebGL/">
-                        <input type="radio" name="liveLinkPresets" id="">
-                        <i class="fa-solid"></i>
-                        <label>Flurry</label>
-                    </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://flux.sandydoo.me">
-                        <input type="radio" name="liveLinkPresets" id="">
-                        <i class="fa-solid"></i>
-                        <label>Flux</label>
-                    </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://gradiyent.netlify.app/">
-                        <input type="radio" name="liveLinkPresets" id="">
-                        <i class="fa-solid"></i>
-                        <label>Gradiyent</label>
-                    </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://lodev09.github.io/web-screensavers/jellyfish">
-                        <input type="radio" name="liveLinkPresets" id="">
-                        <i class="fa-solid"></i>
-                        <label>Jellyfish</label>
-                    </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://lodev09.github.io/web-screensavers/matrix">
-                        <input type="radio" name="liveLinkPresets" id="">
-                        <i class="fa-solid"></i>
-                        <label>Matrix</label>
-                    </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://1j01.github.io/pipes/">
-                        <input type="radio" name="liveLinkPresets" id="">
-                        <i class="fa-solid"></i>
-                        <label>Pipes</label>
-                    </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://lodev09.github.io/web-screensavers/plankton?title=⠀&subtitle=⠀&web=⠀">
-                        <input type="radio" name="liveLinkPresets" id="">
-                        <i class="fa-solid"></i>
-                        <label>Plankton</label>
-                    </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://lodev09.github.io/web-screensavers/stardust?title=⠀&subtitle=⠀&web=⠀">
-                        <input type="radio" name="liveLinkPresets" id="">
-                        <i class="fa-solid"></i>
-                        <label>Stardust</label>
-                    </div>
-                    <div class="dcExpt interactable-hov liveLinkPreset" id="" url="https://www.logan-cooper.com/starry-night/">
-                        <input type="radio" name="liveLinkPresets" id="">
-                        <i class="fa-solid"></i>
-                        <label>Starry Night</label>
-                    </div>
+                    <p>Flat Surface Shader,https://lodev09.github.io/web-screensavers/flat-surface-shader</p>
+                    <p>Boids,https://viz.runningwithdata.com/boids/</p>
+                    <p>Ablaze,http://theorigin.net/ablazejs/</p>
+                    <p>Starfield,http://www.chiptune.com/starfield/starfield.html</p>
+                    <p>Flurry,https://roycurtis.github.io/Flurry-WebGL/</p>
+                    <p>Flux,https://flux.sandydoo.me</p>
+                    <p>Gradiyent,https://gradiyent.netlify.app/</p>
+                    <p>Jellyfish,https://lodev09.github.io/web-screensavers/jellyfish</p>
+                    <p>Matrix,https://lodev09.github.io/web-screensavers/matrix</p>
+                    <p>Pipes,https://1j01.github.io/pipes/</p>
+                    <p>Plankton,https://lodev09.github.io/web-screensavers/plankton?title=⠀&subtitle=⠀&web=⠀</p>
+                    <p>Stardust,https://lodev09.github.io/web-screensavers/stardust?title=⠀&subtitle=⠀&web=⠀</p>
+                    <p>Starry Night,https://www.logan-cooper.com/starry-night/</p>
                 </form>
             </div>
         </div>
@@ -236,7 +204,6 @@
             </div>
             <div class="aboutText">
                 A hybrid dashboard and digital display for large-format screens, heavily inspired by TV & VisionOS
-                <!-- PlusUI is your one-stop-shop for all your information, shortcuts, notes, and more. <br>PlusUI is currently in beta/Open Demo, meaning it won't be super customizable yet, but it will save your changes for later.<br>Feel free to report bugs on the project's GitHub (link below)! -->
             </div>
             <div class="aboutStats" cc="Debug code (click to copy)">
                 <div class="debugCode"></div>
@@ -261,6 +228,7 @@
     </div>
 
     <div class="surface contextMenuDiv">
+        <div class="cmSep cms-b"></div>
         <div class="cmItem cmi-resize interactable-hov" data-btnLabel="">
             <i id="cmi-resize-icn" class="fa-solid fa-up-right-and-down-left-from-center"></i>
         </div>
@@ -273,7 +241,6 @@
             Hide card
         </div>
         <div class="cmSep cms-a"></div>
-        <div class="cmSep cms-b"></div>
         <div class="cmItem cmi-editMode interactable-hov" id="editCardsWallBtn">
             <i class="fa-solid fa-pencil"></i>
             Edit cards
@@ -282,31 +249,26 @@
 
     <div class="eWinSurface"></div>
 
-    <div class="surface categoryBar">
-    </div>
+    <div class="surface categoryBar"></div>
 
     <div class="surface rolodex" data-sectName="Card Deck">
-        <div class="roloCardInfo"></div>
-
-        <div class="infoChips">
-            <div class="infoChip ic1" infoType="Parallax">
-                <i class="fa-solid fa-layer-group"></i>
-            </div>
-            <div class="infoChip ic2" infoType="Resizable">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </div>
-            <div class="infoChip ic3" infoType="Expandable">
-                <i class="fa-solid fa-clone"></i>
-            </div>
-        </div>
-
-        <div class="roloCardOptions"></div>
 
         <div class="cbSect cbs1">
-            <div class="snowCard card deckCard squareCard" data-category="Display" data-expandableCard="n" data-enabled="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Sn0w" data-cardDesc="A display of various card feature demos including parallax, transparency, and onClick action" id="snowDbgCard">
+            <div class="snowCard card deckCard squareCard" id="snowDbgCard" data-category="Display" data-expandableCard="n" data-enabled="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Sn0w" data-cardDesc="A display of various card feature demos including parallax, transparency, and onClick action">
                 <img src="resc/snow-fore.svg" id="snowFore">
             </div>
-            <div class="siriDbgCard card deckCard circleCard" data-category="Display" data-expandableCard="n" data-enabled="n" target="siri" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Assistant" data-cardDesc="A card feature demo featuring a Siri-like animated loop" id="siriDbgCard">
+            <div class="siriDbgCard card deckCard circleCard" id="siriDbgCard" data-category="Display" data-expandableCard="n" data-enabled="n" target="siri" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Assistant" data-cardDesc="A card feature demo consisting of a digital-assistant inspired animated loop">
+                <div class="cardOptions">
+                    <div class="cmItem interactable-hov cmi-assistantTarget cmi-assistantTarget1" data-assistantTargetID="siri">
+                        Siri
+                        <input type="checkbox" name="" id="assistantTarget1">
+                    </div>
+                    <div class="cmItem interactable-hov cmi-assistantTarget cmi-assistantTarget2" data-assistantTargetID="gemini">
+                        Gemini
+                        <input type="checkbox" name="" id="assistantTarget2">
+                    </div>
+                </div>
+
                 <div class="layer1"></div>
                 <div class="layer2"></div>
                 <div class="layer3"></div>
@@ -317,7 +279,7 @@
                 <div class="shadow"></div>
 
             </div>
-            <div class="emojiLocaleCard card deckCard circleCard" data-category="Utility" data-enabled="n" data-expandableCard="y" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Emoji" data-subLbl="Click for emoji picker" data-cardDesc="Demo card with hundreds of emoji, auto-refreshes every 5 seconds. Click/expand to view an emoji picker." id="emojiLocaleCard">
+            <div class="emojiLocaleCard card deckCard circleCard" id="emojiLocaleCard" data-category="Utility" data-enabled="n" data-expandableCard="y" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Emoji" data-subLbl="Click for emoji picker" data-cardDesc="Demo card with hundreds of emoji, auto-refreshes every 5 seconds. Click/expand to view an emoji picker.">
                 <p>❤️</p>
                 <div id="back">
                     <p>❤️</p>
@@ -327,7 +289,7 @@
                     <div class="list"></div>
                 </div>
             </div>
-            <div class="youtubeCard-browse card deckCard rectCard" data-category="Web" data-enabled="n" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="YouTube" data-cardDesc="Instantly search YouTube from the search bar, or access various YouTube locations" id="youtubeCard">
+            <div class="youtubeCard-browse card deckCard rectCard" id="youtubeCard" data-category="Web" data-enabled="n" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="YouTube" data-cardDesc="Instantly search YouTube from the search bar, or access various YouTube locations">
                 <div class="searchCont">
                     <i class="fa-brands fa-youtube"></i>
                     <i class="fa-brands fa-youtube-music"></i>
@@ -345,7 +307,7 @@
                     </a>
                 </div>
             </div>
-            <div class="todoCard card deckCard actionable squareCard" data-category="Utility" data-enabled="n" data-expandableCard="n" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="To-Do" data-cardDesc="Keep a scrollable checklist of up to 6 items. Enlarge to view all 6 at once." id="todoCard">
+            <div class="todoCard card deckCard actionable squareCard" id="todoCard" data-category="Utility" data-enabled="n" data-expandableCard="n" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="To-Do" data-cardDesc="Keep a scrollable checklist of up to 6 items. Enlarge to view all 6 at once.">
                 <div class="items">
                     <div class="item">
                         <input type="checkbox" id="">
@@ -373,7 +335,7 @@
                     </div>
                 </div>
             </div>
-            <div class="yearProgCard card deckCard rectCard" data-category="Information" data-enabled="n" data-expandableCard="n" data-resizableCard="y" data-parallaxCard="y" data-friendlyName="Year Progress" data-cardDesc="View the year's progress as a percentage, and count down the remaining days in the year" id="yearProgCard">
+            <div class="yearProgCard card deckCard rectCard" id="yearProgCard" data-category="Information" data-enabled="n" data-expandableCard="n" data-resizableCard="y" data-parallaxCard="y" data-friendlyName="Year Progress" data-cardDesc="View the year's progress as a percentage, and count down the remaining days in the year">
                 <div class="yearLabel" ce="20" ye="24"></div>
                 <div class="percLabel">
                     <span> - </span>
@@ -382,7 +344,7 @@
                     <div class="fill"></div>
                 </div>
             </div>
-            <div class="characterCopyCard card deckCard squareCard" data-category="Utility" data-enabled="n" data-expandableCard="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Character Board" data-subLbl="Click to copy" data-cardDesc="Click to copy any of 4 symbols and characters" id="characterCopyCard">
+            <div class="characterCopyCard card deckCard squareCard" id="characterCopyCard" data-category="Utility" data-enabled="n" data-expandableCard="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Character Board" data-subLbl="Click to copy" data-cardDesc="Click to copy any of 4 symbols and characters">
                 <div class="grid">
                     <div class="gridItem gi1">⠀</div>
                     <div class="gridItem gi2"></div>
@@ -390,16 +352,16 @@
                     <div class="gridItem gi4">×</div>
                 </div>
             </div>
-            <div class="pupperCard card deckCard rectCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Dog Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Slideshow of adorable dogs from Dog.ceo's open API" id="pupperCard">
+            <div class="pupperCard card deckCard rectCard" id="pupperCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Dog Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Slideshow of adorable dogs from Dog.ceo's open API">
                 <img src="" alt="">
             </div>
-            <div class="cattoCard card deckCard rectCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Cat Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Slideshow of adorable cats from PlaceholderCat's open API" id="cattoCard">
+            <div class="cattoCard card deckCard rectCard" id="cattoCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Cat Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Slideshow of adorable cats from PlaceKitten's open API">
                 <img src="" alt="">
             </div>
-            <div class="nasaCard card deckCard rectCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="NASA Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Random image of from NASA's APOD open API, ranging from 1955 until now" id="nasaCard">
+            <div class="nasaCard card deckCard rectCard" id="nasaCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="NASA Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Random image of from NASA's APOD open API, ranging from 1955 until now">
                 <img src="" alt="">
             </div>
-            <div class="uselessFactsCard card deckCard rectCard" data-category="Entertainment" data-enabled="n" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Useless Fact" data-expandableCard="y" data-subLbl="Click for more" data-cardDesc="Random useless fact from the UselessFacts open API (dedicated to Wil)" id="uselessFactsCard">
+            <div class="uselessFactsCard card deckCard rectCard" id="uselessFactsCard" data-category="Entertainment" data-enabled="n" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Useless Fact" data-expandableCard="y" data-subLbl="Click for more" data-cardDesc="Random useless fact from the UselessFacts open API (dedicated to Wil)">
                 <div class="cardOptions">
                     <div class="cmItem interactable-hov cmi-ufCardRefresh" data-btnLabel="">
                         <i class="fa-solid fa-refresh"></i>
@@ -408,7 +370,7 @@
                 </div>
                 <i class="fa-solid fa-comment-dots be"></i>
             </div>
-            <div class="calculatorCard card deckCard rectCard" data-category="Utility" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Calculator" data-expandableCard="n" data-subLbl="Expand for more" data-cardDesc="Do simple maths straight from the shelf, e̶x̶p̶a̶n̶d̶ ̶f̶o̶r̶ ̶a̶n̶ ̶a̶d̶v̶a̶n̶c̶e̶d̶ ̶v̶i̶e̶w̶" id="calculatorCard">
+            <div class="calculatorCard card deckCard rectCard" id="calculatorCard" data-category="Utility" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Calculator" data-expandableCard="n" data-subLbl="Expand for more" data-cardDesc="Do simple maths straight from the shelf, e̶x̶p̶a̶n̶d̶ ̶f̶o̶r̶ ̶a̶n̶ ̶a̶d̶v̶a̶n̶c̶e̶d̶ ̶v̶i̶e̶w̶">
                 <input type="text" class="calcResult" value="0">
 
                 <div class="calcCont">
@@ -441,13 +403,68 @@
                     </div>
                 </div>
             </div>
+            <!-- <div class="musicLauncherCard card deckCard new circleCard" id="musicLauncherCard" target="AM" data-category="Shortcuts" data-enabled="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Music App" data-expandableCard="n" data-subLbl="++" data-cardDesc="Launch a music app of your choice from a fun parallax card">
+                <div class="cardOptions">
+                    <div class="cmItem interactable-hov cmi-musicApp cmi-musicApp1" data-musicAppID="AM">
+                        Apple Music
+                        <input type="checkbox" name="" id="musicApp1">
+                    </div>
+                    <div class="cmItem interactable-hov cmi-musicApp cmi-musicApp4" data-musicAppID="PR">
+                        Pandora
+                        <input type="checkbox" name="" id="musicApp4">
+                    </div>
+                    <div class="cmItem interactable-hov cmi-musicApp cmi-musicApp3" data-musicAppID="SP">
+                        Spotify
+                        <input type="checkbox" name="" id="musicApp3">
+                    </div>
+                    <div class="cmItem interactable-hov cmi-musicApp cmi-musicApp5" data-musicAppID="TID">
+                        Tidal
+                        <input type="checkbox" name="" id="musicApp5">
+                    </div>
+                    <div class="cmItem interactable-hov cmi-musicApp cmi-musicApp2" data-musicAppID="YTM">
+                        YouTube Music
+                        <input type="checkbox" name="" id="musicApp2">
+                    </div>
+                </div>
+                <svg class="AM" width="193" height="245" viewBox="0 0 193 245" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M183.347 0.0439936C182.477 0.123994 174.747 1.49399 173.817 1.68399L66.8165 23.274L66.7765 23.284C63.9865 23.874 61.7965 24.864 60.1065 26.284C58.0665 27.994 56.9365 30.414 56.5065 33.234C56.4165 33.834 56.2665 35.054 56.2665 36.854C56.2665 36.854 56.2665 146.174 56.2665 170.774C56.2665 173.904 56.0165 176.944 53.8965 179.534C51.7765 182.124 49.1565 182.904 46.0865 183.524C43.7565 183.994 41.4265 184.464 39.0965 184.934C30.2565 186.714 24.5065 187.924 19.2965 189.944C14.3165 191.874 10.5865 194.334 7.6165 197.454C1.7265 203.624 -0.663496 211.994 0.156504 219.834C0.856504 226.524 3.86651 232.924 9.03651 237.654C12.5265 240.854 16.8865 243.284 22.0265 244.314C27.3565 245.384 33.0365 245.014 41.3365 243.334C45.7565 242.444 49.8965 241.054 53.8365 238.724C57.7365 236.424 61.0765 233.354 63.6865 229.614C66.3065 225.864 67.9965 221.694 68.9265 217.264C69.8865 212.694 70.1165 208.564 70.1165 204.004V87.854C70.1165 81.634 71.8765 79.994 76.8965 78.774C76.8965 78.774 165.837 60.834 169.987 60.024C175.777 58.914 178.507 60.564 178.507 66.634V145.924C178.507 149.064 178.477 152.244 176.337 154.844C174.217 157.434 171.597 158.214 168.527 158.834C166.197 159.304 163.867 159.774 161.537 160.244C152.697 162.024 146.947 163.234 141.737 165.254C136.757 167.184 133.027 169.644 130.057 172.764C124.167 178.934 121.566 187.304 122.386 195.144C123.086 201.834 126.307 208.234 131.477 212.964C134.967 216.164 139.327 218.524 144.467 219.564C149.797 220.634 155.477 220.254 163.777 218.584C168.197 217.694 172.337 216.364 176.277 214.034C180.177 211.734 183.517 208.664 186.127 204.924C188.747 201.174 190.437 197.004 191.367 192.574C192.327 188.004 192.367 183.874 192.367 179.314V9.50399C192.387 3.34399 189.137 -0.456006 183.347 0.0439936Z" fill="white" />
+                </svg>
+                <svg class="YTM" width="176" height="176" viewBox="0 0 176 176" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M176 88C176 136.601 136.601 176 88 176C39.3989 176 0 136.601 0 88C0 39.3989 39.3989 0 88 0C136.601 0 176 39.3989 176 88ZM130 88C130 64.8 111.1 46 88 46C64.9 46 46 64.8 46 88C46 111.2 64.8 130 88 130C111.2 130 130 111.2 130 88ZM42 88C42 62.6 62.6 42 88 42C113.4 42 134 62.6 134 88C134 113.4 113.4 134 88 134C62.6 134 42 113.4 42 88ZM111 87L72 111V65L111 87Z" fill="#FF0000" />
+                </svg>
+                <svg class="SP" width="496" height="496" viewBox="0 0 496 496" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 248C0 111.1 111.1 0 248 0C384.9 0 496 111.1 496 248C496 384.9 384.9 496 248 496C111.1 496 0 384.9 0 248ZM393.7 219.2C398.2 221.8 401.4 223.1 406.6 223.1C418.8 223.1 429.8 213.4 429.8 199.8C429.8 187.9 424.7 181.7 416.9 177.2C361 144.6 284.5 129.4 211.5 129.4C168.6 129.4 129.2 134.3 94 144.6C85 147.2 76.6 154.9 76.6 168.5C76.6 181.8 86.7 192.1 99.9 192.1C103.903 192.1 107.697 190.987 110.935 190.038C111.58 189.849 112.202 189.666 112.8 189.5C195.2 166.5 322.5 176.7 393.7 219.2ZM364.633 295.817C367.791 297.533 371.042 299.3 375.6 299.3C386.5 299.3 394.9 290.6 395 279.8C395 271.1 391.8 264.9 383.7 260.1C334.3 230.7 271.6 214.6 206.7 214.6C165.1 214.6 136.7 220.4 108.9 228.2C98.6 231.1 93.4 238.2 93.4 248.9C93.4 259.6 102.1 268.3 112.8 268.3C116.11 268.3 118.392 267.597 121.277 266.707C122.315 266.388 123.43 266.044 124.7 265.7C207.6 243.2 300.8 258.1 363.3 295.1C363.745 295.335 364.188 295.576 364.633 295.817ZM338 361.3C341.9 363.6 344.5 364.9 348.7 364.9C356.8 364.9 363.9 358.6 363.9 349.5C363.9 340.4 360.3 336.9 354.2 333C282.8 290.3 199.1 288.7 117.2 306.8C109.7 308.4 103.6 313.3 103.6 323.6C103.6 331.7 109.7 339.4 119.4 339.4C121.677 339.4 125.311 338.413 128.655 337.505C129.57 337.257 130.462 337.015 131.3 336.8C203 322.1 275.6 323.7 338 361.3Z" fill="#1ED760" />
+                </svg>
+                <svg class="PR" width="800px" height="800px" viewBox="0 0 24 24" fill="#000000" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.882 0v24H8.32a1.085 1.085 0 001.085-1.085v-4.61h1.612c7.88 0 11.103-4.442 11.103-9.636C22.119 2.257 17.247 0 12.662 0H1.882Z" />
+                </svg>
+                <svg class="TID" width="256px" height="171px" viewBox="0 0 256 171" version="1.1" preserveAspectRatio="xMidYMid" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M128.003612,85.338752 L170.668473,128.009031 L128.003612,170.675698 L85.3351396,128.009031 L128.003612,85.338752 Z M42.6666667,0.00180622583 L85.3351396,42.6702791 L42.6666667,85.3405582 L0,42.6702791 L42.6666667,0.00180622583 Z M213.333333,0.00180622583 L256,42.6702791 L213.333333,85.3405582 L170.666667,42.6702791 L128.003612,85.338752 L85.3351396,42.6684729 L128.003612,-2.84217094e-14 L170.666667,42.6648604 L213.333333,0.00180622583 Z" fill="#0A0B09" />
+                </svg>
+            </div> -->
+            <!-- <div class="googleCard card deckCard rectCard" id="googleCard" data-category="Web" data-enabled="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Google Search" data-expandableCard="n" data-subLbl="Expand for more" data-cardDesc="Search & quick-access links inspired by new Google iOS app design">
+                <div class="search">
+                    <i class="fa-solid fa-search"></i>
+                    <p>Search</p>
+                    <i class="fa-solid fa-microphone"></i>
+                    <i class="fa-solid fa-image"></i>
+                </div>
+                <div class="quickLinks">
+                    <div class="ql ql1" style="background-color: #FFEEDB; color: #493A0A;" after="Images">
+                        <i class="fa-solid fa-image"></i>
+                    </div>
+                    <div class="ql ql2" style="background-color: #E6EFFE; color: #17519D;" after="Translate">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+                    <div class="ql ql3" style="background-color: #E9F5E8; color: #256A49;" after="Sound">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <div class="ql ql4" style="background-color: #FEEDEB; color: #A72928;" after="Mail">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                </div>
+            </div> -->
         </div>
-        <div class="moveCtrls">
-            <div class="mvCtrl left interactable-hov"> <i class="fa-solid fa-chevron-left"></i> </div>
-            <div class="addBtn interactable-hov"><i class="fa-solid fa-plus"></i></div>
-            <div class="mvCtrl right interactable-hov"> <i class="fa-solid fa-chevron-right"></i> </div>
-        </div>
-        <!-- <div class="rssBtn disabled">Add RSS<i class="fa-solid fa-rss"></i></div> -->
     </div>
 
     <div class="shelfBack"></div>
@@ -457,7 +474,7 @@
         <div class="surface subCards">
             <div class="shelfLabel surface">Shelf</div>
 
-            <div class="weatherCard card rectCard" data-category="Information" data-enabled="y" data-expandableCard="n" data-resizableCard="y" data-parallaxCard="y" data-friendlyName="Weather" data-cardDesc="Current temperature and 'feel' in local unit, change unit from context menu" id="weatherCard">
+            <div class="weatherCard card rectCard" id="weatherCard" data-category="Information" data-enabled="y" data-expandableCard="n" data-resizableCard="y" data-parallaxCard="y" data-friendlyName="Weather" data-cardDesc="Current temperature and 'feel' in local unit, change unit from context menu">
                 <div class="cardOptions">
                     <div class="cmItem interactable-hov cmi-tempUnit" data-btnLabel="">
                         <i class="fa-solid fa-temperature-high"></i>
@@ -470,7 +487,7 @@
                     <img src="" alt="" id="weatherIcon">
                 </div>
             </div>
-            <div class="clockCard card circleCard" data-category="Information" data-enabled="y" data-expandableCard="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Clock" data-cardDesc="A simple analog clock with customizable styles" id="clockCard">
+            <div class="clockCard card circleCard" id="clockCard" data-category="Information" data-enabled="y" data-expandableCard="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Clock" data-cardDesc="A simple analog clock with customizable styles">
                 <div class="cardOptions">
                     <div class="cmItem interactable-hov cmi-clockCardStyle cmi-clockCardStyle1" data-btnLabel="">
                         <i class="fa-solid fa-circle"></i>
@@ -494,7 +511,7 @@
                     <div class="clockHand" id="second"></div>
                 </div>
             </div>
-            <div class="calendarCard card squareCard" data-category="Utility" data-enabled="y" data-expandableCard="y" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Calendar" data-subLbl="Click to open" data-cardDesc="Numerical and wordmark day of the week, and current month wordmark. Expand to display an interactive monthly calendar view." id="calendarCard">
+            <div class="calendarCard card squareCard" id="calendarCard" data-category="Utility" data-enabled="y" data-expandableCard="y" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Calendar" data-subLbl="Click to open" data-cardDesc="Numerical and wordmark day of the week, and current month wordmark. Expand to display an interactive monthly calendar view.">
                 <div class="calenDay"></div>
                 <div class="calenMonth"></div>
                 <div class="calenDayNo"></div>
@@ -523,7 +540,7 @@
                 </div>
 
             </div>
-            <div class="textCard card actionable squareCard" data-category="Utility" data-enabled="y" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Notes" data-subLbl="Changes save automatically" data-cardDesc="A customizable text block that saves as you type. Expand to view an even larger text canvas." id="textCard">
+            <div class="textCard card actionable squareCard" id="textCard" data-category="Utility" data-enabled="y" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Notes" data-subLbl="Changes save automatically" data-cardDesc="A customizable text block that saves as you type. Expand to view an even larger text canvas.">
                 <div class="cardOptions">
                     <div class="cmItem interactable-hov" data-btnLabel="">
                         <i id="" class="fa-solid fa-circle-half-stroke"></i>
@@ -541,7 +558,7 @@
                 </div>
                 <div class="batteryText"></div>
             </div> -->
-            <div class="shortcutCard card actionable squareCard" data-category="Utility" data-enabled="y" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Shortcuts" data-subLbl="Click to open | Expand to edit" data-cardDesc="Choose between 4 or 8 shortcuts to your favorite places on the web" id="shortcutCard">
+            <div class="shortcutCard card actionable squareCard" id="shortcutCard" data-category="Shortcuts" data-enabled="y" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Shortcuts" data-subLbl="Click to open | Expand to edit" data-cardDesc="Choose between 4 or 8 shortcuts to your favorite places on the web">
                 <div class="expandedViewItems">
                     <div class="dcExpt interactable-hov">
                         <input class="keyTB shortcutLinkNameTB" type="text" placeholder="Name" name="" id="">

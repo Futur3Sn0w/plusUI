@@ -1,17 +1,91 @@
+.rolodexOpen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    height: 46px;
+    width: 46px;
+    gap: 0;
+    /* flex-shrink: 0; */
+
+    position: relative;
+    z-index: 1;
+
+    transition: .2s;
+
+    font-size: 20px;
+
+    border-top-left-radius: 50px !important;
+    border-bottom-left-radius: 50px !important;
+}
+
+.rolodexOpen i {
+    transition: .3s;
+}
+
+body:has(.rolodex.visible) .rolodexOpen i {
+    transform: rotate(135deg);
+}
+
+body:has(.rolodex.visible) .rolodexOpen {
+    border-radius: 50px;
+    pointer-events: all !important;
+}
+
+body:has(.timeDate.ccOpen) .rolodexOpen {
+    opacity: 0;
+    filter: blur(10px);
+    width: 0;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+}
+
+.rolodexOpen:hover {
+    margin-right: -2px;
+    padding: 0 12px;
+    transform: scale(1.075);
+    background-color: rgba(255, 255, 255) !important;
+    gap: 8px;
+    color: rgba(0, 0, 0, .75) !important;
+    width: 90px;
+}
+
+.rolodexOpen:hover::after {
+    opacity: 1;
+    max-width: 200px;
+    margin-left: 0;
+}
+
+.rolodexOpen::after {
+    content: attr(label);
+    font-size: 14px;
+    opacity: .5;
+    transition: .2s;
+
+    opacity: 0;
+    width: fit-content;
+    max-width: 0;
+}
+
+body:has(.rolodex.visible) .rolodexOpen::after {
+    content: 'Close';
+}
+
 .rolodex {
     position: absolute;
     /* top: 60px; */
 
-    width: fit-content;
-    height: fit-content;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
 
-    margin-top: -40px;
-    transform: scale(1.1);
     opacity: 0;
     pointer-events: none;
     transition: transform .3s, opacity .3s;
@@ -22,287 +96,300 @@
     box-shadow: none !important;
 }
 
-/* .rolodex.md {
-    transition: 0 !important;
-} */
-
 .rolodex.visible {
     z-index: 50;
-    transform: scale(1);
     opacity: 1;
     pointer-events: unset;
 }
 
-.roloCardInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-}
-
-.roloCardInfo::before {
-    content: attr(data-sectName);
-    font-size: 32px;
-    font-weight: 700;
-
-    /* position: fixed; */
-    /* top: 60px; */
-    /* left: 50%; */
-    /* transform: translate(-50%, -50%); */
-    width: max-content;
-    /* transform: translateX(-50%); */
-}
-
-.rolodex.empty .roloCardInfo::before {
-    top: 100px;
-}
-
-.roloCardInfo::after {
-    content: attr(data-cardDesc);
-    font-size: 13px;
-    font-weight: 500;
-    opacity: .75;
-
-    /* position: fixed; */
-    /* top: 100px; */
-    /* left: 50%; */
-    /* transform: translate(-50%, -50%); */
-    width: max-content;
-    /* transform: translateX(-50%); */
-}
-
-.rolodex.empty .roloCardInfo::after {
-    /* top: 130px; */
-}
-
-.infoChips {
-    display: flex;
-    gap: 5px;
-
-    width: max-content;
-}
-
-.infoChips .infoChip {
-    width: fit-content;
-    height: fit-content;
-
-    box-sizing: border-box;
-    padding: 3px;
-    padding-right: 10px;
-
-    background-color: #eee;
-    box-shadow: 0 3px 7px #00000022;
-
-    border-radius: 500px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-body:has(.darkModeOn) .infoChips .infoChip {
-    background-color: #222;
-}
-
-.infoChips .infoChip i {
-    width: 33px;
-    height: 25px;
-    border-radius: 30px;
-    color: #eee;
-
-    font-size: 14px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.infoChips .infoChip[avail="n"] i {
-    background-color: #d93d3d;
-}
-
-.infoChips .infoChip[avail="y"] i {
-    background-color: #26a426;
-}
-
-.infoChips .infoChip::after {
-    content: attr(infoType);
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.roloCardOptions::after {
-    content: attr(avail);
-    font-size: 12px;
-    opacity: .5;
-}
-
 .cbSect {
-    width: 90px;
-    height: 140px;
-    padding: 15px;
-
-    display: flex;
-    align-items: center;
-    position: relative;
-
-    border-radius: 12px;
-
-    gap: 15%;
-    padding: 10px 120px 10px 120px;
-    /* margin-top: 170px; */
-
-    transform: scale(1.2);
-
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-
-    mask-image: linear-gradient(to left, transparent, black, black, black, black, transparent);
-
-    pointer-events: none;
-}
-
-.cbSect .card {
-    scroll-snap-align: center;
-    pointer-events: none;
-}
-
-.cbSect .card:not(.hoveredCard) {
-    opacity: .5;
-    transform: scale(.7) !important;
-}
-
-.cbSect .card.hoveredCard {
-    opacity: 1;
-    transform: none !important;
-}
-
-.rolodex.empty .moveCtrls {
-    display: none;
-}
-
-.addBtn,
-.rssBtn {
-    background-color: #26a426;
-    color: white;
-
-    width: max-content;
-    height: 35px;
-    border-radius: 40px;
-    user-select: none;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    gap: 7px;
-    padding: 0 10px;
-
-    font-size: 14px;
-    transition: .2s;
-}
-
-.addBtn:hover,
-.mvCtrl:hover,
-.rssBtn:hover {
-    background-color: white !important;
-    color: black !important;
-}
-
-.addBtn:active,
-.rssBtn:active {
-    transform: scale(.9);
-}
-
-.rssBtn {
-    right: 80px;
-}
-
-.addBtn {
-    width: 35px !important;
-    padding: 0;
-}
-
-.addBtn:hover {
-    padding: 0 10px;
-    width: 45px !important;
-}
-
-.addBtn::after {
-    content: 'Add';
-    width: fit-content;
-    overflow: hidden;
-    max-width: 0;
-    margin-left: -7px;
-    transition: .2s;
-}
-
-.addBtn:hover::after {
-    max-width: 100px;
-    margin-left: 0;
-}
-
-/* Move controls */
-
-.moveCtrls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    margin-top: auto;
-
-    /* position: absolute; */
-    /* bottom: -10px; */
-}
-
-.mvCtrl {
-    background-color: rgba(255, 255, 255, 0.75);
-
-    width: 50px;
-    height: 35px;
-    border-radius: 40px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-
-    position: relative;
-
-    font-size: 15px;
-    transition: .2s;
-    /* padding-bottom: 2px; */
-}
-
-.rolodex.darkModeOn .moveCtrls .mvCtrl {
-    background-color: rgba(34, 34, 34, 0.75);
-}
-
-.mvCtrl::after {
-    content: "";
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: 100%;
+
+    mask-image: linear-gradient(to bottom, black 78%, transparent 84%);
 
     position: absolute;
     top: 0;
+
+    padding: 20px 80px;
+    padding-top: 80px;
+    padding-bottom: 165px;
+    box-sizing: border-box;
+
+    display: flex;
+    gap: 75px 15px;
+    flex-wrap: wrap;
+
+    transition: .3s;
+    transform: translateY(50px);
+    /* grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); */
+    /* grid-auto-rows: auto; */
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 12px;
+    overflow-y: scroll;
+}
+
+.rolodex.visible .cbSect {
+    gap: 15px 15px;
+    transform: translateY(0px);
+}
+
+.cbSect .card-container {
+    width: 290px;
+    height: 243px;
+    border-radius: 16px;
+
+    backdrop-filter: none !important;
+
+    /* grid-column-start: 1; */
+    /* grid-row-start: 1; */
+
+    transition: .25s;
+
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 9;
+    /* overflow: hidden; */
+
+    box-sizing: border-box;
+    padding: 15px;
+    padding-top: 113px;
+    padding-bottom: 60px;
+}
+
+.card-container:hover {
+    transform: scale(1.075);
+    backdrop-filter: blur(10px) !important;
+    z-index: 10;
+}
+
+.card-container:has(.card.new)::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 12px;
+
+    background-color: red;
+
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* body:has(.darkModeOn) .cbSect .card-container {
+    background-color: var(--section-d);
+} */
+
+.categoryBar::before,
+.card-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
     left: 0;
-    z-index: -1;
+    z-index: 0;
+
+    width: 100%;
+    height: 100%;
 
     border-radius: inherit;
-    background-color: inherit;
+
     opacity: 0;
+    transition: .4s;
+
+    background-color: var(--section-l);
+    mask-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, .75));
+}
+
+.categoryBar:hover::before,
+.card-container:hover::before {
+    opacity: 1;
+}
+
+body:has(.darkModeOn) .categoryBar:hover::before,
+body:has(.darkModeOn) .card-container:hover::before {
+    opacity: .2;
+}
+
+.cbSect .card-container .cardName {
+    font-size: 16px;
+    font-weight: 600;
+    align-self: flex-start;
+    z-index: 9;
+    position: relative;
+}
+
+.card-container:has(.card.new) .cardName::after {
+    content: 'New';
+    opacity: .5;
+    text-transform: uppercase;
+    font-size: 11px;
+
+    position: absolute;
+    left: 102%;
+}
+
+
+.cbSect .card-container .cardDesc {
+    font-size: 12px;
+    font-weight: 400;
+    opacity: .7;
+
+    min-height: 58px;
+    max-height: 58px;
+    width: 270px;
+
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    overflow-y: scroll;
+
+    position: relative;
+
+    box-sizing: border-box;
+    background-color: var(--surface-button-l);
+    border-radius: 9px;
+    z-index: 9;
 
     transition: .15s;
 }
 
-.mvCtrl:hover::after {
-    opacity: 1;
+.card-container .cardDesc::after {
+    content: attr(options);
 }
 
-.mvCtrl:active {
+body:has(.darkModeOn) .cbSect .card-container .cardDesc {
+    background-color: var(--surface-button-d);
+}
+
+.cardDesc::before {
+    content: attr(infochip);
+
+    opacity: 0;
+    font-size: 20px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    z-index: 1;
+    transition: .15s;
+}
+
+.card-container:has(.infoChip[data-avail="y"]:hover) .cardDesc::before {
+    opacity: 1;
+    color: rgb(95, 213, 26);
+}
+
+.card-container:has(.infoChip[data-avail="n"]:hover) .cardDesc::before {
+    opacity: 1;
+    color: rgb(241, 55, 55);
+}
+
+.card-container:has(.infoChip:hover) .cardDesc {
+    color: transparent;
+}
+
+.cbSect .card-container .card {
+    pointer-events: none !important;
+    position: absolute;
+    top: 10px;
+    z-index: 9;
+}
+
+.cbSect .card-container .card-options {
+    display: none;
+}
+
+.infoChips {
+    display: flex;
+    height: 25px;
+    gap: 3px;
+    padding-top: 0;
+    box-sizing: border-box;
+    border-radius: 16px 16px 0 0;
+
+    position: absolute;
+    bottom: 105px;
+    right: 8px;
+    transition: .2s;
+    z-index: 7;
+
+}
+
+.infoChips .infoChip {
+    width: 30px;
+    height: 100%;
+    border-radius: 30px;
+
+    background-color: #eee;
+    color: black;
+
+    font-size: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+body:has(.darkModeOn) .infoChips .infoChip {
+    background-color: #222;
+    color: white;
+}
+
+.infoChips .infoChip[data-avail="n"]::before {
+    opacity: .35;
+}
+
+.infoChips .infoChip[data-avail="y"] {
+    opacity: 1;
+    background-color: #eee !important;
+    color: black !important;
+}
+
+.addBtn {
+    background-color: #26a426;
+    color: white;
+
+    position: absolute;
+    bottom: 8px;
+
+    width: 50%;
+    height: 28px;
+    border-radius: 40px;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    gap: 7px;
+
+    font-size: 13px;
+    font-weight: 500;
+    box-sizing: border-box;
+    transition: .2s;
+}
+
+.addBtn:hover {
+    background-color: white !important;
+    color: black !important;
+    transform: scale(1.075);
+}
+
+.addBtn:active {
     transform: scale(.9);
 }
 
@@ -314,18 +401,25 @@ body:has(.darkModeOn) .infoChips .infoChip {
     gap: 5px;
 
     position: fixed;
-    left: 14px;
+    left: 15px;
+    z-index: 100;
+    width: 40px;
 
     opacity: 0;
     transform: scale(.8) translateX(-15px);
     filter: blur(10px);
 
     pointer-events: none;
+    overflow: hidden;
 
     transition: .3s;
 
     padding: 5px;
     border-radius: 16px;
+}
+
+.categoryBar:hover {
+    width: 150px;
 }
 
 body:has(.rolodex.visible) .categoryBar {
@@ -337,7 +431,7 @@ body:has(.rolodex.visible) .categoryBar {
 }
 
 .categoryBar .categoryBtn {
-    width: 40px;
+    width: 150px;
     height: 40px;
     border-radius: 500px;
     position: relative;
@@ -348,10 +442,6 @@ body:has(.rolodex.visible) .categoryBar {
     align-items: center;
     justify-content: flex-start;
     box-sizing: border-box;
-}
-
-.categoryBar:hover .categoryBtn {
-    width: 140px;
 }
 
 .categoryBar .categoryBtn:hover {
@@ -366,6 +456,10 @@ body:has(.rolodex.visible) .categoryBar {
 
 body:has(.darkModeOn) .categoryBtn.selected i {
     background-color: var(--surface-button-d);
+}
+
+.categoryBtn>* {
+    pointer-events: none;
 }
 
 /* .categoryBar:has(.categoryBtn:hover) .categoryBtn.selected i {

@@ -99,10 +99,17 @@ body:has(.darkModeOn) .expandableWindow {
     align-items: center;
     justify-content: center;
     gap: 10px;
+
+    transition: .15s;
 }
 
-.expandableWindow .windowOpts div {
+.expandableWindow .windowOpts>div:hover {
+    opacity: 1;
+}
+
+.expandableWindow .windowOpts>div {
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .25);
+    opacity: .6;
 }
 
 .expandableWindow .return {

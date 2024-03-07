@@ -50,7 +50,6 @@
 
     opacity: 0;
 
-    background-color: rgba(255, 0, 0, 0.515) !important;
     color: white !important;
 
     transition: .2s;
@@ -61,6 +60,14 @@
     backdrop-filter: blur(0px);
 }
 
+.shelf .card .roloClickBlock {
+    background-color: rgba(255, 0, 0, 0.515) !important;
+}
+
+.cbs1 .card.hoveredCard .roloClickBlock {
+    background-color: rgba(51, 255, 0, 0.515) !important;
+}
+
 .card:hover .roloClickBlock {
     backdrop-filter: blur(15px) !important;
     opacity: 1 !important;
@@ -68,6 +75,19 @@
 
 .card:has(.roloClickBlock) {
     transform: none !important;
+}
+
+.card.hoveredCard .roloClickBlock {
+    font-size: 0;
+}
+
+.cbs1 .card.hoveredCard .roloClickBlock::after {
+    content: 'Add';
+    font-size: 14px;
+}
+
+.cbs1 .card:not(.hoveredCard):hover .roloClickBlock {
+    font-size: 0;
 }
 
 .card.removing {
