@@ -4,6 +4,8 @@
 /* Stock cards */
 
 /* @import url('css/stock_cards/batteryCard.css'); */
+@import url('css/stock_cards/assistantCard.css');
+@import url('css/stock_cards/aboutMeCard.css');
 @import url('css/stock_cards/calculatorCard.css');
 @import url('css/stock_cards/calendarCard.css');
 @import url('css/stock_cards/cattoCard.css');
@@ -15,11 +17,11 @@
 @import url('css/stock_cards/nasaCard.css');
 @import url('css/stock_cards/pupperCard.css');
 @import url('css/stock_cards/shortcutCard.css');
-@import url('css/stock_cards/siriDbgCard.css');
 @import url('css/stock_cards/snowDbgCard.css');
 @import url('css/stock_cards/textCard.css');
 @import url('css/stock_cards/todoCard.css');
 @import url('css/stock_cards/uselessFactsCard.css');
 @import url('css/stock_cards/weatherCard.css');
 @import url('css/stock_cards/yearProgCard.css');
+@import url('css/stock_cards/slideshowCard.css');
 @import url('css/stock_cards/youtubeBrowseCard.css');

@@ -8,6 +8,7 @@
     border-radius: 16px;
     background-color: var(--section-l);
     color: black;
+    box-sizing: border-box;
 
     display: flex;
     align-items: center;
@@ -155,11 +156,6 @@ body:has(.darkModeOn) .card {
     opacity: .5;
 }
 
-.card.context-selected-card {
-    transform: scale(1.045) !important;
-    /* margin-bottom: 10px; */
-}
-
 .contextMenuDiv {
     position: absolute;
     bottom: 132px;
@@ -172,8 +168,8 @@ body:has(.darkModeOn) .card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 8px;
-    gap: 8px !important;
+    padding: 3px;
+    gap: 5px !important;
 
     pointer-events: none;
 
@@ -272,6 +268,7 @@ body:has(.darkModeOn) .cmItem {
 .contextMenuDiv .cardOptions .cmItem:hover {
     background-color: white !important;
     color: rgba(0, 0, 0, 0.75) !important;
+    transform: scale(1.1) !important;
 }
 
 .cmItem i {

@@ -42,7 +42,7 @@ function cardContextMenu(e) {
         $('.cmi-expand').addClass('override-hidden');
     }
 
-    if ($(e).hasClass('shortcutCard')) {
+    if ($(e).hasClass('expandEdit')) {
         $('.cmi-expand').text('Edit');
         $('<i id="#cmi-expand-icn" class="fa-solid">').addClass('fa-pencil').prependTo('.cmi-expand');
     } else {

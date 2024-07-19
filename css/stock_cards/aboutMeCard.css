@@ -1,0 +1,57 @@
+.aboutMeCard {
+    padding: 5px;
+
+    display: flex;
+    justify-content: flex-start !important;
+}
+
+.aboutMeCard img:not(.clone) {
+    height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    position: relative;
+    z-index: 2;
+
+    transform: translateZ(20px);
+}
+
+.aboutMeCard .backImg {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: inherit;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.aboutMeCard img.clone {
+    filter: blur(15px);
+    opacity: .5;
+
+    width: 120%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.aboutMeCard .username {
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 15px;
+    font-weight: 600;
+    transform: translateZ(20px);
+}

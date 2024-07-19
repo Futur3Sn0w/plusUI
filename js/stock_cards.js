@@ -1,5 +1,6 @@
 // Main function to start each card
 
+var imageIndex;
 var cardClickingEnabled = true;
 var links;
 var storedLinks;
@@ -23,6 +24,9 @@ function startCards() {
     // doTheBatteryThing();
     // chargingIndic();
 
+    imageIndex = 0;
+    showSlideshow();
+
     if (localStorage.getItem('clockStyle')) {
         $('.cmi-clockCardStyle' + localStorage.getItem('clockStyle')).click();
         $('.clockCard').removeClass('style-a').removeClass('style-b').removeClass('style-c')
@@ -36,13 +40,11 @@ function startCards() {
 
     links = [];
 
-    // Load existing links from localStorage, if any
     storedLinks = localStorage.getItem("savedLinks");
     if (!storedLinks) {
         links = sampleLinks;
-        updateAndSaveLinks(); // Save the sample data
+        updateAndSaveLinks();
     } else {
-        // If found, parse the stored data from localStorage
         links = JSON.parse(storedLinks);
     }
 
@@ -51,17 +53,14 @@ function startCards() {
     $('.yearProgCard .percBar .fill').css('width', resultProg.percentage + '%');
 
     $.each(links, function (index, linkObject) {
-        // Get the name and URL from the current object
         var name = linkObject.name;
         var url = linkObject.url;
 
-        // Create the shortcut item element
         var theSCApp = $('<div class="scApp"><i class="fa-solid fa-close"></i></div>');
         theSCApp.attr('data-url', url);
         theSCApp.attr('data-fn', name);
         theSCApp.find('i').css('background-image', 'url(https://www.google.com/s2/favicons?domain=' + url + '&sz=32)');
 
-        // Append the shortcut item to the shortcuts container
         $('.shortcutCard .shortcuts').append(theSCApp);
     });
 
@@ -97,6 +96,11 @@ function startCards() {
         var target = localStorage.getItem('assistantTarget');
         $('.cmi-assistantTarget[data-assistantTargetID="' + target + '"]').click();
     }
+
+    $(".aboutMeCard .username").text(localStorage.getItem('username'));
+
+    var ami = $('.aboutMeCard img').clone();
+    ami.addClass('clone').appendTo('.aboutMeCard .backImg');
 
     doggyCard();
     cattoCard();
@@ -145,12 +149,12 @@ const weatherCodes = {
 function weather() {
     if (navigator.geolocation) {
         console.log("Geolocation is supported.");
-        getLatLon().then(({ lat, lon }) => {
+        getLatLon().then(({ lat, lon, city }) => {
             if (lat !== null) {
                 localStorage.setItem("locLat", lat);
                 localStorage.setItem("locLon", lon);
 
-                newWeatherBalloon(lat, lon);
+                newWeatherBalloon(lat, lon, city);
             } else {
                 $('.weatherCard').hide();
             }
@@ -167,21 +171,21 @@ function weather() {
 async function getLatLon() {
     try {
         const response = await fetch(`http://ip-api.com/json`);
-        const { lat, lon } = await response.json();
+        const { lat, lon, city } = await response.json();
 
-        return ({ lat, lon });
+        return ({ lat, lon, city });
     } catch (error) {
         console.log(error);
         throw error;
     }
 }
 
-function newWeatherBalloon(lat, lon) {
+function newWeatherBalloon(lat, lon, city) {
     fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,is_day,precipitation,weather_code&current_weather=true&timezone=auto')
-        .then(function (resp) { return resp.json() }) // Convert data to json
+        .then(function (resp) { return resp.json() })
         .then(function (data) {
             $('.weatherCard').show();
-            setTimeout(newDrawWeather(data), 5000);
+            setTimeout(newDrawWeather(data, city), 5000);
         })
         .catch(function (error) {
             // location.reload();
@@ -190,23 +194,20 @@ function newWeatherBalloon(lat, lon) {
         });
     setInterval(() => {
         fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,is_day,precipitation,weather_code&current_weather=true&timezone=auto')
-            .then(function (resp) { return resp.json() }) // Convert data to json
+            .then(function (resp) { return resp.json() })
             .then(function (data) {
                 $('.weatherCard').show();
-                setTimeout(newDrawWeather(data), 5000);
+                setTimeout(newDrawWeather(data, city), 5000);
             })
             .catch(function (error) {
-                // location.reload();
                 $('.weatherCard').hide();
                 console.error('An error occurred:', error);
             });
     }, 10000);
 }
 
-function newDrawWeather(d) {
+function newDrawWeather(d, city) {
     var wcFeel = weatherCodes[d.current_weather.weathercode];
-    var feel = wcFeel.replace('Clear sky', 'Clear ' + tod);
-    // alert(isDay)
     var tempPref;
     if (tempUnit == 'c') {
         tempPref = Math.round(d.current_weather.temperature);
@@ -215,8 +216,12 @@ function newDrawWeather(d) {
     }
     $('#temp').text(tempPref + "°")
 
+    $('.weatherCard .city').remove();
+    $('.weatherCard .feel').remove();
+
     $('#weatherIcon').attr('src', "resc/weather/" + wcFeel.replace('Clear sky', 'Clear ' + isDay).replace(/\s+/g, "").toLowerCase() + '.svg');
-    $('#temp').attr('feel', wcFeel.replace('Clear sky', 'Clear ' + tod))
+    $('<div class="feel">').text(wcFeel.replace('Clear sky', 'Clear ' + tod)).appendTo('.weatherCard')
+    $('<div class="city">').text(city).prepend('<i class="fa-solid fa-location-arrow"></i>').prependTo('.weatherCard');
     $('.cmi-tempUnit').attr('tempunit', tempUnit);
 }
 
@@ -291,7 +296,6 @@ $(document).on('click', '.shortcutCard .scApp', function () {
             return linkObject.url === url;
         });
 
-        // Check if the index was found
         if (index !== -1) {
             links.splice(index, 1);
 
@@ -319,8 +323,19 @@ $('.cmi-assistantTarget').click(function () {
     var thisAppID = $(this).attr('data-assistantTargetID');
     var thisApp = $(this).text();
 
-    $('.siriDbgCard').attr('target', thisAppID).attr('data-subLbl', thisApp);
+    $('.assistantCard').attr('target', thisAppID).attr('data-subLbl', thisApp);
     localStorage.setItem('assistantTarget', thisAppID);
+})
+
+$('.assistantCard').click(function () {
+    if (cardClickingEnabled && $(this).parent().hasClass('subCards') && !$('.subCards').hasClass('editMode')) {
+        var target = $(this).attr('target');
+        if (target == 'siri') {
+            // window.open('https://music.apple.com')
+        } else if (target == 'gemini') {
+            window.open('https://gemini.google.com')
+        }
+    }
 })
 
 // Battery
@@ -400,24 +415,6 @@ $('.cmi-clockCardStyle').click(function () {
     localStorage.setItem('clockStyle', number)
 })
 
-// $('.cmi-clockCardStyle1').click(function () {
-//     $('.cmi-clockCardStyle').not(this).children('input').prop('checked', false);
-//     $('.clockCard').removeClass('style-b').addClass('style-a')
-//     localStorage.setItem('clockStyle', '1')
-// })
-
-// $('.cmi-clockCardStyle2').click(function () {
-//     $('.cmi-clockCardStyle').not(this).children('input').prop('checked', false);
-//     $('.clockCard').removeClass('style-a').addClass('style-b')
-//     localStorage.setItem('clockStyle', '2')
-// })
-
-// $('.cmi-clockCardStyle3').click(function () {
-//     $('.cmi-clockCardStyle').not(this).children('input').prop('checked', false);
-//     $('.clockCard').removeClass('style-a').addClass('style-b')
-//     localStorage.setItem('clockStyle', '3')
-// })
-
 // Music launcher card
 
 $('.cmi-musicApp').click(function () {
@@ -475,11 +472,11 @@ $('.ytSearch').keypress(function (event) {
 
 // FS Card
 
-// $('.snowCard').on('click', function (e) {
-//     if ($(this).parent().hasClass('subCards')) {
-//         window.open('https://futur3sn0w.me');
-//     }
-// })
+$('.snowCard').on('click', function (e) {
+    if (cardClickingEnabled && $(this).parent().hasClass('subCards') && !$('.subCards').hasClass('editMode')) {
+        window.open('https://futur3sn0w.me');
+    }
+})
 
 // Calendar card (expanded view)
 
@@ -745,7 +742,6 @@ function cattoCard() {
 
     fetch('https://placekitten.com/200/300')
         .then(response => {
-            // Check for successful response
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -777,8 +773,8 @@ function nasaCard() {
     var nasaURL = "https://api.nasa.gov/planetary/apod?api_key=oP0tzzSuhXvoNURURjkHU9ew16bKEY0CF3nzuK9W&date=" + randomDate;
 
     $.ajax({
-        url: nasaURL, // Replace with your actual API endpoint
-        dataType: "json", // Specify data type as JSON
+        url: nasaURL,
+        dataType: "json",
         success: function (data) {
             // Set the image URL for the element
             $(".nasaCard img").attr("src", data.hdurl);
@@ -793,17 +789,13 @@ function nasaCard() {
 }
 
 function getRandomDate() {
-    // Set the minimum and maximum dates in milliseconds
     const minDate = new Date(1995, 5, 16).getTime();
     const maxDate = new Date().getTime();
 
-    // Generate a random number between the minimum and maximum dates
     const randomDate = Math.floor(Math.random() * (maxDate - minDate + 1)) + minDate;
 
-    // Create a new Date object from the random milliseconds
     const date = new Date(randomDate);
 
-    // Format the date in YYYY-MM-DD format
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
@@ -824,37 +816,13 @@ function uselessFactsCard() {
         url: "https://uselessfacts.jsph.pl/api/v2/facts/random",
         dataType: "json", // Specify data type as JSON
         success: function (data) {
-            $('.uselessFactsCard .fact').remove();
-            $('.uselessFactsCard .source').remove();
-
-            // Set the image URL for the element
-            $('<div>').addClass('fact').text(data.text).appendTo('.uselessFactsCard');
-            $('<div>').addClass('source').text(data.source).appendTo('.uselessFactsCard');
+            $('.uselessFactsCard .fact').text(data.text).appendTo('.uselessFactsCard');
+            $('.uselessFactsCard .source').text(data.source).appendTo('.uselessFactsCard');
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.error("Error fetching data:", textStatus, errorThrown);
-            $('.uselessFactsCard').remove();
         }
     });
-
-    setInterval(() => {
-        $.ajax({
-            url: "https://uselessfacts.jsph.pl/api/v2/facts/random",
-            dataType: "json", // Specify data type as JSON
-            success: function (data) {
-                $('.uselessFactsCard .fact').remove();
-                $('.uselessFactsCard .source').remove();
-
-                // Set the image URL for the element
-                $('<div>').addClass('fact').text(data.text).appendTo('.uselessFactsCard');
-                $('<div>').addClass('source').text(data.source).appendTo('.uselessFactsCard');
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error("Error fetching data:", textStatus, errorThrown);
-                $('.uselessFactsCard').remove();
-            }
-        });
-    }, 60000);
 }
 
 $('.uselessFactsCard').click(function () {
@@ -865,7 +833,17 @@ $('.uselessFactsCard').click(function () {
 })
 
 $('.cmi-ufCardRefresh').on('click', function () {
-    uselessFactsCard();
+    $.ajax({
+        url: "https://uselessfacts.jsph.pl/api/v2/facts/random",
+        dataType: "json", // Specify data type as JSON
+        success: function (data) {
+            $('.uselessFactsCard .fact').text(data.text).appendTo('.uselessFactsCard');
+            $('.uselessFactsCard .source').text(data.source).appendTo('.uselessFactsCard');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error("Error fetching data:", textStatus, errorThrown);
+        }
+    });
 })
 
 // Calculator card
@@ -888,5 +866,99 @@ $('.calcBtn').on('click', function () {
         } else {
             $(".calcResult").val($(".calcResult").val() + val);
         }
+    }
+})
+
+// Slideshow card
+
+$(".slideshowUpload").change(function (e) {
+    var file = e.target.files[0];
+
+    if (file.size > 5 * 1024 * 1024) {
+        alert("Image size cannot exceed 5MB");
+        return false;
+    }
+
+    if (!file.type.match('image.*')) {
+        alert("Please select an image file");
+        return false;
+    }
+
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+        var img = new Image();
+        img.onload = function () {
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            var MAX_WIDTH = 200;
+            var width = img.width;
+            var height = img.height;
+            var newHeight = height * (MAX_WIDTH / width);
+
+            canvas.width = MAX_WIDTH;
+            canvas.height = newHeight;
+            ctx.drawImage(img, 0, 0, width, height, 0, 0, MAX_WIDTH, newHeight);
+
+            var imageData = canvas.toDataURL('image/jpeg');
+            var imageCount = parseInt(localStorage.getItem("imageCount")) || 0;
+            imageCount++;
+
+            var imageArray = JSON.parse(localStorage.getItem("slideshowImages")) || [];
+            imageArray.push({ 'img': imageData });
+
+            localStorage.setItem("slideshowImages", JSON.stringify(imageArray));
+            localStorage.setItem("imageCount", imageCount);
+
+        };
+        img.src = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+
+    clearTimeout(testTime);
+    showSlideshow();
+});
+
+let testTime;
+function showSlideshow() {
+    testTime = null;
+    var imageData = JSON.parse(localStorage.getItem("slideshowImages"));
+    if (!imageData || imageData.length === 0) {
+        return;
+    }
+
+    var imageUrl = imageData[imageIndex];
+    createSlideshowImages();
+
+    $(".slideshowCard").css("background-image", "url(" + imageUrl.img + ")");
+
+    imageIndex = (imageIndex + 1) % imageData.length;
+
+    testTime = setTimeout(showSlideshow, 10000);
+}
+
+function createSlideshowImages() {
+    $('.slideshowImg').remove();
+    var imageData = JSON.parse(localStorage.getItem("slideshowImages"));
+    if (!imageData || imageData.length === 0) {
+        return; // No images in localStorage
+    }
+
+    for (var i = 0; i < imageData.length; i++) {
+        var imageUrl = imageData["img" + (i + 1)];
+        var div = document.createElement("div");
+        div.className = "slideshowImg";
+        div.setAttribute("index", i);
+        div.style.backgroundImage = "url(" + imageUrl + ")";
+
+        $('.slideshowCard .expView .imgs').append(div);
+    }
+}
+
+$('.slideshowCard').click(function () {
+    if (cardClickingEnabled && $(this).parent().hasClass('subCards') && !$('.subCards').hasClass('editMode')) {
+        clearTimeout(testTime);
+        showSlideshow();
     }
 })

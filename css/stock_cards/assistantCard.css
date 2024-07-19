@@ -1,0 +1,149 @@
+.assistantCard {
+    font-size: 2em;
+
+    background-color: #1D182C !important;
+    transform: perspective(1000px);
+}
+
+.assistantCard .siriLayer {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    background-size: 175%;
+    background-position: center;
+    mix-blend-mode: lighten;
+
+    background-repeat: no-repeat;
+
+    border-radius: inherit;
+    transform: translateZ(25px);
+}
+
+.assistantCard .layer1 {
+    background-image: url(https://cdn.dribbble.com/users/32512/screenshots/3820721/brain_natural_os_by_gleb.gif);
+    mix-blend-mode: screen;
+    opacity: .6;
+}
+
+.assistantCard .layer2 {
+    background-image: url(https://cdn.dribbble.com/users/129227/screenshots/3556417/siri.gif);
+    mix-blend-mode: screen;
+    opacity: .6;
+}
+
+.assistantCard .layer3 {
+    background-image: url(https://cdn.dribbble.com/users/32512/screenshots/3546148/apple_siri_motion_animation_by_gleb.gif);
+}
+
+.assistantCard[target="gemini"] .layer1,
+.assistantCard[target="gemini"] .layer2,
+.assistantCard[target="gemini"] .layer3,
+.assistantCard[target="gemini"] .shadow,
+.assistantCard:not([target="gemini"]) svg {
+    display: none;
+}
+
+.assistantCard[target="gemini"] .shadow {
+    display: flex;
+}
+
+.assistantCard[target="gemini"] {
+    background-color: white !important;
+}
+
+.assistantCard[target="gemini"] .geminicon {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    background-color: transparent;
+
+    mask-image: url(../../resc/gemini.svg);
+    mask-size: 55px;
+    background: linear-gradient(45deg, #e9e7e8, #5489D6, #D96570, #F49C46, #9B72CB);
+    background-size: 250% 250%;
+
+    /* animation: gradient 16s ease infinite; */
+
+    opacity: 1;
+
+    margin-bottom: 10px;
+    position: absolute;
+
+    /* filter: invert(1); */
+    transform: translateZ(25px);
+
+    animation:
+        bounce2 6s ease infinite,
+        gradient 16s ease infinite;
+}
+
+@keyframes bounce2 {
+    0% {
+        transform: translateY(0px) translateZ(25px);
+    }
+
+    10% {
+        transform: translateY(20px) translateZ(25px);
+    }
+
+    20% {
+        transform: translateY(0px) translateZ(25px);
+    }
+
+    30% {
+        transform: translateY(20px) translateZ(25px);
+    }
+
+    40% {
+        transform: translateY(0px) translateZ(25px);
+    }
+
+    50% {
+        transform: translateY(20px) rotate(180deg) translateZ(25px);
+    }
+
+    60% {
+        transform: translateY(0px) rotate(180deg) translateZ(25px);
+    }
+
+    70% {
+        transform: translateY(20px) rotate(180deg) translateZ(25px);
+    }
+
+    80% {
+        transform: translateY(0px) rotate(180deg) translateZ(25px);
+    }
+
+    90% {
+        transform: translateY(20px) rotate(180deg) translateZ(25px);
+    }
+
+    100% {
+        transform: translateY(0px) rotate(360deg) translateZ(25px);
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+
+/* Expanded view */
+
+.assistantCard.expanded .layer1,
+.assistantCard.expanded .layer2,
+.assistantCard.expanded .layer3 {
+    background-size: 140%;
+    background-position: 0% 0%;
+}

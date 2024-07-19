@@ -17,6 +17,7 @@ window.onload = function () {
     showDate();
 
     setupLSVals();
+    $('.profImg').attr('src', localStorage.getItem('userImage'))
 
     if (localStorage.getItem('firstVisit') == '1') {
         $('.firstVisitExperience').remove();
@@ -32,6 +33,9 @@ window.onload = function () {
     }
 
     setAgent();
+
+    $('.greeting').attr('data-username', localStorage.getItem('username'));
+    $('#userNameTextbox').val(localStorage.getItem('username'));
 
     $('.greeting').removeClass('hidden');
     setTimeout(() => {
@@ -93,7 +97,6 @@ window.onload = function () {
     $('.lightDark').attr('data-theme', localStorage.getItem('theme'));
 
     alignShelf();
-    userNameSet();
 
     $(".subCards").sortable({
         appendTo: $('.subCards'),
@@ -252,6 +255,14 @@ function clearWall(e) {
 // Set default localStorage values if they don't exist:
 
 function setupLSVals() {
+    if (localStorage.getItem('devMode') == 'null') {
+        localStorage.setItem('devMode', 'false');
+    }
+
+    if (localStorage.getItem('username') == null) {
+        localStorage.setItem('username', 'User');
+    }
+
     if (localStorage.getItem('tempUnit') == null) {
         localStorage.setItem('tempUnit', 'c');
     }
@@ -303,6 +314,10 @@ function setupLSVals() {
     if (localStorage.getItem('assistantTarget') == null) {
         localStorage.setItem('assistantTarget', 'siri')
     }
+
+    if (localStorage.getItem('userImage') == null) {
+        localStorage.setItem('userImage', 'resc/default.svg')
+    }
 }
 
 // Expandable card functionality
@@ -343,3 +358,29 @@ $(document).on('mousedown', '.expandableWindow', function () {
 $(document).on('mouseup', '.expandableWindow', function () {
     $(this).removeClass('md');
 })
+
+// devMode
+
+$(document).ready(function () {
+    let clickCount = 0;
+    let timer;
+
+    $(document).on('click', '.debugCode', function (event) {
+        clickCount++;
+        clearTimeout(timer);
+
+        if (clickCount === 4) {
+            console.log('devMode enabled');
+            $('body').toggleClass('devMode');
+            $('.greeting').removeClass('hidden');
+            setTimeout(() => {
+                $('.greeting').addClass('hidden');
+            }, 10000);
+            clickCount = 0;
+        } else {
+            timer = setTimeout(function () {
+                clickCount = 0;
+            }, 500);
+        }
+    });
+});

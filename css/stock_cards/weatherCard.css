@@ -1,6 +1,10 @@
 .weatherCard {
     background: linear-gradient(to top, #0e63d1, rgb(92, 168, 255));
     transform: perspective(1000px);
+
+    color: white !important;
+
+    flex-direction: column;
 }
 
 .weatherCard:has(#temp[tod="night"]) {
@@ -23,17 +27,8 @@
     transform: translateZ(20px);
 }
 
-.weatherCard.squareCard * {
-    transform: none;
-}
-
-.weatherCard.rectCard #weatherIcon {
-    z-index: 21;
-    /* position: absolute !important; */
-    /* left: 1px; */
-}
-
 #weatherIcon {
+    z-index: 21;
     height: 48px;
     aspect-ratio: 1/1;
 
@@ -42,7 +37,7 @@
 
 .subCards:not(.darkModeOn).plated .weatherCard .temp,
 .subCards:not(.darkModeOn).plated .weatherCard>i {
-    color: black;
+    color: black !important;
 }
 
 #temp {
@@ -50,40 +45,72 @@
     transition: .2s;
     color: white;
     font-weight: 600;
+
+    display: flex;
 }
 
-#temp::after {
-    content: attr(feel);
-    position: absolute;
+.feel {
     font-weight: 500;
 
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+    position: absolute;
+    bottom: 7px;
 
     width: max-content;
     opacity: .75;
 
-    font-size: 15px;
+    font-size: 14px;
 }
 
-.weatherCard.squareCard #temp::after {
+.weatherCard.squareCard .feel {
     display: none;
 }
 
 .weatherCard.rectCard .tempGroup,
 .weatherCard.expanded .tempGroup {
     font-size: 25px;
-    gap: 10px;
+    gap: 5px;
 
     box-sizing: border-box;
 
-    margin-top: -15px;
+    position: absolute;
+
 
     flex-direction: row-reverse;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.weatherCard.squareCard .city {
+    display: none;
+}
+
+.weatherCard .city {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    background-color: rgb(0, 119, 255);
+    padding: 3px 5px;
+    border-radius: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+
+    transition: .15s;
+
+    font-size: 0;
+}
+
+.weatherCard:hover .city {
+    font-size: 10px;
+}
+
+.weatherCard .city i {
+    transform: rotate(-90deg);
+    font-size: 9px;
 }
 
 /* Stars */

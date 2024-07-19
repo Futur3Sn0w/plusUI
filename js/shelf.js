@@ -24,7 +24,13 @@ $('.card').on('mouseover', function (e) {
     if (!$(this).hasClass('placeholderCard')) {
         if ($(this).parent().hasClass('subCards')) {
             $('.shelfLabel').removeClass('show');
-            $('.shelfLabel').text($(this).attr('data-friendlyName'));
+
+            if ($('body').hasClass('devMode')) {
+                $('.shelfLabel').text($(this).attr('id')); // .toSentenceCase()
+            } else {
+                $('.shelfLabel').text($(this).attr('data-friendlyName'));
+            }
+
             if ($(this).attr('data-subLbl')) {
                 $('.shelfLabel').attr('subLbl', $(this).attr('data-subLbl'));
             } else {
@@ -33,6 +39,17 @@ $('.card').on('mouseover', function (e) {
         }
     }
 })
+
+// $.fn.toSentenceCase = function () {
+//     return this.each(function () {
+//         var text = $(this).text();
+//         text = text.replace(/([A-Z])(?=[a-z])|(^[a-z])/g, function ($1) {
+//             return $1.toUpperCase();
+//         });
+//         $(this).text(text);
+//     });
+// };
+
 
 $('.card').on('mousedown', function (e) {
     $(this).addClass('md');

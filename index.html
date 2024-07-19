@@ -22,8 +22,6 @@
     <link rel="stylesheet" href="jqui/jquery-ui.structure.css">
     <link rel="stylesheet" href="jqui/jquery-ui.theme.css">
 
-
-
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png?v3=4">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png?v3=4">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png?v3=4">
@@ -56,7 +54,7 @@
         </p>
 
         <div class="dcExpt userName interactable-hov">
-            <input class="keyTB" type="text" id="userNameTextbox" onchange="" placeholder="Your name">
+            <input class="keyTB" type="text" id="userNameTextboxFVE" onchange="" placeholder="Your name">
         </div>
 
         <p class="subHeadB">If you're seeing this page multiple times, you may be asked for this code:</p>
@@ -79,13 +77,13 @@
             <div class="ccButtons">
                 <div class="ccb ccb1" label="Personalize"><i class="fa-solid fa-brush"></i></div>
                 <div class="ccb ccb2" label="Backdrop"><i class="fa-solid fa-image"></i></div>
-                <!-- <div class="ccb ccb3" label="User"><i class="fa-solid fa-user"></i></div> -->
+                <div class="ccb ccb3" label="User"><i class="fa-solid fa-user"></i></div>
                 <!-- <div class="ccb ccb4" label="Labs"><i class="fa-solid fa-flask"></i></div> -->
                 <div class="ccb ccb5" label="About"><i class="fa-solid fa-info"></i></div>
             </div>
             <div class="tdSep"></div>
             <div class="ccb dummy">
-                <i class="fa-solid fa-sliders"></i>
+                <img src="" alt="" class="profImg">
             </div>
         </div>
     </div>
@@ -137,12 +135,6 @@
                     <label for="saoR-radio">Right</label>
                 </div>
             </div>
-
-            <div class="ccSep"></div>
-            <div class="sectLabel userNameSL">User info</div>
-            <div class="dcExpt userName interactable-hov">
-                <input class="keyTB" type="text" id="userNameTextbox" onchange="" placeholder="Your name">
-            </div>
         </div>
 
         <div class="surface controlPanelOptGroup backdropOpts" data-sect="Backdrop">
@@ -189,7 +181,17 @@
             </div>
         </div>
 
-        <!-- <div class="surface controlPanelOptGroup shelfOpts" data-sect="About You"></div> -->
+        <div class="surface controlPanelOptGroup aboutYouOpts" data-sect="User image">
+            <img class="backImg profImg">
+            <img class="profImg">
+            <div class="userImages"></div>
+            <input type="file" accept="image/*" class="profImgUpload">
+            <div class="ccSep"></div>
+            <div class="sectLabel userNameSL">User name</div>
+            <div class="dcExpt userName interactable-hov">
+                <input class="keyTB" type="text" id="userNameTextbox" onchange="" placeholder="Your name">
+            </div>
+        </div>
 
         <!-- <div class="surface controlPanelOptGroup debugCards" data-sect="Labs">
             <p class="tip">Looks like there aren't any labs available... Check again later!</p>
@@ -200,7 +202,7 @@
             <div class="header">
                 <img src="favicons/android-chrome-192x192.png" alt="">
                 <p id="title">(PlusUI)</p>
-                <p class="siteVer" id="ver">v2.8.1</p>
+                <p class="siteVer" id="ver">v2.8.2</p>
             </div>
             <div class="aboutText">
                 A hybrid dashboard and digital display for large-format screens, heavily inspired by TV & VisionOS
@@ -254,10 +256,10 @@
     <div class="surface rolodex" data-sectName="Card Deck">
 
         <div class="cbSect cbs1">
-            <div class="snowCard card deckCard squareCard" id="snowDbgCard" data-category="Display" data-expandableCard="n" data-enabled="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Sn0w" data-cardDesc="A display of various card feature demos including parallax, transparency, and onClick action">
+            <div class="snowCard card deckCard squareCard" id="snowDbgCard" data-category="Entertainment,Display" data-expandableCard="n" data-enabled="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Sn0w" data-cardDesc="A display of various card feature demos including parallax, transparency, and onClick action">
                 <img src="resc/snow-fore.svg" id="snowFore">
             </div>
-            <div class="siriDbgCard card deckCard circleCard" id="siriDbgCard" data-category="Display" data-expandableCard="n" data-enabled="n" target="siri" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Assistant" data-cardDesc="A card feature demo consisting of a digital-assistant inspired animated loop">
+            <div class="assistantCard updated card deckCard circleCard" id="assistantCard" data-category="Display" data-expandableCard="n" data-enabled="n" target="siri" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Assistant" data-cardDesc="A card feature demo consisting of a digital-assistant inspired animated loop">
                 <div class="cardOptions">
                     <div class="cmItem interactable-hov cmi-assistantTarget cmi-assistantTarget1" data-assistantTargetID="siri">
                         Siri
@@ -269,17 +271,20 @@
                     </div>
                 </div>
 
-                <div class="layer1"></div>
-                <div class="layer2"></div>
-                <div class="layer3"></div>
+                <div class="siriLayer layer1"></div>
+                <div class="siriLayer layer2"></div>
+                <div class="siriLayer layer3"></div>
 
-                <svg class="geminicon" width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M80 0C80 44.1828 44.1828 80 0 80C44.1828 80 80 115.817 80 160C80 115.817 115.817 80 160 80C115.817 80 80 44.1828 80 0Z" fill="black" />
-                </svg>
+                </svg> -->
+
+                <div class="geminicon"></div>
+
                 <div class="shadow"></div>
 
             </div>
-            <div class="emojiLocaleCard card deckCard circleCard" id="emojiLocaleCard" data-category="Utility" data-enabled="n" data-expandableCard="y" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Emoji" data-subLbl="Click for emoji picker" data-cardDesc="Demo card with hundreds of emoji, auto-refreshes every 5 seconds. Click/expand to view an emoji picker.">
+            <div class="emojiLocaleCard card deckCard circleCard" id="emojiLocaleCard" data-category="Entertainment,Utility" data-enabled="n" data-expandableCard="y" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Emoji" data-subLbl="Click for emoji picker" data-cardDesc="Demo card with hundreds of emoji, auto-refreshes every 5 seconds. Click/expand to view an emoji picker.">
                 <p>❤️</p>
                 <div id="back">
                     <p>❤️</p>
@@ -289,7 +294,7 @@
                     <div class="list"></div>
                 </div>
             </div>
-            <div class="youtubeCard-browse card deckCard rectCard" id="youtubeCard" data-category="Web" data-enabled="n" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="YouTube" data-cardDesc="Instantly search YouTube from the search bar, or access various YouTube locations">
+            <div class="youtubeCard-browse card deckCard rectCard" id="youtubeCard" data-category="Web,Utility" data-enabled="n" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="YouTube" data-cardDesc="Instantly search YouTube from the search bar, or access various YouTube locations">
                 <div class="searchCont">
                     <i class="fa-brands fa-youtube"></i>
                     <i class="fa-brands fa-youtube-music"></i>
@@ -352,16 +357,16 @@
                     <div class="gridItem gi4">×</div>
                 </div>
             </div>
-            <div class="pupperCard card deckCard rectCard" id="pupperCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Dog Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Slideshow of adorable dogs from Dog.ceo's open API">
+            <div class="pupperCard card deckCard rectCard" id="pupperCard" data-category="Entertainment,Web" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Dog Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Slideshow of adorable dogs from Dog.ceo's open API">
                 <img src="" alt="">
             </div>
-            <div class="cattoCard card deckCard rectCard" id="cattoCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Cat Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Slideshow of adorable cats from PlaceKitten's open API">
+            <div class="cattoCard card deckCard rectCard" id="cattoCard" data-category="Entertainment,Web" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Cat Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Slideshow of adorable cats from PlaceKitten's open API">
                 <img src="" alt="">
             </div>
-            <div class="nasaCard card deckCard rectCard" id="nasaCard" data-category="Entertainment" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="NASA Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Random image of from NASA's APOD open API, ranging from 1955 until now">
+            <div class="nasaCard card deckCard rectCard" id="nasaCard" data-category="Entertainment,Web" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="NASA Images" data-expandableCard="y" data-subLbl="Click for new image" data-cardDesc="Random image of from NASA's APOD open API, ranging from 1955 until now">
                 <img src="" alt="">
             </div>
-            <div class="uselessFactsCard card deckCard rectCard" id="uselessFactsCard" data-category="Entertainment" data-enabled="n" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Useless Fact" data-expandableCard="y" data-subLbl="Click for more" data-cardDesc="Random useless fact from the UselessFacts open API (dedicated to Wil)">
+            <div class="uselessFactsCard card deckCard rectCard" id="uselessFactsCard" data-category="Entertainment,Web" data-enabled="n" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Useless Fact" data-expandableCard="y" data-subLbl="Click to refresh" data-cardDesc="Random fun dad joke from the ICanHazDadJoke open API">
                 <div class="cardOptions">
                     <div class="cmItem interactable-hov cmi-ufCardRefresh" data-btnLabel="">
                         <i class="fa-solid fa-refresh"></i>
@@ -369,6 +374,13 @@
                     </div>
                 </div>
                 <i class="fa-solid fa-comment-dots be"></i>
+                <div class="fact"></div>
+                <div class="source"></div>
+            </div>
+            <div class="aboutMeCard card new deckCard rectCard" id="aboutMeCard" data-category="Entertainment,Information" data-enabled="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Nametag" data-expandableCard="n" data-cardDesc="A simple display of your PlusUI profile in a 3D nametag">
+                <img src="" alt="" class="profImg">
+                <div class="username"></div>
+                <div class="backImg"></div>
             </div>
             <div class="calculatorCard card deckCard rectCard" id="calculatorCard" data-category="Utility" data-enabled="n" data-resizableCard="n" data-parallaxCard="n" data-friendlyName="Calculator" data-expandableCard="n" data-subLbl="Expand for more" data-cardDesc="Do simple maths straight from the shelf, e̶x̶p̶a̶n̶d̶ ̶f̶o̶r̶ ̶a̶n̶ ̶a̶d̶v̶a̶n̶c̶e̶d̶ ̶v̶i̶e̶w̶">
                 <input type="text" class="calcResult" value="0">
@@ -403,7 +415,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="musicLauncherCard card deckCard new circleCard" id="musicLauncherCard" target="AM" data-category="Shortcuts" data-enabled="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Music App" data-expandableCard="n" data-subLbl="++" data-cardDesc="Launch a music app of your choice from a fun parallax card">
+            <div class="musicLauncherCard card deckCard new circleCard" id="musicLauncherCard" target="AM" data-category="Shortcuts" data-enabled="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Music App" data-expandableCard="n" data-subLbl="++" data-cardDesc="Launch a music app of your choice from a fun parallax card">
                 <div class="cardOptions">
                     <div class="cmItem interactable-hov cmi-musicApp cmi-musicApp1" data-musicAppID="AM">
                         Apple Music
@@ -441,7 +453,20 @@
                 <svg class="TID" width="256px" height="171px" viewBox="0 0 256 171" version="1.1" preserveAspectRatio="xMidYMid" xmlns="http://www.w3.org/2000/svg">
                     <path d="M128.003612,85.338752 L170.668473,128.009031 L128.003612,170.675698 L85.3351396,128.009031 L128.003612,85.338752 Z M42.6666667,0.00180622583 L85.3351396,42.6702791 L42.6666667,85.3405582 L0,42.6702791 L42.6666667,0.00180622583 Z M213.333333,0.00180622583 L256,42.6702791 L213.333333,85.3405582 L170.666667,42.6702791 L128.003612,85.338752 L85.3351396,42.6684729 L128.003612,-2.84217094e-14 L170.666667,42.6648604 L213.333333,0.00180622583 Z" fill="#0A0B09" />
                 </svg>
-            </div> -->
+            </div>
+            <div class="slideshowCard card new expandEdit deckCard rectCard" id="slideshowCard" data-category="Entertainment,Display" data-enabled="n" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Your Images" data-expandableCard="y" data-subLbl="Click to refresh | Right-click to edit" data-cardDesc="Upload your own images to rotate through automatically">
+                <div class="cardOptions">
+                    <div class="cmItem interactable-hov cmi-ufCardRefresh" data-btnLabel="">
+                        <i class="fa-solid fa-refresh"></i>
+                        Refresh
+                    </div>
+                </div>
+
+                <div class="expView">
+                    <input type="file" accept="image/*" class="slideshowUpload">
+                    <div class="imgs"></div>
+                </div>
+            </div>
             <!-- <div class="googleCard card deckCard rectCard" id="googleCard" data-category="Web" data-enabled="n" data-resizableCard="n" data-parallaxCard="y" data-friendlyName="Google Search" data-expandableCard="n" data-subLbl="Expand for more" data-cardDesc="Search & quick-access links inspired by new Google iOS app design">
                 <div class="search">
                     <i class="fa-solid fa-search"></i>
@@ -474,7 +499,7 @@
         <div class="surface subCards">
             <div class="shelfLabel surface">Shelf</div>
 
-            <div class="weatherCard card rectCard" id="weatherCard" data-category="Information" data-enabled="y" data-expandableCard="n" data-resizableCard="y" data-parallaxCard="y" data-friendlyName="Weather" data-cardDesc="Current temperature and 'feel' in local unit, change unit from context menu">
+            <div class="weatherCard updated card rectCard" id="weatherCard" data-category="Information" data-enabled="y" data-expandableCard="n" data-resizableCard="y" data-parallaxCard="y" data-friendlyName="Weather" data-cardDesc="Current temperature and 'feel' in local unit, change unit from context menu">
                 <div class="cardOptions">
                     <div class="cmItem interactable-hov cmi-tempUnit" data-btnLabel="">
                         <i class="fa-solid fa-temperature-high"></i>
@@ -558,7 +583,7 @@
                 </div>
                 <div class="batteryText"></div>
             </div> -->
-            <div class="shortcutCard card actionable squareCard" id="shortcutCard" data-category="Shortcuts" data-enabled="y" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Shortcuts" data-subLbl="Click to open | Expand to edit" data-cardDesc="Choose between 4 or 8 shortcuts to your favorite places on the web">
+            <div class="shortcutCard card expandEdit actionable squareCard" id="shortcutCard" data-category="Shortcuts" data-enabled="y" data-expandableCard="y" data-resizableCard="y" data-parallaxCard="n" data-friendlyName="Shortcuts" data-subLbl="Click to open | Expand to edit" data-cardDesc="Choose between 4 or 8 shortcuts to your favorite places on the web">
                 <div class="expandedViewItems">
                     <div class="dcExpt interactable-hov">
                         <input class="keyTB shortcutLinkNameTB" type="text" placeholder="Name" name="" id="">

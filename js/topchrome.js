@@ -36,26 +36,16 @@ $('.ccb:not(.rolodexOpen)').on('click', function (e) {
 
 // User name stuff
 
-$('#userNameTextbox').on('keyup', function (event) {
+$('.userName .keyTB').on('keyup', function (event) {
     var keycode = (event.keyCode ? event.keyCode : event.which);
-    localStorage.setItem('username', $('#userNameTextbox').val());
-    userNameSet();
+    localStorage.setItem('username', $(this).val());
     if (keycode == '13') {
-        $('.greeting').removeClass('hidden');
+        $('.greeting').attr('data-username', localStorage.getItem('username')).removeClass('hidden');
         setTimeout(() => {
             $('.greeting').addClass('hidden');
         }, 5000);
     }
 });
-
-function userNameSet() {
-    if (!localStorage.getItem('username') == '') {
-        $('.greeting').attr('data-username', localStorage.getItem('username'));
-        $('#userNameTextbox').val(localStorage.getItem('username'));
-    } else {
-        localStorage.setItem('username', 'User');
-    }
-}
 
 // Switch theme function
 
@@ -503,3 +493,26 @@ function showDate() {
     $('.calendarCard .calenDayNo').text(currentDate);
     $('.calendarCard .calenDay').text(currentDayShort);
 }
+
+// User image stuff
+
+
+$('.profImgUpload').change(function (e) {
+    var file = e.target.files[0];
+
+    if (!file.type.match('image/.*')) {
+        alert("Please select an image file.");
+        return;
+    }
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        var base64Data = e.target.result;
+        localStorage.setItem("userImage", base64Data);
+        $('.profImg').attr('src', localStorage.getItem('userImage'))
+    };
+
+    reader.readAsDataURL(file);
+});
+

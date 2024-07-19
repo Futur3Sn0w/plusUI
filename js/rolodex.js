@@ -66,32 +66,37 @@ function createCategoryBtns() {
     const uniqueCategories = {};
 
     cards.each(function () {
-        const category = $(this).data('category');
-        const catFirstChar = category.charAt(0).toLowerCase();
+        const categories = $(this).data('category').split(',');  // Get comma-separated categories
 
-        if (uniqueCategories[category]) {
-            return;
-        }
+        categories.forEach(function (category) {
+            const catFirstChar = category.charAt(0).toLowerCase();
 
-        uniqueCategories[category] = true;
-        const categoryDiv = $('<div class="categoryBtn">').attr('data-category', category);
-        if (category == 'Display') {
-            categoryDiv.append($('<i class="fa-solid fa-display"></i>'))
-        } else if (category == 'Information') {
-            categoryDiv.append($('<i class="fa-solid fa-info"></i>'))
-        } else if (category == 'Web') {
-            categoryDiv.append($('<i class="fa-solid fa-globe"></i>'))
-        } else if (category == 'Utility') {
-            categoryDiv.append($('<i class="fa-solid fa-toolbox"></i>'))
-        } else if (category == 'Entertainment') {
-            categoryDiv.append($('<i class="fa-solid fa-masks-theater"></i>'))
-        } else if (category == 'Shortcuts') {
-            categoryDiv.append($('<i class="fa-solid fa-share"></i>'))
-        } else {
-            categoryDiv.append($('<i class="fa-solid fa-' + catFirstChar + '"></i>'))
-        }
+            if (uniqueCategories[category]) {
+                return;
+            }
 
-        $('.categoryBar').append(categoryDiv);
+            uniqueCategories[category] = true;
+            const categoryDiv = $('<div class="categoryBtn">').attr('data-category', category);
+
+            // ... (Rest of the code for creating categoryDiv and sorting)
+            if (category == 'Display') {
+                categoryDiv.append($('<i class="fa-solid fa-display"></i>'))
+            } else if (category == 'Information') {
+                categoryDiv.append($('<i class="fa-solid fa-info"></i>'))
+            } else if (category == 'Web') {
+                categoryDiv.append($('<i class="fa-solid fa-globe"></i>'))
+            } else if (category == 'Utility') {
+                categoryDiv.append($('<i class="fa-solid fa-toolbox"></i>'))
+            } else if (category == 'Entertainment') {
+                categoryDiv.append($('<i class="fa-solid fa-masks-theater"></i>'))
+            } else if (category == 'Shortcuts') {
+                categoryDiv.append($('<i class="fa-solid fa-share"></i>'))
+            } else {
+                categoryDiv.append($('<i class="fa-solid fa-' + catFirstChar + '"></i>'))
+            }
+
+            $('.categoryBar').append(categoryDiv);
+        });
     });
 
     // Sort catebtns alphabetically
@@ -105,26 +110,59 @@ function createCategoryBtns() {
     $('.allCardsCategory').after('<div class="sep">')
 }
 
+// $(document).on('click', '.categoryBtn', function () {
+//     i = 0;
+//     var thisCategory = $(this).attr('data-category');
+//     $('.contextBadge').attr('ver', thisCategory);
+//     $('.categoryBtn').removeClass('selected')
+//     $('.cbs1 .card-container').show();
+//     if (!$(this).hasClass('allCardsCategory')) {
+//         $('.cbs1 .card:not([data-category="' + thisCategory + '"])').parent().hide();
+//     }
+
+//     // Sort cards alphabetically
+//     $(".cbs1 .card-container:visible").sort(function (a, b) {
+//     }).detach().appendTo($('.cbs1'));
+
+
+//     $(this).addClass('selected')
+// })
+
 $(document).on('click', '.categoryBtn', function () {
     i = 0;
-    var thisCategory = $(this).attr('data-category');
-    $('.contextBadge').attr('ver', thisCategory);
-    $('.categoryBtn').removeClass('selected')
+    var categories = $(this).attr('data-category').split(',');
+
+    $('.contextBadge').attr('ver', categories.join(',')); // Update ver with comma-separated categories
+    $('.categoryBtn').removeClass('selected');
     $('.cbs1 .card-container').show();
+
     if (!$(this).hasClass('allCardsCategory')) {
-        $('.cbs1 .card:not([data-category="' + thisCategory + '"])').parent().hide();
+        // Hide cards that don't match any of the clicked categories
+        $('.cbs1 .card').each(function () {
+            var cardCategories = $(this).attr('data-category').split(',');
+            var match = false;
+            for (var i = 0; i < categories.length; i++) {
+                if ($.inArray(categories[i], cardCategories) !== -1) {
+                    match = true;
+                    break;
+                }
+            }
+            if (!match) {
+                $(this).parent().hide();
+            }
+        });
     }
 
-    // Sort cards alphabetically
+    // Sort visible card containers alphabetically
     $(".cbs1 .card-container:visible").sort(function (a, b) {
         var categoryA = $(a).children('.card').attr("data-friendlyName").toLowerCase();
         var categoryB = $(b).children('.card').attr("data-friendlyName").toLowerCase();
         return (categoryA < categoryB) ? -1 : (categoryA > categoryB) ? 1 : 0;
     }).detach().appendTo($('.cbs1'));
 
+    $(this).addClass('selected');
+});
 
-    $(this).addClass('selected')
-})
 
 $(document).on('click', '.addBtn', function (e) {
     $(this).parent().children('.card').removeClass('deckCard').addClass('removing').appendTo($('.subCards'));
